@@ -1,0 +1,12 @@
+
+body {
+  text-align: center;
+  background-color: #3333cc;
+}
+
+foot {
+  position: absolute;
+  bottom: 25px;
+  left: 200px;
+  text-align: center;
+}
