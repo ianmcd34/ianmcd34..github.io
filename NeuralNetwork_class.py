@@ -1,10 +1,4 @@
 
-import sys
-sys.path.insert(0, "C:\\Users\\IanMcDonald\\Documents\\hello-app\\venv\\Lib\\site-packages")
-sys.path.insert(0, "C:\\Users\\IanMcDonald\\hvplot\\hvplot")
-from flask import Flask
-import pandas
-import numpy as np
 
 class NeuralNetwork:
     def __init__(self):
