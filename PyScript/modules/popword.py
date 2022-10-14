@@ -1,6 +1,8 @@
 
-from nltk.corpus import words
-from random import sample
-nltk.download('words')
+import numpy
 
-print(sample(words.words(), n))
+File_object = open(r"en","r")
+w=numpy.loadtxt(File_object, dtype="object")
+x=set(w)
+
+print(x.pop())
