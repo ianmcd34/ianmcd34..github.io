@@ -4,4 +4,4 @@ from difflib import SequenceMatcher
 
 x=english_words_set
 
-x.pop()
+print(x.pop())
