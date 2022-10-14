@@ -1,7 +1,5 @@
 
-from english_words import english_words_set
-from difflib import SequenceMatcher
+from nltk.corpus import words
+from random import sample
 
-x=english_words_set
-
-print(x.pop())
+print(sample(words.words(), n))
