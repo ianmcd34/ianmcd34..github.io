@@ -80,7 +80,8 @@ while True:
         diffs.append(SequenceMatcher(list1[0], list1[-1]))
         
     if min(diffs)==0:
-        list1=links[diffs.index(min(diffs))]
+        minindex=diffs.index(min(diffs))
         break
-
+        
+list1=links[diffs.index(min(diffs))]
 print(list1)
