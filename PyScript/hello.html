@@ -46,7 +46,7 @@ from pyodide import create_proxy
 n=0
 def on_add_click(event):
       child = document.createElement("li")
-      child.innerText = link1[0]
+      child.innerText = x.pop()
       parent.appendChild(child)
     
 parent = document.querySelector("#Words ul")
