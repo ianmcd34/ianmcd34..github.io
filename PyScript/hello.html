@@ -35,6 +35,7 @@ plt
 <p>Words</p>
     <ul>
       <li id="word1">word1</li>
+      <li id="wordn">wordn</li>
     </ul>
   </div>
   <py-script src="modules/popword.py"></py-script>
@@ -46,11 +47,11 @@ from pyodide import create_proxy
 def on_add_click(event):
     child = document.createElement("li")
     child.innerText = x.pop()
-    parent.appendChild(child)
+    parent.lastElementChild.insertBefore(child)
     
 parent = document.querySelector("#Words ul")
-parent.firstElementChild.innerText="Bebop"
-parent.lastElementChild.innerText="Alula"
+parent.firstElementChild.innerText=list1[0]
+parent.lastElementChild.innerText=list1[-1]
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
