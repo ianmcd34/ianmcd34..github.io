@@ -81,4 +81,5 @@ while True:
         
     if min(diffs)==0:
         break
-print(links[diffs.index(min(diffs))])
+list1=links[diffs.index(min(diffs))]
+print(list1)
