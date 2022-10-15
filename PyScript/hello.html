@@ -44,7 +44,7 @@ def on_add_click(event):
     child = document.createElement("li")
     child.innerText = x.pop()
     parent = document.querySelector("#Words ul")
-    parent.replaceChild(child)
+    parent.appendChild(child)
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
