@@ -30,7 +30,7 @@ plt.plot(time, np.sin(time))
 plt
   </py-script>
   <button>New Word</button>
-  <div style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
+  <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Words</p>
     <ul>
       <li id="word1">word1</li>
@@ -41,8 +41,10 @@ plt
 from pyodide import create_proxy
 
 def on_add_click(event):
-    parent = document.querySelector("#word1 li")
-    parent.innerText=x.pop()
+    child = document.createElement("li")
+    child.innerText = x.pop()
+    parent = document.querySelector("#Words ul")
+    parent.replaceChild(child)
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
