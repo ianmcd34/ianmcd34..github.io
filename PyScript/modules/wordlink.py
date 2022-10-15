@@ -1,7 +1,7 @@
 #random word link generator
 import numpy
 import sys
-from difflib import SequenceMatcher
+
 
 File_object = open(r"en","r")
 w=numpy.loadtxt(File_object, dtype="object")
@@ -13,6 +13,13 @@ def findnewword(word, list1):
             if word[0:n]+m+word[n+1:] in x and word[0:n]+m+word[n+1:] not in list1:
                 return word[0:n]+m+word[n+1:]
     return None
+
+def SequenceMatcher(word1,word2):
+    tot=0
+    for i in range (0,len(word1)):
+        if word1[i]==word2[i]:
+            tot=tot+1
+    return tot/len(word1)
 
 # function to compare lists
 def compare(l1, l2):
@@ -70,7 +77,7 @@ while True:
 
     diffs=[]
     for list1 in links:
-        diffs.append(SequenceMatcher(a=list1[0], b=list1[-1]).ratio())
+        diffs.append(SequenceMatcher(list1[0], list1[-1]))
         
     if min(diffs)==0:
         break
