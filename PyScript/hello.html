@@ -47,7 +47,7 @@ n=0
 def on_add_click(event):
       child = document.createElement("li")
       child.innerText = links[0][n]
-      lastChild.insertBefore(child)
+      parent.insertBefore(child, lastChild)
       n=n+1
     
 parent = document.querySelector("#Words ul")
