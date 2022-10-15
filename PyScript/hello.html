@@ -43,15 +43,20 @@ plt
   <py-script>
    
 from pyodide import create_proxy
-
+n=0
 def on_add_click(event):
-    child = document.createElement("li")
-    child.innerText = x.pop()
-    parent.lastElementChild.insertBefore(child)
+    n=n+1
+    if n==1:
+        parent.firstElementChild.innerText=list1[0]
+        parent.lastElementChild.innerText=list1[-1]
+    else:
+        child = document.createElement("li")
+        child.innerText = x.pop()
+        parent.lastElementChild.insertBefore(child)
     
 parent = document.querySelector("#Words ul")
-parent.firstElementChild.innerText=list1[0]
-parent.lastElementChild.innerText=list1[-1]
+parent.firstElementChild.innerText="Start word"
+parent.lastElementChild.innerText="Target word"
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
