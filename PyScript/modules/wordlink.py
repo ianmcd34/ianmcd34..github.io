@@ -1,6 +1,7 @@
 #random word link generator
 import numpy
 import sys
+from difflib import SequenceMatcher
 
 File_object = open(r"en","r")
 w=numpy.loadtxt(File_object, dtype="object")
@@ -73,3 +74,4 @@ while True:
         
     if min(diffs)==0:
         break
+print(links[diffs.index(min(diffs))])
