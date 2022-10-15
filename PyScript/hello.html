@@ -34,8 +34,7 @@ plt
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Words</p>
     <ul>
-      <li id="word1">word1</li>
-      <li id="wordn">wordn</li>
+
     </ul>
   </div>
   <!--<py-script src="modules/popword.py"></py-script>-->
@@ -46,7 +45,7 @@ from pyodide import create_proxy
 n=0
 def on_add_click(event):
       child = document.createElement("li")
-      child.innerText = links[0][0]
+      child.innerText = links[0][n]
       parent.appendChild(child)
     
 parent = document.querySelector("#Words ul")
