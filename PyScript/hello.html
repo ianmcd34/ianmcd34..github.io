@@ -51,7 +51,7 @@ from pyodide import create_proxy
 n=0
 def on_add_click(event):
       child = document.createElement("li")
-      child.innerText = links[n]
+      child.innerText = links[0][n]
       parent.appendChild(child)
       n=n+1
 
