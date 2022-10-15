@@ -35,7 +35,7 @@ plt
 from pyodide import create_proxy
 
 def on_add_click(event):
-    button.innerText="Changed!"
+    button.innerText=x.pop()
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
