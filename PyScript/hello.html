@@ -50,12 +50,8 @@ plt
 from pyodide import create_proxy
 n=0
 def on_add_click(event):
-      if n==0:
-           parent = document.querySelector("#LastWord ul")
-           parent.lastElementChild.innerText=links[diffs.index(min(diffs))][-1]
-           parent = document.querySelector("#Words ul")
       child = document.createElement("li")
-      child.innerText = links[diffs.index(min(diffs))][n]
+      child.innerText = list1[n]
       parent.appendChild(child)
       n=n+1
 
