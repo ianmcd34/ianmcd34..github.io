@@ -37,6 +37,11 @@ plt
       <li></li>
       <li></li>
     </ul>
+  <div id="LastWord" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
+<p></p>
+    <ul>
+      <li></li>
+    </ul>
   </div>
   <!--<py-script src="modules/popword.py"></py-script>-->
   <py-script src="modules/wordlink.py"></py-script>
@@ -45,15 +50,20 @@ plt
 from pyodide import create_proxy
 n=0
 def on_add_click(event):
-      child = document.createElement("li")
-      child.innerText = links[0][n]
       if n==0:
-             parent.removeChild(lastChild)
+           parent = document.querySelector("#LastWord ul")
+           parent.lastElementChild.innerText=links[diffs.index(min(diffs))][-1]
+           parent = document.querySelector("#Words ul")
+      child = document.createElement("li")
+      child.innerText = links[diffs.index(min(diffs))][n]
+      parent.appendChild(child)
       n=n+1
-    
+
+parent = document.querySelector("#LastWord ul")
+parent.lastElementChild.innerText="Target word"
 parent = document.querySelector("#Words ul")
 parent.firstElementChild.innerText="Start word"
-parent.lastElementChild.innerText="Target word"
+
 lastChild=parent.lastElementChild
 
 button = document.querySelector("button")
