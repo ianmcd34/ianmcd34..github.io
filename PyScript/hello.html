@@ -40,13 +40,17 @@ plt
   <py-script src="modules/popword.py"></py-script>
   <py-script src="modules/wordlink.py"></py-script>
   <py-script>
+   
 from pyodide import create_proxy
 
 def on_add_click(event):
     child = document.createElement("li")
     child.innerText = x.pop()
-    parent = document.querySelector("#Words ul")
     parent.appendChild(child)
+    
+parent = document.querySelector("#Words ul")
+parent.firstElementChild.innerText="Bebop"
+parent.lastElementChild.innerText="Alula"
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
