@@ -50,15 +50,17 @@ plt
 from pyodide import create_proxy
     
 n=0
+wordn=links[0][n]
+    
 def on_add_click(event):
     global n
-    if n>4:
-      child = document.createElement("li")
-      child.innerText = links[0][0]
-      parent.appendChild(child)
-      child = document.createElement("li")
-      child.innerText = "*"+str(n)+"*"
-      parent.appendChild(child)
+
+    child = document.createElement("li")
+    child.innerText = wordn
+    parent.appendChild(child)
+    child = document.createElement("li")
+    child.innerText = "*"+str(n)+"*"
+    parent.appendChild(child)
     n=n+1
 
 parent = document.querySelector("#LastWord ul")
