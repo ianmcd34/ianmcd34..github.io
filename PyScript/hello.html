@@ -48,9 +48,7 @@ plt
   <py-script>
    
 from pyodide import create_proxy
-    
-n=0
-wordn=links[0][n]
+
     
 def on_add_click(event):
     global n
@@ -62,6 +60,11 @@ def on_add_click(event):
     child.innerText = "*"+str(n)+"*"
     parent.appendChild(child)
     n=n+1
+    wordn=links[0][n]
+    
+    
+n=0
+wordn=links[0][n]
 
 parent = document.querySelector("#LastWord ul")
 parent.lastElementChild.innerText="Target word"
