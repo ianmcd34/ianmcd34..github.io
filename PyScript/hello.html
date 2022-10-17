@@ -73,11 +73,17 @@ parent = document.querySelector("#LastWord ul")
 parent.lastElementChild.innerText="Target word"
 parent = document.querySelector("#Words ul")
 parent.firstElementChild.innerText="Start word"
-
 lastChild=parent.lastElementChild
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
   </py-script>
+  <py-inputbox>
+def on_keypress(event):
+    parent = document.querySelector("#Words ul")
+    firstChild=parent.firstElementChild
+    lastChild=parent.lastElementChild
+    print(firstChild.innerText)
+  </py-inputbox>
 </body>
 </html>
