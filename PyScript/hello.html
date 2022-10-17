@@ -30,6 +30,10 @@ time = np.linspace(0, 2 * np.pi, 100)
 plt.plot(time, np.sin(time))
 plt
   </py-script>
+  <py-inputbox>
+def on_keypress(event):
+    print(event)
+  </py-inputbox>
   <button>New Word</button>
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Words</p>
@@ -78,12 +82,6 @@ lastChild=parent.lastElementChild
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
   </py-script>
-  <py-inputbox>
-def on_keypress(event):
-    parent = document.querySelector("#Words ul")
-    firstChild=parent.firstElementChild
-    lastChild=parent.lastElementChild
-    firstChild.innerText=event
-  </py-inputbox>
+  
 </body>
 </html>
