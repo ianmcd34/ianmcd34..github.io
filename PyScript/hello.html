@@ -54,9 +54,12 @@ def on_add_click(event):
     global n
     wordn=links[minindex][0]
     links[minindex]=links[minindex][1:]
+    parent = document.querySelector("#Words ul")
     child = document.createElement("li")
     child.innerText = wordn
     parent.appendChild(child)
+    parent = document.querySelector("#LastWord ul")
+    parent.lastElementChild.innerText=links[minindex][-1]
 
 
     
