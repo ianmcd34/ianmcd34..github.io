@@ -53,7 +53,7 @@ from pyodide import create_proxy
 def on_add_click(event):
     global n
     wordn=links[minindex][0]
-    links[minindex]=links[0][1:]
+    links[minindex]=links[minindex][1:]
     child = document.createElement("li")
     child.innerText = wordn
     parent.appendChild(child)
