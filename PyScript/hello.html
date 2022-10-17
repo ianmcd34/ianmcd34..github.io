@@ -35,6 +35,7 @@ def on_keypress(event):
     print(event)
   </py-inputbox>
   <button>New Word</button>
+  <input id="new-item" type="text" placeholder="Add new item">
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Words</p>
     <ul>
@@ -56,15 +57,19 @@ from pyodide import create_proxy
     
 def on_add_click(event):
     global n
-    wordn=links[minindex][0]
-    links[minindex]=links[minindex][1:]
-    parent = document.querySelector("#Words ul")
-    child = document.createElement("li")
-    child.innerText = wordn
-    parent.appendChild(child)
-    parent = document.querySelector("#LastWord ul")
-    parent.lastElementChild.innerText=links[minindex][-1]
+    input_new_item = document.querySelector("#new-item")
 
+    if input_new_item.value:
+      wordn=links[minindex][0]
+      links[minindex]=links[minindex][1:]
+      parent = document.querySelector("#Words ul")
+      child = document.createElement("li")
+      child.innerText = wordn+"/"+input_new_item.value
+      parent.appendChild(child)
+      parent = document.querySelector("#LastWord ul")
+      parent.lastElementChild.innerText=links[minindex][-1]
+
+      input_new_item.value = ""
 
     
     
