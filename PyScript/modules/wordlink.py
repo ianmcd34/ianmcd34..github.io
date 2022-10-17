@@ -3,7 +3,7 @@ import numpy
 import sys
 
 
-File_object = open(r"en","r")
+File_object = open(r"en-etherium.txt","r")
 w=numpy.loadtxt(File_object, dtype="object")
 x=set(w)
 
