@@ -94,10 +94,10 @@ def on_add_click(event):
             child.style.backgroundColor = "lime"
           if input_new_item.value==links[minindex][-1]:
             input_new_item.value="You Won!"
-            exit()
+            quit()
           elif len(links[minindex])==0:
             input_new_item.value="You Lost!"
-            exit()
+            quit()
           else:
             input_new_item.value="" 
         
