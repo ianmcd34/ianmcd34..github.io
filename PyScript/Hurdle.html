@@ -85,23 +85,28 @@ def on_add_click(event):
       child = document.createElement("li")
       if input_new_item.value=="Start Word":
         child.innerText = links[minindex][0]
+        parent.appendChild(child)
       else:
         child.innerText = input_new_item.value
+        parent.appendChild(child)
         if diff(wordn,input_new_item.value)<2:
           child.style.backgroundColor = "lime"
-      
-      
-      parent.appendChild(child)
+        
       
       wordn=links[minindex][0]
       links[minindex]=links[minindex][1:]
       parent = document.querySelector("#LastWord ul")
       parent.firstElementChild.innerText=links[minindex][-1]
 
-      input_new_item.value = str(len(links[minindex]))
-
-    
-    
+      if input_new_item.value==links[minindex][-1]:
+        input_new_item.value="You Won!"
+        button.disabled
+      elif len(links[minindex])==0:
+        input_new_item.value="You Lost!"
+        button.disabled  
+      else:
+        input_new_item.value=""                                       
+        
     
 wordn=""
 
