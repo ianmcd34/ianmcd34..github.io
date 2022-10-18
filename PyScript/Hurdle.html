@@ -70,13 +70,13 @@ def on_add_click(event):
       parent = document.querySelector("#Words ul")
       child = document.createElement("li")
       child.innerText = input_new_item.value
+      wordn=links[minindex][0]
       if input_new_item.value=="Start Word":
         child.innerText = links[minindex][0]
       if diff(wordn,input_new_item.value)<2:
         child.style.backgroundColor = "lime"
       parent.appendChild(child)
-
-      wordn=links[minindex][0]
+                                             
       links[minindex]=links[minindex][1:]
       parent = document.querySelector("#LastWord ul")
       parent.lastElementChild.innerText=links[minindex][-1]
