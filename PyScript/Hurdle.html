@@ -1,0 +1,104 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hurdle</title>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <py-env>
+    - matplotlib
+    - numpy
+    - nltk
+    - paths:
+      - modules/NeuralNetwork_class.py
+      - modules/popword.py
+      - modules/wordlink.py
+      - modules/en
+  </py-env>
+  <style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #008CBA; /* Blue */
+} 
+  </style>
+</head>
+<body>
+  <h1>Hurdle - cross from the Start word to the Target word changing only one letter at a time!</h1>
+  <button>New Word</button>
+  <input id="new-item" type="text" placeholder="Start Word">
+  <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
+<p>Words</p>
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+  <div id="LastWord" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
+<p></p>
+    <ul>
+      <li></li>
+    </ul>
+  </div>
+  <py-script src="modules/wordlink.py"></py-script>
+  <py-script>
+   
+from pyodide import create_proxy
+
+def diff(word1,word2):
+    result=0
+    for i in range(0,len(word1)):
+      if word1[i]!=word2[i]:
+        result=result+1
+    return result
+    
+def on_add_click(event):
+    global n
+    input_new_item = document.querySelector("#new-item")
+
+    if input_new_item.value:
+      
+      parent = document.querySelector("#Words ul")
+      child = document.createElement("li")
+      child.innerText = input_new_item.value
+      if input_new_item.value=="Start Word":
+        child.innerText = links[minindex][0]
+      if diff(wordn,input_new_item.value)<2:
+        child.style.backgroundColor = "lime"
+      	parent.appendChild(child)
+
+      wordn=links[minindex][0]
+      links[minindex]=links[minindex][1:]
+      parent = document.querySelector("#LastWord ul")
+      parent.lastElementChild.innerText=links[minindex][-1]
+
+      input_new_item.value = ""
+
+    
+    
+    
+n=0
+
+
+
+parent = document.querySelector("#LastWord ul")
+parent.lastElementChild.innerText="Target word"
+parent = document.querySelector("#Words ul")
+parent.firstElementChild.innerText="Start word"
+lastChild=parent.lastElementChild
+
+button = document.querySelector("button")
+button.addEventListener("click", create_proxy(on_add_click))
+  </py-script>
+  
+</body>
+</html>
