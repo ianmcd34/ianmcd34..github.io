@@ -24,7 +24,7 @@ body {
   background-color: #FFFACD;
 }
 .button {
-  border: none;
+  border: 2px;
   color: white;
   padding: 15px 32px;
   text-align: center;
@@ -37,7 +37,7 @@ body {
 } 
 h1 {
   display: block;
-  font-size: 2em;
+  font-size: 1.75em;
   margin-top: 0.67em;
   margin-bottom: 0.67em;
   margin-left: 0;
@@ -51,7 +51,7 @@ h1 {
   <button>New Word</button>
   <input id="new-item" type="text" placeholder="Start Word" value="Start Word">
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
-<p>Words</p>
+<p>Start Word</p>
     <ul>
       <li></li>
       <li></li>
@@ -59,7 +59,7 @@ h1 {
   <div id="LastWord" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p></p>
     <ul>
-      <li></li>
+      <li>Target Word</li>
     </ul>
   </div>
   <py-script src="modules/wordlink.py"></py-script>
@@ -82,14 +82,16 @@ def on_add_click(event):
       
       parent = document.querySelector("#Words ul")
       child = document.createElement("li")
-      child.innerText = input_new_item.value
-      wordn=links[minindex][0]
       if input_new_item.value=="Start Word":
         child.innerText = links[minindex][0]
+      else:
+        child.innerText = input_new_item.value
+      
       if diff(wordn,input_new_item.value)<2:
         child.style.backgroundColor = "lime"
       parent.appendChild(child)
-                                             
+      
+      wordn=links[minindex][0]
       links[minindex]=links[minindex][1:]
       parent = document.querySelector("#LastWord ul")
       parent.lastElementChild.innerText=links[minindex][-1]
