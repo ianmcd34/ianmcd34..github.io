@@ -59,6 +59,7 @@ h1 {
   <div id="LastWord" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p></p>
     <ul>
+      <li></li>
       <li>Target Word</li>
     </ul>
   </div>
@@ -86,15 +87,16 @@ def on_add_click(event):
         child.innerText = links[minindex][0]
       else:
         child.innerText = input_new_item.value
+        if diff(wordn,input_new_item.value)<2:
+          child.style.backgroundColor = "lime"
       
-      if diff(wordn,input_new_item.value)<2:
-        child.style.backgroundColor = "lime"
+      
       parent.appendChild(child)
       
       wordn=links[minindex][0]
       links[minindex]=links[minindex][1:]
       parent = document.querySelector("#LastWord ul")
-      parent.lastElementChild.innerText=links[minindex][-1]
+      parent.firstElementChild.innerText=links[minindex][-1]
 
       input_new_item.value = ""
 
@@ -104,12 +106,6 @@ def on_add_click(event):
 n=0
 
 
-
-parent = document.querySelector("#LastWord ul")
-parent.lastElementChild.innerText="Target word"
-parent = document.querySelector("#Words ul")
-parent.firstElementChild.innerText="Start word"
-lastChild=parent.lastElementChild
 
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
