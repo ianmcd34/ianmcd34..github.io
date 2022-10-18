@@ -19,6 +19,10 @@
       - modules/en
   </py-env>
   <style>
+body {
+  text-align: center;
+  background-color: #FFFACD;
+}
 .button {
   border: none;
   color: white;
@@ -31,12 +35,21 @@
   cursor: pointer;
   background-color: #008CBA; /* Blue */
 } 
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
   </style>
 </head>
 <body>
   <h1>Hurdle - cross from the Start word to the Target word changing only one letter at a time!</h1>
   <button>New Word</button>
-  <input id="new-item" type="text" placeholder="Start Word">
+  <input id="new-item" type="text" placeholder="Start Word" value="Start Word">
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Words</p>
     <ul>
