@@ -49,7 +49,7 @@ h1 {
 <body>
   <h1>Hurdle - cross from the Start word to the Target word changing only one letter at a time!</h1>
   <button>New Word</button>
-  <input id="new-item" type="text" placeholder="Start Word" value="Start Word">
+  <input id="new-item" type="text" placeholder="Next Word" value="Start Word">
   <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
 <p>Start Word</p>
     <ul>
@@ -95,9 +95,11 @@ def on_add_click(event):
           if input_new_item.value==links[minindex][-1]:
             input_new_item.value="You Won!"
             button.disabled
+            input_new_item.disabled
           elif len(links[minindex])==0:
             input_new_item.value="You Lost!"
             button.disabled  
+            input_new_item.disabled
           else:
             input_new_item.value="" 
         
