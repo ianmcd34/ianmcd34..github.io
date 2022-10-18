@@ -77,7 +77,6 @@ def diff(word1,word2):
     
 def on_add_click(event):
     global wordn
-    input_new_item = document.querySelector("#new-item")
 
     if input_new_item.value:
       
@@ -94,9 +93,13 @@ def on_add_click(event):
             child.style.backgroundColor = "lime"
           if input_new_item.value==links[minindex][-1]:
             input_new_item.value="You Won!"
+            button.disabled=true
+            input_new_item.disabled=true
             quit()
           elif len(links[minindex])==0:
             input_new_item.value="You Lost!"
+            button.disabled=true
+            input_new_item.disabled=true
             quit()
           else:
             input_new_item.value="" 
@@ -111,7 +114,7 @@ def on_add_click(event):
 wordn=""
 
 
-
+input_new_item = document.querySelector("#new-item")
 button = document.querySelector("button")
 button.addEventListener("click", create_proxy(on_add_click))
   </py-script>
