@@ -94,12 +94,10 @@ def on_add_click(event):
             child.style.backgroundColor = "lime"
           if input_new_item.value==links[minindex][-1]:
             input_new_item.value="You Won!"
-            button.disabled=true
-            input_new_item.disabled=true
+            exit()
           elif len(links[minindex])==0:
             input_new_item.value="You Lost!"
-            button.disabled=true
-            input_new_item.disabled=true
+            exit()
           else:
             input_new_item.value="" 
         
