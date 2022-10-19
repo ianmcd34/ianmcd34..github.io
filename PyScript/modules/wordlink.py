@@ -12,14 +12,22 @@ def findnewword(word, list1):
         for m in alphabet:
             if word[0:n]+m+word[n+1:] in x and word[0:n]+m+word[n+1:] not in list1:
                 return word[0:n]+m+word[n+1:]
+            #change
+            if word[0:n]+m+word[n:] in x and word[0:n]+m+word[n:] not in list1:
+                return word[0:n]+m+word[n:]
+            if word[0:n]+m+word[n+2:] in x and word[0:n]+m+word[n+2:] not in list1:
+                #change
+                if len(word[0:n]+m+word[n+2:])>=3:
+                    return word[0:n]+m+word[n+2:]
     return None
 
 def SequenceMatcher(word1,word2):
     tot=0
-    for i in range (0,len(word1)):
+    #change
+    for i in range (0,min(len(word1),len(word2))):
         if word1[i]==word2[i]:
             tot=tot+1
-    return tot/len(word1)
+    return tot/min(len(word1),len(word2))
 
 # function to compare lists
 def compare(l1, l2):
@@ -33,7 +41,11 @@ def compare(l1, l2):
 while True:
     links=[]
     alphabet=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-    word=x.pop()
+    #change
+    word=""
+    while len(word)<4:
+        word=x.pop()
+        
     links.append([word])
     n=0
     m=0
