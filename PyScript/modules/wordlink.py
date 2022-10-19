@@ -96,4 +96,4 @@ while True:
         break
         
 list1=links[diffs.index(min(diffs))]
-print(list1)
+
