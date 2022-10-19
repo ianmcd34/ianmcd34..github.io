@@ -78,7 +78,7 @@ def diff(word1,word2):
 def on_add_click(event):
     global wordn
     
-    if input_new_item.value and not finished:
+    if input_new_item.value:
       
       parent = document.querySelector("#Words ul")
       child = document.createElement("li")
