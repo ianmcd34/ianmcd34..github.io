@@ -102,10 +102,10 @@ def on_add_click(event):
       parent.firstElementChild.innerText=links[minindex][-1]   
       if input_new_item.value==links[minindex][-1]:
         parent = document.querySelector("#FinishWon p")
-        parent.display=block
+        parent.display="hide"
       elif len(links[minindex])==0:
         parent = document.querySelector("#FinishLost p")
-        parent.display=block
+        parent.display="hide"
       else:
         input_new_item.value=""
         
