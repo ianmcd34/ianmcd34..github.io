@@ -91,7 +91,7 @@ while True:
     for list1 in links:
         diffs.append(SequenceMatcher(list1[0], list1[-1])+(10-len(list1))/10)
         
-    if min(diffs)==0:
+    if min(diffs)<0.3:
         minindex=diffs.index(min(diffs))
         break
         
