@@ -117,9 +117,8 @@ def on_add_click(event):
       parent.firstElementChild.innerText=links[minindex][-1]   
       if input_new_item.value==links[minindex][-1]:
         finish("w")
-      elif len(links[minindex])==0:
-        finish(len(links[minindex]))
       else:
+        finish(len(links[minindex]))
         input_new_item.value=""
         
     
