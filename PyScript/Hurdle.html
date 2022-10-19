@@ -81,9 +81,16 @@ def finish(w_l):
   document.body.appendChild(x)
 
 def diff(word1,word2):
+    if len(word1)<len(word2):
+      shortword=word1
+      longword=word2
+    else:
+      shortword=word2
+      longword=word1                            
+                              
     result=0
-    for i in range(0,len(word1)):
-      if word1[i]!=word2[i]:
+    for i in range(0, len(longword)):
+      if shortword.count(longword[i])<>longword.count(longword[i]):
         result=result+1
     return result
     
