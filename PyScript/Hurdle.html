@@ -95,9 +95,9 @@ def diff(word1,word2):
           result=result+1
       return result
     else:
-      for i in range(0, len(longword)):
-        if shortword[i]!=longword[i+result]:
-          result=result+1
+      for i in range(0, len(shortword)):
+        if shortword[i]!=longword[i]:
+          result=diff(shortword[i:],longword[i+1:])
       return result
                                
                                
