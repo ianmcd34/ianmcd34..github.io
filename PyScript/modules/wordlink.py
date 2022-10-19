@@ -15,10 +15,10 @@ def findnewword(word, list1):
             #change
             if word[0:n]+m+word[n:] in x and word[0:n]+m+word[n:] not in list1:
                 return word[0:n]+m+word[n:]
-            if word[0:n]+word[n+2:] in x and word[0:n]+word[n+2:] not in list1:
+            if word[0:n]+word[n+2:] in x and word[0:n]+word[n+1:] not in list1:
                 #change
-                if len(word[0:n]+word[n+2:])>=3:
-                    return word[0:n]+word[n+2:]
+                if len(word[0:n]+word[n+1:])>=3:
+                    return word[0:n]+word[n+1:]
     return None
 
 def SequenceMatcher(word1,word2):
