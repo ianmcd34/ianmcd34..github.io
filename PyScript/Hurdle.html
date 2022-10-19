@@ -73,6 +73,15 @@ h1 {
   <py-script>
    
 from pyodide import create_proxy
+ 
+def finish(w_l)
+  var x = document.createElement("P")
+  if w_l=="w":
+    var t = document.createTextNode("You Won!")
+  else:
+    var t = document.createTextNode("You Lost!")
+  x.appendChild(t)
+  document.body.appendChild(x)
 
 def diff(word1,word2):
     result=0
@@ -107,11 +116,9 @@ def on_add_click(event):
       parent = document.querySelector("#LastWord ul")
       parent.firstElementChild.innerText=links[minindex][-1]   
       if input_new_item.value==links[minindex][-1]:
-        parent = document.querySelector("#FinishWon p")
-        parent.display="hide"
+        finish("w")
       elif len(links[minindex])==0:
-        parent = document.querySelector("#FinishLost p")
-        parent.display="hide"
+        finish("l")
       else:
         input_new_item.value=""
         
