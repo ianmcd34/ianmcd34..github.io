@@ -79,7 +79,7 @@ def finish(w_l):
   if w_l=="w":
     t = document.createTextNode("You Won!")
   else:
-    t = document.createTextNode("You Lost!")
+    t = document.createTextNode(len(links[minindex]))
   x.appendChild(t)
   document.body.appendChild(x)
 
@@ -118,7 +118,7 @@ def on_add_click(event):
       if input_new_item.value==links[minindex][-1]:
         finish("w")
       elif len(links[minindex])==0:
-        finish("l")
+        finish(len(links[minindex]))
       else:
         input_new_item.value=""
         
