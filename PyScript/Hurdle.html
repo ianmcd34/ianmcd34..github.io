@@ -63,12 +63,7 @@ h1 {
       <li>Target Word</li>
     </ul>
   </div>
-  <div id="FinishWon" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted; display: block;">
-    <p style="font-size: 1.75em; color: red;">"You Won!"</p>
-   </div>
-  <div id="FinishLost" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted; display: block;">
-    <p style="font-size: 1.75em; color: red;">"You Lost!"</p>
-   </div>
+
   <py-script src="modules/wordlink.py"></py-script>
   <py-script>
    
@@ -76,9 +71,10 @@ from pyodide import create_proxy
  
 def finish(w_l):
   x = document.createElement("P")
+  x.style.color="red"
+  x.style.font-size="1.75em"
   if w_l=="w":
     t = document.createTextNode("You Won!")
-    x.style.color="red"
   else:
     t = document.createTextNode("You Lost!")
   x.appendChild(t)
