@@ -89,10 +89,18 @@ def diff(word1,word2):
       longword=word1                            
                               
     result=0
-    for i in range(0, len(longword)):
-      if shortword.count(longword[i])!=longword.count(longword[i]):
-        result=result+1
-    return result
+    if len(shortword)==len(longword):
+      for i in range(0, len(longword)):
+        if shortword[i]!=longword[i]:
+          result=result+1
+      return result
+    else:
+      for i in range(longword.find(shortword[0]), len(longword)):
+        if shortword[i]!=longword[i]:
+          result=result+1
+      return result
+                               
+                               
     
 def on_add_click(event):
     global wordn
