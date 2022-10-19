@@ -79,7 +79,7 @@ def finish(w_l):
   if w_l=="w":
     t = document.createTextNode("You Won!")
   else:
-    t = document.createTextNode(len(links[minindex]))
+    t = document.createTextNode("You Lost!")
   x.appendChild(t)
   document.body.appendChild(x)
 
@@ -106,20 +106,18 @@ def on_add_click(event):
           parent.appendChild(child)
           if input_new_item.value==links[minindex][0]:
             child.style.backgroundColor = "lime"
-           
-            
-          
-          
+          if input_new_item.value==links[minindex][-1]:
+            finish("w")
+          elif len(links[minindex])==1:
+            finish("l")
+
+      input_new_item.value="" 
       
       wordn=links[minindex][0]
       links[minindex].pop(0)
       parent = document.querySelector("#LastWord ul")
       parent.firstElementChild.innerText=links[minindex][-1]   
-      if input_new_item.value==links[minindex][-1]:
-        finish("w")
-      else:
-        finish(len(links[minindex]))
-        input_new_item.value=""
+      
         
     
 wordn=""
