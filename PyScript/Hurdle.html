@@ -105,7 +105,7 @@ def on_add_click(event):
         if diff(wordn,input_new_item.value)==1:
           child.innerText = input_new_item.value
           parent.appendChild(child)
-          if input_new_item.value==links[minindex][0]:
+          if input_new_item.value in links[minindex]:
             child.style.backgroundColor = "lime"
           if input_new_item.value==links[minindex][-1]:
             finish("w")
