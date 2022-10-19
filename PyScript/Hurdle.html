@@ -110,10 +110,10 @@ def on_add_click(event):
             finish("w")
           elif len(links[minindex])==1:
             finish("l")
+          wordn=links[minindex][0]
 
       input_new_item.value="" 
-      
-      wordn=links[minindex][0]
+
       links[minindex].pop(0)
       parent = document.querySelector("#LastWord ul")
       parent.firstElementChild.innerText=links[minindex][-1]   
