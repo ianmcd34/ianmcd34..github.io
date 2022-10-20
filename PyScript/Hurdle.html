@@ -99,7 +99,7 @@ def diff(word1,word2):
       while i < len(shortword) and shortword[i]==longword[i]:
         i=i+1
       if i < len(shortword):
-        input_new_item.value=shortword[i:]+"/"+longword[i+1:]+diff(shortword[i:],longword[i+1:])
+        input_new_item.value=shortword[i:]+"/"+longword[i+1:]+str(diff(shortword[i:],longword[i+1:]))
         result=1+diff(shortword[i:],longword[i+1:])
       else:
         result=1
