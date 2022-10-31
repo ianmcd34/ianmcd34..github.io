@@ -12,10 +12,9 @@
       - numpy
       - nltk
       - paths:
-        - modules/NeuralNetwork_class.py
-        - modules/popword.py
         - modules/wordlink_1.py
         - modules/en
+        - modules/diff.py
     </py-env>
     <style>
         h1 {
@@ -132,6 +131,7 @@
     <py-script>
       from pyodide import create_proxy
       import wordlink_1
+      import diff
 
 
 
