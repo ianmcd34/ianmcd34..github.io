@@ -138,13 +138,13 @@
                 shortword=word1
                 longword=word2
             else:
-                shortword=word2;
+                shortword=word2
                 longword=word1
 
-            mismatch=0;
+            mismatch=0
             if len(longword)>len(shortword):
                 i=0
-                while shortword[i]==longword[i]):
+                while shortword[i]==longword[i]:
                     i++
                 if i==len(shortword)-1:
                     mismatch=1
@@ -168,61 +168,61 @@
         min_out = wordlink_1.min_out
         max_out = wordlink_1.max_out
 
-        secondlastrow=document.getElementById("secondlastrow");
+        secondlastrow=document.getElementById("secondlastrow")
 
 
         for x in startword:
-            td1=document.createElement("td");
-            td1_att=document.createAttribute("class");
-            td1_att.value="letterbox";
-            td1.setAttributeNode(td1_att);
-            div1=document.createElement("div");
-            div1_att=document.createAttribute("class");
-            div1_att.value="centered-letter";
-            div1.setAttributeNode(div1_att);
-            div1.innerHTML=x.upper();
-            td1.appendChild(div1);
-            secondlastrow.appendChild(td1);
+            td1=document.createElement("td")
+            td1_att=document.createAttribute("class")
+            td1_att.value="letterbox"
+            td1.setAttributeNode(td1_att)
+            div1=document.createElement("div")
+            div1_att=document.createAttribute("class")
+            div1_att.value="centered-letter"
+            div1.setAttributeNode(div1_att)
+            div1.innerHTML=x.upper()
+            td1.appendChild(div1)
+            secondlastrow.appendChild(td1)
 
-        targetrow=document.getElementById("targetrow");
+        targetrow=document.getElementById("targetrow")
 
 
         for x in targetword:
-            td1=document.createElement("td");
-            td1_att=document.createAttribute("class");
-            td1_att.value="letterbox";
-            td1.setAttributeNode(td1_att);
-            div1=document.createElement("div");
-            div1_att=document.createAttribute("class");
-            div1_att.value="centered-letter";
-            div1.setAttributeNode(div1_att);
-            div1.innerHTML=x.upper();
-            td1.appendChild(div1);
-            targetrow.appendChild(td1);
+            td1=document.createElement("td")
+            td1_att=document.createAttribute("class")
+            td1_att.value="letterbox"
+            td1.setAttributeNode(td1_att)
+            div1=document.createElement("div")
+            div1_att=document.createAttribute("class")
+            div1_att.value="centered-letter"
+            div1.setAttributeNode(div1_att)
+            div1.innerHTML=x.upper()
+            td1.appendChild(div1)
+            targetrow.appendChild(td1)
 
         def nextLetter(event): 
-            key1=event.key;
-            lastrow=document.getElementById("lastrow");
+            key1=event.key
+            lastrow=document.getElementById("lastrow")
             
             if key1.isalpha() and len(key1)==1:
-              td1=document.createElement("td");
-              td1_att=document.createAttribute("class");
-              td1_att.value="letterbox";
-              td1.setAttributeNode(td1_att);
-              div1=document.createElement("div");
-              div1_att=document.createAttribute("class");
-              div1_att.value="centered-letter";
-              div1.setAttributeNode(div1_att);
-              div1.innerHTML=key1.upper();
-              td1.appendChild(div1);
-              lastrow.appendChild(td1);
+              td1=document.createElement("td")
+              td1_att=document.createAttribute("class")
+              td1_att.value="letterbox"
+              td1.setAttributeNode(td1_att)
+              div1=document.createElement("div")
+              div1_att=document.createAttribute("class")
+              div1_att.value="centered-letter"
+              div1.setAttributeNode(div1_att)
+              div1.innerHTML=key1.upper()
+              td1.appendChild(div1)
+              lastrow.appendChild(td1)
             else:
               if event.ctrlKey or event.shiftKey:
                 while lastrow.hasChildNodes():
                   lastrow.removeChild(lastrow.firstChild)
               else:
                 secondlastrow=document.getElementById("secondlastrow")
-                //check for validity
+
                 laststring=""
                 for i in range(0, lastrow.children.length):
                   laststring+=lastrow.children[i].firstChild.innerHTML
@@ -233,7 +233,7 @@
                 match=diff(laststring, secondlaststring)
 
     
-        document.addEventListener("keypress", create_proxy(nextLetter));
+        document.addEventListener("keypress", create_proxy(nextLetter))
 
     </py-script>
 
