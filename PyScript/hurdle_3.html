@@ -175,7 +175,7 @@
             key1=event.key;
             lastrow=document.getElementById("lastrow");
             
-            if key1.isalpha():
+            if key1.isalpha() and len(key1)==1:
               td1=document.createElement("td");
               td1_att=document.createAttribute("class");
               td1_att.value="letterbox";
