@@ -1,0 +1,31 @@
+
+
+
+
+
+def diff(word1,word2):
+    if len(word1)<len(word2):
+        shortword=word1
+        longword=word2
+    else:
+        shortword=word2
+        longword=word1
+
+    mismatch=0
+    if len(longword)>len(shortword):
+        i=0
+        while shortword[i]==longword[i]:
+            i++
+        if i==len(shortword)-1:
+            mismatch=1
+        else:
+            mismatch=1
+            for i in range(i, len(shortword)):
+                if shortword[i]!=longword[i+1]:
+                    mismatch++
+
+    else:
+        for i in range(0, len(shortword)):
+            if shortword[i]!=longword[i]:
+                mismatch++
+    return mismatch
