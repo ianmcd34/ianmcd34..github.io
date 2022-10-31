@@ -133,6 +133,37 @@
       from pyodide import create_proxy
       import wordlink_1
 
+      def nextLetter(event): 
+        key1=event.key
+        lastrow=document.getElementById("lastrow")
+
+        if key1.isalpha() and len(key1)==1:
+            td1=document.createElement("td")
+            td1_att=document.createAttribute("class")
+            td1_att.value="letterbox"
+            td1.setAttributeNode(td1_att)
+            div1=document.createElement("div")
+            div1_att=document.createAttribute("class")
+            div1_att.value="centered-letter"
+            div1.setAttributeNode(div1_att)
+            div1.innerHTML=key1.upper()
+            td1.appendChild(div1)
+            lastrow.appendChild(td1)
+        else:
+            if event.ctrlKey or event.shiftKey:
+                while lastrow.hasChildNodes():
+                lastrow.removeChild(lastrow.firstChild)
+            else:
+                secondlastrow=document.getElementById("secondlastrow")
+
+                laststring=""
+                for i in range(0, lastrow.children.length):
+                    laststring+=lastrow.children[i].firstChild.innerHTML
+
+                secondlaststring=""
+                for i in range(0, secondlastrow.children.length):
+                    secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
+                match=diff(laststring, secondlaststring)
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
