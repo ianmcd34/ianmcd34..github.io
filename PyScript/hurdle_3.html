@@ -131,6 +131,8 @@
     <py-script>
       import wordlink_1
       
+      document.addEventListener("keypress", nextLetter);
+      
       links_out = wordlink_1.links_out
       startword = wordlink_1.startword
       targetword = wordlink_1.targetword
@@ -167,8 +169,12 @@
         div1.setAttributeNode(div1_att);
         div1.innerHTML=x.upper();
         td1.appendChild(div1);
-        secondlastrow.appendChild(td1);
+        targetrow.appendChild(td1);
         
+     function nextLetter(event) {
+       key1=event.key;
+       alert(key1);
+     }
       
       
     </py-script>
