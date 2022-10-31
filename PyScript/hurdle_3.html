@@ -127,18 +127,29 @@
         </tr>
     </table>
     <h2>Target Word</h2>
+    <p  id="links_out">This paragraph should be hidden.</p>
+    <p  id="startword">This paragraph should be hidden.</p>
+    <p hidden id="targetword">This paragraph should be hidden.</p>
+    <p hidden id="min_out">This paragraph should be hidden.</p>
+    <p hidden id="max_out">This paragraph should be hidden.</p>
 
     <py-script>
       import wordlink_1
       
-      links_out=wordlink_1.links_out
-      startword=wordlink_1.startword
-      targetword=wordlink_1.targetword
-      min_out=wordlink_1.min_out
-      max_out=wordlink_1.max_out
+      links_out = document.querySelector("#links_out p")
+      links_out.innerHTML=wordlink_1.links_out
+      startword = document.querySelector("#startword p")
+      startword.innerHTML=wordlink_1.startword
+      targetword = document.querySelector("#targetword p")
+      targetword.innerHTML=wordlink_1.targetword
+      min_out = document.querySelector("#min_out p")
+      min_out.innerHTML=wordlink_1.min_out
+      max_out = document.querySelector("#max_out p")
+      max_out.innerHTML=wordlink_1.max_out
       
       
     </py-script>
-    <script>alert("hi"+startword);</script>
+    <script>
+    </script>
   </body>
 </html>
