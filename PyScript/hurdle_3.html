@@ -173,7 +173,19 @@
 
         def nextLetter(event): 
             key1=event.key;
-            print(key1);
+            lastrow=document.getElementById("lastrow");
+
+            td1=document.createElement("td");
+            td1_att=document.createAttribute("class");
+            td1_att.value="letterbox";
+            td1.setAttributeNode(td1_att);
+            div1=document.createElement("div");
+            div1_att=document.createAttribute("class");
+            div1_att.value="centered-letter";
+            div1.setAttributeNode(div1_att);
+            div1.innerHTML=key1.upper();
+            td1.appendChild(div1);
+            lastrow.appendChild(td1);
     
         document.addEventListener("keypress", create_proxy(nextLetter));
 
