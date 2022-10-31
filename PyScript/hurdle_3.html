@@ -138,19 +138,21 @@
       max_out = wordlink_1.max_out
       
       secondlastrow=document.getElementById("secondlastrow");
-      td1=document.createElement("td");
-      td1_att=document.createAttribute("class");
-      td1_att.value="letterbox";
-      td1.setAttributeNode(td1_att);
-      div1=document.createElement("div");
-      div1_att=document.createAttribute("class");
-      div1_att.value="centered-letter";
-      div1.setAttributeNode(div1_att);
+      
       
       for x in startword:
+        td1=document.createElement("td");
+        td1_att=document.createAttribute("class");
+        td1_att.value="letterbox";
+        td1.setAttributeNode(td1_att);
+        div1=document.createElement("div");
+        div1_att=document.createAttribute("class");
+        div1_att.value="centered-letter";
+        div1.setAttributeNode(div1_att);
         div1.innerHTML=x.upper();
         td1.appendChild(div1);
         secondlastrow.appendChild(td1);
+        
       
       
     </py-script>
