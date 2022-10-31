@@ -127,7 +127,7 @@
         </tr>
     </table>
     <h2>Target Word</h2>
-    <p  id="links_out">This paragraph should be hidden.</p>
+    <p  id="links-out">This paragraph should be hidden.</p>
     <p  id="startword">This paragraph should be hidden.</p>
     <p hidden id="targetword">This paragraph should be hidden.</p>
     <p hidden id="min_out">This paragraph should be hidden.</p>
@@ -136,7 +136,7 @@
     <py-script>
       import wordlink_1
       
-      links_out = document.querySelector("#links_out p")
+      links_out = document.querySelector("#links-out p")
       links_out.innerHTML=wordlink_1.links_out
       startword = document.querySelector("#startword p")
       startword.innerHTML=wordlink_1.startword
