@@ -132,7 +132,6 @@
         from pyodide import create_proxy
         import wordlink_1
 
-        document.addEventListener("keypress", create_proxy(nextLetter));
 
         links_out = wordlink_1.links_out
         startword = wordlink_1.startword
@@ -175,8 +174,8 @@
         def nextLetter(event): 
             key1=event.key;
             print(key1);
-        
-
+    
+        document.addEventListener("keypress", create_proxy(nextLetter));
 
     </py-script>
 
