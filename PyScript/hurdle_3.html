@@ -193,17 +193,17 @@
           else:
               if event.ctrlKey or event.shiftKey:
                   while lastrow.hasChildNodes():
-                  lastrow.removeChild(lastrow.firstChild)
+                    lastrow.removeChild(lastrow.firstChild)
               else:
                   secondlastrow=document.getElementById("secondlastrow")
 
                   laststring=""
                   for i in range(0, lastrow.children.length):
-                      laststring+=lastrow.children[i].firstChild.innerHTML
+                    laststring+=lastrow.children[i].firstChild.innerHTML
 
                   secondlaststring=""
                   for i in range(0, secondlastrow.children.length):
-                      secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
+                    secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
                   match=diff(laststring, secondlaststring)
 
 
