@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hurdle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+      - matplotlib
+      - numpy
+      - nltk
+      - paths:
+        - modules/NeuralNetwork_class.py
+        - modules/popword.py
+        - modules/wordlink.py
+        - modules/en
+    </py-env>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 275%;
+        }
+        h2 {
+            text-align: center;
+            font-size: 150%;
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .letterbox {
+            text-align: center;
+            font-size: 150%;
+            width: 50px;
+            height: 50px;
+            border: 1px black solid;
+            float: left;
+            margin: 2px;
+        }
+        .centered-letter {
+            transform: translate(0px, 10px);
+        }
+        .clear-float {
+            clear:both;
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+        <h1>Hurdle</h1>
+        <div><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoModal" style="float: right; position: absolute; top: 12px; right: 16px;">
+            <i class="bi bi-info-square"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-square" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+            </svg></i>
+        </button></div>
+    </header>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <!-- Button trigger modal -->
+    
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="infoModalLabel">How to play Hurdle</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Get from the Start word to the Target word by changing only one letter at a time. You can swap a letter (eg. SPIN->SPUN)
+              , add a letter (eg. SOON->SPOON) or remove a letter (eg. FEATHER->FATHER). You must keep the letters in the same order and 
+              the word must be a valid English word held in Hurdle's database. There are three levels of difficulty you may choose,
+               giving you more or less guesses according to Hurdle's algorithm. If the word you enter is in the path that Hurdle has 
+               in mind, it will be coloured green. However, it's perfectly possible to get from Start to Target without using any 
+               of the words Hurdle has thought of. Good luck!
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dashModal" data-bs-toggle="modal">Difficulty and Stats</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="dashModal" tabindex="-1" aria-labelledby="dashModalLabel" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="infoModalLabel">Stats and Controls</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Difficulty
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioDifficulty" id="radioDifficulty1">
+                    <label class="form-check-label" for="radioDifficulty1">
+                        Hardest
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioDifficulty" id="radioDifficulty2">
+                    <label class="form-check-label" for="radioDifficulty2">
+                        Medium
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="radioDifficulty" id="radioDifficulty3" checked>
+                    <label class="form-check-label" for="radioDifficulty3">
+                        Easiest
+                    </label>
+                </div>
+              You did good.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-target="#infoModal" data-bs-toggle="modal">Save and Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <hr>
+    <h2>Start Word</h2>
+    <table id="table">
+        <tr id="secondlastrow">
+        </tr>
+        <tr id="lastrow"></tr>
+        <tr id="targetrow">
+        </tr>
+    </table>
+    <h2>Target Word</h2>
+  </body>
+</html>
