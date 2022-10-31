@@ -29,3 +29,5 @@ def diff(word1,word2):
             if shortword[i]!=longword[i]:
                 mismatch=mismatch+1
     return mismatch
+
+
