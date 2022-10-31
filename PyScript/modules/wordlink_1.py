@@ -136,4 +136,3 @@ links_out=links1[-1]
 max_out=len(links1[-1])
 min_out=len(links1[0])
 
-print(links_out, startword, targetword, min_out, max_out)
