@@ -127,7 +127,7 @@
         </tr>
     </table>
     <h2>Target Word</h2>
-    <h2 style="color: red" id="badWordAlert" style="visibility: hidden">Sorry, that word is not a legal entry.</h1>
+    <h2 style="color: red; visibility: hidden" id="badWordAlert">Sorry, that word is not a legal entry.</h1>
 
     <py-script>
       from pyodide import create_proxy
@@ -176,6 +176,19 @@
           div1.innerHTML=x.upper()
           td1.appendChild(div1)
           targetrow.appendChild(td1)
+      
+      def endgame(w_l):
+        if w_l=='w':
+          badWordAlert=document.getElementById("badWordAlert")
+          badWordAlert.innerHTML="Congratulations! You won!"
+          badWordAlert.style.visibility="visible"
+        else:
+          badWordAlert=document.getElementById("badWordAlert")
+          badWordAlert.innerHTML="Sorry, you lost. Better luck next time!"
+          badWordAlert.style.visibility="visible"
+           
+          
+        
 
       def nextLetter(event): 
           key1=event.key
@@ -208,12 +221,10 @@
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring=secondlaststring+secondlastrow.children[i].firstChild.innerHTML
       
-                  
-          
+      
                   match=diff.diff(laststring, secondlaststring)
       
-                  
-  
+
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
                     badWordAlert.style.visibility="visible"
@@ -221,7 +232,7 @@
                       lastrow.removeChild(lastrow.firstChild)
                   else:
                     if laststring==targetword:
-                      endgame()
+                      endgame('w')
      
       
                     
