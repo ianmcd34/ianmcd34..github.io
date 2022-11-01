@@ -248,7 +248,7 @@
                       lastrow.setAttribute("id","secondlastrow")
                       maintable=document.getElementById("maintable")
                       badWordAlert.innerHTML="next word"+str(maintable.rows.length)
-                      maintable.insertRow(maintable.rows.length-1)
+                      lastrow=maintable.insertRow(maintable.rows.length-1)
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att) 
