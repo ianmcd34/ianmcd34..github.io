@@ -192,9 +192,12 @@
 
       def nextLetter(event): 
           key1=event.key
+          shifted=event.ctrlKey or event.shiftKey
           lastrow=document.getElementById("lastrow")
           badWordAlert=document.getElementById("badWordAlert")
-          badWordAlert.style.visibility="hidden"
+          badWordAlert.style.visibility="visible"
+          badWordAlert.innerHTML=shifted+key1
+          
 
           if key1.isalpha() and len(key1)==1:
               td1=document.createElement("td")
