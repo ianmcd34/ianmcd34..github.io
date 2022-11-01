@@ -199,16 +199,21 @@
                     lastrow.removeChild(lastrow.firstChild)
               else:
                   secondlastrow=document.getElementById("secondlastrow")
-                  secondlastrow.style.color="red"
-          """
+          
                   laststring=""
                   for i in range(0, lastrow.children.length):
-                    laststring+=lastrow.children[i].firstChild.innerHTML
+                    laststring=laststring+lastrow.children[i].firstChild.innerHTML
 
                   secondlaststring=""
                   for i in range(0, secondlastrow.children.length):
-                    secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
-
+                    secondlaststring=secondlaststring+secondlastrow.children[i].firstChild.innerHTML
+      
+                  if laststring=="PO":
+                    lastrow.style.color="red"
+                  else:
+                    lastrow.style.color="green"
+                  
+          """
                   match=diff.diff(laststring, secondlaststring)
                   
   
