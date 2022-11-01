@@ -237,6 +237,9 @@
                     elif guesses==maxguesses:
                       endgame('l')
                     else:
+                      badWordAlert=document.getElementById("badWordAlert")
+                      badWWordAlert.innerHTML="At least we're in the right place"
+                      badWordAlert.style.visibility="visible"
                       guesses=guesses+1
                       attr = secondlastrow.getAttributeNode("id")
                       secondlastrow.removeAttributeNode(attr)
