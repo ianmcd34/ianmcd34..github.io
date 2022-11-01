@@ -212,10 +212,10 @@
           else:
               badWordAlert.innerHTML=str(shifted)+key1
               badWordAlert.style.visibility="visible"
-              if shifted:
+              if str(shifted)+key1=="TrueEnter":
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
-              else:
+              if str(shifted)+key1=="FalseEnter"::
                   badWWordAlert.innerHTML="tried to ENTER a word"
                   badWordAlert.style.visibility="visible"
       
