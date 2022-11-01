@@ -191,6 +191,8 @@
         
 
       def nextLetter(event): 
+          global guesses
+      
           key1=event.key
           shifted=event.ctrlKey or event.shiftKey
           lastrow=document.getElementById("lastrow")
