@@ -226,10 +226,15 @@
 
 
                   match=diff.diff(laststring, secondlaststring)
-
-
-                  badWordAlert.innerHTML=str(match)
-                  badWordAlert.style.visibility="visible"
+      
+                  if match!=1:
+                    badWordAlert.style.visibility="visible"
+                    while lastrow.hasChildNodes():
+                      lastrow.removeChild(lastrow.firstChild)
+                  else:
+                    badWordAlert.innerHTML="check for win"
+                    if laststring==targetword:
+                      endgame('w')
 
                   
      
