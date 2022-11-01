@@ -127,7 +127,7 @@
         </tr>
     </table>
     <h2>Target Word</h2>
-    <h2 hidden style="color: red">Sorry, that word is not a legal entry.</h1>
+    <h2 hidden style="color: red" id="badWordAlert">Sorry, that word is not a legal entry.</h1>
 
     <py-script>
       from pyodide import create_proxy
@@ -142,6 +142,8 @@
       targetword = wordlink_1.targetword
       min_out = wordlink_1.min_out
       max_out = wordlink_1.max_out
+      guesses=0
+      maxguesses=max_out
 
       secondlastrow=document.getElementById("secondlastrow")
 
@@ -206,6 +208,32 @@
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
                   match=diff(laststring, secondlaststring)
+      
+                  if match!=1:
+                    badWordAlert=document.getElementById("badWordAlert")
+                    badWordAlert.style.visibility="visible"
+                    while lastrow.hasChildNodes():
+                      lastrow.removeChild(lastrow.firstChild)
+                  else:
+                    laststring=""
+                    for i in lastrow.children:
+                      laststring=laststring+i.innerHTML
+                    if laststring==targetword:
+                      endgame()
+                    else if guesses=maxguesses:
+                      endgame()
+                    else:
+                      guesses=guesses+1
+                      attr = secondlastrow.getAttributeNode("id")
+                      secondlastrow.removeAttributeNode(attr)
+                      lastrow.setAttribute("id","secondlastrow")
+                      lastrow=document.getElementById("table").insertRow(table.rows.length-1)
+                      tr1_att=document.createAttribute("id")
+                      tr1_att.value="lastrow"
+                      lastrow.setAttributeNode(tr1_att)
+                    
+      
+                    
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
