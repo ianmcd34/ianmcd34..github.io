@@ -208,16 +208,16 @@
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
                   match=diff(laststring, secondlaststring)
-      
+                  badWordAlert=document.getElementById("badWordAlert")
+                  badWordAlert.style.visibility="visible"
+                  badWordAlert.innerHTML=match
+      """
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
                     badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
-                    laststring=""
-                    for i in lastrow.children:
-                      laststring=laststring+i.innerHTML
                     if laststring==targetword:
                       endgame()
                     elif guesses==maxguesses:
@@ -231,7 +231,7 @@
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att)
-                    
+         """           
       
                     
 
