@@ -226,9 +226,12 @@
       
                   match=diff.diff(laststring, secondlaststring)
       
-                  badWordAlert=document.getElementById("badWordAlert")
-                  badWordAlert.innerHTML=str(match)
-                  badWordAlert.style.visibility="visible"
+                  if match!=1:
+                    badWordAlert=document.getElementById("badWordAlert")
+                    badWordAlert.style.visibility="visible"
+                    while lastrow.hasChildNodes():
+                      lastrow.removeChild(lastrow.firstChild)
+
       
 
                   
