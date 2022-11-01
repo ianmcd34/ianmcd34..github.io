@@ -216,9 +216,21 @@
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
               if str(shifted)+key1=="FalseEnter":
-                  badWordAlert.innerHTML="tried to ENTER a word"
+                  laststring=""
+                  for i in range(0, lastrow.children.length):
+                    laststring=laststring+lastrow.children[i].firstChild.innerHTML
+                  secondlastrow=document.getElementById("secondlastrow")
+                  secondlaststring=""
+                  for i in range(0, secondlastrow.children.length):
+                    secondlaststring=secondlaststring+secondlastrow.children[i].firstChild.innerHTML
+
+
+                  match=diff.diff(laststring, secondlaststring)
+
+
+                  badWWordAlert.innerHTML=str(match)
                   badWordAlert.style.visibility="visible"
-      
+
                   
      
       
