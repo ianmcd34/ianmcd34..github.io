@@ -232,13 +232,15 @@
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
-                    badWordAlert.innerHTML="check for win"
+                    badWordAlert.innerHTML="check"
                     if laststring==targetword:
+                      badWordAlert.innerHTML="check for win"
                       endgame('w')
                     elif guesses==maxguesses:
+                      badWordAlert.innerHTML="check for loss"
                       endgame('l')
                     else:
-                      badWordAlert.innerHTML="At least we're in the right place"
+                      badWordAlert.innerHTML="next word"
                       badWordAlert.style.visibility="visible"
                       guesses=guesses+1
                       attr = secondlastrow.getAttributeNode("id")
