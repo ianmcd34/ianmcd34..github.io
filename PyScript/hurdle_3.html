@@ -246,7 +246,8 @@
                       guesses=guesses+1
                       secondlastrow.removeAttribute("id")
                       lastrow.setAttribute("id","secondlastrow")
-                      lastrow=document.getElementById("maintable").insertRow(table.rows.length-1)
+                      maintable=document.getElementById("maintable")
+                      maintable.insertRow(maintable.rows.length-1)
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att)       
