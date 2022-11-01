@@ -199,7 +199,10 @@
                     lastrow.removeChild(lastrow.firstChild)
               else:
                   secondlastrow=document.getElementById("secondlastrow")
-
+                  badWordAlert=document.getElementById("badWordAlert")
+                  badWordAlert.style.visibility="visible"
+                  badWordAlert.innerHTML="hi"
+    """
                   laststring=""
                   for i in range(0, lastrow.children.length):
                     laststring+=lastrow.children[i].firstChild.innerHTML
@@ -207,12 +210,10 @@
                   secondlaststring=""
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
-                  badWordAlert=document.getElementById("badWordAlert")
-                  badWordAlert.style.visibility="visible"
-                  badWordAlert.innerHTML=secondlaststring
+
                   match=diff.diff(laststring, secondlaststring)
                   
-      """
+  
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
                     badWordAlert.style.visibility="visible"
