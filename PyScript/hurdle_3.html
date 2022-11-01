@@ -231,6 +231,20 @@
                     badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
+                  else:
+                    if laststring==targetword:
+                      endgame()
+                    elif guesses==maxguesses:
+                      endgame()
+                    else:
+                      guesses=guesses+1
+                      attr = secondlastrow.getAttributeNode("id")
+                      secondlastrow.removeAttributeNode(attr)
+                      lastrow.setAttribute("id","secondlastrow")
+                      lastrow=document.getElementById("table").insertRow(table.rows.length-1)
+                      tr1_att=document.createAttribute("id")
+                      tr1_att.value="lastrow"
+                      lastrow.setAttributeNode(tr1_att)
 
       
 
