@@ -244,12 +244,12 @@
                     else:
                       badWordAlert.innerHTML="next word"
                       guesses=guesses+1
-                     
-                      
-                  
-     
-      
-                    
+                      secondlastrow.removeAttribute("id")
+                      lastrow.setAttribute("id","secondlastrow")
+                      lastrow=document.getElementById("table").insertRow(table.rows.length-1)
+                      tr1_att=document.createAttribute("id")
+                      tr1_att.value="lastrow"
+                      lastrow.setAttributeNode(tr1_att)       
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
