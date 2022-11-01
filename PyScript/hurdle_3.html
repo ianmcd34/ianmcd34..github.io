@@ -235,6 +235,19 @@
                     badWordAlert.innerHTML="check for win"
                     if laststring==targetword:
                       endgame('w')
+                    elif guesses==maxguesses:
+                      endgame('l')
+                    else:
+                      badWordAlert.innerHTML="At least we're in the right place"
+                      badWordAlert.style.visibility="visible"
+                      guesses=guesses+1
+                      attr = secondlastrow.getAttributeNode("id")
+                      secondlastrow.removeAttributeNode(attr)
+                      lastrow.setAttribute("id","secondlastrow")
+                      lastrow=document.getElementById("table").insertRow(table.rows.length-1)
+                      tr1_att=document.createAttribute("id")
+                      tr1_att.value="lastrow"
+                      lastrow.setAttributeNode(tr1_att)
 
                   
      
