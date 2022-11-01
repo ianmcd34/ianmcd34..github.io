@@ -235,7 +235,7 @@
                       lastrow.removeChild(lastrow.firstChild)
                   else:
                     badWordAlert.innerHTML="check"
-                    if laststring==targetword:
+                    if laststring.upper()==targetword.upper():
                       badWordAlert.innerHTML="check for win"
                       endgame('w')
                     elif guesses==maxguesses:
