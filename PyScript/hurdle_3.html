@@ -242,7 +242,7 @@
                       badWordAlert.innerHTML="check for loss"
                       endgame('l')
                     else:
-                      badWordAlert.innerHTML="next word"
+                      badWordAlert.innerHTML="next word"+str(maintable.rows.length)
                       guesses=guesses+1
                       secondlastrow.removeAttribute("id")
                       lastrow.setAttribute("id","secondlastrow")
@@ -251,7 +251,7 @@
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att) 
-                      badWordAlert.innerHTML="next word1"
+                      badWordAlert.innerHTML=badWordAlert.innerHTML+"next word/""+str(maintable.rows.length)
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
