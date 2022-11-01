@@ -212,17 +212,14 @@
           
                   match=diff.diff(laststring, secondlaststring)
       
-                  if match==1:
-                    lastrow.style.color="red"
-                  else:
-                    lastrow.style.color="yellow"
-          """        
+                  
   
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
                     badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
+           """
                   else:
                     if laststring==targetword:
                       endgame()
