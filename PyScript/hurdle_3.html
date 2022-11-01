@@ -226,22 +226,13 @@
       
                   match=diff.diff(laststring, secondlaststring)
       
+                  badWordAlert=document.getElementById("badWordAlert")
+                  badWordAlert.innerHTML=str(match)
+                  badWordAlert.style.visibility="visible"
+      
 
-                  if match!=1:
-                    badWordAlert=document.getElementById("badWordAlert")
-                    badWordAlert.style.visibility="visible"
-                    while lastrow.hasChildNodes():
-                      lastrow.removeChild(lastrow.firstChild)
-                  else:
-                    if laststring==targetword:
-                      endgame('w')
-                    elif guesses==maxguesses:
-                      endgame('l')
-                    else:
-                      guesses=guesses+1
-                      badWordAlert=document.getElementById("badWordAlert")
-                      badWordAlert.innerHTML="newline"
-                      badWordAlert.style.visibility="visible"
+                  
+
      
       
                     
