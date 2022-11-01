@@ -195,8 +195,9 @@
           shifted=event.ctrlKey or event.shiftKey
           lastrow=document.getElementById("lastrow")
           badWordAlert=document.getElementById("badWordAlert")
+          badWordAlert.innerHTML=str(shifted)+key1
           badWordAlert.style.visibility="visible"
-          badWordAlert.innerHTML=shifted+key1
+
           
 
           if key1.isalpha() and len(key1)==1:
