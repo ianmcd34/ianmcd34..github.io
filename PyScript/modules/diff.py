@@ -17,12 +17,9 @@ def diff(word1,word2):
         while shortword[i]==longword[i]:
             i=i+1
         if i==len(shortword)-1:
-            mismatch=1
+            mismatch=len(longword)-len(shortword)
         else:
-            mismatch=1
-            for i in range(i, len(shortword)):
-                if shortword[i]!=longword[i+1]:
-                    mismatch=mismatch+1
+            mismatch=1+diff(shortword[i:],longword[i+1:])
 
     else:
         for i in range(0, len(shortword)):
