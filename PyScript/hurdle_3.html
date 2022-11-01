@@ -213,6 +213,10 @@
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
               else:
+                  badWordAlert=document.getElementById("badWordAlert")
+                  badWWordAlert.innerHTML="tried to ENTER a word"
+                  badWordAlert.style.visibility="visible"
+      
                   secondlastrow=document.getElementById("secondlastrow")
           
                   laststring=""
