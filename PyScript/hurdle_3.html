@@ -210,6 +210,8 @@
               td1.appendChild(div1)
               lastrow.appendChild(td1)
           else:
+              badWordAlert.innerHTML=str(shifted)+key1
+              badWordAlert.style.visibility="visible"
               if shifted:
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
