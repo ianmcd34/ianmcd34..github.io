@@ -195,12 +195,9 @@
           shifted=event.ctrlKey or event.shiftKey
           lastrow=document.getElementById("lastrow")
           badWordAlert=document.getElementById("badWordAlert")
-          badWordAlert.innerHTML=str(shifted)+key1
-          badWordAlert.style.visibility="visible"
+  
 
-          
-
-          if key1.isalpha() and len(key1)==1:
+          if key1.isalpha() and len(key1)==1 and not shifted:
               td1=document.createElement("td")
               td1_att=document.createAttribute("class")
               td1_att.value="letterbox"
@@ -213,13 +210,10 @@
               td1.appendChild(div1)
               lastrow.appendChild(td1)
           else:
-
-              badWordAlert.style.visibility="visible"
-              badWordAlert.innerHTML=key1
-              if event.ctrlKey or event.shiftKey:
+              if shifted:
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
-              if not(event.ctrlKey or event.shiftKey):
+              else:
                   badWWordAlert.innerHTML="tried to ENTER a word"
                   badWordAlert.style.visibility="visible"
       
