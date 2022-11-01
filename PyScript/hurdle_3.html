@@ -242,11 +242,12 @@
                       badWordAlert.innerHTML="check for loss"
                       endgame('l')
                     else:
-                      badWordAlert.innerHTML="next word"+str(maintable.rows.length)
+                      
                       guesses=guesses+1
                       secondlastrow.removeAttribute("id")
                       lastrow.setAttribute("id","secondlastrow")
                       maintable=document.getElementById("maintable")
+                      badWordAlert.innerHTML="next word"+str(maintable.rows.length)
                       maintable.insertRow(maintable.rows.length-1)
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
