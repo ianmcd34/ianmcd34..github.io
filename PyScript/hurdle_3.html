@@ -217,50 +217,7 @@
                   badWWordAlert.innerHTML="tried to ENTER a word"
                   badWordAlert.style.visibility="visible"
       
-                  secondlastrow=document.getElementById("secondlastrow")
-          
-                  laststring=""
-                  for i in range(0, lastrow.children.length):
-                    laststring=laststring+lastrow.children[i].firstChild.innerHTML
-
-                  secondlaststring=""
-                  for i in range(0, secondlastrow.children.length):
-                    secondlaststring=secondlaststring+secondlastrow.children[i].firstChild.innerHTML
-      
-      
-                  match=diff.diff(laststring, secondlaststring)
-      
-                  badWordAlert=document.getElementById("badWordAlert")
-                  badWWordAlert.innerHTML=str(match)
-                  badWordAlert.style.visibility="visible"
-      
-                  if match!=1:
-                    badWordAlert=document.getElementById("badWordAlert")
-                    badWordAlert.style.visibility="visible"
-                    while lastrow.hasChildNodes():
-                      lastrow.removeChild(lastrow.firstChild)
-                  else:
-                    if laststring==targetword:
-                      endgame('w')
-                    elif guesses==maxguesses:
-                      endgame('l')
-                    else:
-                      badWordAlert=document.getElementById("badWordAlert")
-                      badWWordAlert.innerHTML="At least we're in the right place"
-                      badWordAlert.style.visibility="visible"
-                      guesses=guesses+1
-                      attr = secondlastrow.getAttributeNode("id")
-                      secondlastrow.removeAttributeNode(attr)
-                      lastrow.setAttribute("id","secondlastrow")
-                      lastrow=document.getElementById("table").insertRow(table.rows.length-1)
-                      tr1_att=document.createAttribute("id")
-                      tr1_att.value="lastrow"
-                      lastrow.setAttributeNode(tr1_att)
-
-      
-
                   
-
      
       
                     
