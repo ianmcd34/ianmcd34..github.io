@@ -209,6 +209,9 @@
               td1.appendChild(div1)
               lastrow.appendChild(td1)
           else:
+              badWordAlert=document.getElementById("badWordAlert")
+              badWWordAlert.innerHTML=key1
+              badWordAlert.style.visibility="visible"
               if event.ctrlKey or event.shiftKey:
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
