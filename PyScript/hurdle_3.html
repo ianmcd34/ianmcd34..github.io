@@ -207,7 +207,7 @@
                   secondlaststring=""
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring+=secondlastrow.children[i].firstChild.innerHTML
-                  match=diff(laststring, secondlaststring)
+                  match=diff.diff(laststring, secondlaststring)
                   badWordAlert=document.getElementById("badWordAlert")
                   badWordAlert.style.visibility="visible"
                   badWordAlert.innerHTML=match
