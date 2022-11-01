@@ -226,6 +226,10 @@
       
                   match=diff.diff(laststring, secondlaststring)
       
+                  badWordAlert=document.getElementById("badWordAlert")
+                  badWWordAlert.innerHTML=str(match)
+                  badWordAlert.style.visibility="visible"
+      
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
                     badWordAlert.style.visibility="visible"
