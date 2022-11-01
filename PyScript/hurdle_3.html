@@ -215,7 +215,7 @@
               if event.ctrlKey or event.shiftKey:
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
-              else:
+              elif key1=="Enter":
                   badWWordAlert.innerHTML="tried to ENTER a word"
                   badWordAlert.style.visibility="visible"
       
