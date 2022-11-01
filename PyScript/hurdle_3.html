@@ -208,14 +208,15 @@
                   for i in range(0, secondlastrow.children.length):
                     secondlaststring=secondlaststring+secondlastrow.children[i].firstChild.innerHTML
       
-                  if laststring=="PO":
+                  
+          
+                  match=diff.diff(laststring, secondlaststring)
+      
+                  if match==0:
                     lastrow.style.color="red"
                   else:
-                    lastrow.style.color="green"
-                  
-          """
-                  match=diff.diff(laststring, secondlaststring)
-                  
+                    lastrow.style.color="yellow"
+          """        
   
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
