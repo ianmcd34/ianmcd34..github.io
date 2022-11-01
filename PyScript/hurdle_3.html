@@ -127,7 +127,7 @@
         </tr>
     </table>
     <h2>Target Word</h2>
-    <h2 style="color: red" id="badWordAlert">Sorry, that word is not a legal entry.</h1>
+    <h2 style="color: red" id="badWordAlert" style="visibility: hidden">Sorry, that word is not a legal entry.</h1>
 
     <py-script>
       from pyodide import create_proxy
@@ -216,12 +216,12 @@
   
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
-                    if badWordAlert.style.visibility=="hidden":
-                      badWordAlert.style.visibility="visible"
-                    else:
-                      badWordAlert.style.visibility="hidden"
+                    badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
+                  else:
+                    if laststring==targetword:
+                      endgame()
      
       
                     
