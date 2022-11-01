@@ -216,7 +216,10 @@
   
                   if match!=1:
                     badWordAlert=document.getElementById("badWordAlert")
-                    badWordAlert.style.visibility="hidden"
+                    if badWordAlert.style.visibility=="hidden":
+                      badWordAlert.style.visibility="visible"
+                    else:
+                      badWordAlert.style.visibility="hidden"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
      
