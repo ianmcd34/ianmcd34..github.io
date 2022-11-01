@@ -233,9 +233,9 @@
                       lastrow.removeChild(lastrow.firstChild)
                   else:
                     if laststring==targetword:
-                      endgame()
+                      endgame('w')
                     elif guesses==maxguesses:
-                      endgame()
+                      endgame('l')
                     else:
                       guesses=guesses+1
                       attr = secondlastrow.getAttributeNode("id")
