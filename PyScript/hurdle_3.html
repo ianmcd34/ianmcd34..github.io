@@ -193,6 +193,8 @@
       def nextLetter(event): 
           key1=event.key
           lastrow=document.getElementById("lastrow")
+          badWordAlert=document.getElementById("badWordAlert")
+          badWordAlert.style.visibility="hidden"
 
           if key1.isalpha() and len(key1)==1:
               td1=document.createElement("td")
@@ -233,6 +235,17 @@
                   else:
                     if laststring==targetword:
                       endgame('w')
+                  elif guesses==maxguesses:
+                      endgame('l')
+                  else:
+                    guesses=guesses+1
+                    attr = secondlastrow.getAttributeNode("id")
+                    secondlastrow.removeAttributeNode(attr)
+                    lastrow.setAttribute("id","secondlastrow")
+                    lastrow=document.getElementById("table").insertRow(table.rows.length-1)
+                    tr1_att=document.createAttribute("id")
+                    tr1_att.value="lastrow"
+                    lastrow.setAttributeNode(tr1_att)
      
       
                     
