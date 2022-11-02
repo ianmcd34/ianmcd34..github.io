@@ -215,8 +215,6 @@
               td1.appendChild(div1)
               lastrow.appendChild(td1)
           else:
-              badWordAlert.innerHTML=str(shifted)+key1
-              badWordAlert.style.visibility="visible"
               if str(shifted)+key1=="TrueEnter":
                   while lastrow.hasChildNodes():
                     lastrow.removeChild(lastrow.firstChild)
@@ -232,30 +230,25 @@
 
                   match=diff.diff(laststring, secondlaststring)
       
-                  if match!=1:
+                  if match!=1 or laststring not in dict:
                     badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
-                    badWordAlert.innerHTML="check"
                     if laststring.upper()==targetword.upper():
-                      badWordAlert.innerHTML="check for win"
                       endgame('w')
                     elif guesses==maxguesses:
-                      badWordAlert.innerHTML="check for loss"
                       endgame('l')
                     else:
-                      
                       guesses=guesses+1
                       secondlastrow.removeAttribute("id")
                       lastrow.setAttribute("id","secondlastrow")
                       maintable=document.getElementById("maintable")
-                      badWordAlert.innerHTML="next word"+str(maintable.rows.length)
                       lastrow=maintable.insertRow(maintable.rows.length-1)
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att) 
-                      badWordAlert.innerHTML=dict.pop()
+                      
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
