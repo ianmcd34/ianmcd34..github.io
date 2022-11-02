@@ -153,11 +153,11 @@
       difficulty=document.getElementById("difficulty-holder").innerHTML;
       
       if difficulty=="Easiest":
-        maxguesses=max_out
+        maxguesses=max_out-1
       elif difficulty=="Hardest":
-        maxguesses=min_out
+        maxguesses=min_out-1
       else:
-        maxguesses=int((max_out+min_out)/2+(max_out+min_out)%2)
+        maxguesses=int((max_out+min_out-2)/2+(max_out+min_out)%2)
 
 
 
@@ -258,11 +258,11 @@
                     difficulty=document.getElementById("difficulty-holder").innerHTML;
       
                     if difficulty=="Easiest":
-                      maxguesses=max_out
+                      maxguesses=max_out-1
                     elif difficulty=="Hardest":
-                      maxguesses=min_out
+                      maxguesses=min_out-1
                     else:
-                      maxguesses=int((max_out+min_out)/2+(max_out+min_out)%2)
+                      maxguesses=int((max_out+min_out-2)/2+(max_out+min_out)%2)
       
                     if laststring.upper()==targetword.upper():
                       endgame('w')
