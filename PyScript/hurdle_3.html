@@ -201,7 +201,7 @@
           elif difficulty=="Hardest":
             score=score*3
           badWordAlert=document.getElementById("badWordAlert")
-          badWordAlert.innerHTML="Congratulations! You won! Score = "+str(score)
+          badWordAlert.innerHTML="Congratulations! You won! Score = "+str(score)+"("+str(min_out)+"/"+str(max_out)+")"
           badWordAlert.style.visibility="visible"
         else:
           badWordAlert=document.getElementById("badWordAlert")
