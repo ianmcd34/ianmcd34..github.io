@@ -263,7 +263,15 @@
     <script type="text/javascript">
       $("#save-changes").click(function() {
         let no_String = $(":checked").attr("id");
-        alert(no_String);
+        if (no_String=="radioDifficulty1") {
+          $("p#difficulty-holder").html("Hardest");
+        }
+        else if (no_String=="radioDifficulty2") {
+          $("p#difficulty-holder").html("Medium");
+        }
+        else if (no_String=="radioDifficulty3") {
+          $("p#difficulty-holder").html("Easiest");
+        }
       })
     </script>
   
