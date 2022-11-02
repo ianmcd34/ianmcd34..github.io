@@ -133,9 +133,12 @@
       from pyodide import create_proxy
       import wordlink_1
       import diff
+      import numpy
+      import sys
 
-
-
+      File_object = open(r"modules/en","r")
+      w=numpy.loadtxt(File_object, dtype="object")
+      dict=set(w)
 
       links_out = wordlink_1.links_out
       startword = wordlink_1.startword
@@ -252,7 +255,7 @@
                       tr1_att=document.createAttribute("id")
                       tr1_att.value="lastrow"
                       lastrow.setAttributeNode(tr1_att) 
-                      badWordAlert.innerHTML=laststring+targetword
+                      badWordAlert.innerHTML=dict.pop()
 
 
       document.addEventListener("keypress", create_proxy(nextLetter))
