@@ -129,7 +129,7 @@
     </table>
     <h2>Target Word</h2>
     <h2 style="color: red; visibility: hidden" id="badWordAlert">Sorry, that word is not a legal entry.</h1>
-    <p style="visibility: visible" id="difficulty-holder">Medium</p>
+    <p style="visibility: hidden" id="difficulty-holder">Medium</p>
 
     <py-script>
       from pyodide import create_proxy
@@ -158,14 +158,6 @@
         maxguesses=min_out
       else:
         maxguesses=int((max_out+min_out)/2+(max_out+min_out)%2)
-      
-      badWordAlert=document.getElementById("badWordAlert")
-      badWordAlert.innerHTML=difficulty+"/"+str(min_out)+"/"+str(max_out)+"/"+str(maxguesses)
-      badWordAlert.style.visibility="visible"
-      
-      
-      
-      
 
 
 
@@ -203,8 +195,13 @@
       
       def endgame(w_l):
         if w_l=='w':
+          score=1+maxguesses-guesses
+          if difficulty=="Medium":
+            score=score*2
+          elif difficulty="Hardest":
+            score=score*3
           badWordAlert=document.getElementById("badWordAlert")
-          badWordAlert.innerHTML="Congratulations! You won!"
+          badWordAlert.innerHTML="Congratulations! You won! Score = "+str(score)
           badWordAlert.style.visibility="visible"
         else:
           badWordAlert=document.getElementById("badWordAlert")
@@ -258,6 +255,15 @@
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
+                    difficulty=document.getElementById("difficulty-holder").innerHTML;
+      
+                    if difficulty=="Easiest":
+                      maxguesses=max_out
+                    elif difficulty=="Hardest":
+                      maxguesses=min_out
+                    else:
+                      maxguesses=int((max_out+min_out)/2+(max_out+min_out)%2)
+      
                     if laststring.upper()==targetword.upper():
                       endgame('w')
                     elif guesses==maxguesses:
