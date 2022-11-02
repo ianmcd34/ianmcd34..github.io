@@ -147,6 +147,7 @@
       max_out = wordlink_1.max_out
       guesses=0
       maxguesses=max_out
+      const radioDifficulty = document.querySelectorAll("input.radioDifficulty")
 
       secondlastrow=document.getElementById("secondlastrow")
 
@@ -195,6 +196,7 @@
 
       def nextLetter(event): 
           global guesses
+          badWordAlert.style.visibility="hidden"
       
           key1=event.key
           shifted=event.ctrlKey or event.shiftKey
