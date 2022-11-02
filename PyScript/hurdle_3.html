@@ -230,7 +230,7 @@
 
                   match=diff.diff(laststring, secondlaststring)
       
-                  if match!=1 or laststring not in dict:
+                  if match!=1 or laststring.lower() not in dict:
                     badWordAlert.style.visibility="visible"
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
