@@ -283,6 +283,11 @@
     </py-script>
     
     <script type="text/javascript">
+      $("#difficultyButton").click(function(){
+        if ($(this).text()=="Easiest") {$(this).text("Medium"); $("p#difficulty-holder").html("Medium");}
+        else if ($(this).text()=="Medium") {$(this).text("Hardest"); $("p#difficulty-holder").html("Hardest");}
+        else {$(this).text("Easiest"); $("p#difficulty-holder").html("Easiest");}
+      })
       $("#save-changes").click(function() {
         let no_String = $(":checked").attr("id");
         if (no_String=="radioDifficulty1") {
