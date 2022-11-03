@@ -150,6 +150,10 @@
       max_out = wordlink_1.max_out
       guesses=0
       
+      badWordAlert=document.getElementById("badWordAlert")
+      badWordAlert.innerHTML=str(links_out)
+      badWordAlert.style.visibility="visible"
+      
       difficulty=document.getElementById("difficulty-holder").innerHTML;
       
       if difficulty=="Easiest":
