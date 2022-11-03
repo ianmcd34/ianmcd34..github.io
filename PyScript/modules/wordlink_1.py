@@ -128,7 +128,7 @@ for x in links:
         links1.append(x[0:x.index(targetword)+1])
 for x in range(0, len(links1)):
     for y in range(0, len(links1[x])-1):
-        for z in range(y+2, len(links1[x])-1):
+        for z in range(y+2, len(links1[x])):
             if diff(links1[x][y],links1[x][z])==1:
                 links1.append(links1[x][0:y+1]+links1[x][z:])
 links1.sort(key=len)
