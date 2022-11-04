@@ -256,7 +256,7 @@
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
-                    if laststring in links_out:
+                    if laststring.lower() in links_out:
                       badWordAlert=document.getElementById("badWordAlert")
                       badWordAlert.innerHTML="Good word"
                       badWordAlert.style.visibility="visible"
