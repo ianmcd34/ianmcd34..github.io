@@ -256,6 +256,10 @@
                     while lastrow.hasChildNodes():
                       lastrow.removeChild(lastrow.firstChild)
                   else:
+                    if laststring in links_out:
+                      for i in range(0, lastrow.children.length):
+                        lastrow.children[i].style.backgroundColor="#52ff52"
+      
                     difficulty=document.getElementById("difficulty-holder").innerHTML;
       
                     if difficulty=="Easiest":
