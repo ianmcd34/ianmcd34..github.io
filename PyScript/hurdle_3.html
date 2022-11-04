@@ -257,6 +257,9 @@
                       lastrow.removeChild(lastrow.firstChild)
                   else:
                     if laststring in links_out:
+                      badWordAlert=document.getElementById("badWordAlert")
+                      badWordAlert.innerHTML="Good word"
+                      badWordAlert.style.visibility="visible"
                       for i in range(0, lastrow.children.length):
                         lastrow.children[i].style.backgroundColor="#52ff52"
       
