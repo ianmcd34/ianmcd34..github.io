@@ -320,8 +320,8 @@ function drawExpression() {
   
 }
 	    
-function get_pyGlobals(obj) {
-  eval("pyGlobals = obj");
+function get_exp1(obj) {
+  eval("exp1 = obj");
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -350,7 +350,7 @@ createPosns();
 
 drawExpression();
 	    
-exp1=get_pyGlobals.get('exp1')
+
 
 
 // Create gradient
@@ -367,7 +367,7 @@ ctx.globalCompositeOperation="lighter";
     <py-script>
 	import class_Expression
 	from pyodide import create_proxy, to_js
-	from js import get_pyGlobals
+	from js import get_exp1
 	    
 	exp1=class_Expression.Expression()
 	exp1.add_branch('+','x')
@@ -375,7 +375,7 @@ ctx.globalCompositeOperation="lighter";
 	exp1.add_branch('*','y')   
 	exp1.print_tree('o')
 	    
-	get_pyGlobals(create_proxy(globals()))
+	js.get_exp1(create_proxy(exp1.elements))
 
     </py-script>
   </body>
