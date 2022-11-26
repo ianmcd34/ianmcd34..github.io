@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Expression Builder</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+      - matplotlib
+      - numpy
+      - paths:
+        - modules/class_Expression.py
+    </py-env>
+  </head>
+  <body>
+
+    <h1 style="font-size:40px; font-weight: bold;">RENDER EXPRESSION</h1>
+    <h4 id='date'></h4>
+    <canvas id="myCanvas" onmousedown="MouseDown(event)" onmouseup="MouseUp(event)" onmousemove="MouseMove(event)" 
+	width="1100" height="500" style="border:1px solid #000000;">
+    </canvas>
+
+    <py-script> src="modules/class_Expression.py"</py-script>
+    <script type="text/javascript">
+
+
+
+function MouseDown(event) {
+  ctx.fillStyle = grd;
+  var x = event.offsetX;     // Get the horizontal coordinate
+  var y = event.offsetY;     // Get the vertical coordinate
+  ctx.globalAlpha=0.5;
+  ctx.fillRect(x, y, 0, 0);
+  mousex=x;
+  mousey=y;
+  startx=x;
+  starty=y;
+
+}
+
+function MouseMove(event) {
+  ctx.fillStyle = grd;
+  ctx.globalAlpha=0.5;
+  if(startx>0 && starty>0) {
+    var x = event.offsetX;     // Get the horizontal coordinate
+    var y = event.offsetY;     // Get the vertical coordinate
+    var coor = "X coords: " + x + ", Y coords: " + y;
+    ctx.fillRect(mousex, starty, x-mousex, mousey-starty);
+    ctx.fillRect(startx, mousey, x-startx, y-mousey);
+    mousex=x;
+    mousey=y;
+    selectedNodes=[];
+    selectedPosns=[];
+    posns.forEach(selectNodes);
+    }
+}
+
+function highlightNode(index) {
+  ctx.fillStyle = "red";
+  ctx.globalAlpha=1;
+  if(posns[index][0]==999) {
+    text="(";
+  }
+  else if(posns[index][0]==998) {
+    text=")";
+  }
+  else {
+    text=exp[find_pointer(selectedNodes[selectedNodes.length-1])][1];
+  }
+  x=posns[index][1];
+  y=posns[index][2];
+  ctx.fillText(text,x, y, textWidth);
+  }
+
+function highlightSelection() {
+  
+  ctx.globalAlpha=1;
+  for (i in selectedPosns) {
+      posns_index=selectedPosns[i];
+      posn=posns[posns_index];
+      if(posn[0]==999) {
+          text="(";
+          ctx.fillStyle = "black";
+      }
+      else if(posn[0]==998) {
+          text=")";
+          ctx.fillStyle = "black";
+      }
+      else {
+          text=exp[find_pointer(posn[0])][1];
+          ctx.fillStyle = "red";
+      }
+      x=posn[1];
+      y=posn[2];
+      ctx.fillText(text,x, y, textWidth);
+  }
+}
+
+function MouseUp(event) {
+  trimSelectedNodes();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  startx=0;
+  starty=0;
+  drawExpression();
+  highlightSelection();
+}
+
+function find_pointer(index) {
+  i=0;
+  while (exp[i][0]!=index) { i++;}
+  return i
+}
+
+
+
+
+function selectNodes(item,index) {
+
+  if(Math.min(startx, mousex)<item[1] && Math.min(starty, mousey)<item[2] && Math.max(startx, mousex)>item[1] && Math.max(starty, mousey)>item[2]) {
+
+      selectedNodes.push(item[0]);
+      selectedPosns.push(index);
+      highlightNode(index);
+    }
+  
+}
+
+  
+
+
+function find_parent(index) {
+  p_prime=999;
+  for (x in exp) {
+    if(exp[x][2]==index || exp[x][3]==index) {p_prime=exp[x][0];}
+  }
+  return p_prime;
+}
+
+function trimSelectedNodes() {
+
+  //include non-leaf nodes only if all their children are selected
+  for (x1 in selectedNodes) {
+    y=selectedNodes[x1];
+
+    include=true;
+    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
+       p=exp[find_pointer(y)][2];
+
+       while(include && p!=y && find_parent(p)!=999) {
+
+         if (!selectedNodes.includes(p)) {include=false; }
+         else if (exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
+         else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+         else {
+          while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
+          if (find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+          else if (find_parent(p)!=999) {p=find_parent(p);}
+         }
+       }
+    }
+    if (!include) {
+        selectedNodes.splice(x1,1);
+        selectedPosns.splice(x1,1);
+    }
+  }
+
+  //include leaf nodes only if connected to all other selected leafs
+  for (x1 in selectedNodes) {
+    y1=selectedNodes[x1];
+    
+
+    include=true;
+    if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
+
+        for (x2 in selectedNodes) {
+            y2=selectedNodes[x2];
+            if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
+                p1=y1;
+                while (find_parent(p1) in selectedNodes) {
+                    p1=find_parent(p1);
+                }
+                p2=y2;
+                while (find_parent(p2) in selectedNodes) {
+                    p2=find_parent(p2);
+                } 
+                if (p1!=p2) {
+                    include=false;
+                }              
+
+            }
+        }
+    }
+    if (!include) {
+        selectedNodes.splice(x1,1);
+        selectedPosns.splice(x1,1);
+    }
+
+  }
+
+  //include brackets only if multiplier included??
+  
+}
+
+function createPosns() {
+  posns=[];
+  p=exp[0][0];
+ 
+  while (find_parent(p)!=999) {
+    p=find_parent(p);
+  }
+  p_top=p;
+  x=cx;
+  y=cy;
+
+  incomplete=true;
+  while (incomplete && p!=999) {
+
+    if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]);}
+    
+
+
+    incomplete=false;
+    for (e1 in exp) {
+      if (!(posns.map(indexEl).includes(e1[0]))) {incomplete=true;}
+    }
+
+
+    p_left=exp[find_pointer(p)][2];
+
+    p_right=exp[find_pointer(p)][3];
+    p_x=x;
+    p_y=y;
+
+    function indexEl(arr) {
+      return arr[0];
+    }
+
+    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
+      for (i in posns) {
+        if (posns[i][1] < p_x) {
+          posns[i][1]=posns[i][1]-xdiff-xdiff/2;
+        }
+      }
+      
+      posns.push([999,p_x-xdiff-xdiff/2,y]);
+      for (i in posns) {
+        if (posns[i][1] > p_x-xdiff) {
+          posns[i][1]=posns[i][1]+xdiff/2;
+        }
+      }
+      posns.push([998, p_x-xdiff/3,p_y]);
+      p=p_left;
+      x=p_x-xdiff;
+      y=p_y;
+    }
+    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {
+      for (i in posns) {
+        if (posns[i][1]<p_x) {
+          posns[i][1]=posns[i][1]-xdiff;
+        }
+      }
+      p=p_left;
+      x=p_x-xdiff;
+      y=p_y;
+    }
+    else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
+
+      for (i in posns) {
+        if (posns[i][1]>p_x) {
+          posns[i][1]=posns[i][1]+xdiff;
+        }
+      }
+      p=p_right;
+      x=p_x+xdiff;
+      y=p_y;
+    }
+    else {
+
+      p=find_parent(p);
+      if (p!=999) {
+        x=posns[posns.map(indexEl).indexOf(p)][1];
+        y=posns[posns.map(indexEl).indexOf(p)][2];
+      }
+
+    }
+
+  }
+
+}
+
+
+function drawExpression() {
+  ctx.fillStyle = "black";
+  ctx.globalAlpha=1;
+
+
+  for (i in posns) {
+    posn=posns[i];
+    node=posn[0];
+    x=posn[1];
+    y=posn[2];
+    if (node==999) {
+      text="(";
+    }
+    else if (node==998) {
+      text=")";
+    }
+    else {
+      text=exp[find_pointer(node)][1];
+    }
+    ctx.fillText(text,x, y, textWidth);
+  }
+  
+}
+
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.font = "bold 40px Arial";
+
+let exp = [[0,"x",,],[2, "+", 0,1],[1,"3",,],[4, "*", 2,3],[3,"y",,]];
+let exp1=Expression();
+
+textWidth=150;
+xdiff=35;
+topnode=4;
+
+cx=canvas.width/2;
+cy=canvas.height/2;
+
+let mousex=0;
+let mousey=0;
+let startx=0;
+let starty=0;
+let selectedNodes=[];
+let selectedPosns=[];
+let posns=[];
+
+createPosns();
+
+drawExpression();
+
+
+// Create gradient
+var grd = ctx.createLinearGradient(0, 0, 200, 0);
+grd.addColorStop(0, "bisque");
+
+
+// Fill with gradient
+ctx.fillStyle = grd;
+ctx.globalCompositeOperation="lighter";
+
+    </script>
+  </body>
+
+</html>
