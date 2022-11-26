@@ -320,8 +320,8 @@ function drawExpression() {
   
 }
 	    
-function update_Expression(arr) {
-  eval("return arr");
+function get_pyGlobals(obj) {
+  eval("pyGlobals = obj");
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -373,6 +373,7 @@ ctx.globalCompositeOperation="lighter";
 	exp1.add_branch('*','y')   
 	exp1.print_tree('o')
 	    
+	get_pyGlobals(create_proxy(globals())
 
     </py-script>
   </body>
