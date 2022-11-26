@@ -25,15 +25,7 @@
     </canvas>
 
     <py-script> src="modules/class_Expression.py"</py-script>
-    <py-script>
-	import class_Expression
-	from pyodide import create_proxy, to_js
-	exp1=class_Expression.Expression()
-	exp1.add_branch('+','x')
-	exp1.add_branch('+','2')
-	exp1.add_branch('*','y')   
-	exp1.print_tree('o')
-    </py-script>
+    
 	  
     <script type="text/javascript">
 
@@ -327,7 +319,10 @@ function drawExpression() {
   }
   
 }
-
+	    
+function update_Expression(arr) {
+  return arr;
+}
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -366,6 +361,18 @@ ctx.fillStyle = grd;
 ctx.globalCompositeOperation="lighter";
 
     </script>
+	  
+    <py-script>
+	import class_Expression
+	from pyodide import create_proxy, to_js
+	from js import update_Expression
+	    
+	exp1=class_Expression.Expression()
+	exp1.add_branch('+','x')
+	exp1.add_branch('+','2')
+	exp1.add_branch('*','y')   
+	exp1.print_tree('o')
+    </py-script>
   </body>
 
 </html>
