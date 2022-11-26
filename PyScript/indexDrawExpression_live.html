@@ -365,7 +365,7 @@ ctx.globalCompositeOperation="lighter";
     <py-script>
 	import class_Expression
 	from pyodide import create_proxy, to_js
-	from js import update_Expression
+	from js import get_pyGlobals
 	    
 	exp1=class_Expression.Expression()
 	exp1.add_branch('+','x')
