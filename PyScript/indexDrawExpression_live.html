@@ -321,7 +321,7 @@ function drawExpression() {
 }
 	    
 function update_Expression(arr) {
-  return arr;
+  eval("return arr");
 }
 
 var canvas = document.getElementById("myCanvas");
@@ -373,7 +373,7 @@ ctx.globalCompositeOperation="lighter";
 	exp1.add_branch('*','y')   
 	exp1.print_tree('o')
 	    
-	update_Expression(to_js(exp1.elements))
+
     </py-script>
   </body>
 
