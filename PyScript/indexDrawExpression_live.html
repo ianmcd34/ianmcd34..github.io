@@ -361,16 +361,24 @@ ctx.globalCompositeOperation="lighter";
 
     </script>
 	  
+    <script>
+	    function get_exp1(obj) {
+		  eval("exp1 = obj");
+		}
+    </script>
+	  
     <py-script>
 	import class_Expression
 	from pyodide import create_proxy, to_js
 	import js
 	    
-	exp1=class_Expression.Expression()
-	exp1.add_branch('+','x')
-	exp1.add_branch('+','2')
-	exp1.add_branch('*','y')   
-	print(exp1.print_tree('o'))
+	exp_py=class_Expression.Expression()
+	exp_py.add_branch('+','x')
+	exp_py.add_branch('+','2')
+	exp_py.add_branch('*','y')   
+	print(exp_py.print_tree('o'))
+	    
+	js.get_exp1(create_proxy(exp_py.elements))
 	    
 
     </py-script>
