@@ -364,7 +364,9 @@ ctx.globalCompositeOperation="lighter";
     <script>
 	    function get_exp1(obj) {
 		  objString=obj.toString();
-		  alert(objString);
+		  arraystart=objString.indexOf("[[");
+		  arrayend=objString.indexOf("]]");
+		  alert(objString.subString(arraystart,arrayend);
 		}
     </script>
 	  
