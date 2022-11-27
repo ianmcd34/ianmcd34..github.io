@@ -427,6 +427,12 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 	drawExpression();
         
     });
+	    
+    document.getElementById("add-btn").addEventListener("click", () => {
+	// if selected nodes is whole expression - add_branch('+', number),add_branch('+',letters)
+	// if selected nodes is subexpression - add_subbranch(rightmost_leaf,'+', number),add_subbranch(rightmost_leaf,'+', letters)
+        
+    });
  
 
     </script>    
