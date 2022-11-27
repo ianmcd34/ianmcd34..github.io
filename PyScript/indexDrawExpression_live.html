@@ -19,7 +19,7 @@
   <body>
 
     <h1 style="font-size:40px; font-weight: bold;">RENDER EXPRESSION</h1>
-    <h4 id='date'></h4>
+    <button type="button" id="change-expression-btn">Update Expression</button>
     <canvas id="myCanvas" onmousedown="MouseDown(event)" onmouseup="MouseUp(event)" onmousemove="MouseMove(event)" 
 	width="1100" height="500" style="border:1px solid #000000;">
     </canvas>
@@ -373,6 +373,8 @@ ctx.globalCompositeOperation="lighter";
     </script>
 	  
     <py-script>
+	    
+	
 	import class_Expression
 	from pyodide import create_proxy, to_js
 	import js
@@ -389,30 +391,31 @@ ctx.globalCompositeOperation="lighter";
     </py-script>
 	  
     <script>
-exp = exp1;
+	    
+document.getElementById("change-expression-btn").addEventListener("click", () => {
+	exp = exp1;
 
 
-textWidth=150;
-xdiff=35;
-topnode=4;
+	textWidth=150;
+	xdiff=35;
+	topnode=4;
 
-cx=canvas.width/2;
-cy=canvas.height/2;
+	cx=canvas.width/2;
+	cy=canvas.height/2;
 
-mousex=0;
-mousey=0;
-startx=0;
-starty=0;
-selectedNodes=[];
-selectedPosns=[];
-posns=[];
+	mousex=0;
+	mousey=0;
+	startx=0;
+	starty=0;
+	selectedNodes=[];
+	selectedPosns=[];
+	posns=[];
 
-createPosns();
-ctx.clearRect(0,0,canvas.width,canvas.height);
-drawExpression();
-
-
-
+	createPosns();
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	drawExpression();
+        
+    });
  
 
     </script>    
