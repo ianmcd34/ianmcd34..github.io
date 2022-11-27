@@ -20,7 +20,7 @@
 
     <h1 style="font-size:40px; font-weight: bold;">RENDER EXPRESSION</h1>
     <button type="button" id="change-expression-btn">Update Expression</button>
-    <div style="float: right" width="100">
+    <div style="position: absolute;  right: 0px;" width="100">
 	    <button type="button" id="new-expression-btn">New Expression</button></br>
 	    <button type="button" id="add-btn">Add</button></br>
 	    <button type="button" id="subtract-btn">Subtract</button></br>
@@ -30,7 +30,7 @@
 	    <input type="text" id="factor-input" placeholder="2x" /></br>
     </div>
     <canvas id="myCanvas" onmousedown="MouseDown(event)" onmouseup="MouseUp(event)" onmousemove="MouseMove(event)" 
-	width="1100" height="500" style="border:1px solid #000000;">
+	width="1000" height="500" style="border:1px solid #000000;">
     </canvas>
 
     <py-script> src="modules/class_Expression.py"</py-script>
