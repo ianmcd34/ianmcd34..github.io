@@ -320,9 +320,7 @@ function drawExpression() {
   
 }
 	    
-function get_exp1(obj) {
-  eval("exp1 = obj");
-}
+
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
@@ -349,8 +347,7 @@ let posns=[];
 createPosns();
 
 drawExpression();
-	    
-alert("exp1="+exp1);
+
 
 
 // Create gradient
@@ -375,8 +372,6 @@ ctx.globalCompositeOperation="lighter";
 	exp1.add_branch('*','y')   
 	print(exp1.print_tree('o'))
 	    
-	js.get_exp1(create_proxy(exp1.elements))
-	print("exp1="+exp1)
 
     </py-script>
 	  
