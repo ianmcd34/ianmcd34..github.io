@@ -368,7 +368,7 @@ ctx.globalCompositeOperation="lighter";
 		  arrayend=objString.indexOf("]]");
 		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
 		  eval("exp1=[" + objString + "]");
-		  alert(exp1.toString());
+		  alert(exp1[0]);
 		}
     </script>
 	  
