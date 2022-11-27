@@ -364,7 +364,12 @@ ctx.globalCompositeOperation="lighter";
     <script>
 	    function get_exp1(obj) {
 		  eval("exp1 = obj");
-		  alert("get_exp1 called"+Object.keys(obj).toString())
+		  keys=Object.keys(obj);
+		  text="";
+		  for (let x of keys) {
+		    text += x + ",";
+		  }
+		  alert("get_exp1 called"+text)
 		}
     </script>
 	  
