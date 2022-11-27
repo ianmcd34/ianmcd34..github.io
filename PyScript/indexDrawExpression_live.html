@@ -383,6 +383,35 @@ ctx.globalCompositeOperation="lighter";
 
     </py-script>
 	  
+    <script>
+let exp = [[0,"x",,],[2, "+", 0,1],[1,"4",,],[4, "*", 2,3],[3,"y",,]];
+
+
+textWidth=150;
+xdiff=35;
+topnode=4;
+
+cx=canvas.width/2;
+cy=canvas.height/2;
+
+let mousex=0;
+let mousey=0;
+let startx=0;
+let starty=0;
+let selectedNodes=[];
+let selectedPosns=[];
+let posns=[];
+
+createPosns();
+
+drawExpression();
+
+
+
+ 
+
+    </script>    
+	  
 	  
   </body>
 
