@@ -366,8 +366,8 @@ ctx.globalCompositeOperation="lighter";
 		  objString=obj.toString();
 		  arraystart=objString.indexOf("[[");
 		  arrayend=objString.indexOf("]]");
-		  objArr=objString.substring(arraystart+2,arrayend).split("],[");
-		  alert(objArr[0]+";"+objArr[1]);
+		  objString=objString.substring(arraystart+1,arrayend+1);
+		  alert(objString);
 		}
     </script>
 	  
