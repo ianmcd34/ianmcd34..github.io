@@ -439,7 +439,7 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 	  index+=1;
 	  p=selectedNodes[index];
 	}
-	while (p in selectedNodes && find_parent(p)<998) {
+	while (find_parent(p) in selectedNodes && find_parent(p)<998) {
 	  p=find_parent(p)
 	}
 	selectedtop=p;
