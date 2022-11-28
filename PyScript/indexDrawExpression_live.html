@@ -381,6 +381,10 @@ ctx.globalCompositeOperation="lighter";
 		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
 		  eval("exp1=[" + objString + "]");
 		}
+	    
+	    function js_add_branch(obj) {
+		
+	    }
     </script>
 	  
     <py-script>
@@ -433,6 +437,8 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 	    
     document.getElementById("add-btn").addEventListener("click", () => {
 	factorString=document.getElementById("factor-input").value;
+	num=parseInt(factorString);
+	
 	p=999;
 	index=-1;
 	while (p>=998 && index<selectedNodes.length-1) {
@@ -440,18 +446,21 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 	  p=selectedNodes[index];
 	}
 	while (find_parent(p) in selectedNodes && find_parent(p)<998) {
-	  p=find_parent(p)
+	  p=find_parent(p);
 	}
 	selectedtop=p;
 	p=exp[0][0];
 	while (p in exp.map(firstEl) && find_parent(p)<998) {
-	  p=find_parent(p)
+	  p=find_parent(p);
 	}
 	exptop=p;
-	alert(selectedNodes+","+exp);
-	alert(selectedtop+","+exptop);
-	// if selected nodes is whole expression - add_branch('+', number),add_branch('+',letters)
+	 
 	
+
+	// if selected nodes is whole expression - add_branch('+', number),add_branch('+',letters)
+	if (selectedtop==exptop) {
+	  
+	}
 	    
 	// if selected nodes is subexpression - add_subbranch(rightmost_leaf,'+', number),add_subbranch(rightmost_leaf,'+', letters)
         
