@@ -397,7 +397,7 @@ ctx.globalCompositeOperation="lighter";
 	exp_py.add_branch('*','y')   
 	print(exp_py.print_tree('o'))
 	    
-	js.get_exp1(create_proxy(exp_py.elements))
+	js_exp_py=create_proxy(exp_py.elements)
 	    
 
     </py-script>
@@ -408,6 +408,7 @@ ctx.globalCompositeOperation="lighter";
        }
 	    
 document.getElementById("change-expression-btn").addEventListener("click", () => {
+	get_exp1(js_exp_py);
 	exp = exp1;
 
 
