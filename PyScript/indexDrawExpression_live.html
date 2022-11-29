@@ -441,12 +441,14 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 
   <py-script>
     import js
+   
+    def on_add_click():
+      print("add button clicked")
     
     add_btn=document.querySelector("#add-btn")
     add_btn.addEventListener("click", on_add_click)
 	  
-    def on_add_click():
-      print("add button clicked")
+    
 	  
   </py-script>
 
