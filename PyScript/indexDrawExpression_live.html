@@ -375,6 +375,7 @@ ctx.globalCompositeOperation="lighter";
 	  
     <script>
 	    function get_exp1(obj) {
+		  alert("get_exp1 called");
 		  objString=obj.toString();
 		  arraystart=objString.indexOf("[[");
 		  arrayend=objString.indexOf("]]");
@@ -399,7 +400,7 @@ ctx.globalCompositeOperation="lighter";
 	print(exp_py.print_tree('o'))
 
 	
-
+        document.querySelector("#change-expression-btn").addEventListener("click",js.get_exp1(create_proxy(exp_py.elements)))
 
 </py-script>
 	  
