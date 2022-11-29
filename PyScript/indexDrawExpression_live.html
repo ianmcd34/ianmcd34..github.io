@@ -393,11 +393,12 @@ ctx.globalCompositeOperation="lighter";
 	from pyodide import create_proxy, to_js
 	import js
 
-	exp_py=class_Expression.Expression()
-	exp_py.add_branch('+','x')
-	exp_py.add_branch('+','2')
-	exp_py.add_branch('*','y')   
-	print(exp_py.print_tree('o'))
+	def create_exp_py:
+		exp_py=class_Expression.Expression()
+		exp_py.add_branch('+','x')
+		exp_py.add_branch('+','2')
+		exp_py.add_branch('*','y')   
+		print(exp_py.print_tree('o'))
 	
 	document.querySelector("#change-expression-btn").addEventListener("click",js.get_exp1(create_proxy(exp_py.elements)))
 
