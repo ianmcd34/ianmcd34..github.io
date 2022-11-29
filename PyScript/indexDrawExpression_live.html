@@ -432,37 +432,7 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
         
     });
 	    
-    document.getElementById("add-btn").addEventListener("click", () => {
-	factorString=document.getElementById("factor-input").value;
-	num=parseInt(factorString);
-	
-	p=999;
-	index=-1;
-	while (p>=998 && index<selectedNodes.length-1) {
-	  index+=1;
-	  p=selectedNodes[index];
-	}
-	while (find_parent(p) in selectedNodes && find_parent(p)<998) {
-	  p=find_parent(p);
-	}
-	selectedtop=p;
-	p=exp[0][0];
-	while (p in exp.map(firstEl) && find_parent(p)<998) {
-	  p=find_parent(p);
-	}
-	exptop=p;
-	 
-	
 
-	// if selected nodes is whole expression - add_branch('+', number),add_branch('+',letters)
-	if (selectedtop==exptop) {
-	  
-	}
-	    
-	// if selected nodes is subexpression - add_subbranch(rightmost_leaf,'+', number),add_subbranch(rightmost_leaf,'+', letters)
-        
-    });
- 
 
     </script>    
 	  
@@ -473,7 +443,11 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
     import js
     
     add_btn=document.querySelector("#add-btn")
-    document.query
+    add_btn.addEventListener("click", on_add_click)
+	  
+    def on_add_click:
+      print("add button clicked")
+	  
   </py-script>
 
 </html>
