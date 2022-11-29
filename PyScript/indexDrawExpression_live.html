@@ -441,6 +441,7 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
 
   <py-script>
     import js
+    from pyodide import create_proxy, to_js
 	  
     print("hail and well met")
    
@@ -448,7 +449,7 @@ document.getElementById("change-expression-btn").addEventListener("click", () =>
       print("add button clicked")
     
     add_btn=document.querySelector("#add-btn")
-    add_btn.addEventListener("click", on_add_click)
+    add_btn.addEventListener("click", create_proxy(on_add_click))
 	  
     
 	  
