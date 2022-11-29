@@ -28,7 +28,7 @@
 	    <button type="button" id="multiply-btn">Multiply</button></br>
 	    <button type="button" id="divide-btn">Divide</button></br>
             <p></br></p>
-	    <p><label for="factor-input">Manipulation factor:</label></br>
+	    <p><label for="factor-input">By:</label></br>
             <input type="text" id="factor-input" placeholder="2x" /></p>
             <p></br></p>
     </div>
@@ -374,6 +374,10 @@ ctx.globalCompositeOperation="lighter";
     </script>
 	  
     <script>
+	    function firstEl(arr) {
+		    return arr[0];
+	    }
+	    
 	    function get_exp1(obj) {
 		  alert("get_exp1 called");
 		  objString=obj.toString();
@@ -409,6 +413,25 @@ ctx.globalCompositeOperation="lighter";
 		  drawExpression();
 	    }
 	    
+	    function findtops() {
+		p=999;
+		index=-1;
+		while (p>=998 && index<selectedNodes.length-1) {
+		  index+=1;
+		  p=selectedNodes[index];
+		}
+		while (find_parent(p) in selectedNodes && find_parent(p)<998) {
+		  p=find_parent(p);
+		}
+		selectedtop=p;
+		p=exp[0][0];
+		while (p in exp.map(firstEl) && find_parent(p)<998) {
+		  p=find_parent(p);
+		}
+		exptop=p;
+		return [selectedtop,exptop];
+	    }
+	    
     </script>
 	  
 <py-script>
@@ -417,6 +440,9 @@ ctx.globalCompositeOperation="lighter";
 	import class_Expression
 	from pyodide import create_proxy, to_js
 	import js
+	
+	numpart=0
+	strpart=""
 
 	def create_exp_py(event):
 		exp_py=class_Expression.Expression()
@@ -426,42 +452,41 @@ ctx.globalCompositeOperation="lighter";
 		print(exp_py.print_tree('o'))
 		js.get_exp1(create_proxy(exp_py.elements))
 	
+	def parseFactor():
+		expString=js.document.getElementById("factor-input").value
+		for (i in range(0, len(expString)):
+			if expString[i].isdigit():
+				numpart=int(expString[0:i+1])
+				strpart=expString[i+1:]
+	         if numpart==0 and strpart=="":
+			strpart=expString
+		
+	
+	def add_exp(event):
+		parseFactor()
+		selectedtop=js.findtops[0]
+		exptop=js.findtops[1]
+		print(selectedtop+","+exptop)
+		
+	
+		
+		
+					
+			
+		
+	
 	js.document.getElementById("change-expression-btn").addEventListener("click", create_proxy(create_exp_py))
+	
+	js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 	
 
 </py-script>
 	  
-    <script>
-       function firstEl(arr) {
-	  return arr[0];
-       }
-	    
-document.getElementById("change-expression-btn").addEventListener("click", () => {
-  
-	
- });
-	    
 
-
-    </script>    
 	  
 	  
   </body>
 
-  <py-script>
-    import js
-    from pyodide import create_proxy, to_js
-	  
-    print("hail and well met")
-   
-    def on_add_click(event):
-      print("add button clicked")
-    
-    add_btn=document.querySelector("#add-btn")
-    add_btn.addEventListener("click", create_proxy(on_add_click))
-	  
-    
-	  
-  </py-script>
+
 
 </html>
