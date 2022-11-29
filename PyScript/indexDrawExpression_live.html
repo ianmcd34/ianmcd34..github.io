@@ -414,6 +414,7 @@ ctx.globalCompositeOperation="lighter";
 	    }
 	    
 	    function findtops() {
+		alert("findtops called");
 		p=999;
 		index=-1;
 		while (p>=998 && index<selectedNodes.length-1) {
@@ -464,6 +465,7 @@ ctx.globalCompositeOperation="lighter";
 
 	def add_exp(event):
 		parseFactor()
+		print(numpart+","+strpart)
 		selectedtop=js.findtops[0]
 		exptop=js.findtops[1]
 		print(selectedtop+","+exptop)
