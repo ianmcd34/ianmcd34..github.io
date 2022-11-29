@@ -454,7 +454,7 @@ ctx.globalCompositeOperation="lighter";
 	
 	def parseFactor():
 		expString=js.document.getElementById("factor-input").value
-		for (i in range(0, len(expString))):
+		for i in range(0, len(expString)):
 			if expString[i].isdigit():
 				numpart=int(expString[0:i+1])
 				strpart=expString[i+1:]
