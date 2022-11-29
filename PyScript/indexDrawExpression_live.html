@@ -440,7 +440,7 @@ ctx.globalCompositeOperation="lighter";
 	import class_Expression
 	from pyodide import create_proxy, to_js
 	import js
-	
+
 	numpart=0
 	strpart=""
 
@@ -451,34 +451,34 @@ ctx.globalCompositeOperation="lighter";
 		exp_py.add_branch('*','y')   
 		print(exp_py.print_tree('o'))
 		js.get_exp1(create_proxy(exp_py.elements))
-	
+
 	def parseFactor():
 		expString=js.document.getElementById("factor-input").value
 		for i in range(0, len(expString)):
-			if expString[i].isdigit():
-				numpart=int(expString[0:i+1])
-				strpart=expString[i+1:]
-	         if numpart==0 and strpart=="":
-			strpart=expString
-		
-	
+		if expString[i].isdigit():
+		numpart=int(expString[0:i+1])
+		strpart=expString[i+1:]
+		if numpart==0 and strpart=="":
+		strpart=expString
+
+
 	def add_exp(event):
 		parseFactor()
 		selectedtop=js.findtops[0]
 		exptop=js.findtops[1]
 		print(selectedtop+","+exptop)
-		
-	
-		
-		
-					
-			
-		
-	
+
+
+
+
+
+
+
+
 	js.document.getElementById("change-expression-btn").addEventListener("click", create_proxy(create_exp_py))
-	
+
 	js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
-	
+
 
 </py-script>
 	  
