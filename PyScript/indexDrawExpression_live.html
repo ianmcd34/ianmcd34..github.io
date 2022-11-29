@@ -393,7 +393,7 @@ ctx.globalCompositeOperation="lighter";
 	from pyodide import create_proxy, to_js
 	import js
 
-	def create_exp_py():
+	def create_exp_py(event):
 		exp_py=class_Expression.Expression()
 		exp_py.add_branch('+','x')
 		exp_py.add_branch('+','2')
