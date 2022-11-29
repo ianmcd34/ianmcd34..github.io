@@ -380,27 +380,7 @@ ctx.globalCompositeOperation="lighter";
 		  arrayend=objString.indexOf("]]");
 		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
 		  eval("exp1=[" + objString + "]");
-		  exp = exp1;
-
-
-		  textWidth=150;
-		  xdiff=35;
-		  topnode=4;
-
-		  cx=canvas.width/2;
-		  cy=canvas.height/2;
-
-		  mousex=0;
-		  mousey=0;
-		  startx=0;
-		  starty=0;
-		  selectedNodes=[];
-		  selectedPosns=[];
-		  posns=[];
-
-		  createPosns();
-		  ctx.clearRect(0,0,canvas.width,canvas.height);
-		  drawExpression();
+		  
 		}
 	    
     </script>
@@ -429,10 +409,29 @@ ctx.globalCompositeOperation="lighter";
        }
 	    
 document.getElementById("change-expression-btn").addEventListener("click", () => {
+  exp = exp1;
+
+
+  textWidth=150;
+  xdiff=35;
+  topnode=4;
+
+  cx=canvas.width/2;
+  cy=canvas.height/2;
+
+  mousex=0;
+  mousey=0;
+  startx=0;
+  starty=0;
+  selectedNodes=[];
+  selectedPosns=[];
+  posns=[];
+
+  createPosns();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  drawExpression();
 	
-	
-        
-    });
+ });
 	    
 
 
