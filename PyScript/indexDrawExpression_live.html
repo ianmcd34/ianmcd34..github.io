@@ -434,9 +434,10 @@ ctx.globalCompositeOperation="lighter";
 	    }
 	    
 	    function find_leaf() {
-		    for i in Range(selectedNodes.length-1,0,-1):
+		    for i in range(selectedNodes.length-1,0,-1):
 		    	if selectedNodes[i] < 998 && exp[find_pointer(selectedNodes[i])][2] is undefined:
 				return selectedNodes[i];
+		    		break;
 				
 	    }
 	    
