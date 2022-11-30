@@ -454,9 +454,10 @@ ctx.globalCompositeOperation="lighter";
 
 	numpart=0
 	strpart=""
+	exp_py=exp_py=class_Expression.Expression()
 
 	def create_exp_py(event):
-		exp_py=class_Expression.Expression()
+		global exp_py
 		exp_py.add_branch('+','x')
 		exp_py.add_branch('+','2')
 		exp_py.add_branch('*','y')   
