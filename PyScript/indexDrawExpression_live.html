@@ -475,6 +475,7 @@ ctx.globalCompositeOperation="lighter";
 				strpart=expString[i+1:]
 		if numpart==0 and strpart=="":
 			strpart=expString
+		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		
 
 
@@ -484,23 +485,16 @@ ctx.globalCompositeOperation="lighter";
 		exptop=js.findtops()[1]
 		if selectedtop==exptop:
 			if numpart>0:
-				exp_py.add_branch('+',numpart)
+				exp_py.add_branch('+',str(numpart))
 			while len(strpart)>0:
 				exp_py.add_branch('+',strpart[0])
 				strpart=strpart[1:]
 				
 		js.get_exp1(create_proxy(exp_py.elements))
 		
-			
-		
-
-		
-
-
 
 
 	js.document.getElementById("change-expression-btn").addEventListener("click", create_proxy(create_exp_py))
-
 	js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 
 
