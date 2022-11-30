@@ -462,12 +462,12 @@ ctx.globalCompositeOperation="lighter";
 				strpart=expString[i+1:]
 		if numpart==0 and strpart=="":
 			strpart=expString
-		js.document.getElementById("factor-input").value="parsed"
+		js.document.getElementById("factor-input").value=str(numpart)+","+strpart
 
 
 	def add_exp(event):
 		parseFactor()
-		js.document.getElementById("factor-input").value=str(numpart)+","+strpart
+		
 
 		
 
