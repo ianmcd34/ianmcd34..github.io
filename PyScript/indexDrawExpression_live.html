@@ -454,7 +454,7 @@ ctx.globalCompositeOperation="lighter";
 
 	numpart=0
 	strpart=""
-	exp_py=exp_py=class_Expression.Expression()
+	exp_py=class_Expression.Expression()
 
 	def create_exp_py(event):
 		global exp_py
@@ -484,7 +484,7 @@ ctx.globalCompositeOperation="lighter";
 		exptop=js.findtops()[1]
 		if selectedtop==exptop:
 			if numpart>0:
-				exp.add_branch('+',numpart)
+				exp_py.add_branch('+',numpart)
 		js.get_exp1(create_proxy(exp_py.elements))
 		
 			
