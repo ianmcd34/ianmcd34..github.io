@@ -257,10 +257,7 @@ function createPosns() {
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1] < p_x && posns[i][0] < 998) {
-		
-	  lfactor=exp[find_pointer(posns[i][0])][1].toString().length;
-	  alert(exp[find_pointer(posns[i][0])]+","+lfactor);
-          posns[i][1]=posns[i][1]-xdiff*lfactor-xdiff/2;
+          posns[i][1]=posns[i][1]-xdiff-xdiff/2;
         } else if (posns[i][1] < p_x) {
 	  posns[i][1]=posns[i][1]-xdiff-xdiff/2;
 	}
@@ -280,9 +277,7 @@ function createPosns() {
     else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
-	  lfactor=exp[find_pointer(posns[i][0])][1].toString().length;
-	  alert(exp[find_pointer(posns[i][0])]+","+lfactor);
-          posns[i][1]=posns[i][1]-xdiff*lfactor;
+          posns[i][1]=posns[i][1]-xdiff;
         } else if (posns[i][1] < p_x)  {
 	  posns[i][1]=posns[i][1]-xdiff;
 	}
@@ -295,9 +290,7 @@ function createPosns() {
 
       for (i in posns) {
         if (posns[i][1]>p_x && posns[i][0] < 998) {
-	  lfactor=exp[find_pointer(posns[i][0])][1].toString().length;
-	  alert(exp[find_pointer(posns[i][0])]+","+lfactor);
-          posns[i][1]=posns[i][1]+xdiff*lfactor;
+          posns[i][1]=posns[i][1]+xdiff;
         } else if (posns[i][1] > p_x) {
 	  posns[i][1]=posns[i][1]+xdiff;
 	}
