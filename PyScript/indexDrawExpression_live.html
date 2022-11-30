@@ -291,7 +291,7 @@ function createPosns() {
       for (i in posns) {
         if (posns[i][1]>p_x && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]+xdiff;
-        } else if (posns[i][1] < p_x) {
+        } else if (posns[i][1] > p_x) {
 	  posns[i][1]=posns[i][1]+xdiff;
 	}
       }
