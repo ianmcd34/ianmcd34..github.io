@@ -257,7 +257,7 @@ function createPosns() {
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1] < p_x) {
-          posns[i][1]=posns[i][1]-xdiff-xdiff/2;
+          posns[i][1]=posns[i][1]-xdiff*len(exp[find_pointer(posns[0])][0])-xdiff/2;
         }
       }
       
@@ -275,7 +275,7 @@ function createPosns() {
     else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x) {
-          posns[i][1]=posns[i][1]-xdiff;
+          posns[i][1]=posns[i][1]-xdiff*len(exp[find_pointer(posns[0])][0]);
         }
       }
       p=p_left;
@@ -286,7 +286,7 @@ function createPosns() {
 
       for (i in posns) {
         if (posns[i][1]>p_x) {
-          posns[i][1]=posns[i][1]+xdiff;
+          posns[i][1]=posns[i][1]+xdiff*len(exp[find_pointer(posns[0])][0]);
         }
       }
       p=p_right;
