@@ -485,6 +485,10 @@ ctx.globalCompositeOperation="lighter";
 		if selectedtop==exptop:
 			if numpart>0:
 				exp_py.add_branch('+',numpart)
+			while len(strpart)>0:
+				exp_py.add_branch('+',strpart[0])
+				strpart=strpart[1:]
+				
 		js.get_exp1(create_proxy(exp_py.elements))
 		
 			
