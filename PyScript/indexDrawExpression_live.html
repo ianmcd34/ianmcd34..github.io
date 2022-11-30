@@ -469,7 +469,10 @@ ctx.globalCompositeOperation="lighter";
 
 	def add_exp(event):
 		parseFactor()
-		js.document.getElementById("factor-input").value=str(numpart)+","+strpart
+		selectedtop=js.findtops()[0]
+		exptop=js.findtops[1]
+		expString=js.document.getElementById("factor-input").value=str(numpart)+","+strpart
+		
 
 		
 
