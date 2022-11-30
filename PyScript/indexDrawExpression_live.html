@@ -475,12 +475,13 @@ ctx.globalCompositeOperation="lighter";
 				strpart=expString[i+1:]
 		if numpart==0 and strpart=="":
 			strpart=expString
-		document.getElementById("factor-input").value=str(numpart)+","+strpart
+		
 		
 
 
 	def add_exp(event):
 		parseFactor()
+		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		selectedtop=js.findtops()[0]
 		exptop=js.findtops()[1]
 		if selectedtop==exptop:
