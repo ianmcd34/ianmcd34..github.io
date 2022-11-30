@@ -454,6 +454,8 @@ ctx.globalCompositeOperation="lighter";
 		js.get_exp1(create_proxy(exp_py.elements))
 
 	def parseFactor():
+		global numpart
+		global strpart
 		print("parsefactor called")
 		expString=js.document.getElementById("factor-input").value
 		for i in range(0, len(expString)):
@@ -462,12 +464,12 @@ ctx.globalCompositeOperation="lighter";
 				strpart=expString[i+1:]
 		if numpart==0 and strpart=="":
 			strpart=expString
-		js.document.getElementById("factor-input").value=str(numpart)+","+strpart
+		
 
 
 	def add_exp(event):
 		parseFactor()
-		
+		js.document.getElementById("factor-input").value=str(numpart)+","+strpart
 
 		
 
