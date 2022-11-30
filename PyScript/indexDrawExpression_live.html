@@ -433,6 +433,13 @@ ctx.globalCompositeOperation="lighter";
 		return [selectedtop,exptop];
 	    }
 	    
+	    function find_leaf() {
+		    for i in Range(selectedNodes.length-1,0,-1):
+		    	if selectedNodes[i] < 998 && exp[find_pointer(selectedNodes[i])][2] is undefined:
+				return selectedNodes[i]
+				
+	    }
+	    
     </script>
 	  
 <py-script>
@@ -471,7 +478,12 @@ ctx.globalCompositeOperation="lighter";
 		parseFactor()
 		selectedtop=js.findtops()[0]
 		exptop=js.findtops()[1]
-		expString=js.document.getElementById("factor-input").value=str(selectedtop)+","+str(exptop)
+		if selectedtop==exptop:
+			if numpart>0:
+				exp.add_branch('+',numpart)
+		js.get_exp1(create_proxy(exp.elements))
+		
+			
 		
 
 		
