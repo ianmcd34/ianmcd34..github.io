@@ -491,7 +491,7 @@ ctx.globalCompositeOperation="lighter";
 		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		selectedtop=js.findtops()[0]
 		exptop=js.findtops()[1]
-		if selectedtop==exptop:
+		if selectedtop==exptop or selectedtop==undefined:
 			if numpart>0:
 				exp_py.add_branch('+',str(numpart))
 			while len(strpart)>0:
