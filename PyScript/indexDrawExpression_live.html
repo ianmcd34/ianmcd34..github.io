@@ -191,8 +191,10 @@ function trimSelectedNodes() {
 	newSelectedPosns.push(selectedPosns[x1]);
     }
   }
+  alert(newSelectedNodes+"/"+newSelectedPosns);
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
+  alert(selectedNodes+"/"+selectedPosns);
 
   //include leaf nodes only if connected to all other selected leafs
   for (x1 in selectedNodes) {
