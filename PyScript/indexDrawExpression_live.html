@@ -158,6 +158,7 @@ function find_parent(index) {
 function trimSelectedNodes() {
   alert(selectedNodes+"/"+selectedPosns);
   //include non-leaf nodes only if all their children are selected
+  toRemove=[];
   for (x1 in selectedNodes) {
    
     y=selectedNodes[x1];
@@ -178,12 +179,20 @@ function trimSelectedNodes() {
          }
        }
     }
-    if (!include) {
-	alert(selectedNodes+"/"+selectedPosns+"/"+x1+"/"+selectedNodes.splice(x1,1)+"/"+selectedPosns.splice(x1,1));
-        selectedNodes.splice(x1,1);
-        selectedPosns.splice(x1,1);
+    if (include) {
+	toRemove.push(x1);
     }
   }
+  newSelectedNodes=[];
+  newsSelectedPosns=[];
+  for (x1 in selectedNodes) {
+    if (!toRemove.includes(x1)) {
+	newSelectedNodes.push(selectedNodes[x1]);
+	newSelectedPosns.push(selectedPosns[x1]);
+    }
+  }
+  selectedNodes=newSelectedNodes;
+  selectedPosns=newSelectedPosns;
 
   //include leaf nodes only if connected to all other selected leafs
   for (x1 in selectedNodes) {
