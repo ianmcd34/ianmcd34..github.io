@@ -212,14 +212,16 @@ function trimSelectedNodes() {
 		
                 p1=y1;
                 while (p1<998 && (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1]))) {
-                    p1=find_parent(p1);
-		    alert("trim leafs1");
+                   alert("trim leafs1");
+		   p1=find_parent(p1);
+		   if (p1==999) {break;}
                 }
                 p2=y2;
 		alert("trim leafs2a");
                 while (p2<998 && (find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y2))][1]))) {
-                    p2=find_parent(p2);
-		    alert("trim leafs2b");
+                    alert("trim leafs2b");
+		    p2=find_parent(p2);
+		    if (p2==999) {break;}		    
                 } 
                 if (p1!=p2) {
                     toRemove.push(x1);
