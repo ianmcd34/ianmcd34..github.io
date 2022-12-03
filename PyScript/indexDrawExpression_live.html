@@ -197,11 +197,12 @@ function trimSelectedNodes() {
   selectedPosns=newSelectedPosns;
   alert(selectedNodes+"/"+selectedPosns);
 
-  //include leaf nodes only if connected to all other selected leafs
+  //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
+	
   for (x1 in selectedNodes) {
     y1=selectedNodes[x1];
     
-
+    toRemove=[];
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
 
@@ -209,26 +210,34 @@ function trimSelectedNodes() {
             y2=selectedNodes[x2];
             if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
                 p1=y1;
-                while (find_parent(p1) in selectedNodes) {
+                while (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])) {
                     p1=find_parent(p1);
                 }
                 p2=y2;
-                while (find_parent(p2) in selectedNodes) {
+                while (find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])) {
                     p2=find_parent(p2);
                 } 
                 if (p1!=p2) {
-                    include=false;
+                    toRemove.push(x1);
                 }              
 
             }
         }
     }
-    if (!include) {
-        selectedNodes.splice(x1,1);
-        selectedPosns.splice(x1,1);
-    }
 
   }
+  newSelectedNodes=[];
+  newSelectedPosns=[];
+  for (x1 in selectedNodes) {
+    if (!toRemove.includes(x1)) {
+	newSelectedNodes.push(selectedNodes[x1]);
+	newSelectedPosns.push(selectedPosns[x1]);
+    }
+  }
+  alert(newSelectedNodes+"/"+newSelectedPosns);
+  selectedNodes=newSelectedNodes;
+  selectedPosns=newSelectedPosns;
+  alert(selectedNodes+"/"+selectedPosns);
 
   //include brackets only if multiplier included??
   
