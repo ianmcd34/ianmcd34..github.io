@@ -200,14 +200,17 @@ function trimSelectedNodes() {
 
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
   alert(exp[find_pointer(selectedNodes[0])]+"/"+exp[find_pointer(selectedNodes[1])]+"/"+exp[find_pointer(selectedNodes[2])]);
+  toRemove=[];
   for (x1 in selectedNodes) {
     y1=selectedNodes[x1];
 
-    toRemove=[];
+    
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
 	
         for (x2 in selectedNodes) {
+	  if (!(toRemove.contains(x2)) {	  
+		  
             y2=selectedNodes[x2];
             if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
 		alert("y1="+y1+"y2="+y2);
@@ -232,6 +235,7 @@ function trimSelectedNodes() {
 
             }
         }
+     }
     }
 
   }
