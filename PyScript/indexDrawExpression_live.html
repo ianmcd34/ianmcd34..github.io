@@ -205,7 +205,7 @@ function trimSelectedNodes() {
     toRemove=[];
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
-
+	alert("trim leafs");
         for (x2 in selectedNodes) {
             y2=selectedNodes[x2];
             if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
@@ -226,7 +226,7 @@ function trimSelectedNodes() {
     }
 
   }
-  alert("trim leafs");
+  
   newSelectedNodes=[];
   newSelectedPosns=[];
   for (x1 in selectedNodes) {
