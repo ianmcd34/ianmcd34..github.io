@@ -205,10 +205,11 @@ function trimSelectedNodes() {
     toRemove=[];
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
-	alert("trim leafs");
+	
         for (x2 in selectedNodes) {
             y2=selectedNodes[x2];
             if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
+		alert("trim leafs");
                 p1=y1;
                 while (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])) {
                     p1=find_parent(p1);
