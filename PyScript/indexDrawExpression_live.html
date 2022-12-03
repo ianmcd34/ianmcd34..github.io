@@ -192,16 +192,16 @@ function trimSelectedNodes() {
 	newSelectedPosns.push(selectedPosns[x1]);
     }
   }
-  alert(newSelectedNodes+"/"+newSelectedPosns);
+
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
-  alert(selectedNodes+"/"+selectedPosns);
+
 
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
 	
   for (x1 in selectedNodes) {
     y1=selectedNodes[x1];
-    alert("trim leafs");
+
     toRemove=[];
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
@@ -226,6 +226,7 @@ function trimSelectedNodes() {
     }
 
   }
+  alert("trim leafs");
   newSelectedNodes=[];
   newSelectedPosns=[];
   for (x1 in selectedNodes) {
