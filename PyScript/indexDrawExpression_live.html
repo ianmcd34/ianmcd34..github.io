@@ -201,7 +201,7 @@ function trimSelectedNodes() {
 	
   for (x1 in selectedNodes) {
     y1=selectedNodes[x1];
-    
+    alert("trim leafs");
     toRemove=[];
     include=true;
     if(y1!=999 && y1!=998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
