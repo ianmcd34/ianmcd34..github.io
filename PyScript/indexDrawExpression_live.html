@@ -167,13 +167,13 @@ function trimSelectedNodes() {
     include=true;
     if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
        p=exp[find_pointer(y)][2];
-	if (exp[find_pointer(y)][1]=='+') {alert("starting at +");}
+
        while(include && p!=y && find_parent(p)!=999) {
-	 if (exp[find_pointer(y)][1]=='+') {alert("left index is "+exp[find_pointer(p)][2]);}
-         if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]!=exp[find_pointer(y)][1]) {include=false; if (exp[find_pointer(y)][1]=='+') {alert("being unincluded");}}
+
+         if (!selectedNodes.includes(p) ) {include=false;}
 	   
-         else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];if (exp[find_pointer(y)][1]=='+') {alert("going left");}}
-         else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];if (exp[find_pointer(y)][1]=='+') {alert("going right");}}
+         else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
+         else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
          else {
           while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
           if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
