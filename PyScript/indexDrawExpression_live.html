@@ -241,9 +241,10 @@ function trimSelectedNodes() {
 		      while (p2<998 && find_parent(p2)<998 &&
 		      (p2 in selectedNodes || (exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y2))][1])))
 
-
+			alert("y1="+y1+"y2="+y2+"p1="+p1+"p2="+p2);
 		      if (p1!=p2) {
 			toRemove.push(x1);
+			alert(toRemove);
 		      } 
 
 		    }
