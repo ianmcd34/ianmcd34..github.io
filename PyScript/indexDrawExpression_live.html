@@ -224,14 +224,9 @@ function trimSelectedNodes() {
 		      do {
 
 			if (find_parent(p1)<998) {
-			  if (y1==1 && y2==3 && p1==1) {alert("p1=1 parent="+find_parent(p1));}
+			  
 			  p1=find_parent(p1);
-			  if (y1==1 && y2==3 && p1==2) {alert("p1=2 p1 in selectedNodes "+(selectedNodes.includes(p1)).toString()+
-					    " selectedNodes="+selectedNodes+
-					    " exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1]="+
-					    (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1]).toString()+
-					    " exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]="+
-					    (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]).toString());}
+			  
 			}
 		      }
 		      while (p1<998 && find_parent(p1)<998 &&
@@ -248,10 +243,10 @@ function trimSelectedNodes() {
 		      while (p2<998 && find_parent(p2)<998 &&
 		      (selectedNodes.includes(p2) || (exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y2))][1])))
 
-			alert("y1="+y1+"y2="+y2+"p1="+p1+"p2="+p2);
+			
 		      if (p1!=p2) {
 			toRemove.push(x1);
-			alert(toRemove);
+
 		      } 
 
 		    }
@@ -277,7 +272,7 @@ function trimSelectedNodes() {
   
 
   //add in connecting operators
-  alert(exp);
+
   
    
   
