@@ -194,13 +194,13 @@ function trimSelectedNodes() {
 	newSelectedPosns.push(selectedPosns[x1]);
     }
   }
-  alert("trimSelectedNodes");
+  
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
 
 
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
-  alert(exp[find_pointer(selectedNodes[0])]+"/"+exp[find_pointer(selectedNodes[1])]+"/"+exp[find_pointer(selectedNodes[2])]);
+  
   toRemove=[];
 	for (x1 in selectedNodes) {
 		y1=selectedNodes[x1];
@@ -214,7 +214,7 @@ function trimSelectedNodes() {
 
 					y2=selectedNodes[x2];
 					if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
-						alert("y1="+y1+"y2="+y2);
+						
 						p1=y1;
 
 						while (p1<998 && find_parent(p1)<998 && (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1]))) {
@@ -229,7 +229,7 @@ function trimSelectedNodes() {
 							p2=find_parent(p2);
 
 						} 
-						alert("p1="+p1+"p2="+p2);
+						
 						if (p1!=p2) {
 							toRemove.push(x1);
 						}              
@@ -240,7 +240,7 @@ function trimSelectedNodes() {
 
 		}
 	}
-	alert(toRemove);
+	
 
 	newSelectedNodes=[];
 	newSelectedPosns=[];
@@ -253,7 +253,7 @@ function trimSelectedNodes() {
 
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
-  alert(selectedNodes);
+  
 
   //include brackets only if multiplier included??
   
@@ -424,7 +424,7 @@ ctx.globalCompositeOperation="lighter";
 	    }
 	    
 	    function get_exp1(obj) {
-		  alert("get_exp1 called");
+		  
 		  objString=obj.toString();
 		  arraystart=objString.indexOf("[[");
 		  arrayend=objString.indexOf("]]");
@@ -434,7 +434,7 @@ ctx.globalCompositeOperation="lighter";
 		}
 	    
 	    function draw_exp1() {
-		  alert(typeof exp1);
+		  
 		  exp = exp1;
 
 
