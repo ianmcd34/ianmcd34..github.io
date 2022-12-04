@@ -247,10 +247,6 @@ function trimSelectedNodes() {
 		      if (p1!=p2) {
 			toRemove.push(x1);
 		      } 
-		      else if (!selectedNodes.includes(p1) && x1!=x2) {
-			alert("y1="+y1+"/y2="+y2);
-			toAdd.push(p1);
-		      }
 		      //alert("trimSelectedNodes13");
 		    }
 		  }
@@ -268,22 +264,15 @@ function trimSelectedNodes() {
 			newSelectedPosns.push(selectedPosns[x1]);
 		}
 	}
-	for (x1 in toAdd) {
-		if (!newSelectedNodes.includes(toAdd[x1])) {
-			newSelectedNodes.push(toAdd[x1]);
-			for (x2 in posns) {
-				if (posns[x2][0]==toAdd[x1]) {
-					newSelectedPosns.push(x2);
-				}
-			}
-		}
-	}
+	
 
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
   
 
-  //include brackets only if multiplier included??
+  //add in connecting operators
+  
+   
   
 }
 
