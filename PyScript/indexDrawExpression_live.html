@@ -220,25 +220,27 @@ function trimSelectedNodes() {
 		    if (!(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
 		      alert("trimSelectedNodes8");
 		      p1=y1;
-		      
+
 		      Do {
-			  alert("trimSelectedNodes9");
-			  if (find_parent(p1)<998) {
-			  	p1=find_parent(p1);
-			  }
+			alert("trimSelectedNodes9");
+			if (find_parent(p1)<998) {
+			  p1=find_parent(p1);
 			}
+		      }
 		      while (p1<998 && find_parent(p1)<998 &&
-			(find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])))
+		      (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])))
+
 		      p2=y2;
 		      alert("trimSelectedNodes10");
 		      Do {
-			  alert("trimSelectedNodes11");
-			  if (find_parent(p2)<998) {
-			  	p2=find_parent(p2);
-			  }
+			alert("trimSelectedNodes11");
+			if (find_parent(p2)<998) {
+			  p2=find_parent(p2);
 			}
-		      while (p2<998 && find_parent(p2)<998) &&
-			(find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y2))][1])))
+		      }
+		      while (p2<998 && find_parent(p2)<998 &&
+		      (find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y2))][1])))
+
 		      alert("trimSelectedNodes12");
 		      if (p1!=p2) {
 			toRemove.push(x1);
@@ -254,7 +256,6 @@ function trimSelectedNodes() {
 	    }
 	  }
 	}
-
 
 	newSelectedNodes=[];
 	newSelectedPosns=[];
