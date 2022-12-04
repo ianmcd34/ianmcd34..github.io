@@ -157,11 +157,11 @@ function find_parent(index) {
 
 function trimSelectedNodes() {
   
-  alert("trimSelectedNodes1");
+  //alert("trimSelectedNodes1");
   //include non-leaf nodes only if all their children are selected
   toRemove=[];
   for (x1 in selectedNodes) {
-    alert("trimSelectedNodes2");
+    //alert("trimSelectedNodes2");
     y=selectedNodes[x1];
 	
     include=true;
@@ -185,7 +185,7 @@ function trimSelectedNodes() {
 	toRemove.push(x1);
     }
   }
-  alert("trimSelectedNodes3");
+  //alert("trimSelectedNodes3");
   newSelectedNodes=[];
   newSelectedPosns=[];
   for (x1 in selectedNodes) {
@@ -198,31 +198,31 @@ function trimSelectedNodes() {
   selectedNodes=newSelectedNodes;
   selectedPosns=newSelectedPosns;
 
-  alert("trimSelectedNodes4");
+  //alert("trimSelectedNodes4");
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
   
   toRemove=[];
   toAdd=[];
 	for (x1 in selectedNodes) {
 	  y1=selectedNodes[x1];
-	  alert("trimSelectedNodes5");
+	  //alert("trimSelectedNodes5");
 
 	  include=true;
 	  if(y1!=999 && y1!=998) {
 	    if (!(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
-	      alert("trimSelectedNodes6");
+	      //alert("trimSelectedNodes6");
 	      for (x2 in selectedNodes) {
 		if (!(toRemove.includes(x2))) {	  
 
 		  y2=selectedNodes[x2];
-		  alert("trimSelectedNodes7");
+		  //alert("trimSelectedNodes7");
 		  if(y2!=999 && y2!=998) {
 		    if (!(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
-		      alert("trimSelectedNodes8");
+		      //alert("trimSelectedNodes8");
 		      p1=y1;
 
 		      do {
-			alert("trimSelectedNodes9");
+			//alert("trimSelectedNodes9");
 			if (find_parent(p1)<998) {
 			  p1=find_parent(p1);
 			}
@@ -231,9 +231,9 @@ function trimSelectedNodes() {
 		      (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])))
 
 		      p2=y2;
-		      alert("trimSelectedNodes10");
+		      //alert("trimSelectedNodes10");
 		      do {
-			alert("trimSelectedNodes11");
+			//alert("trimSelectedNodes11");
 			if (find_parent(p2)<998) {
 			  p2=find_parent(p2);
 			}
@@ -241,14 +241,14 @@ function trimSelectedNodes() {
 		      while (p2<998 && find_parent(p2)<998 &&
 		      (find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y2))][1])))
 
-		      alert("trimSelectedNodes12");
+		      //alert("trimSelectedNodes12");
 		      if (p1!=p2) {
 			toRemove.push(x1);
 		      } 
 		      else if (!selectedNodes.includes(p1) && x1!=x2) {
 			//toAdd.push(p1);
 		      }
-		      alert("trimSelectedNodes13");
+		      //alert("trimSelectedNodes13");
 		    }
 		  }
 		}
