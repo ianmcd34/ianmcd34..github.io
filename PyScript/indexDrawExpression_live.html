@@ -224,7 +224,13 @@ function trimSelectedNodes() {
 		      do {
 
 			if (find_parent(p1)<998) {
+			  if (p1==1) {alert("p1=1 parent="+find_parent(p1));}
 			  p1=find_parent(p1);
+			  if (p1==2) {alert("p1=2 p1 in selectedNodes "+(p1 in selectedNodes).toString()+
+					    " exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1]="+
+					    (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1]).toString()+
+					    " exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]="+
+					    (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]).toString());}
 			}
 		      }
 		      while (p1<998 && find_parent(p1)<998 &&
