@@ -205,12 +205,12 @@ function trimSelectedNodes() {
   toAdd=[];
 	for (x1 in selectedNodes) {
 	  y1=selectedNodes[x1];
-
+	  alert("trimSelectedNodes5");
 
 	  include=true;
 	  if(y1!=999 && y1!=998) {
 	    if (!(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
-
+	      alert("trimSelectedNodes6");
 	      for (x2 in selectedNodes) {
 		if (!(toRemove.includes(x2))) {	  
 
