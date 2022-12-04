@@ -220,7 +220,7 @@ function trimSelectedNodes() {
 						p1=y1;
 						alert(p1+"/"+find_parent(p1)+"/"+exp[find_pointer(find_parent(p1))][1]+"/"+exp[find_pointer(find_parent(y1))][1]);
 						while (p1<998 && find_parent(p1)<998 && (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1]))) {
-							alert("while1a"+find_parent(p1));
+							alert("while1a"+find_parent(p1)+"/"+find_parent(find_parent(p1)));
 							p1=find_parent(p1);
 							alert(p1+"/"+find_parent(p1)+"/"+exp[find_pointer(find_parent(p1))][1]+"/"+exp[find_pointer(find_parent(y1))][1]);
 							alert("while1b");
