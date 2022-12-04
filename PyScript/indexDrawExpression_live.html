@@ -223,28 +223,28 @@ function trimSelectedNodes() {
 
 		      while (p1<998 && find_parent(p1)<998) {
 			if (find_parent(p1) in selectedNodes || (exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p1))][1]==exp[find_pointer(find_parent(y2))][1])) {
-
+			  alert("trimSelectedNodes9");
 			  p1=find_parent(p1);
 
 			}
 		      }
 		      p2=y2;
-
+		      alert("trimSelectedNodes10");
 		      while (p2<998 && find_parent(p2)<998) {
 			if (find_parent(p2) in selectedNodes || (exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(find_parent(p2))][1]==exp[find_pointer(find_parent(y2))][1])) {
-
+			  alert("trimSelectedNodes11");
 			  p2=find_parent(p2);
 
 			}
 		      } 
-
+		      alert("trimSelectedNodes12");
 		      if (p1!=p2) {
 			toRemove.push(x1);
 		      } 
 		      else if (!selectedNodes.includes(p1) && x1!=x2) {
 			toAdd.push(p1);
 		      }
-
+		      alert("trimSelectedNodes13");
 		    }
 		  }
 		}
