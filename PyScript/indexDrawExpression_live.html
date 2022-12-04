@@ -214,6 +214,7 @@ function trimSelectedNodes() {
 				if (!(toRemove.includes(x2))) {	  
 
 					y2=selectedNodes[x2];
+					alert("y2="+y2);
 					if(y2!=999 && y2!=998 && !(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
 						alert(exp[find_pointer(y1)][1]+"/"+exp[find_pointer(y2)][1]);
 						p1=y1;
