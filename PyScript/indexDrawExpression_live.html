@@ -202,6 +202,7 @@ function trimSelectedNodes() {
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
   
   toRemove=[];
+  toAdd=[];
 	for (x1 in selectedNodes) {
 		y1=selectedNodes[x1];
 
@@ -232,7 +233,10 @@ function trimSelectedNodes() {
 						
 						if (p1!=p2) {
 							toRemove.push(x1);
-						}              
+						} 
+						else if (!selectedNodes.includes(p1)) {
+							toAdd.push(p1);
+						}
 
 					}
 				}
@@ -248,6 +252,16 @@ function trimSelectedNodes() {
 		if (!toRemove.includes(x1)) {
 			newSelectedNodes.push(selectedNodes[x1]);
 			newSelectedPosns.push(selectedPosns[x1]);
+		}
+	}
+	for (x1 in toAdd) {
+		if (!newSelectedNodes.includes(toAdd[x1])) {
+			newSelectedNodes.push(toAdd[x1]);
+			for (x2 in posns) {
+				if (posns[x2][0]==toAdd[x1]) {
+					newSelectedPosns.push(x2);
+				}
+			}
 		}
 	}
 
