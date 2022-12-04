@@ -234,7 +234,7 @@ function trimSelectedNodes() {
 						if (p1!=p2) {
 							toRemove.push(x1);
 						} 
-						else if (!selectedNodes.includes(p1)) {
+						else if (!selectedNodes.includes(p1) && x1!=x2) {
 							toAdd.push(p1);
 						}
 
