@@ -156,14 +156,14 @@ function find_parent(index) {
 }
 
 function trimSelectedNodes() {
-  alert("trimSelectedNodes");
+  
 
   //include non-leaf nodes only if all their children are selected
   toRemove=[];
   for (x1 in selectedNodes) {
-   
+    alert("trimSelectedNodes");
     y=selectedNodes[x1];
-
+	
     include=true;
     if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
        p=exp[find_pointer(y)][2];
