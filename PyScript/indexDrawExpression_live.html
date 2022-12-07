@@ -512,6 +512,7 @@ ctx.globalCompositeOperation="lighter";
 		    	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
 				p=selectedNodes[index];
 				while (find_parent(p)<998  && p!=findtops()[0]) {
+					alert(p+"/"+exp);
 					p=find_parent(p);
 					operators=operators+exp[find_pointer(p)][1];
 				}
