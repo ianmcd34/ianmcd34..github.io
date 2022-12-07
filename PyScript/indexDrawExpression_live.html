@@ -506,6 +506,23 @@ ctx.globalCompositeOperation="lighter";
 				
 	    }
 	    
+	    function find_operators() {
+		    operators="";
+		    for (let index=selectedNodes.length-1; index>-1;index--) {
+		    	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
+				p=selectedNodes[index];
+				while (find_parent(p)<998  && p!=findtops()[0]) {
+					p=find_parent(p);
+					operators=operators+exp[find_pointer(p)][1];
+				}
+			}
+		    }
+		    operatorsSet=new Set(operators.split("");
+		    text="";
+		    operatorsSet.forEach(function(value) {text += value;});
+		    return text;
+	    }
+	    
     </script>
 	  
 <py-script>
@@ -549,7 +566,7 @@ ctx.globalCompositeOperation="lighter";
 		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		selectedtop=js.findtops()[0]
 		exptop=js.findtops()[1]
-		document.getElementById("factor-input").value=str(selectedtop)+","+str(exptop)
+
 		if selectedtop==exptop or selectedtop==999:
 			if numpart>0:
 				exp_py.add_branch('+',str(numpart))
@@ -558,7 +575,8 @@ ctx.globalCompositeOperation="lighter";
 				strpart=strpart[1:]
 		else:
 			leafnode=js.find_leaf()
-			document.getElementById("factor-input").value=leafnode
+			operators=js.find_operators();
+			document.getElementById("factor-input").value=operators;
 				
 		js.get_exp1(create_proxy(exp_py.elements))
 		
