@@ -478,6 +478,14 @@ ctx.globalCompositeOperation="lighter";
 	    }
 	    
 	    function findtops() {
+		    
+		p=exp[0][0];
+		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
+		  p=find_parent(p);
+		}
+		exptop=p;
+		selectedtop=exptop;
+		
 		parents=[];
 		for (x1 in selectedNodes) {
 			if (selectedNodes[x1]<998) {
@@ -508,12 +516,7 @@ ctx.globalCompositeOperation="lighter";
 		alert(text+"selectedtop="+selectedtop);
 
 		
-		p=exp[0][0];
-		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
-		  p=find_parent(p);
-		}
-		exptop=p;
-		selectedtop=999;
+		
 		return [selectedtop,exptop];
 	    }
 	    
