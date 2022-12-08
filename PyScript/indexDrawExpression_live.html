@@ -480,7 +480,7 @@ ctx.globalCompositeOperation="lighter";
 	    function findtops() {
 		parents=[[]];
 		for (x1 in selectedNodes) {
-			parents[x1].push(0);
+			alert(selectedNodes[x1]);
 		}
 		alert(parents);
 		
@@ -489,7 +489,7 @@ ctx.globalCompositeOperation="lighter";
 		  p=find_parent(p);
 		}
 		exptop=p;
-		selectedtop=p;
+		selectedtop=999;
 		return [selectedtop,exptop];
 	    }
 	    
