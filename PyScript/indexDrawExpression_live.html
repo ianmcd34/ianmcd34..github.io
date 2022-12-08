@@ -489,7 +489,11 @@ ctx.globalCompositeOperation="lighter";
 				}
 			}
 		}
-		alert(parents);
+		text="";
+		for (x1 in parents) {
+			text+="["+parents[x1]+"]";
+		}
+		alert(text);
 		
 		p=exp[0][0];
 		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
