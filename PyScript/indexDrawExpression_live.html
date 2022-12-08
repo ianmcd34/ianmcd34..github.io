@@ -483,6 +483,10 @@ ctx.globalCompositeOperation="lighter";
 			if (selectedNodes[x1]<998) {
 				p=find_parent(selectedNodes[x1])
 				parents.push([p]);
+				while(find_parent(p)<998) {
+					p=find_parent(p);
+					parents[parents.length-1].push(p);
+				}
 			}
 		}
 		alert(parents);
