@@ -498,8 +498,8 @@ ctx.globalCompositeOperation="lighter";
 			}
 		}
 		function containsSelectedtop(value, index, array) {
-			alert("n="+n+value.includes(array[0][array[0].length-n]));
-			return value.includes(array[0][array[0].length-n]);
+			alert("n="+n+"value="+value+"selectedtop="+selectedtop+value.includes(selectedtop));
+			return value.includes(selectedtop);
 		}
 
 		n=1;
