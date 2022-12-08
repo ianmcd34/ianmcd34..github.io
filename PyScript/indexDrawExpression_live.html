@@ -489,11 +489,24 @@ ctx.globalCompositeOperation="lighter";
 				}
 			}
 		}
+		function containsSelectedtop(value, index, array) {
+			return array.includes(array[0][array[0].length-n]);
+		}
+
+		selectedtop=999;
+		n=0;
+
+		while (parents.every(containsSelectedtop) && n<=array[0].length) {
+			selectedtop=parents[0][parents[0].length-n];
+			n=n+1;
+		}
+		if (parents.every(containsSelectedtop)) {selectedtop=parents[1][parents[1].length-n-1];}
 		text="";
 		for (x1 in parents) {
 			text+="["+parents[x1]+"]";
 		}
-		alert(text);
+		alert(text+"selectedtop="+selectedtop);
+
 		
 		p=exp[0][0];
 		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
