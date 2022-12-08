@@ -504,7 +504,8 @@ ctx.globalCompositeOperation="lighter";
 
 		n=1;
 
-		while (parents.every(containsSelectedtop) && n<array[0].length) {
+		while (parents.every(containsSelectedtop) && n<parents[0].length) {
+			alert("while"+n+parents[0]);
 			selectedtop=parents[0][parents[0].length-n];
 			n=n+1;
 		}
