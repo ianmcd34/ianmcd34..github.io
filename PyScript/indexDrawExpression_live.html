@@ -479,7 +479,9 @@ ctx.globalCompositeOperation="lighter";
 	    
 	    function findtops() {
 		parents=[[]];
-		parents[0].push(999);
+		for (x1 in selectedNodes) {
+			parents[x1].push(0);
+		}
 		alert(parents);
 		
 		p=exp[0][0];
