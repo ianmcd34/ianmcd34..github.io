@@ -480,8 +480,9 @@ ctx.globalCompositeOperation="lighter";
 	    function findtops() {
 		parents=[[]];
 		for (x1 in selectedNodes) {
-			if (selectedNodes[x1}<998) {
-				parents.push([find_parent(selectedNodes[x1])]);
+			if (selectedNodes[x1]<998) {
+				p=find_parent(selectedNodes[x1])
+				parents.push([p]);
 			}
 		}
 		alert(parents);
