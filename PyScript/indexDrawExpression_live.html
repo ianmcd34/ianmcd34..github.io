@@ -155,6 +155,7 @@ function find_parent(index) {
     	if(exp[x][2]==index || exp[x][3]==index) {p_prime=exp[x][0];}
     }
   }
+  alert("p="+p_prime);
   return p_prime;
 }
 
@@ -536,20 +537,20 @@ ctx.globalCompositeOperation="lighter";
 		    for (let index=selectedNodes.length-1; index>-1;index--) {
 		    	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
 				p=selectedNodes[index];
-				alert("p="+p+"findtops()[0]="+findtops()[0]+"/nl"+exp+"/nl"+"pp="+find_parent(p)+"<998"+(find_parent(p) < 998).toString());
+				
 				while (find_parent(p) < 998  && p!=findtops()[0]) {
-					alert(p+"/"+findtops()[0]+"/"+exp);
+					
 					p=find_parent(p);
-					alert(p);
+					
 					operators=operators+exp[find_pointer(p)][1];
-					alert(operators);
+					
 				}
 			}
 		    }
 		    operatorsSet=new Set(operators.split(""));
 		    text="";
 		    operatorsSet.forEach(function(value) {text += value;});
-		    alert("operators="+text);
+		   
 		    return text;
 	    }
 	    
