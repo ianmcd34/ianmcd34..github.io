@@ -148,15 +148,12 @@ function selectNodes(item,index) {
 
 
 function find_parent(index) {
-
   p_prime=999;
   for (x in exp) {
     if (exp[x][2]!=undefined && exp[x][3]!=undefined) {
     	if(exp[x][2]==index || exp[x][3]==index) {p_prime=exp[x][0];}
     }
   }
-
-
 }
 
 function trimSelectedNodes() {
@@ -619,12 +616,8 @@ ctx.globalCompositeOperation="lighter";
 
 </py-script>
 	  
-
-	  
 	  
   </body>
-
-
 
 
 </html>
