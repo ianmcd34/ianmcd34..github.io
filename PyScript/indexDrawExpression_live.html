@@ -168,7 +168,7 @@ function trimSelectedNodes() {
 	
     include=true;
     if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
-       p=exp[find_pointer(y)][2];
+       var p=exp[find_pointer(y)][2];
 
        while(include && p!=y && find_parent(p)!=999) {
 
@@ -282,7 +282,7 @@ function trimSelectedNodes() {
 
 function createPosns() {
   posns=[];
-  p=exp[0][0];
+  var p=exp[0][0];
  
   while (find_parent(p)!=999) {
     p=find_parent(p);
@@ -481,7 +481,7 @@ ctx.globalCompositeOperation="lighter";
 	    
 	    function findtops() {
 		    
-		p=exp[0][0];
+		var p=exp[0][0];
 		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
 		  p=find_parent(p);
 		}
@@ -529,6 +529,7 @@ ctx.globalCompositeOperation="lighter";
 	    
 	    function find_operators() {
 		    operators="";
+		    var p=0;
 		    for (let index=selectedNodes.length-1; index>-1;index--) {
 		    	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
 				p=selectedNodes[index];
