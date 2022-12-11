@@ -505,8 +505,9 @@ ctx.globalCompositeOperation="lighter";
 		
 		n=1;
 		if (parents.length>0) {
-			alert(parents.every(containsSelectedtop)+","+(n<parents[0].length).toString());
+			
 			while (parents.every(containsSelectedtop) && n<parents[0].length) {
+				alert(n+","+selectedtop+","+parents.every(containsSelectedtop)+","+(n<parents[0].length).toString());
 				selectedtop=parents[0][parents[0].length-n];
 				n=n+1;
 			}
