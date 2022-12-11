@@ -517,7 +517,7 @@ ctx.globalCompositeOperation="lighter";
 				text+="["+parents[x1]+"]";
 			}
 		}
-		alert(selectedtop+","+exptop);
+
 		return [selectedtop,exptop];
 	    }
 	    
@@ -598,7 +598,7 @@ ctx.globalCompositeOperation="lighter";
 		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		selectedtop=js.findtops()[0]
 		exptop=js.findtops()[1]
-		document.getElementById("factor-input").value=selectedtop+","+exptop
+		document.getElementById("factor-input").value=str(selectedtop)+","+str(exptop)
 
 		if selectedtop==exptop or selectedtop==999:
 			if numpart>0:
