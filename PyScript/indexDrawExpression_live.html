@@ -534,10 +534,11 @@ ctx.globalCompositeOperation="lighter";
 				p=selectedNodes[index];
 				alert(p+","+find_parent(p)+","+findtops()[0]);
 				while (find_parent(p) < 998  && p!=findtops()[0]) {
-					
+					alert(p+","+find_parent(p)+","+findtops()[0]);
 					p=find_parent(p);
 					
 					operators=operators+exp[find_pointer(p)][1];
+					
 					
 				}
 			}
