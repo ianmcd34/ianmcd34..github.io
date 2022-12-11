@@ -593,9 +593,10 @@ ctx.globalCompositeOperation="lighter";
 		parseFactor()
 		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		tops=js.findtops()
+		selectedtop=tops[0]
+		exptop=tops[1]
 
-
-		document.getElementById("factor-input").value=tops[1]
+		document.getElementById("factor-input").value=selectedtop
 
 		if selectedtop==exptop or selectedtop==999:
 			if numpart>0:
