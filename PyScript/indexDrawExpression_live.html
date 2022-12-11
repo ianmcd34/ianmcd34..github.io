@@ -576,7 +576,9 @@ ctx.globalCompositeOperation="lighter";
 	def parseFactor():
 		global numpart
 		global strpart
-
+		
+		numpart=0;
+		strpart="";
 		expString=js.document.getElementById("factor-input").value
 		for i in range(0, len(expString)):
 			if expString[i].isdigit():
