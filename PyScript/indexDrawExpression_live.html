@@ -628,7 +628,7 @@ ctx.globalCompositeOperation="lighter";
 					x1[2]=x1[2]-maxindex_insert-1+minindex_py
 					x1[3]=x1[3]-maxindex_insert-1+minindex_py
 			if operators=='+':
-				oldtree=np.delete(exp_py, exp_py.find_pointer(leafnode), 0)
+				oldtree=np.delete(exp_py, exp_py.find_pointer(leafnode), None)
 				exp_py.elements=np.concatenate((oldtree.elements,exp_insert.elements), axis=0)
 				
 				
