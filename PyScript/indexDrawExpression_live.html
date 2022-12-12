@@ -611,14 +611,14 @@ ctx.globalCompositeOperation="lighter";
 			operators=js.find_operators();
 			document.getElementById("factor-input").value=operators;
 			exp_insert=class_Expression.Expression()
-			exp_insert.add_branch('+', leafnode[1])
+			exp_insert.add_branch('+', exp_py[find_pointer(leafnode)][1])
 			if numpart>0:
 				exp_insert.add_branch('*',str(numpart))
 			while len(strpart)>0:
 				exp_insert.add_branch('*',strpart[0])
 				strpart=strpart[1:]
 			minindex_py=exp_py.elements[:,0].min()
-			if minindex_py==leafnode[0]:
+			if minindex_py==leafnode:
 				minindex_py=minindex_py+1
 			maxindex_insert=exp_insert.elements[:,0].max()
 			for x1 in exp_insert.elements:
@@ -627,7 +627,7 @@ ctx.globalCompositeOperation="lighter";
 					x1[2]=x1[2]-maxindex_insert-1+minindex_py
 					x1[3]=x1[3]-maxindex_insert-1+minindex_py
 			if operators=='+':
-				oldtree=np.delete(exp_py, find_pointer(leafnode[0]), 0)
+				oldtree=np.delete(exp_py, find_pointer(leafnode), 0)
 				exp_py.elements=np.concatenate((oldtree.elements,exp_insert.elements), axis=0)
 				
 				
