@@ -633,7 +633,7 @@ ctx.globalCompositeOperation="lighter";
 			exp_py.elements[exp_py.find_pointer(leafnode)][3]=minindex_py-1
 			if operators=='+':
 				oldtree=exp_py
-				exp_py.elements=np.concatenate((oldtree.elements,newleaf,exp_insert.elements), axis=0)
+				exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
 				
 				
 				
