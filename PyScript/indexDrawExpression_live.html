@@ -556,13 +556,13 @@ ctx.globalCompositeOperation="lighter";
 <py-script>
 
 
-	import class_Expression
+	import class_Expression as cex
 	from pyodide import create_proxy, to_js
 	import js
 
 	numpart=0
 	strpart=""
-	exp_py=class_Expression.Expression()
+	exp_py=cex.Expression()
 
 	def create_exp_py(event):
 		global exp_py
@@ -610,8 +610,8 @@ ctx.globalCompositeOperation="lighter";
 			leafnode=js.find_leaf()
 			operators=js.find_operators();
 			document.getElementById("factor-input").value=operators;
-			exp_insert=class_Expression.Expression()
-			exp_insert.add_branch('+', exp_py[find_pointer(leafnode)][1])
+			exp_insert=cex.Expression()
+			exp_insert.add_branch('+', exp_py[cex.find_pointer(leafnode)][1])
 			if numpart>0:
 				exp_insert.add_branch('*',str(numpart))
 			while len(strpart)>0:
@@ -627,7 +627,7 @@ ctx.globalCompositeOperation="lighter";
 					x1[2]=x1[2]-maxindex_insert-1+minindex_py
 					x1[3]=x1[3]-maxindex_insert-1+minindex_py
 			if operators=='+':
-				oldtree=np.delete(exp_py, find_pointer(leafnode), 0)
+				oldtree=np.delete(exp_py, cex.find_pointer(leafnode), 0)
 				exp_py.elements=np.concatenate((oldtree.elements,exp_insert.elements), axis=0)
 				
 				
