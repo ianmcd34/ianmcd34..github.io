@@ -304,8 +304,10 @@ function createPosns() {
     }
 
     if (Number.parseInt(exp[find_pointer(p)][1])!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10) {
+	    alert("big"+exp[find_pointer(p)][1])
 	    xdiff=70;
     } else {
+	    alert("small"+exp[find_pointer(p)][1])
 	    xdiff=35;
     }
     p_left=exp[find_pointer(p)][2];
