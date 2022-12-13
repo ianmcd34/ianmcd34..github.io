@@ -347,17 +347,38 @@ function createPosns() {
       y=p_y;
     }
     else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
+      if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
+	      for (i in posns) {
+		if (posns[i][1] > p_x && posns[i][0] < 998) {
+		  posns[i][1]=posns[i][1]+xdiff+xdiff/2;
+		} else if (posns[i][1] > p_x) {
+		  posns[i][1]=posns[i][1]+xdiff+xdiff/2;
+		}
+	      }
 
-      for (i in posns) {
-        if (posns[i][1]>p_x && posns[i][0] < 998) {
-          posns[i][1]=posns[i][1]+xdiff;
-        } else if (posns[i][1] > p_x) {
-	  posns[i][1]=posns[i][1]+xdiff;
-	}
-      }
-      p=p_right;
-      x=p_x+xdiff;
-      y=p_y;
+	      posns.push([999,p_x+xdiff+xdiff/2,y]);
+	      for (i in posns) {
+		if (posns[i][1] > p_x+xdiff) {
+		  posns[i][1]=posns[i][1]+xdiff/2;
+		}
+	      }
+	      posns.push([998, p_x+xdiff/3,p_y]);
+	      p=p_right;
+	      x=p_x+xdiff;
+	      y=p_y;
+	    }
+      else {
+	      for (i in posns) {
+		if (posns[i][1]>p_x && posns[i][0] < 998) {
+		  posns[i][1]=posns[i][1]+xdiff;
+		} else if (posns[i][1] > p_x) {
+		  posns[i][1]=posns[i][1]+xdiff;
+		}
+	      }
+	      p=p_right;
+	      x=p_x+xdiff;
+	      y=p_y;
+	    }
     }
     else {
 
