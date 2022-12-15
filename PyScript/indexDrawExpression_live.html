@@ -367,6 +367,7 @@ function createPosns() {
       }
       p=p_left;
       x=p_x-xdiff;
+      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff;}
       y=p_y;
     }
     else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
@@ -400,6 +401,7 @@ function createPosns() {
 	      }
 	      p=p_right;
 	      x=p_x+xdiff;
+	      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff;}
 	      y=p_y;
 	    }
     }
