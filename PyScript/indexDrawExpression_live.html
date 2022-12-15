@@ -281,6 +281,11 @@ function trimSelectedNodes() {
 }
 
 function createPosns() {
+	
+  function indexEl(arr) {
+      return arr[0];
+  }
+	
   posns=[];
   var p=exp[0][0];
  
@@ -330,9 +335,7 @@ function createPosns() {
     }
 	  
 
-    function indexEl(arr) {
-      return arr[0];
-    }
+
 
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
