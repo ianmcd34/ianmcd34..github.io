@@ -309,17 +309,7 @@ function createPosns() {
     p_x=x;
     p_y=y;
 
-    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10  &&  !(posns.map(indexEl).includes(p_left))) {
-	    alert("big"+exp[find_pointer(p_left)][1])
-	    xdiff=70;
-    } else if ((Number.parseInt(exp[find_pointer(p_right)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_right)][1])>=10  &&  !(posns.map(indexEl).includes(p_right))) {
-	    alert("big"+exp[find_pointer(p_right)][1])
-	    xdiff=70;
-    }
-    else {
-	    xdiff=35;
-    }
-	  
+
     function indexEl(arr) {
       return arr[0];
     }
