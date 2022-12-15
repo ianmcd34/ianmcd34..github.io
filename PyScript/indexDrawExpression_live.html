@@ -315,14 +315,14 @@ function createPosns() {
     p_y=y;
 	  
 
-    if (!(posns.map(indexEl).includes(p_left))) {
+    if (!(posns.map(indexEl).includes(p_left)) && p_left!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10 ) {
 		    alert("big"+exp[find_pointer(p_left)][1])
 		    xdiff=70;
 	    } else {
 	    	    xdiff=35;
     	    }
-    } else  if (!(posns.map(indexEl).includes(p_right))) {
+    } else  if (!(posns.map(indexEl).includes(p_right)) && p_right!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_right)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_right)][1])>=10 ) {
 		    alert("big"+exp[find_pointer(p_right)][1])
 		    xdiff=70;
