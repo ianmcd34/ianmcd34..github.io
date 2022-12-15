@@ -303,17 +303,23 @@ function createPosns() {
       if (!(posns.map(indexEl).includes(e1[0]))) {incomplete=true;}
     }
 
-    if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10) {
-	    alert("big"+exp[find_pointer(p)][1])
-	    xdiff=70;
-    } else {
-	    xdiff=35;
-    }
+   
     p_left=exp[find_pointer(p)][2];
     p_right=exp[find_pointer(p)][3];
     p_x=x;
     p_y=y;
 
+    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10  &&  !(posns.map(indexEl).includes(p_left)) {
+	    alert("big"+exp[find_pointer(p_left)][1])
+	    xdiff=70;
+    } else if ((Number.parseInt(exp[find_pointer(p_right)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_right)][1])>=10  &&  !(posns.map(indexEl).includes(p_right)) {
+	    alert("big"+exp[find_pointer(p_right)][1])
+	    xdiff=70;
+    }
+    else {
+	    xdiff=35;
+    }
+	  
     function indexEl(arr) {
       return arr[0];
     }
