@@ -146,7 +146,43 @@ function selectNodes(item,index) {
   
 }
 
-  
+    function findtops() {
+
+	var p=exp[0][0];
+	while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
+	  p=find_parent(p);
+	}
+	exptop=p;
+	selectedtop=exptop;
+
+	parents=[];
+	for (x1 in selectedNodes) {
+		if (selectedNodes[x1]<998) {
+			p=selectedNodes[x1];
+			parents.push([p]);
+			while(find_parent(p)<998) {
+				p=find_parent(p);
+				parents[parents.length-1].push(p);
+			}
+		}
+	}
+	function containsSelectedtop(value, index, array) {
+		return value.includes(selectedtop);
+	}
+
+	n=1;
+	if (parents.length>0) {
+
+		while (parents.every(containsSelectedtop) && n < parents[0].length) {
+			n=n+1;
+			selectedtop=parents[0][parents[0].length-n];
+		}
+
+
+	}
+
+	return [selectedtop,exptop];
+    }
 
 
 function find_parent(index) {
@@ -579,43 +615,7 @@ ctx.globalCompositeOperation="lighter";
 		  drawExpression();
 	    }
 	    
-	    function findtops() {
-		    
-		var p=exp[0][0];
-		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
-		  p=find_parent(p);
-		}
-		exptop=p;
-		selectedtop=exptop;
-		
-		parents=[];
-		for (x1 in selectedNodes) {
-			if (selectedNodes[x1]<998) {
-				p=selectedNodes[x1];
-				parents.push([p]);
-				while(find_parent(p)<998) {
-					p=find_parent(p);
-					parents[parents.length-1].push(p);
-				}
-			}
-		}
-		function containsSelectedtop(value, index, array) {
-			return value.includes(selectedtop);
-		}
-		
-		n=1;
-		if (parents.length>0) {
-			
-			while (parents.every(containsSelectedtop) && n < parents[0].length) {
-				n=n+1;
-				selectedtop=parents[0][parents[0].length-n];
-			}
 
-			
-		}
-		
-		return [selectedtop,exptop];
-	    }
 	    
 	    function find_leaf() {
 		    for (let index=selectedNodes.length-1; index>-1;index--) {
