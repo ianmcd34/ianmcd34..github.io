@@ -302,7 +302,7 @@ function trimSelectedNodes() {
   while (find_operators().length > 1 && trimmed) {
     trimmed=false;
 	for (x1 in selectedNodes) {
-		if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined) {
+		if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined && !trimmed) {
 			p=find_parent(selectedNodes[x1]);
 			if (p<998 && (!selectedNodes.includes(exp[find_pointer(p)][2])) || !selectedNodes.includes(exp[find_pointer(p)][3])) {
 				for (x2 in selectedPosns) {
