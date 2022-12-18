@@ -273,7 +273,19 @@ function trimSelectedNodes() {
   selectedPosns=newSelectedPosns;
   
 
-  //add in connecting operators
+  //if leaves are connected by differing operators, trim 
+	
+  while (find_operators().length > 1) {
+    for (x1 in selectedNodes) {
+	if (exp[find_pointer(selectedNodes[x1][0])][2] == undefined) {
+	  for (x2 in selectedPosns) {
+	  	if (selectedPosns[x2][0]==selectedNodes[x1][0]) {
+		  selectedPosns.splice(x2,1);
+		  selectedNodes.splice(x1,1);
+		}
+	  }
+	}
+    }
 
   
    
