@@ -303,7 +303,7 @@ function trimSelectedNodes() {
     for (x1 in selectedNodes) {
 	if (exp[find_pointer(selectedNodes[x1])][2] == undefined) {
 	  for (x2 in selectedPosns) {
-	  	if (selectedPosns[x2][0]==selectedNodes[x1][0]) {
+	  	if (selectedPosns[x2][0]==selectedNodes[x1]) {
 		  selectedPosns.splice(x2,1);
 		  selectedNodes.splice(x1,1);
 		}
