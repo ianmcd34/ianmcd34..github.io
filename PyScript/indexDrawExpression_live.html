@@ -301,7 +301,7 @@ function trimSelectedNodes() {
 	
   while (find_operators().length > 1) {
     for (x1 in selectedNodes) {
-	if (exp[find_pointer(selectedNodes[x1])][2] == undefined) {
+	if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined) {
 	  for (x2 in selectedPosns) {
 	  	if (selectedPosns[x2][0]==selectedNodes[x1]) {
 		  selectedPosns.splice(x2,1);
@@ -319,7 +319,9 @@ function trimSelectedNodes() {
    while (trimmed) {
 	trimmed=false;
 	for (x1 in selectedNodes) {
-	  alert(selectedNodes[x1]);
+	  if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] != undefined) {
+	    alert("hi");
+	  }
 	  }	
    }
 }
