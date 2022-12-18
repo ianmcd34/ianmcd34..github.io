@@ -320,9 +320,11 @@ function trimSelectedNodes() {
 	trimmed=false;
 	for (x1 in selectedNodes) {
 	  if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] != undefined) {
-	    alert("hi");
-	  }
-	  }	
+	    if (!selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][2]) && !selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][3])) {
+		alert("hi");
+	    }
+	   }
+	 }	
    }
 }
 
