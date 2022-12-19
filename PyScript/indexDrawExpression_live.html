@@ -367,6 +367,7 @@ function trimSelectedNodes() {
 	    if (!selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][2]) && !selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][3])) {
 		    alert(selectedNodes[x1]+" getting trimmed");
 		    for (x2 in selectedPosns) {
+			alert("selectedPosns="+selectedPosns);
 			if (selectedPosns[x2][0]==selectedNodes[x1]) {
 				selectedPosns.splice(x2,1);
 				selectedNodes.splice(x1,1);
