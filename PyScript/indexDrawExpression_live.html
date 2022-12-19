@@ -363,12 +363,15 @@ function trimSelectedNodes() {
 	trimmed=false;
 	for (x1 in selectedNodes) {
 	  if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] != undefined && !trimmed) {
+	    alert("trimming "+exp[find_pointer(selectedNodes[x1])][1]+" at "+selectedNodes[x1])
 	    if (!selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][2]) && !selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][3])) {
+		    alert(selectedNodes[x1]+" getting trimmed");
 		    for (x2 in selectedPosns) {
 			if (selectedPosns[x2][0]==selectedNodes[x1]) {
 				selectedPosns.splice(x2,1);
 				selectedNodes.splice(x1,1);
 				trimmed=true;
+				alert(selectedNodes[x1]+" trimming done");
 				}
 			}
 	      }
