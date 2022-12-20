@@ -342,14 +342,10 @@ function trimSelectedNodes() {
 	for (x1 in selectedNodes) {
 		if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined && !trimmed) {
 			p=find_parent(selectedNodes[x1]);
-			if (p<998 && (!selectedNodes.includes(exp[find_pointer(p)][2])) || !selectedNodes.includes(exp[find_pointer(p)][3])) {
-				for (x2 in selectedPosns) {
-					if (selectedPosns[x2][0]==selectedNodes[x1]) {
-						selectedPosns.splice(x2,1);
-						selectedNodes.splice(x1,1);
-						trimmed=true;
-					}
-				}
+			if (p<998 && (!selectedNodes.includes(exp[find_pointer(p)][2])) || !selectedNodes.includes(exp[find_pointer(p)][3])) {	
+				selectedPosns.splice(x1,1);
+				selectedNodes.splice(x1,1);
+				trimmed=true;		
 			}
 		}
 	}
@@ -357,7 +353,7 @@ function trimSelectedNodes() {
    
   
    //if there are any operators with no dependencies, trim
-
+/*
    trimmed=true;
    while (trimmed) {
 	trimmed=false;
@@ -378,7 +374,7 @@ function trimSelectedNodes() {
 	      }
 	    }
 	 }	
-   }
+   }*/
 }
 
 function createPosns() {
