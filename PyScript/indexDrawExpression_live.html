@@ -691,6 +691,7 @@ ctx.globalCompositeOperation="lighter";
 
 		if selectedtop==exptop or selectedtop==999:
 			if numpart>0:
+				document.getElementById("print-tree").innerHTML=exp_py.print_tree('r')
 				exp_py.add_branch('+',str(numpart))
 			while len(strpart)>0:
 				exp_py.add_branch('+',strpart[0])
@@ -728,9 +729,9 @@ ctx.globalCompositeOperation="lighter";
 				
 				
 				
-		document.getElementById("print-tree").innerHTML=exp_py.print_tree('r') 		
+		 		
 		js.get_exp1(create_proxy(exp_py.elements))
-		
+		document.getElementById("print-tree").innerHTML=exp_py.print_tree('r')
 		
 
 
