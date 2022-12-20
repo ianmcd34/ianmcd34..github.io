@@ -203,7 +203,7 @@ function find_operators() {
 	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
 		p=selectedNodes[index];
 
-		while (find_parent(p) < 998  && p!=findtops()[0] )) {
+		while (find_parent(p) < 998  && p!=findtops()[0] ) {
 			
 			if (selectedNodes.includes(p)) {
 				p=find_parent(p);
