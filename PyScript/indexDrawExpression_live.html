@@ -279,50 +279,51 @@ function trimSelectedNodes() {
 
 	  include=true;
 	  if(y1!=999 && y1!=998) {
-	    if (!(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
+	    if (find_parent(y1)<998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
+	      if (!selectedNodes.includes(find_parent(y1)) {
+		      for (x2 in selectedNodes) {
+			if (!(toRemove.includes(x2))) {	  
 
-	      for (x2 in selectedNodes) {
-		if (!(toRemove.includes(x2))) {	  
+			  y2=selectedNodes[x2];
 
-		  y2=selectedNodes[x2];
+			  if(y2!=999 && y2!=998) {
 
-		  if(y2!=999 && y2!=998) {
-		    
-		    if (!(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
+			    if (!(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
 
-		      p1=y1;
+			      p1=y1;
 
-		      do {
+			      do {
 
-			if (find_parent(p1)<998) {
-			  
-			  p1=find_parent(p1);
-			  
+				if (find_parent(p1)<998) {
+
+				  p1=find_parent(p1);
+
+				}
+			      }
+			      while (p1<998 && find_parent(p1)<998 &&
+			      (selectedNodes.includes(p1) || (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1])))
+
+			      p2=y2;
+
+			      do {
+
+				if (find_parent(p2)<998) {
+				  p2=find_parent(p2);
+				}
+			      }
+			      while (p2<998 && find_parent(p2)<998 &&
+			      (selectedNodes.includes(p2) || (exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y2))][1])))
+
+
+			      if (p1!=p2) {
+				toRemove.push(x1);
+
+			      } 
+
+			    }
+			  }
 			}
-		      }
-		      while (p1<998 && find_parent(p1)<998 &&
-		      (selectedNodes.includes(p1) || (exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1])))
-
-		      p2=y2;
-
-		      do {
-
-			if (find_parent(p2)<998) {
-			  p2=find_parent(p2);
-			}
-		      }
-		      while (p2<998 && find_parent(p2)<998 &&
-		      (selectedNodes.includes(p2) || (exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1] && exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y2))][1])))
-
-			
-		      if (p1!=p2) {
-			toRemove.push(x1);
-
-		      } 
-
-		    }
-		  }
-		}
+	        }
 	      }
 	    }
 	  }
