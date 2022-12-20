@@ -219,7 +219,7 @@ function find_operators() {
     text="";
     operatorsSet.forEach(function(value) {text += value;});
 
-    operatorsSet=new Set(operators1.split(""));
+    operatorsSet=new Set((operators+operators1).split(""));
     text1="";
     operatorsSet.forEach(function(value) {text1 += value;});
     alert(text+","+text1);
