@@ -195,14 +195,14 @@ function find_parent(index) {
   return p_prime;
 }
 	    
-function find_operators() {
+function find_operators(strict) {
     operators="";
     var p=0;
     for (let index=selectedNodes.length-1; index>-1;index--) {
 	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
 		p=selectedNodes[index];
 
-		while (find_parent(p) < 998  && p!=findtops()[0] && selectedNodes.includes(p)) {
+		while (find_parent(p) < 998  && p!=findtops()[0] && (selectedNodes.includes(p) || !strict)) {
 			
 			p=find_parent(p);
 
@@ -337,7 +337,7 @@ function trimSelectedNodes() {
 
   //if leaves are connected by differing operators, trim 
   trimmed=true;
-  while (find_operators().length > 1 && trimmed) {
+  while (find_operators(false).length > 1 && trimmed) {
     trimmed=false;
 	for (x1 in selectedNodes) {
 		if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined && !trimmed) {
@@ -697,7 +697,7 @@ ctx.globalCompositeOperation="lighter";
 				strpart=strpart[1:]
 		else:
 			leafnode=js.find_leaf()
-			operators=js.find_operators()
+			operators=js.find_operators(true)
 			document.getElementById("factor-input").value=operators
 			exp_insert=cex.Expression()
 
