@@ -174,9 +174,11 @@ function selectNodes(item,index) {
 	n=1;
 	if (parents.length>0) {
 
-		while (parents.every(containsSelectedtop) && n < parents[0].length) {
+		while (n < parents[0].length) {
 			n=n+1;
-			selectedtop=parents[0][parents[0].length-n];
+			if (parents.every(containsSelectedtop)) {
+				selectedtop=parents[0][parents[0].length-n];
+			}
 		}
 
 
