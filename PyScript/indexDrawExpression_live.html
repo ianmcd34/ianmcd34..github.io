@@ -302,7 +302,7 @@ function trimSelectedNodes() {
 									}
 								}
 								while (p1<998 && find_parent(p1)<998 &&
-								(selectedNodes.includes(p1) || exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]))
+								(selectedNodes.includes(p1) || exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]) && p1!=findtops[0])
 
 								p2=y2;
 
@@ -314,7 +314,7 @@ function trimSelectedNodes() {
 									}
 								}
 								while (p2<998 && find_parent(p2)<998 &&
-								(selectedNodes.includes(p2) || exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1]))
+								(selectedNodes.includes(p2) || exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1])  && p2!=findtops[0])
 
 
 								if (p1!=p2) {
