@@ -272,7 +272,7 @@ function trimSelectedNodes() {
 
 
   //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
-  
+  selectedtop=findtops()[0];
   toRemove=[];
   toAdd=[];
 	for (x1 in selectedNodes) {
@@ -298,12 +298,12 @@ function trimSelectedNodes() {
 									if (find_parent(p1)<998) {
 
 										p1=find_parent(p1);
-										alert("leaf "+y1+" parent "+p1+" selectedtop "+findtops[0]);
+										alert("leaf "+y1+" parent "+p1+" selectedtop "+selectedtop);
 
 									}
 								}
 								while (p1<998 && find_parent(p1)<998 &&
-								(selectedNodes.includes(p1) || exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]) && p1!=findtops()[0])
+								(selectedNodes.includes(p1) || exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1]) && p1!=selectedtop)
 
 								p2=y2;
 
@@ -311,11 +311,11 @@ function trimSelectedNodes() {
 
 									if (find_parent(p2)<998) {
 										p2=find_parent(p2);
-										alert("leaf "+y2+" parent "+p2+" selectedtop "+findtops[0]);
+										alert("leaf "+y2+" parent "+p2+" selectedtop "+selectedtop);
 									}
 								}
 								while (p2<998 && find_parent(p2)<998 &&
-								(selectedNodes.includes(p2) || exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1])  && p2!=findtops()[0])
+								(selectedNodes.includes(p2) || exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1])  && p2!=selectedtop)
 
 
 								if (p1!=p2) {
