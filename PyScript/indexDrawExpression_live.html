@@ -297,7 +297,7 @@ function trimSelectedNodes() {
 									if (find_parent(p1)<998) {
 
 										p1=find_parent(p1);
-										alert("leaf "+y1+" parent "+p1);
+										alert("leaf "+y1+" parent "+p1+" selectedtop "+findtops[0]);
 
 									}
 								}
@@ -310,7 +310,7 @@ function trimSelectedNodes() {
 
 									if (find_parent(p2)<998) {
 										p2=find_parent(p2);
-										alert("leaf "+y2+" parent "+p2);
+										alert("leaf "+y2+" parent "+p2+" selectedtop "+findtops[0]);
 									}
 								}
 								while (p2<998 && find_parent(p2)<998 &&
