@@ -271,6 +271,31 @@ function trimSelectedNodes() {
 
 	  selectedNodes=newSelectedNodes;
 	  selectedPosns=newSelectedPosns;
+	
+   //if there are any * nodes in containing tree , eliminate highest leaf and retry
+	retry=false;
+	finished=false;
+	selectedtop=findtops[0];
+	p=selectedtop;
+	while (!retry && !finished) {
+		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='*') {
+			retry=true;
+			p=exp[find_pointer(p)][2];
+		} else if (exp[find_pointer(p)][2]!=undefined) {
+			p=exp[find_pointer(p)][2];
+		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][2]==p) {
+			p=exp[find_pointer(find_parent(p))][3];
+		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][3]==p) {
+			while (find_parent(p)!=selectedtop) {p=find_parent(p);}
+			if (exp[find_pointer(find_parent(p))][3]==p) {finished=true;}
+			else {p=exp[find_pointer(find_parent(p))][3];}
+		}
+	}
+	if (retry) {
+		alert("remove leaf");
+	}
+	
+	
 }
 
 function createPosns() {
