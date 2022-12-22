@@ -232,164 +232,45 @@ function find_operators() {
 }
 
 function trimSelectedNodes() {
-  
+  //reduce to leaf nodes or completely selected subtrees
+	  toRemove=[];
+	  for (x1 in selectedNodes) {
 
-  //include non-leaf nodes only if all their children are selected
-  toRemove=[];
-  for (x1 in selectedNodes) {
+	    y=selectedNodes[x1];
 
-    y=selectedNodes[x1];
-	
-    include=true;
-    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
-       var p=exp[find_pointer(y)][2];
+	    include=true;
+	    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
+	       var p=exp[find_pointer(y)][2];
 
-       while(include && p!=y && find_parent(p)!=999) {
+	       while(include && p!=y && find_parent(p)!=999) {
 
-         if (!selectedNodes.includes(p) ) {include=false;}
-	   
-         else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
-         else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
-         else {
-          while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
-          if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
-          else if (p!=y && find_parent(p)!=999) {p=find_parent(p);}
-         }
-       }
-    }
-    if (!include) {
-	toRemove.push(x1);
-    }
-  }
+		 if (!selectedNodes.includes(p) ) {include=false;}
 
-  newSelectedNodes=[];
-  newSelectedPosns=[];
-  for (x1 in selectedNodes) {
-    if (!toRemove.includes(x1)) {
-	newSelectedNodes.push(selectedNodes[x1]);
-	newSelectedPosns.push(selectedPosns[x1]);
-    }
-  }
-  
-  selectedNodes=newSelectedNodes;
-  selectedPosns=newSelectedPosns;
-
-
-  //include leaf nodes only if connected to all other selected leafs or intervening nodes have same operator as their parent
-  selectedtop=findtops()[0];
-  toRemove=[];
-  toAdd=[];
-	for (x1 in selectedNodes) {
-	y1=selectedNodes[x1];
-
-	include=true;
-	if(y1!=999 && y1!=998) {
-		if (find_parent(y1)<998 && !(exp[find_pointer(y1)][1]=='*' || exp[find_pointer(y1)][1]=='+' || exp[find_pointer(y1)][1]=='/')) {
-			if (!selectedNodes.includes(find_parent(y1))) {
-				for (x2 in selectedNodes) {
-					if (!(toRemove.includes(x2))) {	  
-
-						y2=selectedNodes[x2];
-
-						if(y2!=999 && y2!=998) {
-
-							if (!(exp[find_pointer(y2)][1]=='*' || exp[find_pointer(y2)][1]=='+' || exp[find_pointer(y2)][1]=='/')) {
-
-								p1=y1;
-
-								do {
-
-									if (find_parent(p1)<998) {
-
-										p1=find_parent(p1);
-										alert("leaf "+y1+" parent "+p1+" selectedtop "+selectedtop);
-
-									}
-								}
-								while (p1<998 && find_parent(p1)<998 &&
-								((selectedNodes.includes(p1) || exp[find_pointer(p1)][1]==exp[find_pointer(find_parent(y2))][1])) && p1!=selectedtop)
-
-								p2=y2;
-
-								do {
-
-									if (find_parent(p2)<998) {
-										p2=find_parent(p2);
-										alert("leaf "+y2+" parent "+p2+" selectedtop "+selectedtop);
-									}
-								}
-								while (p2<998 && find_parent(p2)<998 &&
-								((selectedNodes.includes(p2) || exp[find_pointer(p2)][1]==exp[find_pointer(find_parent(y1))][1]))  && p2!=selectedtop)
-
-
-								if (p1!=p2) {
-									toRemove.push(x1);
-
-								} 
-
-							}	
-						}	
-					}
-				}
-			}
-		}
-	}
-}
-
-	newSelectedNodes=[];
-	newSelectedPosns=[];
-	for (x1 in selectedNodes) {
-		if (!toRemove.includes(x1)) {
-			newSelectedNodes.push(selectedNodes[x1]);
-			newSelectedPosns.push(selectedPosns[x1]);
-		}
-	}
-	
-
-  selectedNodes=newSelectedNodes;
-  selectedPosns=newSelectedPosns;
-  
-/*
-  //if leaves are connected by differing operators, trim 
-  trimmed=true;
-  while (find_operators()[1].length > 1 && trimmed) {
-    trimmed=false;
-	for (x1 in selectedNodes) {
-		if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] == undefined && !trimmed) {
-			p=find_parent(selectedNodes[x1]);
-			if (p<998 && (!selectedNodes.includes(exp[find_pointer(p)][2])) || !selectedNodes.includes(exp[find_pointer(p)][3])) {	
-				selectedPosns.splice(x1,1);
-				selectedNodes.splice(x1,1);
-				trimmed=true;		
-			}
-		}
-	}
-    }
-  */ 
-  
-   //if there are any operators with no dependencies, trim
-/*
-   trimmed=true;
-   while (trimmed) {
-	trimmed=false;
-	for (x1 in selectedNodes) {
-	  if (selectedNodes[x1]<998 && exp[find_pointer(selectedNodes[x1])][2] != undefined && !trimmed) {
-	    alert("trimming "+exp[find_pointer(selectedNodes[x1])][1]+" at "+selectedNodes[x1])
-	    if (!selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][2]) && !selectedNodes.includes(exp[find_pointer(selectedNodes[x1])][3])) {
-		    alert(selectedNodes[x1]+" getting trimmed");
-		    for (x2 in selectedPosns) {
-			alert("selectedPosns="+selectedPosns);
-			if (selectedPosns[x2][0]==selectedNodes[x1]) {
-				selectedPosns.splice(x2,1);
-				selectedNodes.splice(x1,1);
-				trimmed=true;
-				alert(selectedNodes[x1]+" trimming done");
-				}
-			}
-	      }
+		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
+		 else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+		 else {
+		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
+		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+		  else if (p!=y && find_parent(p)!=999) {p=find_parent(p);}
+		 }
+	       }
 	    }
-	 }	
-   }*/
+	    if (!include) {
+		toRemove.push(x1);
+	    }
+	  }
+
+	  newSelectedNodes=[];
+	  newSelectedPosns=[];
+	  for (x1 in selectedNodes) {
+	    if (!toRemove.includes(x1)) {
+		newSelectedNodes.push(selectedNodes[x1]);
+		newSelectedPosns.push(selectedPosns[x1]);
+	    }
+	  }
+
+	  selectedNodes=newSelectedNodes;
+	  selectedPosns=newSelectedPosns;
 }
 
 function createPosns() {
