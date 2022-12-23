@@ -650,6 +650,7 @@ ctx.globalCompositeOperation="lighter";
 					x1[2]=x1[2]-maxindex_insert-1+minindex_py
 					x1[3]=x1[3]-maxindex_insert-1+minindex_py
 			minindex_insert=exp_insert.elements[:,0].min()
+			maxindex_insert=exp_insert.elements[:,0].max()
 			
 			if operators=='+' or operators=='':
 				newleaf=[minindex_insert-1,exp_py.elements[exp_py.find_pointer(leafnode)][1],None,None]
@@ -658,8 +659,16 @@ ctx.globalCompositeOperation="lighter";
 				exp_py.elements[exp_py.find_pointer(leafnode)][3]=minindex_py-1
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
-			elif operators=='*':
-				document.getElementById("factor-input").value="adding multiplier subtree"
+			elif iperators=='*+' or operators=='+*' or operators=='*':
+				pp=find_parent(selectedtop)
+				if (exp[find_pointer(pp)][2]==selectedtop) {
+					newnode=[minindex_insert-1, '+', selectedtop, maxindex_insert];
+					exp[find_pointer(pp)][2]=minindex_insert-1;
+				} else {
+					newnode=[minindex_insert-1, '+',  maxindex_insert, selectedtop];
+					exp[find_pointer(pp)][3]=minindex_insert-1;
+				}
+
 				
 				
 				
