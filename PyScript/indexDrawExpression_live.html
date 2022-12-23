@@ -275,7 +275,7 @@ function trimSelectedNodes() {
    //if there are any * nodes in containing tree , eliminate highest leaf and retry
 	retry=false;
 	finished=false;
-	selectedtop=findtops[0];
+	selectedtop=findtops()[0];
 	p=selectedtop;
 	while (!retry && !finished) {
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='*') {
