@@ -277,7 +277,7 @@ function trimSelectedNodes() {
 	finished=false;
 	selectedtop=findtops()[0];
 	p=selectedtop;
-	while (!retry && !finished) {
+	while (!retry && !finished && selectedNodes.length > 1) {
 		alert(exp[find_pointer(p)]);
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='*') {
 			retry=true;
