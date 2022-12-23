@@ -276,6 +276,7 @@ function trimSelectedNodes() {
 	retry=false;
 	finished=false;
 	selectedtop=findtops()[0];
+	exptop=findtops()[1];
 	p=selectedtop;
 	while (!retry && !finished && selectedNodes.length > 1) {
 		alert(exp[find_pointer(p)]);
@@ -286,7 +287,7 @@ function trimSelectedNodes() {
 		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][2]==p) {
 			p=exp[find_pointer(find_parent(p))][3];
 		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][3]==p) {
-			while (find_parent(p)!=selectedtop) {p=find_parent(p);}
+			while (find_parent(p)!=selectedtop && find_parent(p)!=999 && find_parent(p)!=exptop) {p=find_parent(p);}
 			if (exp[find_pointer(find_parent(p))][3]==p) {finished=true;}
 			else {p=exp[find_pointer(find_parent(p))][3];}
 		}
