@@ -662,7 +662,7 @@ ctx.globalCompositeOperation="lighter";
 			elif operators=='*+' or operators=='+*' or operators=='*':
 				pp=js.find_parent(selectedtop)
 				document.getElementById("factor-input").value=pp
-				/*
+				"""
 				if (exp_py[js.find_pointer(pp)][2]==selectedtop) {
 					newnode=[minindex_insert-1, '+', selectedtop, maxindex_insert]
 					exp_py[js.find_pointer(pp)][2]=minindex_insert-1
@@ -672,7 +672,7 @@ ctx.globalCompositeOperation="lighter";
 				}
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
-				*/
+				"""
 
 				
 				
