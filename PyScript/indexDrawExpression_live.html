@@ -166,7 +166,7 @@ function selectNodes(item,index) {
 			}
 		}
 	}
-	alert("findtops parents="+parents);
+
 	function containsSelectedtop(value, index, array) {
 		return value.includes(selectedtop);
 	}
@@ -227,7 +227,7 @@ function find_operators() {
     operatorsSet=new Set((operators+operators1).split(""));
     text1="";
     operatorsSet.forEach(function(value) {text1 += value;});
-    alert(text+","+text1);
+
     return [text,text1];
 }
 
@@ -278,9 +278,9 @@ function trimSelectedNodes() {
 	selectedtop=findtops()[0];
 	p=selectedtop;
 	while (!retry && !finished) {
+		alert(exp[find_pointer(p)]);
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='*') {
 			retry=true;
-			p=exp[find_pointer(p)][2];
 		} else if (exp[find_pointer(p)][2]!=undefined) {
 			p=exp[find_pointer(p)][2];
 		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][2]==p) {
@@ -335,14 +335,12 @@ function createPosns() {
 
     if (!(posns.map(indexEl).includes(p_left)) && p_left!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10 ) {
-		    alert("big"+exp[find_pointer(p_left)][1])
 		    xdiff=70;
 	    } else {
 	    	    xdiff=35;
     	    }
     } else  if (!(posns.map(indexEl).includes(p_right)) && p_right!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_right)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_right)][1])>=10 ) {
-		    alert("big"+exp[find_pointer(p_right)][1])
 		    xdiff=70;
     	    } else {
 	    	    xdiff=35;
