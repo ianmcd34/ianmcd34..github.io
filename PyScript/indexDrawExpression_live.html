@@ -294,6 +294,19 @@ function trimSelectedNodes() {
 	}
 	if (retry) {
 		alert("remove leaf");
+		removed=false;
+		n=selectedNodes.length-1;
+		while(!removed && n >= 0) {
+			if (selectedNodes[n] < 998) {
+				if (exp[find_pointer(selectedNodes[n])][2] == undefined) {
+					selectedNodes.splice(n,1);
+					selectedPosns.splice(n,1);
+					removed = true;
+				}
+				else {n--;}
+			} else {n--;}
+		}
+		trimSelectedNodes();
 	} else {
 		alert("don't remove leaf");
 	}
