@@ -233,6 +233,19 @@ function find_operators() {
 
 function trimSelectedNodes() {
 	
+        incompleteunit=false;
+	for (x1 in selectedNodes) {
+		if (selectedNodes[x1] < 998) {
+			node=exp[find_pointer(selectedNodes[x1])];
+			if (node[1]=='*' && node[2]==undefined && node[3]!=undefined) {
+				incompleteunit=true;
+			}
+			if (node[1]=='*' && node[2]!=undefined && node[3]==undefined) {
+				incompleteunit=true;
+			}
+		}
+	}
+	
      //reduce to leaf nodes or completely selected subtrees
 	  toRemove=[];
 	  for (x1 in selectedNodes) {
@@ -281,18 +294,7 @@ function trimSelectedNodes() {
 			}
 		}
 	}
-	incompleteunit=false;
-	for (x1 in selectedNodes) {
-		if (selectedNodes[x1] < 998) {
-			node=exp[find_pointer(selectedNodes[x1])];
-			if (node[1]=='*' && node[2]==undefined && node[3]!=undefined) {
-				incompleteunit=true;
-			}
-			if (node[1]=='*' && node[2]!=undefined && node[3]==undefined) {
-				incompleteunit=true;
-			}
-		}
-	}
+	
 	retry=false;
 	finished=false;
 	selectedtop=findtops()[0];
