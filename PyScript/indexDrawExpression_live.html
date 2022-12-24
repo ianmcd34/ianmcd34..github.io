@@ -287,8 +287,9 @@ function trimSelectedNodes() {
 	exptop=findtops()[1];
 	p=selectedtop;
 	leafcount=0;
-	while (!retry && !finished && selectedNodes.forEach(countleafs) > 1) {
-		leafcount=0;
+	selectedNodes.forEach(countleafs);
+	while (!retry && !finished && leafcount > 1) {
+		
 		alert(exp[find_pointer(p)]);
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
