@@ -273,15 +273,24 @@ function trimSelectedNodes() {
 	  selectedNodes=newSelectedNodes;
 	  selectedPosns=newSelectedPosns;
 
-   //if there are any * nodes in containing tree , eliminate highest leaf and retry
+   //if there are any + nodes in containing tree , eliminate highest leaf and retry
+	function countleafs(item) {
+		if (item<998) {
+			if (exp[find_pointer(item)][2]==undefined) {
+				leafcount++;
+			}
+		}
+	}
 	retry=false;
 	finished=false;
 	selectedtop=findtops()[0];
 	exptop=findtops()[1];
 	p=selectedtop;
-	while (!retry && !finished && selectedNodes.length > 1) {
+	leafcount=0;
+	while (!retry && !finished && selectedNodes.forEach(countleafs) > 1) {
+		leafcount=0;
 		alert(exp[find_pointer(p)]);
-		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='*') {
+		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
 		} else if (exp[find_pointer(p)][2]!=undefined) {
 			p=exp[find_pointer(p)][2];
