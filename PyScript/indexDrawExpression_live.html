@@ -233,18 +233,6 @@ function find_operators() {
 
 function trimSelectedNodes() {
 	
-        incompleteunit=false;
-	for (x1 in selectedNodes) {
-		if (selectedNodes[x1] < 998) {
-			node=exp[find_pointer(selectedNodes[x1])];
-			if (node[1]=='*' && node[2]==undefined && node[3]!=undefined) {
-				incompleteunit=true;
-			}
-			if (node[1]=='*' && node[2]!=undefined && node[3]==undefined) {
-				incompleteunit=true;
-			}
-		}
-	}
 	
      //reduce to leaf nodes or completely selected subtrees
 	  toRemove=[];
@@ -295,10 +283,23 @@ function trimSelectedNodes() {
 		}
 	}
 	
+	
+	
 	retry=false;
 	finished=false;
 	selectedtop=findtops()[0];
 	exptop=findtops()[1];
+	incompleteunit=false;
+	for (x1 in selectedNodes) {
+		if (selectedNodes[x1] < 998) {
+			p=selectedNodes[x1];
+			while (find_parent(p) < 998 && find_parent(p)!=selectedtop && !selectedNodes.includes(find_parent(p))) {
+				p=find_parent(p);
+				if (exp[find_pointer(p)][1]=='*') {incompleteunit=true;}
+			}
+		}
+	}
+	
 	p=selectedtop;
 	leafcount=0;
 	selectedNodes.forEach(countleafs);
