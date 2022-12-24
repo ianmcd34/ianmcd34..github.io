@@ -293,9 +293,9 @@ function trimSelectedNodes() {
 	for (x1 in selectedNodes) {
 		if (selectedNodes[x1] < 998) {
 			p=selectedNodes[x1];
-			while (find_parent(p) < 998 && find_parent(p)!=selectedtop && !selectedNodes.includes(find_parent(p))) {
+			while (find_parent(p) < 998 && p!=selectedtop) {
 				p=find_parent(p);
-				if (exp[find_pointer(p)][1]=='*') {incompleteunit=true;}
+				if (exp[find_pointer(p)][1]=='*' && !selectedNodes.includes(p)) {incompleteunit=true;}
 			}
 		}
 	}
