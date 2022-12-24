@@ -285,10 +285,10 @@ function trimSelectedNodes() {
 	for (x1 in selectedNodes) {
 		if (selectedNodes[x1] < 998) {
 			node=exp[find_pointer(selectedNodes[x1])];
-			if (node[1]='*' && node[2]==undefined && node[3]!=undefined) {
+			if (node[1]=='*' && node[2]==undefined && node[3]!=undefined) {
 				incompleteunit=true;
 			}
-			if (node[1]='*' && node[2]!=undefined && node[3]==undefined) {
+			if (node[1]=='*' && node[2]!=undefined && node[3]==undefined) {
 				incompleteunit=true;
 			}
 		}
