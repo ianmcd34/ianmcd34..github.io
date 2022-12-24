@@ -273,11 +273,23 @@ function trimSelectedNodes() {
 	  selectedNodes=newSelectedNodes;
 	  selectedPosns=newSelectedPosns;
 
-   //if there are any + nodes in containing tree , eliminate highest leaf and retry
+   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
 	function countleafs(item) {
 		if (item<998) {
 			if (exp[find_pointer(item)][2]==undefined) {
 				leafcount++;
+			}
+		}
+	}
+	incompleteunit=false;
+	for (x1 in selectedNodes) {
+		if (selectedNodes[x1] < 998) {
+			node=exp[find_pointer(selectedNodes[x1])];
+			if (node[1]='*' && node[2]==undefined && node[3]!=undefined) {
+				incompleteunit=true;
+			}
+			if (node[1]='*' && node[2]!=undefined && node[3]==undefined) {
+				incompleteunit=true;
 			}
 		}
 	}
@@ -288,7 +300,7 @@ function trimSelectedNodes() {
 	p=selectedtop;
 	leafcount=0;
 	selectedNodes.forEach(countleafs);
-	while (!retry && !finished && leafcount > 1) {
+	while (!retry && !finished && leafcount > 1 && incompleteunit) {
 		
 		alert(exp[find_pointer(p)]);
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
