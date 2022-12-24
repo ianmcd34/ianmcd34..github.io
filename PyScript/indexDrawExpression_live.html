@@ -232,6 +232,46 @@ function find_operators() {
 }
 
 function trimSelectedNodes() {
+	
+     //reduce to leaf nodes or completely selected subtrees
+	  toRemove=[];
+	  for (x1 in selectedNodes) {
+
+	    y=selectedNodes[x1];
+
+	    include=true;
+	    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
+	       var p=exp[find_pointer(y)][2];
+
+	       while(include && p!=y && find_parent(p)!=999) {
+
+		 if (!selectedNodes.includes(p) ) {include=false;}
+
+		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
+		 else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+		 else {
+		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
+		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+		  else if (p!=y && find_parent(p)!=999) {p=find_parent(p);}
+		 }
+	       }
+	    }
+	    if (!include) {
+		toRemove.push(x1);
+	    }
+	  }
+
+	  newSelectedNodes=[];
+	  newSelectedPosns=[];
+	  for (x1 in selectedNodes) {
+	    if (!toRemove.includes(x1)) {
+		newSelectedNodes.push(selectedNodes[x1]);
+		newSelectedPosns.push(selectedPosns[x1]);
+	    }
+	  }
+
+	  selectedNodes=newSelectedNodes;
+	  selectedPosns=newSelectedPosns;
 
    //if there are any * nodes in containing tree , eliminate highest leaf and retry
 	retry=false;
