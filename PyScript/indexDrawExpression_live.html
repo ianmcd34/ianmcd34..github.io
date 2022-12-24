@@ -232,6 +232,7 @@ function find_operators() {
 }
 
 function trimSelectedNodes() {
+	"""
   //reduce to leaf nodes or completely selected subtrees
 	  toRemove=[];
 	  for (x1 in selectedNodes) {
@@ -271,7 +272,7 @@ function trimSelectedNodes() {
 
 	  selectedNodes=newSelectedNodes;
 	  selectedPosns=newSelectedPosns;
-	
+	"""
    //if there are any * nodes in containing tree , eliminate highest leaf and retry
 	retry=false;
 	finished=false;
