@@ -699,8 +699,8 @@ ctx.globalCompositeOperation="lighter";
 				maxindex_insert=exp_insert.elements[:,0].max()
 	
 				pp=js.find_parent(selectedtop)
-				document.getElementById("factor-input").value=exp_py.elements[exp_py.find_pointer(pp)][2]
-				
+				document.getElementById("factor-input").value=pp+","+exp_py.elements[exp_py.find_pointer(pp)][2]
+				"""
 				if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 					exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
 					newnode=[minindex_py-1, '+', selectedtop, minindex_py-2]
@@ -711,7 +711,7 @@ ctx.globalCompositeOperation="lighter";
 				
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
-				
+				"""
 
 				
 				
