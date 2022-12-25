@@ -670,15 +670,17 @@ ctx.globalCompositeOperation="lighter";
 			minindex_py=exp_py.elements[:,0].min()
 			maxindex_insert=exp_insert.elements[:,0].max()
 			
-			for x1 in exp_insert.elements:
-				x1[0]=x1[0]-maxindex_insert-2+minindex_py
-				if x1[2] is not None:
-					x1[2]=x1[2]-maxindex_insert-2+minindex_py
-					x1[3]=x1[3]-maxindex_insert-2+minindex_py
-			minindex_insert=exp_insert.elements[:,0].min()
-			maxindex_insert=exp_insert.elements[:,0].max()
+			
 			
 			if operators=='+' or operators=='':
+				for x1 in exp_insert.elements:
+				x1[0]=x1[0]-maxindex_insert-1+minindex_py
+				if x1[2] is not None:
+					x1[2]=x1[2]-maxindex_insert-1+minindex_py
+					x1[3]=x1[3]-maxindex_insert-1+minindex_py
+				minindex_insert=exp_insert.elements[:,0].min()
+				maxindex_insert=exp_insert.elements[:,0].max()
+	
 				newleaf=[minindex_insert-1,exp_py.elements[exp_py.find_pointer(leafnode)][1],None,None]
 				exp_py.elements[exp_py.find_pointer(leafnode)][1]='+'
 				exp_py.elements[exp_py.find_pointer(leafnode)][2]=minindex_insert-1
@@ -686,6 +688,15 @@ ctx.globalCompositeOperation="lighter";
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
 			elif operators=='*+' or operators=='+*' or operators=='*':
+	
+				for x1 in exp_insert.elements:
+				x1[0]=x1[0]-maxindex_insert-2+minindex_py
+				if x1[2] is not None:
+					x1[2]=x1[2]-maxindex_insert-2+minindex_py
+					x1[3]=x1[3]-maxindex_insert-2+minindex_py
+				minindex_insert=exp_insert.elements[:,0].min()
+				maxindex_insert=exp_insert.elements[:,0].max()
+	
 				pp=js.find_parent(selectedtop)
 				document.getElementById("factor-input").value=exp_py.elements[exp_py.find_pointer(pp)][2]
 				
