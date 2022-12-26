@@ -710,6 +710,7 @@ ctx.globalCompositeOperation="lighter";
 				
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
+				document.getElementById("print-tree").innerHTML=exp_py.print_tree('r') 
 				
 
 				
