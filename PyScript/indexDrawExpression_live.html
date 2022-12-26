@@ -166,9 +166,9 @@ function selectNodes(item,index) {
 			}
 		}
 	}
-	alert(parents);
+
 	function containsSelectedtop(value, index, array) {
-		alert("func selectedtop="+selectedtop);
+
 		return value.includes(selectedtop);
 	}
 
@@ -186,7 +186,7 @@ function selectNodes(item,index) {
 
 
 	}
-	alert("selectedtop="+selectedtop);
+
 	return [selectedtop,exptop];
     }
 
@@ -306,7 +306,7 @@ function trimSelectedNodes() {
 	selectedNodes.forEach(countleafs);
 	while (!retry && !finished && leafcount > 1 && incompleteunit) {
 		
-		alert(exp[find_pointer(p)]);
+
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
 		} else if (exp[find_pointer(p)][2]!=undefined) {
@@ -320,7 +320,7 @@ function trimSelectedNodes() {
 		}
 	}
 	if (retry) {
-		alert("remove leaf");
+
 		removed=false;
 		n=selectedNodes.length-1;
 		while(!removed && n >= 0) {
@@ -334,9 +334,7 @@ function trimSelectedNodes() {
 			} else {n--;}
 		}
 		trimSelectedNodes();
-	} else {
-		alert("don't remove leaf");
-	}
+	} 
 	
 	
 }
@@ -700,7 +698,7 @@ ctx.globalCompositeOperation="lighter";
 				maxindex_insert=exp_insert.elements[:,0].max()
 	
 				pp=js.find_parent(selectedtop)
-				document.getElementById("factor-input").value=selectedtop+","+pp+","+minindex_py
+				document.getElementById("factor-input").value=str(selectedtop)+","+str(pp)+","+str(minindex_py)
 				
 				if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 					exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
