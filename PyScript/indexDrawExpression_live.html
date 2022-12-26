@@ -700,7 +700,7 @@ ctx.globalCompositeOperation="lighter";
 				maxindex_insert=exp_insert.elements[:,0].max()
 	
 				pp=js.find_parent(selectedtop)
-				document.getElementById("factor-input").value=selectedtop
+				document.getElementById("factor-input").value=selectedtop+","+pp+","+minindex_py
 				
 				if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 					exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
