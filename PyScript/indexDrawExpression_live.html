@@ -711,6 +711,7 @@ ctx.globalCompositeOperation="lighter";
 				oldtree=exp_py
 				document.getElementById("print-tree").innerHTML=str(oldtree.elements)+"/"+str(newnode)+"/"+str(exp_insert.elements)
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
+				document.getElementById("print-tree").innerHTML=str(exp_py.elements)
 				
 				
 
