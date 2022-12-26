@@ -357,7 +357,7 @@ function createPosns() {
 
   incomplete=true;
   while (incomplete && p!=999) {
-    if (p==-5) {alert("-5trace1a");}
+    
 	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); alert(posns);}
     
@@ -367,7 +367,7 @@ function createPosns() {
     for (e1 in exp) {
       if (!(posns.map(indexEl).includes(e1[0]))) {incomplete=true;}
     }
-
+    if (p==-5) {alert("-5trace incomplete"+incomplete);}
    
     p_left=exp[find_pointer(p)][2];
     p_right=exp[find_pointer(p)][3];
