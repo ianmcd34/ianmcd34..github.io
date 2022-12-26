@@ -357,7 +357,8 @@ function createPosns() {
 
   incomplete=true;
   while (incomplete && p!=999) {
-
+    if (p==-5) {alert("-5trace1a");}
+	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); alert(posns);}
     
 
@@ -373,7 +374,7 @@ function createPosns() {
     p_x=x;
     p_y=y;
 	
-    if (p==-5) {alert("-5trace1a");}
+    
 
     if (!(posns.map(indexEl).includes(p_left)) && p_left!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10 ) {
