@@ -723,7 +723,7 @@ ctx.globalCompositeOperation="lighter";
 
 	js.document.getElementById("change-expression-btn").addEventListener("click", create_proxy(create_exp_py))
 	js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
-	js.document.getElementById("show-btn").addEventListener("click", show_expression)
+	js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
 
 
 </py-script>
