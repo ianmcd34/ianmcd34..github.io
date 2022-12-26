@@ -340,7 +340,7 @@ function trimSelectedNodes() {
 }
 
 function createPosns() {
-	
+  alert(exp);
   function indexEl(arr) {
       return arr[0];
   }
@@ -709,9 +709,8 @@ ctx.globalCompositeOperation="lighter";
 					exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
 				
 				oldtree=exp_py
-				document.getElementById("print-tree").innerHTML=str(oldtree.elements)+"/"+str(newnode)+"/"+str(exp_insert.elements)
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
-				document.getElementById("print-tree").innerHTML=str(exp_py.elements)
+
 				
 				
 
