@@ -359,13 +359,13 @@ function createPosns() {
   while (incomplete && p!=999) {
     
 	  
-    if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); alert(posns);}
+    if (!(posns.map(indexEl).includes(parseInt(p)))) {posns.push([p,x,y]); alert(posns);}
     
 
 
     incomplete=false;
     for (e1 in exp) {
-      if (!(posns.map(indexEl).includes(e1[0]))) {incomplete=true;}
+      if (!(posns.map(indexEl).includes(parseInt(e1[0])))) {incomplete=true;}
     }
     if (p==-5) {alert("-5trace incomplete"+incomplete);}
    
@@ -376,7 +376,7 @@ function createPosns() {
 	
     
 
-    if (!(posns.map(indexEl).includes(p_left)) && p_left!=undefined) {
+    if (!(posns.map(indexEl).includes(parseInt(p_left))) && p_left!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10 ) {
 		    xdiff=70;
 	    } else {
@@ -397,7 +397,7 @@ function createPosns() {
     if (p==-5) {alert("-5trace1");}
     if (p==-6) {alert("-6trace1");}
 
-    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {if (p==-5) {alert("trace2");} if (p==-6) {alert("-6trace2");}
+    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {if (p==-5) {alert("trace2");} if (p==-6) {alert("-6trace2");}
       for (i in posns) {
         if (posns[i][1] < p_x && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff-xdiff/2;
@@ -417,7 +417,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {if (p==-5) {alert("trace3");}if (p==-6) {alert("-6trace3");}
+    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {if (p==-5) {alert("trace3");}if (p==-6) {alert("-6trace3");}
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
@@ -430,7 +430,7 @@ function createPosns() {
       if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
       y=p_y;
     }
-    else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {if (p==-5) {alert("trace4");}if (p==-6) {alert("-6trace4");}
+    else if (p_left!=undefined && (posns.map(indexEl).includes(parseInt(p_left))) && !(posns.map(indexEl).includes(parseInt(p_right)))) {if (p==-5) {alert("trace4");}if (p==-6) {alert("-6trace4");}
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
 		if (posns[i][1] > p_x && posns[i][0] < 998) {
