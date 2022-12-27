@@ -709,12 +709,10 @@ ctx.globalCompositeOperation="lighter";
 				
 				if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 					exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
-					newnode=[minindex_py-1, '+', selectedtop, minindex_py-2]
-
 				else:
-					newnode=[minindex_py-1, '+',  minindex_py-2, selectedtop]
 					exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
 				
+				newnode=[minindex_py-1, '+', selectedtop, minindex_py-2]
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
 
