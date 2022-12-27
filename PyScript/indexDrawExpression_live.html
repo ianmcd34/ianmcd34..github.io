@@ -713,8 +713,9 @@ ctx.globalCompositeOperation="lighter";
 
 				
 		js.get_exp1(create_proxy(exp_py.elements))
+		document.getElementById("print-tree").innerHTML=""
 		for x1 in exp_py.elements:
-		  document.getElementById("print-tree").innerHTML+=str(x1[0])+str(type(x1[0]))
+		  document.getElementById("print-tree").innerHTML+=str(type(x1[0]))
 
 		
 
