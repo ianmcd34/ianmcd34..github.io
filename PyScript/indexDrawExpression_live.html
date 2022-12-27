@@ -358,7 +358,7 @@ function createPosns() {
   incomplete=true;
   while (incomplete && p!=999) {
     
-	  
+    alert(posns.map(indexEl)+" includes "+p+" : "+posns.map(indexEl).includes(parseInt(p)));
     if (!(posns.map(indexEl).includes(parseInt(p)))) {posns.push([p,x,y]); alert(posns);}
     
 
