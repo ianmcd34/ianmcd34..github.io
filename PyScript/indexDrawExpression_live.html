@@ -340,7 +340,7 @@ function trimSelectedNodes() {
 }
 
 function createPosns() {
-  alert(exp);
+
   function indexEl(arr) {
       return parseInt(arr[0]);
   }
@@ -358,7 +358,7 @@ function createPosns() {
   incomplete=true;
   while (incomplete && p!=999) {
     
-    alert(posns.map(indexEl)+" includes "+p+" : "+posns.map(indexEl).includes(parseInt(p)));
+    
     if (!(posns.map(indexEl).includes(parseInt(p)))) {posns.push([p,x,y]); alert(posns);}
     
 
@@ -367,7 +367,7 @@ function createPosns() {
     for (e1 in exp) {
       if (!(posns.map(indexEl).includes(parseInt(e1[0])))) {incomplete=true;}
     }
-    if (p==-5) {alert("-5trace incomplete"+incomplete);}
+
    
     p_left=exp[find_pointer(p)][2];
     p_right=exp[find_pointer(p)][3];
@@ -394,10 +394,9 @@ function createPosns() {
     }
 	  
 
-    if (p==-5) {alert("-5trace1");}
-    if (p==-6) {alert("-6trace1");}
 
-    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {if (p==-5) {alert("trace2");} if (p==-6) {alert("-6trace2");}
+
+    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {
       for (i in posns) {
         if (posns[i][1] < p_x && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff-xdiff/2;
@@ -417,7 +416,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {if (p==-5) {alert("trace3");}if (p==-6) {alert("-6trace3");}
+    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
@@ -430,7 +429,7 @@ function createPosns() {
       if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
       y=p_y;
     }
-    else if (p_left!=undefined && (posns.map(indexEl).includes(parseInt(p_left))) && !(posns.map(indexEl).includes(parseInt(p_right)))) {if (p==-5) {alert("trace4");}if (p==-6) {alert("-6trace4");}
+    else if (p_left!=undefined && (posns.map(indexEl).includes(parseInt(p_left))) && !(posns.map(indexEl).includes(parseInt(p_right)))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
 		if (posns[i][1] > p_x && posns[i][0] < 998) {
@@ -465,14 +464,10 @@ function createPosns() {
 	      y=p_y;
 	    }
     }
-    else {if (p==-5) {alert("trace5");}
-	  if (p==-6) {alert("-6trace5");}
+    else {
 
       p=find_parent(p);
       if (p!=999) {
-	alert("line469 p="+p);
-	alert("indexEl="+posns.map(indexEl));
-	alert("index(p)="+posns.map(indexEl).indexOf(parseInt(p)));
         x=posns[posns.map(indexEl).indexOf(parseInt(p))][1];
         y=posns[posns.map(indexEl).indexOf(parseInt(p))][2];
       }
