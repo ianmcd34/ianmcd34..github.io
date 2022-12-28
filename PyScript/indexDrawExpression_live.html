@@ -159,10 +159,10 @@ function selectNodes(item,index) {
 	for (x1 in selectedNodes) {
 		if (selectedNodes[x1]<998) {
 			p=selectedNodes[x1];
-			parents.push([p]);
+			parents.push([parseInt(p)]);
 			while(find_parent(p)<998) {
 				p=find_parent(p);
-				parents[parents.length-1].push(p);
+				parents[parents.length-1].push(parseInt(p));
 			}
 		}
 	}
@@ -268,8 +268,8 @@ function trimSelectedNodes() {
 	  newSelectedPosns=[];
 	  for (x1 in selectedNodes) {
 	    if (!toRemove.includes(x1)) {
-		newSelectedNodes.push(selectedNodes[x1]);
-		newSelectedPosns.push(selectedPosns[x1]);
+		newSelectedNodes.push(parseInt(selectedNodes[x1]));
+		newSelectedPosns.push(parseInt(selectedPosns[x1]));
 	    }
 	  }
 
@@ -298,7 +298,7 @@ function trimSelectedNodes() {
 			p=selectedNodes[x1];
 			while (find_parent(p) < 998 && p!=selectedtop) {
 				p=find_parent(p);
-				if (exp[find_pointer(p)][1]=='*' && !selectedNodes.includes(p)) {incompleteunit=true;}
+				if (exp[find_pointer(p)][1]=='*' && !selectedNodes.includes(parseInt(p))) {incompleteunit=true;}
 			}
 		}
 	}
@@ -309,7 +309,7 @@ function trimSelectedNodes() {
 	while (!retry && !finished && leafcount > 1 && incompleteunit) {
 		
 
-		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
+		if (!selectedNodes.includes(parseInt(p)) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
 		} else if (exp[find_pointer(p)][2]!=undefined) {
 			p=exp[find_pointer(p)][2];
