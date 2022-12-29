@@ -253,7 +253,8 @@ function trimSelectedNodes() {
 		 if (!selectedNodes.includes(p) ) {include=false; alert("not included because child node not selected");}
 
 		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2]; alert("going left");}
-		 else if (parseInt(exp[find_pointer(find_parent(p))][2])==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
+		 else if (parseInt(exp[find_pointer(find_parent(p))][2])==p && (selectedNodes.includes(parseInt(find_parent(p))) || selectedNodes.includes(find_parent(p).toString())) 
+			  {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
 		 else {
 		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p); alert("going up");}
 		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going rightA");}
