@@ -241,21 +241,22 @@ function trimSelectedNodes() {
 	  for (x1 in selectedNodes) {
 
 	    y=selectedNodes[x1];
-
+	    
 	    include=true;
 	    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
+		    
 	       var p=parseInt(exp[find_pointer(y)][2]);
-
+	       alert("consider "+exp[find_pointer(y)]);
 	       while(include && p!=y && find_parent(p)!=999) {
 
-		 if (!selectedNodes.includes(p) ) {include=false;}
+		 if (!selectedNodes.includes(p) ) {include=false; alert("not included because left node not selected");}
 
-		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2];}
-		 else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
+		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2]; alert("going left");}
+		 else if (exp[find_pointer(find_parent(p))][2]==p && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
 		 else {
-		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p);}
-		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3];}
-		  else if (p!=y && find_parent(p)!=999) {p=find_parent(p);}
+		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p); alert("going up");}
+		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going rightA");}
+		  else if (p!=y && find_parent(p)!=999) {p=find_parent(p); alert("going upA");}
 		 }
 	       }
 	    }
