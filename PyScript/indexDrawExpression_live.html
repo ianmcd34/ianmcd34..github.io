@@ -171,14 +171,14 @@ function selectNodes(item,index) {
 
 		return value.includes(parseInt(selectedtop));
 	}
-	alert(parents);
+	
 	n=1;
 	if (parents.length>0) {
 
 		while (n < parents[0].length) {
 			n=n+1;
 			selectedtop=parents[0][parents[0].length-n];
-			alert("st="+selectedtop+"parents.every(containsSelectedtop)="+parents.every(containsSelectedtop));
+			
 			if (!parents.every(containsSelectedtop)) {
 				selectedtop=parents[0][parents[0].length-n+1];
 				n=parents[0].length+1;
@@ -290,7 +290,7 @@ function trimSelectedNodes() {
 	retry=false;
 	finished=false;
 	selectedtop=findtops()[0];
-	alert(selectedtop);
+	
 	exptop=findtops()[1];
 	incompleteunit=false;
 	for (x1 in selectedNodes) {
