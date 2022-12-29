@@ -43,6 +43,7 @@
 	  
     <script type="text/javascript">
 
+ 
 
 
 function MouseDown(event) {
@@ -139,7 +140,7 @@ function selectNodes(item,index) {
 
   if(Math.min(startx, mousex)<item[1] && Math.min(starty, mousey)<item[2] && Math.max(startx, mousex)>item[1] && Math.max(starty, mousey)>item[2]) {
 
-      selectedNodes.push(item[0]);
+      selectedNodes.push(parseInt(item[0]));
       selectedPosns.push(index);
       highlightNode(index);
     }
@@ -148,7 +149,7 @@ function selectNodes(item,index) {
 
     function findtops() {
 
-	var p=exp[0][0];
+	var p=parseInt(exp[0][0]);
 	while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
 	  p=find_parent(p);
 	}
@@ -177,10 +178,10 @@ function selectNodes(item,index) {
 
 		while (n < parents[0].length) {
 			n=n+1;
-			selectedtop=parents[0][parents[0].length-n];
+			selectedtop=parseInt(parents[0][parents[0].length-n]);
 			
 			if (!parents.every(containsSelectedtop)) {
-				selectedtop=parents[0][parents[0].length-n+1];
+				selectedtop=parseInt(parents[0][parents[0].length-n+1]);
 				n=parents[0].length+1;
 			}
 		}
@@ -196,7 +197,7 @@ function find_parent(index) {
   p_prime=999;
   for (x in exp) {
     if (exp[x][2]!=undefined && exp[x][3]!=undefined) {
-    	if(exp[x][2]==index || exp[x][3]==index) {p_prime=exp[x][0];}
+    	if(exp[x][2]==index || exp[x][3]==index) {p_prime=parseInt(exp[x][0]);}
     }
   }
   return p_prime;
@@ -248,18 +249,17 @@ function trimSelectedNodes() {
 	       var p=parseInt(exp[find_pointer(y)][2]);
 	       alert("consider "+exp[find_pointer(y)]);
 	       while(include && p!=y && find_parent(p)!=999) {
-		 if (exp[find_pointer(y)][1]=='*') {alert("p="+p+" ==exp[find_pointer(find_parent(p))][2]="+exp[find_pointer(find_parent(p))][2]+"?");
-						    alert("parseInt(find_parent(p))="+parseInt(find_parent(p))+" selectedNodes="+selectedNodes);}
-		 if (!selectedNodes.includes(p) ) {include=false; alert("not included because child node not selected");}
+            if (exp[find_pointer(y)][1]=='*') {alert("p="+p+" ==exp[find_pointer(find_parent(p))][2]="+exp[find_pointer(find_parent(p))][2]+"?");
+                                alert("parseInt(find_parent(p))="+parseInt(find_parent(p))+" selectedNodes="+selectedNodes);}
+            if (!selectedNodes.includes(p) ) {include=false; alert("not included because child node not selected");}
 
-		 else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2]; alert("going left");}
-		 else if (parseInt(exp[find_pointer(find_parent(p))][2])==p && (selectedNodes.includes(parseInt(find_parent(p))) 
-				|| selectedNodes.includes(find_parent(p).toString())))  {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
-		 else {
-		  while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p); alert("going up");}
-		  if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going rightA");}
-		  else if (p!=y && find_parent(p)!=999) {p=find_parent(p); alert("going upA");}
-		 }
+            else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2]; alert("going left");}
+            else if (parseInt(exp[find_pointer(find_parent(p))][2])==p && selectedNodes.includes(find_parent(p) ))  {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
+            else {
+            while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p); alert("going up");}
+            if (p!=y && find_parent(p)!=999 && p!=exp[find_pointer(find_parent(p))][3] && selectedNodes.includes(find_parent(p))) {p=exp[find_pointer(find_parent(p))][3]; alert("going rightA");}
+            else if (p!=y && find_parent(p)!=999) {p=find_parent(p); alert("going upA");}
+            }
 	       }
 	    }
 	    if (!include) {
@@ -301,7 +301,7 @@ function trimSelectedNodes() {
 			p=selectedNodes[x1];
 			while (find_parent(p) < 998 && p!=selectedtop) {
 				p=find_parent(p);
-				if (exp[find_pointer(p)][1]=='*' && !selectedNodes.includes(parseInt(p))) {incompleteunit=true;}
+				if (exp[find_pointer(p)][1]=='*' && !selectedNodes.includes(p)) {incompleteunit=true;}
 			}
 		}
 	}
@@ -312,16 +312,16 @@ function trimSelectedNodes() {
 	while (!retry && !finished && leafcount > 1 && incompleteunit) {
 		
 
-		if (!selectedNodes.includes(parseInt(p)) && exp[find_pointer(p)][1]=='+') {
+		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
 		} else if (exp[find_pointer(p)][2]!=undefined) {
-			p=exp[find_pointer(p)][2];
+			p=parseInt(exp[find_pointer(p)][2]);
 		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][2]==p) {
-			p=exp[find_pointer(find_parent(p))][3];
-		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][3]==p) {
+			p=parseInt(exp[find_pointer(find_parent(p))][3]);
+		} else if (exp[find_pointer(p)][2]==undefined && parseInt(exp[find_pointer(find_parent(p))][3])==p) {
 			while (find_parent(p)!=selectedtop && find_parent(p)!=999 && find_parent(p)!=exptop) {p=find_parent(p);}
-			if (exp[find_pointer(find_parent(p))][3]==p) {finished=true;}
-			else {p=exp[find_pointer(find_parent(p))][3];}
+			if (parseInt(exp[find_pointer(find_parent(p))][3])==p) {finished=true;}
+			else {p=parseInt(exp[find_pointer(find_parent(p))][3]);}
 		}
 	}
 	if (retry) {
@@ -351,10 +351,10 @@ function createPosns() {
   }
 	
   posns=[];
-  var p=exp[0][0];
+  var p=parseInt(exp[0][0]);
  
   while (find_parent(p)!=999) {
-    p=find_parent(p);
+    p=parseInt(find_parent(p));
   }
   p_top=p;
   x=cx;
@@ -364,7 +364,7 @@ function createPosns() {
   while (incomplete && p!=999) {
     
     
-    if (!(posns.map(indexEl).includes(parseInt(p)))) {posns.push([p,x,y]); }
+    if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); }
     
 
 
@@ -374,14 +374,14 @@ function createPosns() {
     }
 
    
-    p_left=exp[find_pointer(p)][2];
-    p_right=exp[find_pointer(p)][3];
+    p_left=parseInt(exp[find_pointer(p)][2]);
+    p_right=parseInt(exp[find_pointer(p)][3]);
     p_x=x;
     p_y=y;
 	
     
 
-    if (!(posns.map(indexEl).includes(parseInt(p_left))) && p_left!=undefined) {
+    if (!(posns.map(indexEl).includes(p_left)) && p_left!=undefined) {
 	    if ((Number.parseInt(exp[find_pointer(p_left)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p_left)][1])>=10 ) {
 		    xdiff=70;
 	    } else {
@@ -401,7 +401,7 @@ function createPosns() {
 
 
 
-    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {
+    if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1] < p_x && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff-xdiff/2;
@@ -421,7 +421,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(parseInt(p_left))) ) {
+    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
@@ -434,7 +434,7 @@ function createPosns() {
       if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
       y=p_y;
     }
-    else if (p_left!=undefined && (posns.map(indexEl).includes(parseInt(p_left))) && !(posns.map(indexEl).includes(parseInt(p_right)))) {
+    else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
 		if (posns[i][1] > p_x && posns[i][0] < 998) {
@@ -471,10 +471,10 @@ function createPosns() {
     }
     else {
 
-      p=find_parent(p);
+      p=parseInt(find_parent(p));
       if (p!=999) {
-        x=posns[posns.map(indexEl).indexOf(parseInt(p))][1];
-        y=posns[posns.map(indexEl).indexOf(parseInt(p))][2];
+        x=posns[posns.map(indexEl).indexOf(p)][1];
+        y=posns[posns.map(indexEl).indexOf(p)][2];
       }
 
     }
@@ -509,6 +509,9 @@ function drawExpression() {
   
 }
 	    
+
+
+
 
 
 var canvas = document.getElementById("myCanvas");
