@@ -244,7 +244,7 @@ function trimSelectedNodes() {
 
 	    include=true;
 	    if(y!=999 && y!=998 && (exp[find_pointer(y)][1]=='*' || exp[find_pointer(y)][1]=='+' || exp[find_pointer(y)][1]=='/')) {
-	       var p=exp[find_pointer(y)][2];
+	       var p=parseInt(exp[find_pointer(y)][2]);
 
 	       while(include && p!=y && find_parent(p)!=999) {
 
