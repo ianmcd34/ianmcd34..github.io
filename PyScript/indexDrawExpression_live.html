@@ -424,7 +424,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (p_left!=undefined && p_left!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
+    else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
@@ -437,7 +437,7 @@ function createPosns() {
       if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
       y=p_y;
     }
-    else if (p_left!=undefined && p_left!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
+    else if (p_left!=undefined && p_left.toString()!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
 		if (posns[i][1] > p_x && posns[i][0] < 998) {
