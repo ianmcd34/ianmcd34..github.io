@@ -198,7 +198,7 @@ function selectNodes(item,index) {
 function find_parent(index) {
   p_prime=999;
   for (x in exp) {
-    if (exp[x][2]!=undefined && exp[x][3]!=undefined) {
+    if (exp[x][2]!=undefined && exp[x][3]!=undefined && exp[x][2].toString()!="NaN" && exp[x][3].toString()!="NaN") {
     	if(exp[x][2]==index || exp[x][3]==index) {p_prime=parseInt(exp[x][0]);}
     }
   }
@@ -211,7 +211,7 @@ function find_operators() {
     operators1="";
     var p=0;
     for (let index=selectedNodes.length-1; index>-1;index--) {
-	if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
+	if (selectedNodes[index] < 998 && (exp[find_pointer(selectedNodes[index])][2] == undefined || exp[find_pointer(selectedNodes[index])][2].toString()=="NaN") ) {
 		p=selectedNodes[index];
 
 		while (find_parent(p) < 998  && p!=findtops()[0] ) {
@@ -256,7 +256,7 @@ function trimSelectedNodes() {
                                 alert("parseInt(find_parent(p))="+parseInt(find_parent(p))+" selectedNodes="+selectedNodes);}
             if (!selectedNodes.includes(p) ) {include=false; alert("not included because child node not selected");}
 
-            else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined) {p=exp[find_pointer(p)][2]; alert("going left");}
+            else if (selectedNodes.includes(p) && exp[find_pointer(p)][2]!=undefined && exp[find_pointer(p)][2].toString()!="NaN") {p=exp[find_pointer(p)][2]; alert("going left");}
             else if (parseInt(exp[find_pointer(find_parent(p))][2])==p && selectedNodes.includes(find_parent(p) ))  {p=exp[find_pointer(find_parent(p))][3]; alert("going right");}
             else {
             while (find_parent(p)!=999 && exp[find_pointer(find_parent(p))][2]!=p && p!=y) {p=find_parent(p); alert("going up");}
@@ -285,7 +285,7 @@ function trimSelectedNodes() {
    //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
 	function countleafs(item) {
 		if (item<998) {
-			if (exp[find_pointer(item)][2]==undefined) {
+			if (exp[find_pointer(item)][2]==undefined || exp[find_pointer(item)][2].toString()=="NaN") {
 				leafcount++;
 			}
 		}
@@ -317,11 +317,11 @@ function trimSelectedNodes() {
 
 		if (!selectedNodes.includes(p) && exp[find_pointer(p)][1]=='+') {
 			retry=true;
-		} else if (exp[find_pointer(p)][2]!=undefined) {
+		} else if (exp[find_pointer(p)][2]!=undefined && exp[find_pointer(p)][2].toString()!="NaN") {
 			p=parseInt(exp[find_pointer(p)][2]);
-		} else if (exp[find_pointer(p)][2]==undefined && exp[find_pointer(find_parent(p))][2]==p) {
+		} else if ((exp[find_pointer(p)][2]==undefined || exp[find_pointer(p)][2].toString()=="NaN") && exp[find_pointer(find_parent(p))][2]==p) {
 			p=parseInt(exp[find_pointer(find_parent(p))][3]);
-		} else if (exp[find_pointer(p)][2]==undefined && parseInt(exp[find_pointer(find_parent(p))][3])==p) {
+		} else if ((exp[find_pointer(p)][2]==undefined || exp[find_pointer(p)][2].toString()=="NaN") && parseInt(exp[find_pointer(find_parent(p))][3])==p) {
 			while (find_parent(p)!=selectedtop && find_parent(p)!=999 && find_parent(p)!=exptop) {p=find_parent(p);}
 			if (parseInt(exp[find_pointer(find_parent(p))][3])==p) {finished=true;}
 			else {p=parseInt(exp[find_pointer(find_parent(p))][3]);}
@@ -333,7 +333,7 @@ function trimSelectedNodes() {
 		n=selectedNodes.length-1;
 		while(!removed && n >= 0) {
 			if (selectedNodes[n] < 998) {
-				if (exp[find_pointer(selectedNodes[n])][2] == undefined) {
+				if (exp[find_pointer(selectedNodes[n])][2] == undefined || exp[find_pointer(selectedNodes[n])][2].toString() == "NaN") {
 					selectedNodes.splice(n,1);
 					selectedPosns.splice(n,1);
 					removed = true;
@@ -424,7 +424,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (p_left!=undefined &&  !(posns.map(indexEl).includes(p_left)) ) {
+    else if (p_left!=undefined && p_left!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
@@ -437,7 +437,7 @@ function createPosns() {
       if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
       y=p_y;
     }
-    else if (p_left!=undefined && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
+    else if (p_left!=undefined && p_left!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
 		if (posns[i][1] > p_x && posns[i][0] < 998) {
