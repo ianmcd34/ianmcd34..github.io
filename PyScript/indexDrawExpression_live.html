@@ -650,7 +650,7 @@ ctx.globalCompositeOperation="lighter";
 		global exp_py
 		types=""
 		for x1 in exp_py.elements:
-			if x1[0]==0:
+			if type(x1[0])==str:
 				types+='Y'
 			else:
 				types+='N'
