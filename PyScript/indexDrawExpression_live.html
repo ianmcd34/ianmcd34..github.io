@@ -649,8 +649,7 @@ ctx.globalCompositeOperation="lighter";
 	def show_expression(event):
 		global exp_py
 		types=""
-		for x1 in exp_py.elements:
-			types+=str(type(x1[0]))
+		types+=str(type(exp_py.elements[0][0]))
 		document.getElementById("print-tree").innerHTML="button click"+types
 		#document.getElementById("print-tree").innerHTML=exp_py.print_tree('r') 
 	
