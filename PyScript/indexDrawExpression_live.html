@@ -651,9 +651,11 @@ ctx.globalCompositeOperation="lighter";
 		types=""
 		for x1 in exp_py.elements:
 			if type(x1[0])==str:
-				types+='Y'
+				types+='S'
+			elif type(x1[0])==int:
+				types+='I'
 			else:
-				types+='N'
+				types+='X'
 		document.getElementById("print-tree").innerHTML=types
 		#document.getElementById("print-tree").innerHTML=exp_py.print_tree('r') 
 	
