@@ -647,6 +647,7 @@ ctx.globalCompositeOperation="lighter";
 		
 		
 	def show_expression(event):
+		global exp_py
 		types=""
 		for x1 in exp_py.elements:
 			types+=str(type(x1[0]))
@@ -657,6 +658,7 @@ ctx.globalCompositeOperation="lighter";
 	def add_exp(event):
 		global numpart
 		global strpart
+		global exp_py
 		parseFactor()
 		document.getElementById("factor-input").value=str(numpart)+","+strpart
 		tops=js.findtops()
