@@ -567,6 +567,9 @@ ctx.globalCompositeOperation="lighter";
 		  arrayend=objString.indexOf("]]");
 		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
 		  eval("exp1=[" + objString + "]");
+		  for (x1 in exp1) {
+			  x1[0]=parseInt(x1[0]);
+		  }
 		  draw_exp1();
 		}
 	    
