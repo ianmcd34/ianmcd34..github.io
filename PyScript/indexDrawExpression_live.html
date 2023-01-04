@@ -735,7 +735,8 @@ ctx.globalCompositeOperation="lighter";
 				oldtree=exp_py
 				exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
 
-				
+		for x1 in exp_py.elements:
+			x1[0]=int(x1[0])
 		js.get_exp1(create_proxy(exp_py.elements))
 		#document.getElementById("print-tree").innerHTML=""
 
