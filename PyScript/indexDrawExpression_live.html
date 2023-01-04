@@ -23,8 +23,7 @@
     <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
 	    <p><button type="button" id="new-expression-btn">New Expression</button></p>
 	    <p></br></p>
-	    <button type="button" id="add-btn">Add</button></br>
-	    <button type="button" id="subtract-btn">Subtract</button></br>
+	    <button type="button" id="add-btn">Add/Subtract</button></br>
 	    <button type="button" id="multiply-btn">Multiply</button></br>
 	    <button type="button" id="divide-btn">Divide</button></br>
             <p></br></p>
@@ -678,8 +677,12 @@ ctx.globalCompositeOperation="lighter";
 		if selectedtop==exptop or selectedtop==999:
 			if numpart>0:
 				exp_py.add_branch('+',str(numpart))
-			while len(strpart)>0:
-				exp_py.add_branch('+',strpart[0])
+			elif numpart<0:
+				exp_py.add_branch('-',str(numpart))
+			elif strpart[0]=='-':
+				exp_py.add_branch('-', '1')
+			while len(strpart)>0
+				exp_py.add_branch('*',strpart[0])
 				strpart=strpart[1:]
 		else:
 			leafnode=js.find_leaf()
@@ -689,6 +692,10 @@ ctx.globalCompositeOperation="lighter";
 
 			if numpart>0:
 				exp_insert.add_branch('+',str(numpart))
+			elif numpart<0:
+				exp_insert.add_branch('-',str(numpart))
+			elif strpart[0]=='-':
+				exp_py.add_branch('-', '1')
 			while len(strpart)>0:
 				exp_insert.add_branch('*',strpart[0])
 				strpart=strpart[1:]
