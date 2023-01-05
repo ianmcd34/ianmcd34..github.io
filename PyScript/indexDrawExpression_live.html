@@ -422,7 +422,7 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
-    else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&  !(posns.map(indexEl).includes(p)) {
+    else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&  !(posns.map(indexEl).includes(p))) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
