@@ -363,6 +363,11 @@ function createPosns() {
 
   incomplete=true;
   while (incomplete && p!=999) {
+	  
+    p_left=parseInt(exp[find_pointer(p)][2]);
+    p_right=parseInt(exp[find_pointer(p)][3]);
+    p_x=x;
+    p_y=y;
     
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&
 	     !(posns.map(indexEl).includes(p))) {alert("-1* found A");
@@ -411,10 +416,7 @@ function createPosns() {
     }
 
    
-    p_left=parseInt(exp[find_pointer(p)][2]);
-    p_right=parseInt(exp[find_pointer(p)][3]);
-    p_x=x;
-    p_y=y;
+   
 	
 
 
