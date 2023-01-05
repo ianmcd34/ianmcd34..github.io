@@ -422,6 +422,22 @@ function createPosns() {
       x=p_x-xdiff;
       y=p_y;
     }
+    else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&  !(posns.map(indexEl).includes(p)) {
+      for (i in posns) {
+        if (posns[i][1]<p_x  && posns[i][0] < 998) {
+          posns[i][1]=posns[i][1]-xdiff;
+        } else if (posns[i][1] < p_x)  {
+	  posns[i][1]=posns[i][1]-xdiff;
+	}
+      }
+      x=p_x-xdiff;
+      y=p_y;
+      posns.push([p, 50, 50]);
+      posns.push([p_left, 50, 50]);
+      posns.push([1000, x, y]);
+      x=p_x-xdiff;
+      p=p_right;
+    }
     else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
@@ -501,6 +517,9 @@ function drawExpression() {
     }
     else if (node==998) {
       text=")";
+    }
+    else if (node==1000) {
+      text="-";
     }
     else {
       text=exp[find_pointer(node)][1];
