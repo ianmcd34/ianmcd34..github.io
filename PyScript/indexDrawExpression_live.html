@@ -384,10 +384,10 @@ function createPosns() {
       posns.push([p_left, 50, 50]);
       posns.push([exp[find_pointer(exp[find_pointer(p_left)][2])][0], 50, 50]);
       posns.push([1000, x, y]);
-      x=p_x-xdiff;
+      p_x=x;
       p=p_left;
-      p_left=parseInt(exp[find_pointer(p)][2]);
-      p_right=parseInt(exp[find_pointer(p)][3]);
+      //p_left=parseInt(exp[find_pointer(p)][2]);
+      //p_right=parseInt(exp[find_pointer(p)][3]);
     }
     else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=="*" && exp[find_pointer(exp[find_pointer(p_right)][2])][1]=="-1" 
 	      && !(posns.map(indexEl).includes(p))) {alert("-1* found B");
@@ -404,10 +404,10 @@ function createPosns() {
       posns.push([p_right, 50, 50]);
       posns.push([exp[find_pointer(exp[find_pointer(p_right)][2])][0], 50, 50]);
       posns.push([1000, x, y]);
-      x=p_x-xdiff;
+      p_x=x;
       p=p_right;
-      p_left=parseInt(exp[find_pointer(p)][2]);
-      p_right=parseInt(exp[find_pointer(p)][3]);
+      //p_left=parseInt(exp[find_pointer(p)][2]);
+      //p_right=parseInt(exp[find_pointer(p)][3]);
     }
 	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); }
