@@ -388,7 +388,7 @@ function createPosns() {
       p=p_left;
     }
     else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=="*" && exp[find_pointer(exp[find_pointer(p_right)][2])][1]=="-1" 
-	     && posns.map(indexEl).includes(p_left) && !(posns.map(indexEl).includes(p))) {alert("-1* found B");
+	      && !(posns.map(indexEl).includes(p))) {alert("-1* found B");
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]+xdiff;
