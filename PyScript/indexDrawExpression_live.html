@@ -406,8 +406,8 @@ function createPosns() {
       posns.push([1000, x, y]);
       p_x=x;
       p=p_right;
-      //p_left=parseInt(exp[find_pointer(p)][2]);
-      //p_right=parseInt(exp[find_pointer(p)][3]);
+      p_left=parseInt(exp[find_pointer(p)][2]);
+      p_right=parseInt(exp[find_pointer(p)][3]);
     }
 	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); }
