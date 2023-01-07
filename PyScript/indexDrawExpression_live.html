@@ -440,10 +440,7 @@ function createPosns() {
     else {
 	    xdiff=35;
     }
-    if (p==6) {  
-	    alert("p="+p+" operator="+exp[find_pointer(p)][1]+" p_right operator="+exp[find_pointer(p_right)][1]+
-		  " p_right left multiplicand="+exp[find_pointer(exp[find_pointer(p_right)][2])][1]+" and p included "+posns.map(indexEl).includes(p));
-    }
+ 
 
 
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
@@ -517,7 +514,7 @@ function createPosns() {
     else {
 
       p=parseInt(find_parent(p));
-      if (p!=999 && posns[posns.map(indexEl).indexOf(p)][2]!=50) {
+      if (p!=999 && posns[posns.map(indexEl).indexOf(p)][2]==p_y) {
         x=posns[posns.map(indexEl).indexOf(p)][1];
         y=posns[posns.map(indexEl).indexOf(p)][2];
       }
