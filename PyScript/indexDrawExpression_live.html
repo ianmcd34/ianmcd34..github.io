@@ -373,9 +373,9 @@ function createPosns() {
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&
 	     !(posns.map(indexEl).includes(p))) {alert("-1* found A");
       for (i in posns) {
-        if (posns[i][1]<p_x  && posns[i][0] < 998 && posns[i][1] > 50) {
+        if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
-        } else if (posns[i][1] < p_x && posns[i][1] > 50)  {
+        } else if (posns[i][1] < p_x )  {
 	  posns[i][1]=posns[i][1]-xdiff;
 	}
       }
@@ -390,9 +390,9 @@ function createPosns() {
     else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=="*" && exp[find_pointer(exp[find_pointer(p_right)][2])][1]=="-1" 
 	      && !(posns.map(indexEl).includes(p))) {alert("-1* found B");
       for (i in posns) {
-        if (posns[i][1]<p_x  && posns[i][0] < 998 && posns[i][1] > 50) {
+        if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
           posns[i][1]=posns[i][1]+xdiff;
-        } else if (posns[i][1] < p_x && posns[i][1] > 50)  {
+        } else if (posns[i][1] < p_x )  {
 	  posns[i][1]=posns[i][1]+xdiff;
 	}
       }
@@ -459,12 +459,14 @@ function createPosns() {
       y=p_y;
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
-      for (i in posns) {
-        if (posns[i][1]<p_x  && posns[i][0] < 998) {
-          posns[i][1]=posns[i][1]-xdiff;
-        } else if (posns[i][1] < p_x)  {
-	  posns[i][1]=posns[i][1]-xdiff;
-	}
+      if (!dontDraw.includes(p_left)) {
+	      for (i in posns) {
+		if (posns[i][1]<p_x  && posns[i][0] < 998) {
+		  posns[i][1]=posns[i][1]-xdiff;
+		} else if (posns[i][1] < p_x)  {
+		  posns[i][1]=posns[i][1]-xdiff;
+		}
+	      }
       }
       p=p_left;
       x=p_x-xdiff;
@@ -492,13 +494,15 @@ function createPosns() {
 	      x=p_x+xdiff;
 	      y=p_y;
 	    }
-      else {
-	      for (i in posns) {
-		if (posns[i][1]>p_x && posns[i][0] < 998 ) {
-		  posns[i][1]=posns[i][1]+xdiff;
-		} else if (posns[i][1] > p_x ) {
-		  posns[i][1]=posns[i][1]+xdiff;
-		}
+      else { 
+	      if (!dontDraw.inludes(p_right)) {
+		      for (i in posns) {
+			if (posns[i][1]>p_x && posns[i][0] < 998 ) {
+			  posns[i][1]=posns[i][1]+xdiff;
+			} else if (posns[i][1] > p_x ) {
+			  posns[i][1]=posns[i][1]+xdiff;
+			}
+		      }
 	      }
 	      p=p_right;
 	      x=p_x+xdiff;
