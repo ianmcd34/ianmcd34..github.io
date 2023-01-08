@@ -352,6 +352,7 @@ function createPosns() {
   }
 	
   posns=[];
+  dontDraw=[];
   var p=parseInt(exp[0][0]);
  
   while (find_parent(p)!=999) {
@@ -380,14 +381,11 @@ function createPosns() {
       }
       x=p_x-xdiff;
       y=p_y;
-      posns.push([p, 50, 50]);
-      posns.push([p_left, 50, 50]);
-      posns.push([exp[find_pointer(exp[find_pointer(p_left)][2])][0], 50, 50]);
+      dontDraw.push(p);
+      dontDraw.push(p_left);
+      dontDraw.push(exp[find_pointer(exp[find_pointer(p_left)][2])][0]);
       posns.push([1000, x, y]);
       p_x=x;
-      p=p_left;
-      //p_left=parseInt(exp[find_pointer(p)][2]);
-      //p_right=parseInt(exp[find_pointer(p)][3]);
     }
     else if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=="*" && exp[find_pointer(exp[find_pointer(p_right)][2])][1]=="-1" 
 	      && !(posns.map(indexEl).includes(p))) {alert("-1* found B");
@@ -400,14 +398,11 @@ function createPosns() {
       }
       x=p_x+xdiff;
       y=p_y;
-      posns.push([p, 50, 50]);
-      posns.push([p_right, 50, 50]);
-      posns.push([exp[find_pointer(exp[find_pointer(p_right)][2])][0], 50, 50]);
+      dontDraw.push(p);
+      dontDraw.push(p_right);
+      dontDraw.push(exp[find_pointer(exp[find_pointer(p_right)][2])][0]);
       posns.push([1000, x, y]);
       p_x=x;
-      p=p_right;
-      p_left=parseInt(exp[find_pointer(p)][2]);
-      p_right=parseInt(exp[find_pointer(p)][3]);
     }
 	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); }
@@ -445,16 +440,16 @@ function createPosns() {
 
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
-        if (posns[i][1] < p_x && posns[i][0] < 998 && posns[i][1] > 50) {
+        if (posns[i][1] < p_x) {
           posns[i][1]=posns[i][1]-xdiff-xdiff/2;
-        } else if (posns[i][1] < p_x && posns[i][1] > 50) {
+        } else if (posns[i][1] < p_x) {
 	  posns[i][1]=posns[i][1]-xdiff-xdiff/2;
 	}
       }
       
       posns.push([999,p_x-xdiff-xdiff/2,y]);
       for (i in posns) {
-        if (posns[i][1] > p_x-xdiff && posns[i][1] > 50) {
+        if (posns[i][1] > p_x-xdiff) {
           posns[i][1]=posns[i][1]+xdiff/2;
         }
       }
@@ -465,9 +460,9 @@ function createPosns() {
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
-        if (posns[i][1]<p_x  && posns[i][0] < 998 && posns[i][1] > 50) {
+        if (posns[i][1]<p_x  && posns[i][0] < 998) {
           posns[i][1]=posns[i][1]-xdiff;
-        } else if (posns[i][1] < p_x && posns[i][1] > 50)  {
+        } else if (posns[i][1] < p_x)  {
 	  posns[i][1]=posns[i][1]-xdiff;
 	}
       }
@@ -479,16 +474,16 @@ function createPosns() {
     else if (p_left!=undefined && p_left.toString()!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
 	      for (i in posns) {
-		if (posns[i][1] > p_x && posns[i][0] < 998 && posns[i][1] > 50) {
+		if (posns[i][1] > p_x && posns[i][0] < 998) {
 		  posns[i][1]=posns[i][1]+xdiff+xdiff/2;
-		} else if (posns[i][1] > p_x && posns[i][1] > 50) {
+		} else if (posns[i][1] > p_x ) {
 		  posns[i][1]=posns[i][1]+xdiff+xdiff/2;
 		}
 	      }
 
 	      posns.push([998,p_x+xdiff+xdiff/3,y]);
 	      for (i in posns) {
-		if (posns[i][1] > p_x+xdiff && posns[i][1] > 50) {
+		if (posns[i][1] > p_x+xdiff) {
 		  posns[i][1]=posns[i][1]+xdiff/2;
 		}
 	      }
@@ -499,9 +494,9 @@ function createPosns() {
 	    }
       else {
 	      for (i in posns) {
-		if (posns[i][1]>p_x && posns[i][0] < 998 && posns[i][1] > 50) {
+		if (posns[i][1]>p_x && posns[i][0] < 998 ) {
 		  posns[i][1]=posns[i][1]+xdiff;
-		} else if (posns[i][1] > p_x && posns[i][1] > 50) {
+		} else if (posns[i][1] > p_x ) {
 		  posns[i][1]=posns[i][1]+xdiff;
 		}
 	      }
@@ -514,7 +509,7 @@ function createPosns() {
     else {
 
       p=parseInt(find_parent(p));
-      if (p!=999 && posns[posns.map(indexEl).indexOf(p)][2]==p_y) {
+      if (p!=999) {
         x=posns[posns.map(indexEl).indexOf(p)][1];
         y=posns[posns.map(indexEl).indexOf(p)][2];
       }
@@ -549,7 +544,9 @@ function drawExpression() {
     else {alert("node="+node);
       text=exp[find_pointer(node)][1];
     }
-    ctx.fillText(text,x, y, textWidth);
+    if (!dontDraw.includes(node)) {
+       ctx.fillText(text,x, y, textWidth);
+    }
   }
   
 }
