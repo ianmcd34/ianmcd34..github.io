@@ -469,8 +469,12 @@ function createPosns() {
 	      }
       }
       p=p_left;
-      x=p_x-xdiff;
-      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
+      if (!dontDraw.includes(p)) {
+	      x=p_x-xdiff;
+	      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
+      } else {
+      	      x=p_x;
+      }
       y=p_y;
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
