@@ -583,7 +583,9 @@ function drawExpression() {
     }
     if (!dontDraw.includes(node)) {
        //when + (-n) is indicated
-
+       if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_parent(node)][1]=='+' && dontDraw.includes(find_parent(node))) {
+	   text=(parseInt(text)*(-1)).toString();
+       }
        if (parseInt(node)==5) {alert(" x is "+x);}
        ctx.fillText(text,x, y, textWidth);
     }
