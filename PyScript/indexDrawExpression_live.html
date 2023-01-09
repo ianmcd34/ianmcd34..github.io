@@ -370,6 +370,7 @@ function createPosns() {
     p_x=x;
     p_y=y;
     
+    //when (-1)*... is indicated
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_left)][1]=="*" && exp[find_pointer(exp[find_pointer(p_left)][2])][1]=="-1" &&
 	     !(posns.map(indexEl).includes(p))) {
       for (i in posns) {
@@ -403,6 +404,23 @@ function createPosns() {
       dontDraw.push(exp[find_pointer(exp[find_pointer(p_right)][2])][0]);
       posns.push([1000, x, y]);
       p_x=x;
+    }
+    //when + (-n) is indicated
+    if (exp[find_pointer(p)][1]=="+" && parseInt(exp[find_pointer(p_right)][1])!="NaN" && parseInt(exp[find_pointer(p_right)][1])<0  
+	      && !(posns.map(indexEl).includes(p))) {
+      for (i in posns) {
+        if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
+          posns[i][1]=posns[i][1]+xdiff;
+        } else if (posns[i][1] < p_x )  {
+	  posns[i][1]=posns[i][1]+xdiff;
+	}
+      }
+      x=p_x+xdiff;
+      y=p_y;
+      dontDraw.push(p);
+      posns.push([1000, x, y]);
+      p_x=x;
+      
     }
 	  
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,x,y]); }
@@ -560,6 +578,10 @@ function drawExpression() {
       text=exp[find_pointer(node)][1];
     }
     if (!dontDraw.includes(node)) {
+       //when + (-n) is indicated
+       if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_parent(node)][1]=='+' && dontDraw.includes(find_parent(node)) {
+	   	text=(parseInt(text)*(-1)).toString();
+	   }
        ctx.fillText(text,x, y, textWidth);
     }
   }
