@@ -735,9 +735,9 @@ ctx.globalCompositeOperation="lighter";
 				exp_py.add_branch('+',str(numpart))
 			elif numpart<0:
 				exp_py.add_branch('+',str(numpart))
-			if strpart[0]=='-':
-				exp_py.add_branch('-', strpart[1])
-				strpart=strpart[2:]
+			#if strpart[0]=='-':
+				#exp_py.add_branch('-', strpart[1])
+				#strpart=strpart[2:]
 			while len(strpart)>0:
 				exp_py.add_branch('*',strpart[0])
 				strpart=strpart[1:]
