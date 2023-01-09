@@ -556,7 +556,7 @@ function createPosns() {
 
 function drawExpression() {
   alert("posns="+posns);
-  if (parseInt(node)==5) {alert(" x is "+x);}
+  
   alert("dontDRaw="+dontDraw);
   
   ctx.fillStyle = "black";
@@ -568,6 +568,7 @@ function drawExpression() {
     node=posn[0];
     x=parseInt(posn[1]);
     y=parseInt(posn[2]);
+    if (parseInt(node)==5) {alert(" x is "+x);}
     if (node==999) {
       text="(";
     }
