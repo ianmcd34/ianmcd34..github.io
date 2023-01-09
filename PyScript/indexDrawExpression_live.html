@@ -508,8 +508,8 @@ function createPosns() {
 	      x=p_x+xdiff;
 	      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x+xdiff/2;}
 	      y=p_y;
-	      if (p==5) {ctx.fillText("|",x, y, textWidth);alert("node=5"); }
-	      if (p==-2) {ctx.fillText("|",x, y, textWidth);alert("node=-2"); }
+	      if (parseInt(p)==5) {ctx.fillText("|",x, y, textWidth);alert("node=5"); }
+	      if (parseInt(p)==-2) {ctx.fillText("|",x, y, textWidth);alert("node=-2"); }
 	    }
     }
     else {
