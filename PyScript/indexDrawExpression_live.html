@@ -564,8 +564,8 @@ function drawExpression() {
   for (i in posns) {
     posn=posns[i];
     node=posn[0];
-    x=posn[1];
-    y=posn[2];
+    x=parseInt(posn[1]);
+    y=parseInt(posn[2]);
     if (node==999) {
       text="(";
     }
