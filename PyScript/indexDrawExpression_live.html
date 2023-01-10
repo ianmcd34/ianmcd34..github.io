@@ -364,7 +364,7 @@ function createPosns() {
 
   incomplete=true;
   while (incomplete && p!=999) {
-    alert("p="+p+" x="+x);	  
+    	  
 
     p_left=parseInt(exp[find_pointer(p)][2]);
     p_right=parseInt(exp[find_pointer(p)][3]);
@@ -555,9 +555,6 @@ function createPosns() {
 
 
 function drawExpression() {
-  alert("posns="+posns);
-  
-  alert("dontDRaw="+dontDraw);
   
   ctx.fillStyle = "black";
   ctx.globalAlpha=1;
@@ -568,7 +565,7 @@ function drawExpression() {
     node=posn[0];
     x1=parseInt(posn[1]);
     y1=parseInt(posn[2]);
-    if (parseInt(node)==5) {alert(" x is "+x1);}
+   
     if (node==999) {
       text="(";
     }
@@ -582,13 +579,11 @@ function drawExpression() {
       text=exp[find_pointer(node)][1];
     }
     if (!dontDraw.includes(node)) {
-       if (parseInt(node)==5) {alert("parseInt(text)="+parseInt(text)+" exp[find_pointer(find_parent(node))][1]="+exp[find_pointer(find_parent(node))][1]+" dontDraw="+dontDraw);}
+       
        //when + (-n) is indicated
        if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_pointer(find_parent(node))][1]=='+' && dontDraw.includes(find_parent(node))) {
-	   alert("hi");
 	   text=(parseInt(text)*(-1)).toString();
        }
-       if (parseInt(node)==5) {alert(" x is "+x1);}
        ctx.fillText(text,x1, y1, textWidth);
     }
   }
