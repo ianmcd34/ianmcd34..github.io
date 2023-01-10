@@ -393,9 +393,9 @@ function createPosns() {
 	      && !(posns.map(indexEl).includes(p))) {
       for (i in posns) {
         if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
-          posns[i][1]=posns[i][1]+xdiff;
+          posns[i][1]=posns[i][1]-xdiff;
         } else if (posns[i][1] < p_x )  {
-	  posns[i][1]=posns[i][1]+xdiff;
+	  posns[i][1]=posns[i][1]-xdiff;
 	}
       }
       x=p_x;
