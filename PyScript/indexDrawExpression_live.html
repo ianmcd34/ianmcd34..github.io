@@ -770,13 +770,16 @@ ctx.globalCompositeOperation="lighter";
 			minindex_py=int(exp_py.elements[:,0].min())
 			maxindex_py=int(exp_py.elements[:,0].min())
 			maxindex_insert=int(exp_insert.elements[:,0].max())
+			minindex_insert=int(exp_insert.elements[:,0].min())
 			for x1 in exp_insert.elements:
-					x1[0]=x1[0]+minindex_py+1
+					x1[0]=x1[0]+maxindex_py+1
 					if x1[2] is not None:
-						x1[2]=x1[2]+minindex_py+1
-						x1[3]=x1[3]+minindex_py+1
+						x1[2]=x1[2]+maxindex_py+1
+						x1[3]=x1[3]+maxindex_py+1
 			maxindex_insert=int(exp_insert.elements[:,0].max())
-			newleaf=[int(minindex_insert+1),'+', maxindex_py , maxindex_insert]
+			newleaf=[int(maxindex_insert+1),'+', maxindex_py , maxindex_insert]
+			oldtree=exp_py
+			exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
 	
 		else:
 			leafnode=js.find_leaf()
@@ -796,8 +799,7 @@ ctx.globalCompositeOperation="lighter";
 				strpart=strpart[1:]
 			minindex_py=int(exp_py.elements[:,0].min())
 			maxindex_insert=int(exp_insert.elements[:,0].max())
-			oldtree=exp_py
-			exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
+			
 			
 			
 			
