@@ -768,7 +768,7 @@ ctx.globalCompositeOperation="lighter";
 				exp_insert.add_branch('*',strpart[0])
 				strpart=strpart[1:]
 			minindex_py=int(exp_py.elements[:,0].min())
-			maxindex_py=int(exp_py.elements[:,0].min())
+			maxindex_py=int(exp_py.elements[:,0].max())
 			maxindex_insert=int(exp_insert.elements[:,0].max())
 			minindex_insert=int(exp_insert.elements[:,0].min())
 			document.getElementById("factor-input").value=str(maxindex_py)+","+str(maxindex_insert)
