@@ -784,7 +784,7 @@ ctx.globalCompositeOperation="lighter";
 			newleaf=np.array([[int(maxindex_insert+1),'+', int(maxindex_py) , int(maxindex_insert)]])
 			oldtree=exp_py
 			exp_py.elements=np.concatenate((oldtree.elements,newleaf ,exp_insert.elements), axis=0)
-			for x1 in exp_py:
+			for x1 in exp_py.elements:
 				x1[0]=int(x1[0])
 				x1[2]=int(x1[2])
 				x1[3]=int(x1[3])
