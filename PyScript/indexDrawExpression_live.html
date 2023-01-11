@@ -579,9 +579,10 @@ function drawExpression() {
       text=exp[find_pointer(node)][1];
     }
     if (!dontDraw.includes(node)) {
-       
+       alert("node="+node+" text="+text);
        //when + (-n) is indicated
        if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_pointer(find_parent(node))][1]=='+' && dontDraw.includes(find_parent(node))) {
+	   alert("negative value");
 	   text=(parseInt(text)*(-1)).toString();
        }
        ctx.fillText(text,x1, y1, textWidth);
@@ -778,7 +779,7 @@ ctx.globalCompositeOperation="lighter";
 						x1[2]=x1[2]+maxindex_py+1
 						x1[3]=x1[3]+maxindex_py+1
 			maxindex_insert=int(exp_insert.elements[:,0].max())
-			newleaf=[int(maxindex_insert+1),'+', maxindex_py , maxindex_insert]
+			newleaf=[int(maxindex_insert+1),'+', int(maxindex_py) , int(maxindex_insert)]
 			oldtree=exp_py
 			exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
 	
