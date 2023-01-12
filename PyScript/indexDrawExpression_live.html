@@ -585,7 +585,6 @@ function drawExpression() {
       text=exp[find_pointer(node)][1];
     }
     if (!dontDraw.includes(node)) {
-       }
        //when  (-n) is indicated and parentnode has been substituted for a '-'
        if (parseInt(text)!="NaN" && parseInt(text)<0  && dontDraw.includes(find_parent(node))) {
 	   text=(parseInt(text)*(-1)).toString();
