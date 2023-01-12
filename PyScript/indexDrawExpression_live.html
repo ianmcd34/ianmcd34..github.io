@@ -585,12 +585,9 @@ function drawExpression() {
       text=exp[find_pointer(node)][1];
     }
     if (!dontDraw.includes(node)) {
-       if (text=='-3') {
-         alert("parseInt(text)="+parseInt(text)+" exp[find_pointer(find_parent(node))][1]="+exp[find_pointer(find_parent(node))][1]+" dontDraw.includes(find_parent(node))="+dontDraw.includes(find_parent(node)));
        }
-       //when + (-n) is indicated
-       if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_pointer(find_parent(node))][1]=='+' && dontDraw.includes(find_parent(node))) {
-	   alert("negative value");
+       //when  (-n) is indicated and parentnode has been substituted for a '-'
+       if (parseInt(text)!="NaN" && parseInt(text)<0  && dontDraw.includes(find_parent(node))) {
 	   text=(parseInt(text)*(-1)).toString();
        }
        ctx.fillText(text,x1, y1, textWidth);
