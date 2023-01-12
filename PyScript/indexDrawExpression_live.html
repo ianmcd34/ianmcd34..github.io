@@ -385,7 +385,9 @@ function createPosns() {
       y=p_y;
       dontDraw.push(p);
       dontDraw.push(p_left);
-      dontDraw.push(exp[find_pointer(exp[find_pointer(p_left)][2])][0]);
+      if (exp[find_pointer(exp[find_pointer(p_left)][2])][1]=='-1') {
+         dontDraw.push(exp[find_pointer(exp[find_pointer(p_left)][2])][0]);
+      }
       posns.push([1000, x, y]);
       p_x=x;
     }
@@ -401,8 +403,10 @@ function createPosns() {
       x=p_x;
       y=p_y;
       dontDraw.push(p);
-      dontDraw.push(p_right);
-      dontDraw.push(exp[find_pointer(exp[find_pointer(p_right)][2])][0]);
+      dontDraw.push(p_right);    
+      if (exp[find_pointer(exp[find_pointer(p_right)][2])][1]=='-1') {
+         dontDraw.push(exp[find_pointer(exp[find_pointer(p_right)][2])][0]);
+      }
       posns.push([1000, x, y]);
       p_x=x;
     }
