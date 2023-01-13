@@ -465,6 +465,7 @@ function createPosns() {
       }
       posns.push([998, p_x-xdiff/3,p_y]);
       p=p_left;
+      alert("p="+p+" p_x="+p_x+" xdiff="+xdiff);
       x=p_x-xdiff;
       y=p_y;
       alert("p="+p+" p_x="+p_x);
@@ -480,6 +481,7 @@ function createPosns() {
 	      }
       }
       p=p_left;
+      alert("p="+p+" p_x="+p_x+" xdiff="+xdiff);
       if (!dontDraw.includes(p)) {
 	      x=p_x-xdiff;
 	      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x-xdiff/2;}
@@ -507,6 +509,7 @@ function createPosns() {
 	      }
 	      posns.push([999, p_x+xdiff/2,p_y]);
 	      p=p_right;
+	      alert("p="+p+" p_x="+p_x+" xdiff="+xdiff);
 	      x=p_x+xdiff;
 	      y=p_y;
 	      alert("p="+p+" p_x="+p_x);
@@ -522,6 +525,7 @@ function createPosns() {
 		      }
 	      }
 	      p=p_right;
+	      alert("p="+p+" p_x="+p_x+" xdiff="+xdiff);
 	      if (!dontDraw.includes(p)) {
 		      x=p_x+xdiff;
 		      if ((Number.parseInt(exp[find_pointer(p)][1])).toString()!="NaN" && Number.parseInt(exp[find_pointer(p)][1])>=10 ) {x=x+xdiff/2;}
