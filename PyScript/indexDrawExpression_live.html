@@ -387,9 +387,9 @@ function createPosns() {
 	      y=p_y;
 	      dontDraw.push(p);
 
-	      if (exp[find_pointer(exp[find_pointer(p_right)][2])][1]=='-1') {
-		 dontDraw.push(p_right);  
-		 dontDraw.push(exp[find_pointer(exp[find_pointer(p_right)][2])][0]);
+	      if (exp[find_pointer(exp[find_pointer(pp)][1]=='-1') {
+		 dontDraw.push(pp);  
+		 dontDraw.push(find_parent(pp));
 	      }
 	      posns.push([1000, x, y]);
 	      p_x=x;
