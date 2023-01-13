@@ -373,7 +373,7 @@ function createPosns() {
     p_y=y;
     
     //when (-n)*... is indicated
-    if (exp[find_pointer(p)][1]=="+") { 
+    if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=='*') { 
 	    pp=p_right;
 	    while (exp[find_pointer(pp)][1]=='*') {pp=exp[find_pointer(pp)][2];}
 	    if (parseInt(exp[find_pointer(pp)][1])!="NaN" && parseInt(exp[find_pointer(pp)][1])<0 && !(posns.map(indexEl).includes(p))) {
@@ -546,6 +546,7 @@ function createPosns() {
 
 
 function drawExpression() {
+  alert(posns);
   
   ctx.fillStyle = "black";
   ctx.globalAlpha=1;
