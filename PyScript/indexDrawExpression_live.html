@@ -467,6 +467,7 @@ function createPosns() {
       p=p_left;
       x=p_x-xdiff;
       y=p_y;
+      alert("p="+p+" p_x="+p_x);
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
       if (!dontDraw.includes(p_left)) {
@@ -486,6 +487,7 @@ function createPosns() {
       	      x=p_x;
       }
       y=p_y;
+      alert("p="+p+" p_x="+p_x);
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" && (posns.map(indexEl).includes(p_left)) && !(posns.map(indexEl).includes(p_right))) {
       if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_right)][1]=="+"  ) {
@@ -507,6 +509,7 @@ function createPosns() {
 	      p=p_right;
 	      x=p_x+xdiff;
 	      y=p_y;
+	      alert("p="+p+" p_x="+p_x);
 	    }
       else { 
 	      if (!dontDraw.includes(p_right)) {
@@ -526,7 +529,7 @@ function createPosns() {
 	      	      x=p_x;
 	      }
 	      y=p_y;
-
+	      alert("p="+p+" p_x="+p_x);
 	    }
     }
     else {
