@@ -589,6 +589,10 @@ function drawExpression() {
        if (parseInt(text)!="NaN" && parseInt(text)<0  && dontDraw.includes(find_parent(node))) {
 	   text=(parseInt(text)*(-1)).toString();
        }
+       //when (-n*) is indicated and grandparentnode has been substituted for a '-'
+       if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_pointer(find_parent(node))][1]=='*'  && find_parent(find_parent(node))<999 && dontDraw.includes(find_parent(find_parent(node)))) {
+	   text=(parseInt(text)*(-1)).toString();
+       }
        ctx.fillText(text,x1, y1, textWidth);
     }
   }
