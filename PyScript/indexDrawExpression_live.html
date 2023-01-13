@@ -577,7 +577,7 @@ function drawExpression() {
        //when (-n*) is indicated and grandparentnode has been substituted for a '-'
        if (parseInt(text)!="NaN" && parseInt(text)<0 && exp[find_pointer(find_parent(node))][1]=='*') {
 	   pp=find_parent(node);
-	   while (pp<998 && exp[find_pointer(find_parent(pp))][1]!='+') {pp=find_parent(pp));}
+	   while (pp<998 && exp[find_pointer(find_parent(pp))][1]!='+') {pp=find_parent(pp);}
 	   if (pp<998 && exp[find_pointer(pp)][1]=='+' && dontDraw.includes(pp)) {
 		  text=(parseInt(text)*(-1)).toString(); 
 	   }   
