@@ -375,6 +375,7 @@ function createPosns() {
     
     //when (-n)*... is indicated
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=='*') { 
+	    alert("Bap="+p+" cx="+cx+" p_x="+p_x);
 	    pp=p_right;
 	    while (exp[find_pointer(pp)][1]=='*') {pp=exp[find_pointer(pp)][2];}
 	    if (parseInt(exp[find_pointer(pp)][1])!="NaN" && parseInt(exp[find_pointer(pp)][1])<0 && !(posns.map(indexEl).includes(p))) {
@@ -388,7 +389,7 @@ function createPosns() {
 	      x=p_x;
 	      y=p_y;
 	      dontDraw.push(p);
-
+	      alert("Bbp="+p+" cx="+cx+" p_x="+p_x);
 		    
 	      if (exp[find_pointer(pp)][1]=='-1') {
 		 dontDraw.push(pp);  
@@ -396,6 +397,7 @@ function createPosns() {
 	      }
 	      posns.push([1000, x, y]);
 	      p_x=x;
+	      alert("Bcp="+p+" cx="+cx+" p_x="+p_x);
 	    }
     }
     //when + (-n) is indicated
