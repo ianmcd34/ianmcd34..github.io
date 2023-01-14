@@ -371,15 +371,15 @@ function createPosns() {
     p_right=parseInt(exp[find_pointer(p)][3]);
     p_x=x;
     p_y=y;
-    alert("Bp="+p+" cx="+cx+" p_x="+p_x);
+    alert("Bp="+p+" x="+x+" p_x="+p_x);
     
     //when (-n)*... is indicated
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=='*') { 
-	    alert("Bap="+p+" cx="+cx+" p_x="+p_x);
+	    alert("Bap="+p+" x="+x+" p_x="+p_x);
 	    pp=p_right;
 	    while (exp[find_pointer(pp)][1]=='*') {pp=exp[find_pointer(pp)][2];}
 	    if (parseInt(exp[find_pointer(pp)][1])!="NaN" && parseInt(exp[find_pointer(pp)][1])<0 && !(posns.map(indexEl).includes(p))) {
-	      alert("Ba1p="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Ba1p="+p+" x="+x+" p_x="+p_x);
 	      for (i in posns) {
 		if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
 		  posns[i][1]=posns[i][1]-xdiff;
@@ -387,21 +387,21 @@ function createPosns() {
 		  posns[i][1]=posns[i][1]-xdiff;
 		}
 	      }
-	      alert("Ba2p="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Ba2p="+p+" x="+x+" p_x="+p_x);
 	      x=p_x;
 	      y=p_y;
 	      dontDraw.push(p);
-	      alert("Bbp="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Bbp="+p+" x="+x+" p_x="+p_x);
 		    
 	      if (exp[find_pointer(pp)][1]=='-1') {
 		 dontDraw.push(pp);  
 		 dontDraw.push(find_parent(pp));
 	      }
-	      alert("Brp="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Brp="+p+" x="+x+" p_x="+p_x);
 	      posns.push([1000, x, y]);
-	      alert("Bsp="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Bsp="+p+" x="+x+" p_x="+p_x);
 	      p_x=x;
-	      alert("Bcp="+p+" cx="+cx+" p_x="+p_x);
+	      alert("Bcp="+p+" x="+x+" p_x="+p_x);
 	    }
     }
     //when + (-n) is indicated
