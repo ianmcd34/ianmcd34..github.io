@@ -472,6 +472,7 @@ function createPosns() {
       alert("Dp="+p+" p_x="+p_x);
     }
     else if (p_left!=undefined && p_left.toString()!="NaN" &&  !(posns.map(indexEl).includes(p_left)) ) {
+      alert("Ep="+p+" p_x="+p_x+" xdiff="+xdiff);
       if (!dontDraw.includes(p_left)) {
 	      for (i in posns) {
 		if (posns[i][1]<p_x  && posns[i][0] < 998) {
