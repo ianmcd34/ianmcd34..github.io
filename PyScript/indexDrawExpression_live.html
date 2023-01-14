@@ -379,6 +379,7 @@ function createPosns() {
 	    pp=p_right;
 	    while (exp[find_pointer(pp)][1]=='*') {pp=exp[find_pointer(pp)][2];}
 	    if (parseInt(exp[find_pointer(pp)][1])!="NaN" && parseInt(exp[find_pointer(pp)][1])<0 && !(posns.map(indexEl).includes(p))) {
+	      alert("Ba1p="+p+" cx="+cx+" p_x="+p_x);
 	      for (i in posns) {
 		if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
 		  posns[i][1]=posns[i][1]-xdiff;
@@ -386,6 +387,7 @@ function createPosns() {
 		  posns[i][1]=posns[i][1]-xdiff;
 		}
 	      }
+	      alert("Ba2p="+p+" cx="+cx+" p_x="+p_x);
 	      x=p_x;
 	      y=p_y;
 	      dontDraw.push(p);
