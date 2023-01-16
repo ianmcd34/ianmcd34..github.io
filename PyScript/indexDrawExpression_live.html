@@ -454,7 +454,10 @@ function createPosns() {
 	    xdiff=35;
     }
  
-
+    if(p==11) {
+	    alert("p_left="p_left+" posns.map(indexEl).includes(p_left)="+posns.map(indexEl).includes(p_left)="+posns.map(indexEl).includes(p_left)+
+	    " posns.map(indexEl).includes(p_right)="+posns.map(indexEl).includes(p_right));
+    }
 
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
