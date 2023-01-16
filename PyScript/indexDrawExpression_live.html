@@ -365,21 +365,21 @@ function createPosns() {
   incomplete=true;
   while (incomplete && p!=999) {
     	  
-    #alert("Aposns="+posns);
+    //alert("Aposns="+posns);
 	  
     p_left=parseInt(exp[find_pointer(p)][2]);
     p_right=parseInt(exp[find_pointer(p)][3]);
     p_x=xpos;
     p_y=ypos;
-    #alert("Bp="+p+" xpos="+xpos+" p_x="+p_x);
+    //alert("Bp="+p+" xpos="+xpos+" p_x="+p_x);
     
     //when (-n)*... is indicated
     if (exp[find_pointer(p)][1]=="+" && exp[find_pointer(p_right)][1]=='*') { 
-	    #alert("Bap="+p+" xpos="+xpos+" p_x="+p_x);
+	    //alert("Bap="+p+" xpos="+xpos+" p_x="+p_x);
 	    pp=p_right;
 	    while (exp[find_pointer(pp)][1]=='*') {pp=exp[find_pointer(pp)][2];}
 	    if (parseInt(exp[find_pointer(pp)][1])!="NaN" && parseInt(exp[find_pointer(pp)][1])<0 && !(posns.map(indexEl).includes(p))) {
-	      #alert("Ba1p="+p+" xpos="+xpos+" p_x="+p_x);
+	      //alert("Ba1p="+p+" xpos="+xpos+" p_x="+p_x);
 	      for (i in posns) {
 		if (posns[i][1]<p_x  && posns[i][0] < 998 ) {
 		  posns[i][1]=posns[i][1]-xdiff;
@@ -387,21 +387,21 @@ function createPosns() {
 		  posns[i][1]=posns[i][1]-xdiff;
 		}
 	      }
-	      #alert("Ba2p="+p+" xpos="+xpos+" p_x="+p_x);
+	      //alert("Ba2p="+p+" xpos="+xpos+" p_x="+p_x);
 	      xpos=p_x;
 	      ypos=p_y;
 	      dontDraw.push(p);
-	      #alert("Bbp="+p+" xpos="+xpos+" p_x="+p_x);
+	      //alert("Bbp="+p+" xpos="+xpos+" p_x="+p_x);
 		    
 	      if (exp[find_pointer(pp)][1]=='-1') {
 		 dontDraw.push(pp);  
 		 dontDraw.push(find_parent(pp));
 	      }
-	      #alert("Brp="+p+" xpos="+xpos+" p_x="+p_x);
+	      //alert("Brp="+p+" xpos="+xpos+" p_x="+p_x);
 	      posns.push([1000, xpos, ypos]);
-	      #alert("Bsp="+p+" xpos="+xpos+" p_x="+p_x);
+	      //alert("Bsp="+p+" xpos="+xpos+" p_x="+p_x);
 	      p_x=xpos;
-	      #alert("Bcp="+p+" x="+x+" p_x="+p_x);
+	      //alert("Bcp="+p+" x="+x+" p_x="+p_x);
 	    }
     }
     //when + (-n) is indicated
@@ -562,7 +562,7 @@ function createPosns() {
 
 
 function drawExpression() {
-  #alert(posns);
+  //alert(posns);
   
   ctx.fillStyle = "black";
   ctx.globalAlpha=1;
