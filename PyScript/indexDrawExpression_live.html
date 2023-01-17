@@ -365,7 +365,7 @@ function createPosns() {
   incomplete=true;
   while (incomplete && p!=999) {
     	  
-    alert("Aposns="+posns);
+    
 	  
     p_left=parseInt(exp[find_pointer(p)][2]);
     p_right=parseInt(exp[find_pointer(p)][3]);
@@ -425,7 +425,7 @@ function createPosns() {
      
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,xpos,ypos]); }
     
-
+    alert("Aposns="+posns);
 
     incomplete=false;
     for (e1 in exp) {
