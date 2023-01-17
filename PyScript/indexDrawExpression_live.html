@@ -454,10 +454,10 @@ function createPosns() {
 	    xdiff=35;
     }
  
-    if(p==11) {
-	    alert("p_left="+p_left+" posns.map(indexEl).includes(p_left)="+posns.map(indexEl).includes(p_left)+
-	    " posns.map(indexEl).includes(p_right)="+posns.map(indexEl).includes(p_right));
-    }
+    //if(p==11) {
+	    //alert("p_left="+p_left+" posns.map(indexEl).includes(p_left)="+posns.map(indexEl).includes(p_left)+
+	    //" posns.map(indexEl).includes(p_right)="+posns.map(indexEl).includes(p_right));
+    //}
 
     if (exp[find_pointer(p)][1]=="*" && exp[find_pointer(p_left)][1]=="+" &&  !(posns.map(indexEl).includes(p_left)) ) {
       for (i in posns) {
@@ -555,7 +555,7 @@ function createPosns() {
         xpos=posns[posns.map(indexEl).indexOf(p)][1];
         ypos=posns[posns.map(indexEl).indexOf(p)][2];
       }
-      if (p==11 || p==9) {alert("p="+p+" incomplete="+incomplete);}
+      //if (p==11 || p==9) {alert("p="+p+" incomplete="+incomplete);}
     }
 
   }
@@ -565,7 +565,7 @@ function createPosns() {
 
 
 function drawExpression() {
-  alert(posns);
+  //alert(posns);
   
   ctx.fillStyle = "black";
   ctx.globalAlpha=1;
