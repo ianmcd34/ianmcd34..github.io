@@ -429,7 +429,9 @@ function createPosns() {
 
     incomplete=false;
     for (e1 in exp) {
-      alert("e1[0]="+e1[0]+" posns.map(indexEl)="+posns.map(indexEl)+" posns.map(indexEl).includes(parseInt(e1[0]))="+posns.map(indexEl).includes(parseInt(e1[0])));
+      if (p==11 || p==9) {
+        alert("e1[0]="+e1[0]+" posns.map(indexEl)="+posns.map(indexEl)+" posns.map(indexEl).includes(parseInt(e1[0]))="+posns.map(indexEl).includes(parseInt(e1[0])));
+      }
       if (!(posns.map(indexEl).includes(parseInt(e1[0])))) {incomplete=true;}
     }
 
