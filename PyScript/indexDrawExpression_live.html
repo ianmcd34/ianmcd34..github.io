@@ -425,7 +425,7 @@ function createPosns() {
      
     if (!(posns.map(indexEl).includes(p))) {posns.push([p,xpos,ypos]); }
     
-    alert("Aposns="+posns);
+    //alert("Aposns="+posns);
 
     incomplete=false;
     for (e1 in exp) {
@@ -543,7 +543,7 @@ function createPosns() {
     else {
 
       p=parseInt(find_parent(p));
-      if (p!=999) {
+      if (p!=999 && !dontDraw.includes(p)) {
         xpos=posns[posns.map(indexEl).indexOf(p)][1];
         ypos=posns[posns.map(indexEl).indexOf(p)][2];
       }
