@@ -543,7 +543,7 @@ function createPosns() {
     else {
 
       p=parseInt(find_parent(p));
-      if (p!=999 && !dontDraw.includes(p)) {
+      if (p!=999 ) {
         xpos=posns[posns.map(indexEl).indexOf(p)][1];
         ypos=posns[posns.map(indexEl).indexOf(p)][2];
       }
