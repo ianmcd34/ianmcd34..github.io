@@ -79,8 +79,7 @@
 	  let answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
-		  document.getElementById('problem').select();
-		  answerMathField.typedText(text);
+		  document.getElementById('problem').innerHTML=text;
 	  }
 		
 	  set_answerMathField("x+y");
