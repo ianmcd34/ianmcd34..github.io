@@ -79,7 +79,9 @@
 	  var answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
-		  problemspan.select();
+		  global problemSpan;
+		  global answerMathField;
+		  problemSpan.select();
 		  answerMathField.typedText(text);
 	  }
 		
