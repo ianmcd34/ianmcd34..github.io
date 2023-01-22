@@ -32,10 +32,11 @@
       - paths:
         - modules/class_Expression.py
     </py-env>
+	  
     <script>
       var MQ = MathQuill.getInterface(2);
-      
     </script>
+	  
     <script>
     // (A) PASTE FROM CLIPBOARD
     function jspaste() {
@@ -46,8 +47,7 @@
       alert("hi"+selectionString+",");
     }
     </script>
-    
-    <title>My webpage!</title>
+
   </head>
   <body >
     <h1>RENDER EXPRESSION</h1>
@@ -100,7 +100,7 @@
         exp_py.add_branch('+','2')
         exp_py.add_branch('*','y')   
         
-        js.document.getElementById("problem").innerHTML=print(exp_py.print_tree('o'))
+        js.document.getElementById("problem").innerHTML="\frac{(x+2)}{y}"
     </py-script>
 
 
