@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./styles/styles.css" />
+    
+    <title>Expression Builder</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    
+    <link rel="stylesheet" href="../mathquill-0.10.1/mathquill-0.10.1/mathquill.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../mathquill-0.10.1/mathquill-0.10.1//mathquill.js"></script>
+
+    <style>
+        #problemo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+
+    <py-env>
+      - matplotlib
+      - numpy
+      - paths:
+        - modules/class_Expression.py
+    </py-env>
+    <script>
+      var MQ = MathQuill.getInterface(2);
+      
+    </script>
+    <script>
+    // (A) PASTE FROM CLIPBOARD
+    function jspaste() {
+      const selection = document.getSelection();
+      selectionString=selection.toString();
+      var problemText= new Text(document.getElementById('problem').innerHTML);
+      answerMathField.typedText("#");
+      alert("hi"+selectionString+",");
+    }
+    </script>
+    
+    <title>My webpage!</title>
+  </head>
+  <body >
+    <h1>RENDER EXPRESSION</h1>
+    <h4 id='date'>date here</h4>
+
+    <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
+	    <p><button type="button" id="new-expression-btn">New Expression</button></p>
+	    <p></br></p>
+	    <button type="button" id="add-btn">Add/Subtract</button></br>
+	    <button type="button" id="multiply-btn">Multiply</button></br>
+	    <button type="button" id="divide-btn">Divide</button></br>
+            <p></br></p>
+	    <p><label for="factor-input">By:</label></br>
+            <input type="text" id="factor-input" placeholder="2x" /></p>
+            <p></br></p>
+	    <button type="button" id="show-btn">Show Expression</button></br>
+	    <p id="print-tree">pre-wassup</p>
+    </div>
+
+
+	<p id="problemo" onmouseup="jspaste()"><span id="problem">\frac{(x+2)}{y}</span></p>
+
+
+
+
+	<script>
+	  exp = [[0,"x",,],[2, "+", 0,1],[1,"2",,],[4, "*", 2,3],[3,"y",,]];
+	  var problemSpan = document.getElementById('problem');
+	  var answerMathField = MQ.MathField(problemSpan);
+	</script>
+
+
+
+	<script async src="./javascript/index.js"></script>
+
+    <py-script>
+
+
+        import class_Expression as cex
+        from pyodide import create_proxy, to_js
+        import js
+        import numpy as np
+    
+        numpart=0
+        strpart=""
+        exp_py=cex.Expression()
+    
+
+        exp_py.add_branch('+','x')
+        exp_py.add_branch('+','2')
+        exp_py.add_branch('*','y')   
+        
+        js.document.getElementById("problem").innerHTML=print(exp_py.print_tree('o'))
+    </py-script>
+
+
+  </body>
+
+</html>
