@@ -84,7 +84,9 @@
 	  let answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
-		  answerMathField.latex(text);
+		  answerMathField.select();
+		  answerMathField.clearSelection();
+		  answerMathField.latex(a+b);
 	  }
 		
 	  set_answerMathField('\frac{x+y}{2}');
