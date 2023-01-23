@@ -83,7 +83,9 @@
 		var len = txt.length;
 		answerMathField.revert();
 		var range = document.caretRangeFromPoint(e.clientX, e.clientY);
-		alert(range.startOffset);
+		os=range.startOffset;
+		answerMathField = MQ.StaticMath(problemSpan);
+		alert(os+txt.substring(0,os)+"#"+txt.substring(os,len));
 	}
 
 
