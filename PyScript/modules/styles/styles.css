@@ -6,7 +6,7 @@ h1 {
 body {
   text-align: center;
   background-color: #FFFACD;
-  font-size: x-large;
+  font-size: large;
 }
 
 #problemo {
@@ -15,6 +15,7 @@ body {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  font-size: xx-large;
 }
 
 foot {
