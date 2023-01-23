@@ -78,10 +78,7 @@
 	alert(substring(ansString,0, caratPosition)+"#"+substring(ansString, caratPosition));
 	}
 
-	let paragraphs = document.getElementsByTagName("p");
-	for (const paragraph of paragraphs) {
-	  paragraph.addEventListener("click", insertHashAtPoint, false);
-    	}
+
     </script>
 
   </head>
@@ -104,7 +101,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" onclick="insertHashAtPoint(event e)" ><span id="problem" contenteditable="true">\frac{(x+2)}{y}</span></p>
+	<p id="problemo" onmouseup="jspaste()"  ><span id="problem" contenteditable="true">\frac{(x+2)}{y}</span></p>
 
 
 
@@ -119,6 +116,11 @@
 	  }
 		
 	  set_answerMathField('\\frac{x+y}{2}');
+		
+	  let paragraphs = document.getElementsByTagName("p");
+	  for (const paragraph of paragraphs) {
+	    paragraph.addEventListener("click", insertHashAtPoint, false);
+	   }
 	</script>
 
 
