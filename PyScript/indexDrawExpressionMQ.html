@@ -76,6 +76,14 @@
 	ansString=answerMathField.latex();
 	alert(offset+ansString.slice(0, offset)+"#"+ansString.slice(-1*offset));
 	}
+	
+	function insertHashAtPoint1(e) {
+
+		var txt = answerMathField.latex();
+		var len = txt.length;
+		
+		alert(txt);
+	}
 
 
     </script>
@@ -100,7 +108,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()"  ><span id="problem" contenteditable="true">\frac{(x+2)}{y}</span></p>
+	<p id="problemo" ><span id="problem" contenteditable="true">\frac{(x+2)}{y}</span></p>
 
 
 
@@ -118,7 +126,7 @@
 		
 	  let paragraphs = document.getElementsByTagName("p");
 	  for (const paragraph of paragraphs) {
-	    paragraph.addEventListener("click", insertHashAtPoint, false);
+	    paragraph.addEventListener("click", insertHashAtPoint1, false);
 	   }
 	</script>
 
