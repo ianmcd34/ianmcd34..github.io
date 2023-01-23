@@ -50,7 +50,6 @@
       const selection = document.getSelection();
       selectionString=selection.toString();
       var problemText= new Text(document.getElementById('problem').innerHTML);
-      answerMathField.typedText("#");
       alert("hi"+selectionString+",");
     }
     </script>
@@ -86,8 +85,6 @@
 	  let answerMathField = MQ.StaticMath(problemSpan);
 		
 	  function set_answerMathField(text) {
-		  answerMathField.select();
-		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
 	  }
 		
