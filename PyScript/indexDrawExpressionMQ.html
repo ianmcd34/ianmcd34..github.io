@@ -74,7 +74,7 @@
 	  }
 
 	ansString=document.getElementById('problem').innerHTML;
-	alert(substring(ansString,0, offset)+"#"+substring(ansString, offset));
+	alert(ansString.slice(0, offset)+"#"+ansString.slice(-1*offset));
 	}
 
 
