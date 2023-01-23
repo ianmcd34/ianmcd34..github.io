@@ -64,6 +64,7 @@
 	    offset = range.offset;
 	  } else if (document.caretRangeFromPoint) {
 	    // Use WebKit-proprietary fallback method
+	    alert("e.clientX="+e.clientX);
 	    range = document.caretRangeFromPoint(e.clientX, e.clientY);
 	    textNode = range.startContainer;
 	    offset = range.startOffset;
