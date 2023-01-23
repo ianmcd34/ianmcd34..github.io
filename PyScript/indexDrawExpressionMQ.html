@@ -73,7 +73,7 @@
 	    return;
 	  }
 
-	ansString=document.getElementById('problem').innerText;
+	ansString=answerMathField.latex();
 	alert(ansString.slice(0, offset)+"#"+ansString.slice(-1*offset));
 	}
 
