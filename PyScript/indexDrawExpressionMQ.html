@@ -81,8 +81,8 @@
 
 		var txt = answerMathField.latex();
 		var len = txt.length;
-		
-		alert(txt);
+		var range = document.caretRangeFromPoint(e.clientX, e.clientY);
+		alert(range.startOffset);
 	}
 
 
