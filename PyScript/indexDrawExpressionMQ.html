@@ -50,7 +50,9 @@
       selection = document.getSelection();
 
       selectionString=selection.toString();
-      
+      alert("hi"+selectionString);
+      selection.extend(selection.anchorNode);
+      selectionString=selection.toString();
       alert("hi"+selectionString);
 
     }
