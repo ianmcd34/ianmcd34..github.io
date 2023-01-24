@@ -51,7 +51,8 @@
 
       selectionString=selection.toString();
       alert("hi"+selectionString);
-      selection.extend(selection.anchorNode);
+      selection.collapseToStart();
+      selection.modify("extend","backward","word");
       selectionString=selection.toString();
       alert("hi"+selectionString);
 
