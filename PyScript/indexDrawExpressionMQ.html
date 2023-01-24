@@ -47,11 +47,12 @@
     <script>
     // (A) PASTE FROM CLIPBOARD
     function jspaste() {
-      document.getElementById('problem').innerText='(a+b)/2';
       const selection = document.getSelection();
+      document.getElementById('problem').innerText='(a+b)/2';
+      
       selectionString=selection.toString();
-      var problemText= new Text(document.getElementById('problem').innerHTML);
-      alert("hi"+selectionString+","+problemText.toString());
+      
+      alert("hi"+selectionString;
     }
 	    
     function insertHashAtPoint(e) {
