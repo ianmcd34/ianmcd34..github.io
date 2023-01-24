@@ -47,6 +47,7 @@
     <script>
     // (A) PASTE FROM CLIPBOARD
     function jspaste() {
+      document.getElementById('problem').innerText='(a+b)/2';
       const selection = document.getSelection();
       selectionString=selection.toString();
       var problemText= new Text(document.getElementById('problem').innerHTML);
@@ -129,7 +130,7 @@
 		
 	  let paragraphs = document.getElementsByTagName("p");
 	  for (const paragraph of paragraphs) {
-	    paragraph.addEventListener("click", insertHashAtPoint1, false);
+	    paragraph.addEventListener("mouseUp", jspaste, false);
 	   }
 	</script>
 
