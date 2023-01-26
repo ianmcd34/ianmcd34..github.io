@@ -51,12 +51,11 @@
 
       selectionString=selection.toString();
       alert("hi"+selectionString);
-      answerMathField.revert();
-
+      answerMathField.clearSelection();
+      answerMathField.select();
 	    
       selectionString=selection.toString();
       alert("hi"+selectionString);
-
     }
 	    
     function insertHashAtPoint(e) {
