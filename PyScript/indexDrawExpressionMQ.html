@@ -53,9 +53,8 @@
       alert("hi"+selectionString);
       answerMathField.write("");
       answerMathField.select();
-      selection = document.getSelection();    
-      selectionString=selection.toString();
-      alert("hi"+selectionString);
+      
+      if (document.getSelection().length>0) {jpaste();}
     }
 	    
     function insertHashAtPoint(e) {
