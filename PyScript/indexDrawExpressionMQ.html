@@ -47,6 +47,7 @@
     <script>
     // (A) PASTE FROM CLIPBOARD
     function jspaste() {
+      alert(answerMathField.latex());
       selection = document.getSelection();
 
       selectionString=selection.toString();
@@ -54,7 +55,7 @@
       answerMathField.write("");
       answerMathField.select();
       alert(answerMathField.latex());
-      if (document.getSelection().length>0) {jpaste();}
+
     }
 	    
     function insertHashAtPoint(e) {
