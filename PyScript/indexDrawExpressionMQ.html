@@ -100,32 +100,30 @@
 
 	<script async src="./modules/index.js"></script>
 
-    <py-script>
+	<py-script>
+		import class_Expression as cex
+		from pyodide import create_proxy, to_js
+		import js
+		import numpy as np
+
+		numpart=0
+		strpart=""
+		exp_py=cex.Expression()
 
 
-        import class_Expression as cex
-        from pyodide import create_proxy, to_js
-        import js
-        import numpy as np
-    
-        numpart=0
-        strpart=""
-        exp_py=cex.Expression()
-    
+		exp_py.add_branch('+','x')
+		exp_py.add_branch('+','2')
+		exp_py.add_branch('*','y')   
 
-        exp_py.add_branch('+','x')
-        exp_py.add_branch('+','2')
-        exp_py.add_branch('*','y')   
+		def show_expression(event):
+			document.getElementById("factor-input").innerHTML="hi"
+			#txt=document.getElementById("factor-input").innerHTML
+			#js.set_answerMathField(text)(create_proxy(exp_py.print_tree('l')))
 
-        def show_expression(event):
-		document.getElementById("factor-input").innerHTML="hi"
-		#txt=document.getElementById("factor-input").innerHTML
-		#js.set_answerMathField(text)(create_proxy(exp_py.print_tree('l')))
 
-        
-        js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
 
-    </py-script>
+	</py-script>
 
 
   </body>
