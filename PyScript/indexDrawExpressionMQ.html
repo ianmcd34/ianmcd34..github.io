@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,53 +48,12 @@
     <script>
     // (A) PASTE FROM CLIPBOARD
     function jspaste() {
-      alert(answerMathField.latex());
-      selection = document.getSelection();
-
+      const selection = document.getSelection();
       selectionString=selection.toString();
-      alert("hi"+selectionString);
-      answerMathField.write("");
-      answerMathField.select();
-      alert(answerMathField.latex());
-
+      var problemText= new Text(document.getElementById('problem').innerHTML);
+      answerMathField.typedText("#");
+      alert("hi"+selectionString+",");
     }
-	    
-    function insertHashAtPoint(e) {
-	  let range;
-	  let textNode;
-	  let offset;
-
-	  if (document.caretPositionFromPoint) {
-	    range = document.caretPositionFromPoint(e.clientX, e.clientY);
-	    textNode = range.offsetNode;
-	    offset = range.offset;
-	  } else if (document.caretRangeFromPoint) {
-	    // Use WebKit-proprietary fallback method
-	    range = document.caretRangeFromPoint(e.clientX, e.clientY);
-	    textNode = range.startContainer;
-	    offset = range.startOffset;
-	  } else {
-	    // Neither method is supported, do nothing
-	    alert("caratPosition failed");
-	    return;
-	  }
-
-	ansString=answerMathField.latex();
-	alert(offset+ansString.slice(0, offset)+"#"+ansString.slice(-1*offset));
-	}
-	
-	function insertHashAtPoint1(e) {
-
-		var txt = answerMathField.latex();
-		var len = txt.length;
-		answerMathField.revert();
-		var range = document.caretRangeFromPoint(e.clientX, e.clientY);
-		os=range.startOffset;
-		answerMathField = MQ.StaticMath(problemSpan);
-		alert(os+txt.substring(0,os)+","+e.clientY+","+txt.substring(os,len));
-	}
-
-
     </script>
 
   </head>
@@ -116,7 +76,7 @@
     </div>
 
 
-	<p id="problemo" ><span id="problem" contenteditable="true">\frac{(x+2)}{y}</span></p>
+	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false">\frac{(x+2)}{y}</span></p>
 
 
 
@@ -127,15 +87,12 @@
 	  let answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
+		  answerMathField.select();
+		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
 	  }
 		
-	  set_answerMathField('\\left(x+3\\right)\\sqrt{y-1}');
-		
-	  let paragraphs = document.getElementsByTagName("p");
-	  for (const paragraph of paragraphs) {
-	    paragraph.addEventListener("mouseup", jspaste, false);
-	   }
+	  set_answerMathField('\\frac{x+y}{2}');
 	</script>
 
 
@@ -158,13 +115,14 @@
         exp_py.add_branch('+','x')
         exp_py.add_branch('+','2')
         exp_py.add_branch('*','y')   
-        
+
         def show_expression(event):
           txt=document.getElementById("factor-input").innerHTML
           js.set_answerMathField(text)(create_proxy(exp_py.print_tree('l')))
 
         
         js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+
     </py-script>
 
 
