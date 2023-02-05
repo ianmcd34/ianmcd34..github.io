@@ -87,6 +87,7 @@
 	  let answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
+		  alert("testb");
 		  answerMathField.select();
 		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
@@ -118,6 +119,7 @@
 
         def show_expression(event):
           txt=document.getElementById("factor-input").innerHTML
+	  document.getElementById("factor-input").innerHTML="testa"
           js.set_answerMathField(text)(create_proxy(exp_py.print_tree('l')))
 
         
