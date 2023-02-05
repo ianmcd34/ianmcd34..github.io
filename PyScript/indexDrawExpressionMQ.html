@@ -87,7 +87,8 @@
 	  let answerMathField = MQ.MathField(problemSpan);
 		
 	  function set_answerMathField(text) {
-		  text=text.replace(/'/g,"");
+		  text=text.replace("'","");
+		  text=text.replace("'","");
 		  alert(text);
 		  answerMathField.select();
 		  answerMathField.clearSelection();
