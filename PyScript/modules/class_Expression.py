@@ -1,9 +1,4 @@
-import sys
 
-for path in sys.path:
-    print(path)
-
-sys.path.append("C:\\Users\\ianmc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\")
 
 import numpy as np
 import math
