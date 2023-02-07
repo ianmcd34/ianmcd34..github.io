@@ -144,7 +144,7 @@
 		
 		def push_vars(event):
 			js.get_exp1(create_proxy(exp_py.elements))
-			js.get_printTree(create_proxy([exp.py.print_tree('r'), exp_py.print_tree('l')]))
+			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 
 
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
