@@ -1,6 +1,13 @@
+import sys
+
+for path in sys.path:
+    print(path)
+
+sys.path.append("C:\\Users\\ianmc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\")
 
 import numpy as np
 import math
+import re
 
 class Expression:
     def __init__(self):
@@ -194,6 +201,50 @@ class Expression:
         if power>1:
             final=final+"^"+str(power)
             
+        latex=''
+        powered=0
+        for i in range(0,len(final)):
+            if final[i]=='(':
+                latex+='\\left('
+            elif final[i]==')':
+                latex+='\\right)'
+            elif final[i]=='^':
+                latex+='^{'
+                powered+=1
+            elif not final[i].isdigit() and powered>0:
+                powered-=1
+                latex+='}'+final[i]
+            else:
+                latex+=final[i]
+
+        dividepos=latex.find('/')
+        if dividepos>=0:
+            #check for (1/(..))
+            p=re.search(r"[^+-/()]*(\\left\(.*\\right\))*[^+-/()]*\\left\([\w]*/", latex)
+            m=re.search(r"\\left\([\w]*/", latex)
+            n=re.search(r"/\\left\([^(\\right)]*", latex)
+            if m is not None and n is not None:
+                topnum=latex[m.span()[0]+6:dividepos]
+                if topnum=='1':
+                    topnum=''
+                else:
+                    topnum='*'+topnum
+                prefac=latex[:p.span()[0]]
+                topnum=latex[p.span()[0]:m.span()[0]]+topnum
+                if topnum[-1]=='*' and topnum!='*':
+                    topnum=topnum[:len(topnum)-1]
+                elif topnum=='*':
+                    topnum='1'
+                bottomnum=latex[dividepos+7:n.span()[1]]
+                postfrac=latex[n.span()[1]+14:]
+                latex=prefac+"\\frac{"+topnum+"}{"+bottomnum+"}"+postfrac
+                p=re.search(r"\\frac{\\left\(.*\\right\)}", latex)
+                if p is not None:
+                    latex=latex[:p.span()[0]+6]+latex[p.span()[0]+12:p.span()[1]-8]+"}"+latex[p.span()[1]:]
+
+            
+
+                
     
         if o_r=='o':
             return output
@@ -201,6 +252,8 @@ class Expression:
             return result
         elif o_r=='f':
             return final
+        elif o_r=='l':
+            return latex
             
  
 
