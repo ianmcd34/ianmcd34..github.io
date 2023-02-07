@@ -83,6 +83,8 @@
 
 	<script>
 	  exp = [[0,"x",,],[2, "+", 0,1],[1,"2",,],[4, "*", 2,3],[3,"y",,]];
+	  exp_result="";
+	  exp_latex="";
 	  let problemSpan = document.getElementById('problem');
 	  let answerMathField = MQ.MathField(problemSpan);
 		
@@ -110,7 +112,10 @@
 	    
 	   function get_printTree(obj) {
 		  objString=obj.toString(); 
-		  alert(objString);
+		  exp_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
+		  exp_latex=objString.substring(objString.indexOf(",'"+2,objString.indexOf("']"));
+		  alert(exp_result);
+		  alert(exp_latex);
 	   	}
 	    
 
