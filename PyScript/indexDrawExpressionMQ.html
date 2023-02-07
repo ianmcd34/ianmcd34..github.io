@@ -45,16 +45,6 @@
       var MQ = MathQuill.getInterface(2);
     </script>
 	  
-    <script>
-    // (A) PASTE FROM CLIPBOARD
-    function jspaste() {
-      const selection = document.getSelection();
-      selectionString=selection.toString();
-      var problemText= new Text(document.getElementById('problem').innerHTML);
-      answerMathField.typedText("#");
-      alert("hi"+selectionString+",");
-    }
-    </script>
 
   </head>
   <body >
@@ -118,7 +108,14 @@
 		  alert(exp_latex);
 	   	}
 	    
-
+	    // (A) PASTE FROM CLIPBOARD
+	    function jspaste() {
+	      	const selection = document.getSelection();
+	      	selectionString=selection.toString();
+	      	var problemText= new Text(document.getElementById('problem').innerHTML);
+	      	answerMathField.typedText("#");
+	      	alert("hi"+selectionString+",");
+	    	}
 	</script>
 
 
