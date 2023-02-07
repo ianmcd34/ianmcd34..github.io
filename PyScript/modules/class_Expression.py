@@ -4,6 +4,7 @@ import numpy as np
 import math
 import re
 
+
 class Expression:
     def __init__(self):
         self.elements=np.array([[0, None,None,None]])
