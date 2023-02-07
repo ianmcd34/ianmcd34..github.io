@@ -100,7 +100,7 @@
 
 
 	<script async src="./modules/index.js"></script>
-
+<!
 	<py-script>
 		import class_Expression as cex
 		from pyodide import create_proxy, to_js
@@ -115,7 +115,7 @@
 		exp_py.add_branch('+','x')
 		exp_py.add_branch('+','2')
 		exp_py.add_branch('*','y') 
-		#document.getElementById("factor-input").value=exp_py.print_tree('l')
+		document.getElementById("factor-input").value=exp_py.print_tree('l')
 		
 
 		def show_expression(event):
@@ -126,7 +126,7 @@
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
 
 	</py-script>
-
+>
 
   </body>
 
