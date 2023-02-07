@@ -118,6 +118,8 @@
 		selection = document.getSelection();
 	      	selectionString1 = selection.toString().substring(0,selection.toString().indexOf("#"));
 		selectionString2 = selection.toString().substring(selection.toString().indexOf("#")+1,selection.toString().length);   
+		    
+		alert(selectionString1+";"+selectionString+";"+selectionString2);
 		
 		exp_result1=exp_result.replaceAll("(");
 		exp_result1=exp_result1.replaceAll(")");
