@@ -113,7 +113,7 @@
 	   function get_printTree(obj) {
 		  objString=obj.toString(); 
 		  exp_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
-		  exp_latex=objString.substring(objString.indexOf(",'")+2,objString.indexOf("']"));
+		  exp_latex=objString.substring(objString.indexOf(", '")+2,objString.indexOf("']"));
 		  alert(exp_result);
 		  alert(exp_latex);
 	   	}
