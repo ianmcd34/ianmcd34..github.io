@@ -75,7 +75,7 @@
 	  exp = [[0,"x",,],[2, "+", 0,1],[1,"2",,],[4, "*", 2,3],[3,"y",,]];
 	  exp_result="";
 	  exp_latex="";
-	  selectedNodes=[];
+	  var selectedNodes=[];
 	  let problemSpan = document.getElementById('problem');
 	  let answerMathField = MQ.MathField(problemSpan);
 		
@@ -109,9 +109,9 @@
 		  alert(exp_latex);
 	   	}
 	    
-	    // (A) PASTE FROM CLIPBOARD
+
 	    function jspaste() {
-		global selectedNodes;
+		selectedNodes=[];
 		    
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
