@@ -137,16 +137,18 @@
 					n+=1;
 				}
 				exp_result1=exp_result1.substring(n+2);
+				alert(operand);
+				if (selectionString1.indexOf(operand)>=0) {
+					selectionString1=selectionString1.substring(selectionString1.indexOf(operand)+operand.length);
+				} else {selectionStringNo=0;}
+				alert(selectionString1);
+				n=exp_result1.indexOf("]");
 			}
-			alert(operand);
-			if (selectionString1.indexOf(operand)>=0) {
-				selectionString1=selectionString1.substring(selectionString1.indexOf(operand)+operand.length);
-			} else {selectionStringNo=0;}
-			alert(selectionString1);
+			
 		}
 		while (selectionStringNo==0) {
 			n=exp_result1.indexOf("]");
-			alert(exp_result1);
+			alert("hi");
 			while (n>-1) {
 				index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
 				selectedNodes=selectedNodes.push(index);
