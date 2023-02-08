@@ -138,11 +138,13 @@
 				operand+=exp_result1[n+2];
 				n+=1;
 			}
-			exp_result1=exp_result1.substring(n+2);
+			
 			alert(operand);
 			if (selectionString1.indexOf(operand)>=0) {
+				exp_result1=exp_result1.substring(n+2);
 				selectionString1=selectionString1.substring(selectionString1.indexOf(operand)+operand.length);
 			} else {selectionStringNo=0;}
+			
 			alert(selectionString1);
 			n=exp_result1.indexOf("]");
 		}
