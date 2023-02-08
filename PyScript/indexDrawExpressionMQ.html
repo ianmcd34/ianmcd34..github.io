@@ -206,6 +206,7 @@
 			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 		
 		def parseFactor():
+			document.getElementById("print-tree").innerHTML="parseFactor"
 			global numpart
 			global strpart
 
@@ -224,7 +225,7 @@
 			global strpart
 			global exp_py
 			parseFactor()
-			document.getElementById("print-tree").value=str(numpart)+","+strpart
+			document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
 
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
