@@ -115,7 +115,7 @@
 	      	selectionString=selection.toString();
 
 	      	answerMathField.typedText("#");
-		selection = document.getSelection();
+		selection = answerMathField.latex();
 	      	selectionString1 = selection.toString().substring(0,selection.toString().indexOf("#"));
 		selectionString2 = selection.toString().substring(selection.toString().indexOf("#")+1,selection.toString().length);   
 		    
