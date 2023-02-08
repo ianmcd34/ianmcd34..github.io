@@ -111,6 +111,8 @@
 	    
 	    // (A) PASTE FROM CLIPBOARD
 	    function jspaste() {
+		global selectedNodes;
+		    
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 
@@ -150,7 +152,7 @@
 		alert("hi");
 		while (n>-1 && selectionStringNo==0) {
 			index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
-			selectedNodes=selectedNodes.push(index);
+			selectedNodes.push(index);
 			operand=exp_result1[n+1];
 			while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]>='A' && exp_result1<='Z') || (exp_result1[n+2]>='a' && exp_result1<='z')) {
 				operand+=exp_result1[n+2];
