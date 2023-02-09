@@ -272,16 +272,14 @@
 		  }
 
 		  newSelectedNodes=[];
-		  newSelectedPosns=[];
+
 		  for (x1 in selectedNodes) {
 		    if (!toRemove.includes(x1)) {
 			newSelectedNodes.push(parseInt(selectedNodes[x1]));
-			newSelectedPosns.push(parseInt(selectedPosns[x1]));
 		    }
 		  }
 
 		  selectedNodes=newSelectedNodes;
-		  selectedPosns=newSelectedPosns;
 
 	   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
 		function countleafs(item) {
@@ -336,7 +334,6 @@
 				if (selectedNodes[n] < 998) {
 					if (exp[find_pointer(selectedNodes[n])][2] == undefined || exp[find_pointer(selectedNodes[n])][2].toString() == "NaN") {
 						selectedNodes.splice(n,1);
-						selectedPosns.splice(n,1);
 						removed = true;
 					}
 					else {n--;}
