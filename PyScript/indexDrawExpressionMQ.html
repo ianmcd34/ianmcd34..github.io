@@ -408,20 +408,20 @@
 			document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
 		
 			if selectedtop==exptop or selectedtop==999:
-			if numpart>0:
-				exp_py.add_branch('+',str(numpart))
-			elif numpart<0:
-				exp_py.add_branch('+',str(numpart))
-			if len(strpart)>0:
-				if strpart[0]=='-':
-					exp_py.add_branch('-', strpart[1])
-					strpart=strpart[2:]
-				while len(strpart)>0:
-					exp_py.add_branch('*',strpart[0])
-					strpart=strpart[1:]
+				if numpart>0:
+					exp_py.add_branch('+',str(numpart))
+				elif numpart<0:
+					exp_py.add_branch('+',str(numpart))
+				if len(strpart)>0:
+					if strpart[0]=='-':
+						exp_py.add_branch('-', strpart[1])
+						strpart=strpart[2:]
+					while len(strpart)>0:
+						exp_py.add_branch('*',strpart[0])
+						strpart=strpart[1:]
 		
 			for x1 in exp_py.elements:
-			x1[0]=int(x1[0])
+				x1[0]=int(x1[0])
 			js.get_exp1(create_proxy(exp_py.elements))
 			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 			#document.getElementById("print-tree").innerHTML=""
