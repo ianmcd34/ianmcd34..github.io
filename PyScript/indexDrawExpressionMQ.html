@@ -402,6 +402,10 @@
 			global exp_py
 			parseFactor()
 			document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
+			tops=js.findtops()
+			selectedtop=tops[0]
+			exptop=tops[1]
+			document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
 
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
