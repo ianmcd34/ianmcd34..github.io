@@ -423,7 +423,7 @@
 				while len(strpart)>0:
 					exp_insert.add_branch('*',strpart[0])
 					strpart=strpart[1:]
-				
+				document.getElementById("print-tree").innerHTML= exp_insert.elements+";"+ exp_py.elements
 				if len(exp_insert.elements)==1:
 					exp_py.add_branch('+', exp_insert.elements[0][1])
 				else:
