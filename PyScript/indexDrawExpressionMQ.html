@@ -408,20 +408,34 @@
 			document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
 		
 			if selectedtop==exptop or selectedtop==999:
+				exp_insert=cex.Expression()
+
 				if numpart>0:
-					exp_py.add_branch('+',str(numpart))
+					exp_insert.add_branch('+',str(numpart))
 				elif numpart<0:
-					exp_py.add_branch('+',str(numpart))
-				else:
-					exp_py.add_branch('+',strpart[0])
+					exp_insert.add_branch('-',str(numpart))
+				elif strpart[0]=='-':
+					exp_py.add_branch('-', '1')
 					strpart=strpart[1:]
-				if len(strpart)>0:
-					if strpart[0]=='-':
-						exp_py.add_branch('-', strpart[1])
-						strpart=strpart[2:]
-					while len(strpart)>0:
-						exp_py.add_branch('*',strpart[0])
-						strpart=strpart[1:]
+				else:
+					exp_insert.add_branch('+',strpart[0])
+					strpart=strpart[1:]
+				while len(strpart)>0:
+					exp_insert.add_branch('*',strpart[0])
+					strpart=strpart[1:]
+		
+				if exp_insert.elements[0][2] is None:
+					exp_py.add_branch('+', exp_insert.elements[0][1])
+				else:
+					maxindex=exp_py.elements[:,0].max()
+					for x1 in exp_insert.elements:
+						x1[0]=x1[0]+2+maxindex
+						if x1[2]!=None:
+							x1[2]=x1[2]+2+maxindex
+							x1[3]=x1[3]+2+maxindex
+					
+					exp_py.elements=coalesce(exp_py.elements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements)
+		
 		
 			for x1 in exp_py.elements:
 				x1[0]=int(x1[0])
