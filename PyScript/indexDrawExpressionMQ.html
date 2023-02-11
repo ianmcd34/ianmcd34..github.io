@@ -429,12 +429,13 @@
 				else:
 					maxindex=exp_py.elements[:,0].max()
 					for x1 in exp_insert.elements:
-						x1[0]=x1[0]+2+maxindex
+						x1[0]=x1[0]+1+maxindex
 						if x1[2]!=None:
-							x1[2]=x1[2]+2+maxindex
-							x1[3]=x1[3]+2+maxindex
+							x1[2]=x1[2]+1+maxindex
+							x1[3]=x1[3]+1+maxindex
+					maxinsindex=exp_insert.elements[:,0].max()
 					oldelements=exp_py.elements
-					exp_py.elements=np.concatenate((oldelements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements), axis=0)
+					exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', maxindex, maxinsindex]], exp_insert.elements), axis=0)
 					document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
 		
 			for x1 in exp_py.elements:
