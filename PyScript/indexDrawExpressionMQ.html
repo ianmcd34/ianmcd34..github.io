@@ -423,7 +423,7 @@
 				while len(strpart)>0:
 					exp_insert.add_branch('*',strpart[0])
 					strpart=strpart[1:]
-				document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+				
 				if len(exp_insert.elements)==1:
 					exp_py.add_branch('+', exp_insert.elements[0][1])
 				else:
@@ -433,9 +433,9 @@
 						if x1[2]!=None:
 							x1[2]=x1[2]+2+maxindex
 							x1[3]=x1[3]+2+maxindex
-					
-					exp_py.elements=np.concatenate((exp_py.elements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements), axis=0)
-		
+					oldelements=exp_py.elements
+					exp_py.elements=np.concatenate((oldelements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements), axis=0)
+					document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
 		
 			for x1 in exp_py.elements:
 				x1[0]=int(x1[0])
