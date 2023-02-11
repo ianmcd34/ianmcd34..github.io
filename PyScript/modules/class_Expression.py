@@ -134,9 +134,9 @@ class Expression:
             right=self.print_rightsubtree(self.elements[absmaxindex][3])
             if self.elements[absmaxindex][1]=='+':
                 if left.startswith("(!") and left.endswith("!)"):
-                    left=left.lstrip("(!").rstrip("!)")
+                    left=left[2:-2]
                 if right.startswith("(!") and right.endswith("!)"):
-                    right=right.lstrip("(!").rstrip("!)")
+                    right=right[2:-2]
             result="("+left+"["+str(maxindex)+"]"+self.elements[absmaxindex][1]+right+")"
         else:
             result="("+"["+str(maxindex)+"]"+self.elements[absmaxindex][1]+")"
@@ -260,9 +260,9 @@ class Expression:
             right=self.print_rightsubtree(self.elements[absindex][3])
             if self.elements[absindex][1]=='+' or self.elements[absindex][1]=='-':
                 if left.startswith("(!") and left.endswith("!)"):
-                    left=left.lstrip("(!").rstrip("!)")
+                    left=left[2:-2]
                 if right.startswith("(!") and right.endswith("!)"):
-                    right=right.lstrip("(!").rstrip("!)")
+                    right=right[2:-2]
                 return "(!"+left+"["+str(index)+"]"+self.elements[absindex][1]+right+"!)"
             elif self.elements[absindex][1]=='/':
                 if not (right.startswith("(!") and right.endswith("!)")):
@@ -281,9 +281,9 @@ class Expression:
             right=self.print_rightsubtree(self.elements[absindex][3])
             if self.elements[absindex][1]=='+' or self.elements[absindex][1]=='-':
                 if left.startswith("(!") and left.endswith("!)"):
-                    left=left.lstrip("(!").rstrip("!)")
+                    left=left[2:-2]
                 if right.startswith("(!") and right.endswith("!)"):
-                    right=right.lstrip("(!").rstrip("!)")
+                    right=right[2:-2]
                 return "(!"+left+"["+str(index)+"]"+self.elements[absindex][1]+right+"!)"
             elif self.elements[absindex][1]=='/':  
                 if not (right.startswith("(!") and right.endswith("!)")):
