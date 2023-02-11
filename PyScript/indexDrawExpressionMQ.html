@@ -434,7 +434,7 @@
 							x1[2]=x1[2]+2+maxindex
 							x1[3]=x1[3]+2+maxindex
 					
-					exp_py.elements=coalesce(exp_py.elements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements)
+					exp_py.elements=np.concatenate((exp_py.elements, [[maxindex+1, '+', maxindex, maxindex+2]], exp_insert.elements), axis=0)
 		
 		
 			for x1 in exp_py.elements:
