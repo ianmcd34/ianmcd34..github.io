@@ -127,8 +127,8 @@
 	      	selectionString=selection.toString();
 
 		let range = new Range();
-		range.setStart(answerMathField.firstChild, 0);
-		range.setEnd(answerMathField.firstChild, 1);
+		range.setStart(answerMathField, 0);
+		range.setEnd(answerMathField, 1);
 		
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
