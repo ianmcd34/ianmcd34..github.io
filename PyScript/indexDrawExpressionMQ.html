@@ -126,12 +126,12 @@
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 
-		answerMathField1 = MQ.MathField(problemSpan);
+
 	      	answerMathField.typedText("#");
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
-		answerMathField=answerMathField1;
+		answerMathField.typedText(selectionString);
 		    
 		alert(selectionString1+";"+selectionString+";"+selectionString2);
 		
