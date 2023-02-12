@@ -126,7 +126,9 @@
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 
-		ta=answerMathField.substituteTextarea;
+		let range = new Range();
+		range.setStart(problem.firstChild, 0);
+		range.setEnd(problem.firstChild, 3);
 	      	answerMathField.typedText("#");
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
