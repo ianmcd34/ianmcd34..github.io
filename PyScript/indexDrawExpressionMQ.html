@@ -128,7 +128,7 @@
 
 		let range = new Range();
 		range.setStart(problemo.firstChild, 0);
-		range.setEnd(problemo.firstChild, 2);
+		range.setEnd(problemo.querySelector("span").firstChild, 2);
 		document.getSelection().addRange(range);
 		
 
