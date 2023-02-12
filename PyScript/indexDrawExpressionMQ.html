@@ -126,7 +126,7 @@
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 
-
+		answerMathField.substituteTextarea();
 	      	answerMathField.typedText("#");
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
