@@ -127,8 +127,8 @@
 	      	selectionString=selection.toString();
 
 		let range = new Range();
-		range.setStart(problemo.firstChild, 0);
-		range.setEnd(problemo.querySelector("span").firstChild, 0);
+		range.setStart(answerMathField.el().firstChild, 0);
+		range.setEnd(answerMathField.el().firstChild, 2);
 		document.getSelection().addRange(range);
 		
 
