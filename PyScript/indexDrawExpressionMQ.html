@@ -243,6 +243,50 @@
 	}
 		
 		
+	   function find_leaf() {
+		    for (let index=selectedNodes.length-1; index>-1;index--) {
+			if (selectedNodes[index] < 998 && exp[find_pointer(selectedNodes[index])][2] == undefined ) {
+				return selectedNodes[index];
+				break;
+			}
+		    }
+
+	    }
+		
+		
+	function find_operators() {
+	    operators="";
+	    operators1="";
+	    var p=0;
+	    for (let index=selectedNodes.length-1; index>-1;index--) {
+		if (selectedNodes[index] < 998 && (exp[find_pointer(selectedNodes[index])][2] == undefined || exp[find_pointer(selectedNodes[index])][2].toString()=="NaN") ) {
+			p=selectedNodes[index];
+
+			while (find_parent(p) < 998  && p!=findtops()[0] ) {
+
+				if (selectedNodes.includes(p)) {
+					p=find_parent(p);
+					operators=operators+exp[find_pointer(p)][1];
+				} else {
+					p=find_parent(p);
+					operators1=operators1+exp[find_pointer(p)][1];
+				}
+			}
+		}
+	    }
+	    operatorsSet=new Set(operators.split(""));
+	    text="";
+	    operatorsSet.forEach(function(value) {text += value;});
+
+	    operatorsSet=new Set((operators+operators1).split(""));
+	    text1="";
+	    operatorsSet.forEach(function(value) {text1 += value;});
+
+	    return [text,text1];
+	}
+
+		
+		
 	function trimSelectedNodes() {
 	
 	
