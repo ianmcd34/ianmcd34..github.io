@@ -127,14 +127,16 @@
 	      	selectionString=selection.toString();
 
 		let range = new Range();
-		range.setStart(problem.firstChild, 0);
-		range.setEnd(problem.firstChild, 3);
-	      	answerMathField.typedText("#");
+		range.setStart(problemo.firstChild, 0);
+		range.setEnd(problemo.firstChild, 1);
+		document.getSelection().addRange(range);
+	      	
+		#answerMathField.typedText("#");
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
-		answerMathField.typedText(selectionString);
-		selection.extend(problemSpan);
+		#answerMathField.typedText(selectionString);
+
 		    
 		alert(selectionString1+";"+selectionString+";"+selectionString2);
 		
