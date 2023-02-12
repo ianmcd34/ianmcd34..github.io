@@ -129,9 +129,7 @@
 		let range = new Range();
 		range.setStart(answerMathField.firstChild, 0);
 		range.setEnd(answerMathField.firstChild, 1);
-		#document.getSelection().addRange(range);
-	      	
-		#answerMathField.typedText("#");
+		
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
