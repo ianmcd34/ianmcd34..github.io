@@ -131,6 +131,10 @@
 		range.setEnd(answerMathField.el().firstChild, 1);
 		document.getSelection().addRange(range);
 		alert(range.startOffset+","+range.endOffset);
+		range.endOffset+=1;
+		document.getSelection().extend(answerMathField.el().firstChild, 3);
+		alert(range.startOffset+","+range.endOffset);
+		   
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
