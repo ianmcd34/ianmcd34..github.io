@@ -130,7 +130,7 @@
 		range.setStart(answerMathField.el().firstChild, 0);
 		range.setEnd(answerMathField.el().firstChild, 1);
 		document.getSelection().addRange(range);
-		
+		alert(range.startOffset+","+range.endOffset);
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
