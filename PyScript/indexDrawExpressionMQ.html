@@ -130,7 +130,7 @@
 		range.setStart(answerMathField.el().firstChild, 0);
 		range.setEnd(answerMathField.el().firstChild, 1);
 		document.getSelection().addRange(range);
-		alert(range.startOffset+","+range.endOffset);
+		alert(range.focusOffset+","+range.anchorOffset);
 		range.endOffset+=1;
 		document.getSelection().extend(answerMathField.el().firstChild, 1);
 		alert(range.startOffset+","+range.endOffset);
