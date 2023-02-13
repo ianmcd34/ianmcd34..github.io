@@ -126,7 +126,7 @@
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 
-		let range = new Range();
+		let range = selection.getRangeAt(0);
 		range.setStart(answerMathField.el().firstChild, 0);
 		range.setEnd(answerMathField.el().firstChild, 1);
 		document.getSelection().addRange(range);
