@@ -459,7 +459,7 @@
 				if numpart>0:
 					exp_insert.add_branch('+',str(numpart))
 				elif numpart<0:
-					exp_insert.add_branch('-',str(numpart))
+					exp_insert.add_branch('-',str(-1*numpart))
 				elif strpart[0]=='-':
 					exp_py.add_branch('-', '1')
 					strpart=strpart[1:]
@@ -492,7 +492,7 @@
 				if numpart>0:
 					exp_insert.add_branch('+',str(numpart))
 				elif numpart<0:
-					exp_insert.add_branch('-',str(numpart))
+					exp_insert.add_branch('-',str(-1*numpart))
 				elif strpart[0]=='-':
 					exp_py.add_branch('-', '1')
 					strpart=strpart[1:]
