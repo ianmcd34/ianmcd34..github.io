@@ -482,7 +482,7 @@
 					maxinsindex=exp_insert.elements[:,0].max()
 					oldelements=exp_py.elements
 					exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
-					document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+					#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
 			else:
 				leafnode=js.find_leaf()
 				operators=js.find_operators()[0]
