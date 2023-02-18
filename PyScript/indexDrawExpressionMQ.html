@@ -121,7 +121,7 @@
 	    
 
 	   function jspaste() {
-		global selectedNodes;
+		
 		selectedNodes=[];
 		    
 	      	selection = document.getSelection();
@@ -183,7 +183,7 @@
 			exp_result1=exp_result1.substring(n+2);
 			n=exp_result1.indexOf("]");
 		}
-
+		alert("selectedNodes="+selectedNodes);
 		trimSelectedNodes();
 
 	      }
@@ -295,6 +295,7 @@
 	function trimSelectedNodes() {
 	
 		alert("starting trimSelectedNodes");
+		alert("selectedNodes="+selectedNodes);
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
 		  for (x1 in selectedNodes) {
