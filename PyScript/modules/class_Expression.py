@@ -196,6 +196,15 @@ class Expression:
                 final=final+output[i]
         if power>1:
             final=final+"^"+str(power)
+        #check for +(-X)
+        p=re.search(r"\+\(-[^()]*\)", final)
+        while p:
+            q=re.search(r"\+\(-1\)\*", final)
+            if q:
+                final=final[:q.span()[0]]+"-"+final[q.span()[1]:]
+            else:
+                final=final[:p.span()[0]]+final[p.span()[0]+2:p.span()[1]-1]+final[p.span()[1]:]
+            p=re.search(r"\+\(-[^()]*\)", final)
             
         latex=''
         powered=0
