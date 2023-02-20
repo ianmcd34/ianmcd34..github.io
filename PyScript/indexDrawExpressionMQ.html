@@ -129,7 +129,7 @@
 	      	selectionString=selection.toString();
 		answerMathField.typedText("#");
 		   
-		alert(answerMathField.latex().toString()+";"+answerMathField.latex().toString().indexOf("#"));
+
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
@@ -149,12 +149,12 @@
 		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString1.replaceAll("\left","");
 		selectionString1=selectionString1.replaceAll("\right","");
-		selectionString1=selectionString.replaceAll("{","");
-		selectionString1=selectionString.replaceAll("}","");
-		selectionString1=selectionString.replaceAll("\textcolor","");
-		selectionString1=selectionString1.replaceAll("red","");
-		selectionString1=selectionString.replaceAll("\left","");
-		selectionString1=selectionString.replaceAll("\right","");
+		selectionString=selectionString.replaceAll("{","");
+		selectionString=selectionString.replaceAll("}","");
+		selectionString=selectionString.replaceAll("\textcolor","");
+		selectionString=selectionString.replaceAll("red","");
+		selectionString=selectionString.replaceAll("\left","");
+		selectionString=selectionString.replaceAll("\right","");
 		
 		alert(selectionString1+";"+selectionString+";"+selectionString2);  
 		selectionStringNo=1;
