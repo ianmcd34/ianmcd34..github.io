@@ -162,12 +162,12 @@
 			
 
 			n=exp_result1.indexOf("]");
-			alert("exp_result1="+exp_result1);
+			alert("exp_result1_1="+exp_result1);
 		}
 
 
 		n=exp_result1.indexOf("]");
-		alert("exp_result1="+exp_result1);
+		alert("exp_result1_2="+exp_result1);
 		while (n>-1 && selectionStringNo==0) {
 			index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
 			
@@ -184,7 +184,7 @@
 			
 			exp_result1=exp_result1.substring(n+2);
 			n=exp_result1.indexOf("]");
-			alert("exp_result1="+exp_result1);
+			alert("exp_result1_2="+exp_result1);
 		}
 		alert("selectedNodes="+selectedNodes);
 		trimSelectedNodes();
