@@ -144,6 +144,13 @@
 		selectionString1=selectionString1.replaceAll("{","");
 		selectionString1=selectionString1.replaceAll("}","");
 		selectionString1=selectionString1.replaceAll("\textcolorred","");
+		selectionString1=selectionString1.replaceAll("\left","");
+		selectionString1=selectionString1.replaceAll("\right","");
+		selectionString1=selectionString.replaceAll("{","");
+		selectionString1=selectionString.replaceAll("}","");
+		selectionString1=selectionString.replaceAll("\textcolorred","");
+		selectionString1=selectionString.replaceAll("\left","");
+		selectionString1=selectionString.replaceAll("\right","");
 		
 		    
 		selectionStringNo=1;
@@ -161,7 +168,7 @@
 			
 			if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)) {
 				i=selectionString1.indexOf(operand);
-				if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-');}
+				if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-')-1;}
 				alert("found "+operand+" in "+selectionString1+" at position "+i);
 				exp_result1=exp_result1.substring(n+2);
 				selectionString1=selectionString1.substring(i+operand.length);
@@ -191,7 +198,7 @@
 			alert("operand="+operand);
 			if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)) {
 				i=selectionString.indexOf(operand);
-				if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-');}
+				if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
 				selectedNodes.push(index);
 				selectionString=selectionString.substring(i+operand.length);
 			} else {selectionStringNo=2;}
