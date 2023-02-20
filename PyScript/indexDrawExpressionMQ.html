@@ -134,7 +134,7 @@
 		
 
 		    
-		alert(selectionString1+";"+selectionString+";"+selectionString2);
+
 		   
 		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 		
@@ -143,16 +143,18 @@
 		exp_result1=exp_result1.replaceAll("!","");
 		selectionString1=selectionString1.replaceAll("{","");
 		selectionString1=selectionString1.replaceAll("}","");
-		selectionString1=selectionString1.replaceAll("\textcolorred","");
+		selectionString1=selectionString1.replaceAll("\textcolor","");
+		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString1.replaceAll("\left","");
 		selectionString1=selectionString1.replaceAll("\right","");
 		selectionString1=selectionString.replaceAll("{","");
 		selectionString1=selectionString.replaceAll("}","");
-		selectionString1=selectionString.replaceAll("\textcolorred","");
+		selectionString1=selectionString.replaceAll("\textcolor","");
+		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString.replaceAll("\left","");
 		selectionString1=selectionString.replaceAll("\right","");
 		
-		    
+		alert(selectionString1+";"+selectionString+";"+selectionString2);  
 		selectionStringNo=1;
 		    
 
