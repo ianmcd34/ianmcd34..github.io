@@ -153,11 +153,13 @@
 				operand+=exp_result1[n+2];
 				n+=1;
 			}
-			alert("operand="+operand);
-
+			alert("looking for "+operand+" in "+selectionString1);
+			
 			if (selectionString1.indexOf(operand)>=0) {
+				alert("found "+operand+" in "+selectionString1+" at position "+selectionString1.indexOf(operand));
 				exp_result1=exp_result1.substring(n+2);
 				selectionString1=selectionString1.substring(selectionString1.indexOf(operand)+operand.length);
+				alert("now exp_result1="+exp_result1+" and selectionString1="+selectionString1);
 			} else {
 				alert("can't find "+operand+" in "+selectionString1);
 				selectionStringNo=0;
