@@ -156,7 +156,8 @@
 			alert("looking for "+operand+" in "+selectionString1);
 			
 			if (selectionString1.indexOf(operand)>=0 || (operand='-' && selectionString1.indexOf('-')>=0)) {
-				i=Math.min(selectionString1.indexOf(operand), selectionString1.indexOf('-')-1);
+				i=selectionString1.indexOf(operand);
+				if  (operand='-' && selectionString1.indexOf('-')>=0) {i=-1;}
 				alert("found "+operand+" in "+selectionString1+" at position "+i);
 				exp_result1=exp_result1.substring(n+2);
 				selectionString1=selectionString1.substring(i+operand.length);
@@ -185,7 +186,8 @@
 			}
 			alert("operand="+operand);
 			if (selectionString.indexOf(operand)>=0 || (operand='-' && selectionString1.indexOf('-')>=0)) {
-				i=Math.min(selectionString1.indexOf(operand), selectionString1.indexOf('-')-1);
+				i=selectionString1.indexOf(operand);
+				if  (operand='-' && selectionString1.indexOf('-')>=0) {i=-1;}
 				selectedNodes.push(index);
 				selectionString=selectionString.substring(i+operand.length);
 			} else {selectionStringNo=2;}
