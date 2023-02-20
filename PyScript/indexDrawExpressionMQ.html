@@ -158,7 +158,10 @@
 			if (selectionString1.indexOf(operand)>=0) {
 				exp_result1=exp_result1.substring(n+2);
 				selectionString1=selectionString1.substring(selectionString1.indexOf(operand)+operand.length);
-			} else {selectionStringNo=0;}
+			} else {
+				alert("can't find "+operand+" in "+selectionString1);
+				selectionStringNo=0;
+			}
 			
 
 			n=exp_result1.indexOf("]");
