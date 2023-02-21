@@ -162,6 +162,7 @@
 		n=exp_result1.indexOf("]");
 	
 		while (n>-1 && selectionStringNo==1) {
+			alert("exp_result1="+exp_result1+"selectionString1="+selectionString1);
 			operand=exp_result1[n+1];
 			while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
 				operand+=exp_result1[n+2];
