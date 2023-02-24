@@ -153,7 +153,7 @@
 		position=selectionString1.search("frac");
 		alert("position="+position);
 		if (position>-1) {
-			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.position(position+4);
+			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
 			if (selectionString1.search("}{")>-1) {
 				selectionString1=selectionString1.replace("}{","/");
 			} else {
@@ -172,7 +172,7 @@
 		position=selectionString.search("frac");
 		alert("position="+position);
 		if (position>-1) {
-			selectionString=selectionString.substring(0,position-1)+"*"+selectionString.position(position+4);
+			selectionString=selectionString.substring(0,position-1)+"*"+selectionString.substring(position+4);
 			selectionString=selectionString.replace("}{","/");
 			position=selectionString.search("frac");
 		}
