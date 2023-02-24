@@ -152,7 +152,7 @@
 		selectionString1=selectionString1.replaceAll("\right","");
 		position=selectionString1.search("frac");
 		alert("position="+position);
-		while (position>-1) {
+		if (position>-1) {
 			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.position(position+4);
 			if (selectionString1.search("}{")>-1) {
 				selectionString1=selectionString1.replace("}{","/");
@@ -171,7 +171,7 @@
 
 		position=selectionString.search("frac");
 		alert("position="+position);
-		while (position>-1) {
+		if (position>-1) {
 			selectionString=selectionString.substring(0,position-1)+"*"+selectionString.position(position+4);
 			selectionString=selectionString.replace("}{","/");
 			position=selectionString.search("frac");
