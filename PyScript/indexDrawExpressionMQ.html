@@ -150,7 +150,7 @@
 		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString1.replaceAll("\left","");
 		selectionString1=selectionString1.replaceAll("\right","");
-		position=selectionString1.search("\frac");
+		position=selectionString1.search("\\frac");
 		while (position>-1) {
 			selectionString1=selectionString1.replace("\frac","*");
 			if (selectionString1.search("}{")>-1) {
@@ -158,7 +158,7 @@
 			} else {
 				selectionString=selectionString.replace("}{","/");
 			}
-			position=selectionString1.search("\frac");
+			position=selectionString1.search("\\frac");
 		}
 		
 		selectionString=selectionString.replaceAll("{","");
@@ -168,11 +168,11 @@
 		selectionString=selectionString.replaceAll("\left","");
 		selectionString=selectionString.replaceAll("\right","");
 
-		position=selectionString.search("\frac");
+		position=selectionString.search("\\frac");
 		while (position>-1) {
 			selectionString=selectionString.replace("\frac","*");
 			selectionString=selectionString.replace("}{","/");
-			position=selectionString.search("\frac");
+			position=selectionString.search("\\frac");
 		}
 		
 
