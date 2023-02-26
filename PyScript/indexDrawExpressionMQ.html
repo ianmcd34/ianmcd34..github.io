@@ -143,14 +143,6 @@
 		exp_result1=exp_result1.replaceAll(")","");
 		exp_result1=exp_result1.replaceAll("!","");
 		
-		   
-		selectionString1=selectionString1.replaceAll("{","");
-		selectionString1=selectionString1.replaceAll("}","");
-		selectionString1=selectionString1.replaceAll("\textcolor","");
-		selectionString1=selectionString1.replaceAll("red","");
-		selectionString1=selectionString1.replaceAll("\left","");
-		selectionString1=selectionString1.replaceAll("\right","");
-		position=selectionString1.search("frac");
 		alert("position="+position);
 		if (position>-1) {
 			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
@@ -160,15 +152,15 @@
 				selectionString=selectionString.replace("}{","/");
 			}
 			position=selectionString1.search("frac");
-		}
+		}   
+		selectionString1=selectionString1.replaceAll("{","");
+		selectionString1=selectionString1.replaceAll("}","");
+		selectionString1=selectionString1.replaceAll("\textcolor","");
+		selectionString1=selectionString1.replaceAll("red","");
+		selectionString1=selectionString1.replaceAll("\left","");
+		selectionString1=selectionString1.replaceAll("\right","");
+		position=selectionString1.search("frac");
 		
-		selectionString=selectionString.replaceAll("{","");
-		selectionString=selectionString.replaceAll("}","");
-		selectionString=selectionString.replaceAll("\textcolor","");
-		selectionString=selectionString.replaceAll("red","");
-		selectionString=selectionString.replaceAll("\left","");
-		selectionString=selectionString.replaceAll("\right","");
-
 		position=selectionString.search("frac");
 		alert("position="+position);
 		if (position>-1) {
@@ -176,6 +168,14 @@
 			selectionString=selectionString.replace("}{","/");
 			position=selectionString.search("frac");
 		}
+		selectionString=selectionString.replaceAll("{","");
+		selectionString=selectionString.replaceAll("}","");
+		selectionString=selectionString.replaceAll("\textcolor","");
+		selectionString=selectionString.replaceAll("red","");
+		selectionString=selectionString.replaceAll("\left","");
+		selectionString=selectionString.replaceAll("\right","");
+
+		
 		
 
 		selectionStringNo=1;
