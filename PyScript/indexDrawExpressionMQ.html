@@ -489,6 +489,8 @@
 			numpart=0;
 			strpart="";
 			expString=js.document.getElementById("factor-input").value
+			if !(re.search("^-?[0-9]*[a-z]*$", expString):
+				return false
 			for i in range(0, len(expString)):
 				if expString[i].isdigit():
 					numpart=int(expString[0:i+1])
