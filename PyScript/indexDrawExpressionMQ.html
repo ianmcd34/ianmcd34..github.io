@@ -127,7 +127,7 @@
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 		answerMathField.typedText("#");
-		   
+
 
 
 	      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
@@ -144,7 +144,7 @@
 		exp_result1=exp_result1.replaceAll("!","");
 		
 		position=selectionString1.search("frac");
-		alert("position="+position);
+
 		if (position>-1) {
 			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
 			if (selectionString1.search("}{")>-1) {
@@ -163,7 +163,7 @@
 		
 		
 		position=selectionString.search("frac");
-		alert("position="+position);
+
 		if (position>-1) {
 			selectionString=selectionString.substring(0,position-1)+"*"+selectionString.substring(position+4);
 			selectionString=selectionString.replace("}{","/");
@@ -181,11 +181,10 @@
 
 		selectionStringNo=1;
 		    
-		alert(selectionString1+";"+selectionString+";"+selectionString2);
 		n=exp_result1.indexOf("]");
 	
 		while (n>-1 && selectionStringNo==1) {
-			alert("exp_result1="+exp_result1+"selectionString1="+selectionString1);
+
 			operand=exp_result1[n+1];
 			while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
 				operand+=exp_result1[n+2];
@@ -216,15 +215,15 @@
 		n=exp_result1.indexOf("]");
 
 		while (n>-1 && selectionStringNo==0) {
-			alert("exp_result1="+exp_result1+"selectionString="+selectionString);
+
 			index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
-			alert("index="+index);
+
 			operand=exp_result1[n+1];
 			while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
 				operand+=exp_result1[n+2];
 				n+=1;
 			}
-			alert("operand="+operand);
+
 			if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)  || (operand=='*' && selectionString.indexOf('/')>=0)) {
 				i=selectionString.indexOf(operand);
 				if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
@@ -346,7 +345,7 @@
 		
 	function trimSelectedNodes() {
 	
-		   alert("selectedNodes="+selectedNodes);
+
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
 		  for (x1 in selectedNodes) {
