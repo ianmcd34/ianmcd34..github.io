@@ -638,6 +638,16 @@
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+			
+			for x1 in exp_py.elements:
+				x1[0]=int(x1[0])
+				if x1[2] is not None:
+					x1[2]=int(x1[2])
+					x1[3]=int(x1[3])
+			js.get_exp1(create_proxy(exp_py.elements))
+			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
+			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
+			#document.getElementById("print-tree").innerHTML=""
 
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
