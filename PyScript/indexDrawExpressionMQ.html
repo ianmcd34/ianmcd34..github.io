@@ -503,114 +503,118 @@
 			global numpart
 			global strpart
 			global exp_py
-			parseFactor()
-			document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
-			tops=js.findtops()
-			selectedtop=tops[0]
-			exptop=tops[1]
-			document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
-		
-			if selectedtop==exptop or selectedtop==999:
-				exp_insert=cex.Expression()
-
-				if numpart>0:
-					exp_insert.add_branch('+',str(numpart))
-				elif numpart<0:
-					exp_insert.add_branch('-',str(-1*numpart))
-				elif strpart[0]=='-':
-					exp_py.add_branch('-', '1')
-					strpart=strpart[1:]
-				else:
-					exp_insert.add_branch('+',strpart[0])
-					strpart=strpart[1:]
-				while len(strpart)>0:
-					exp_insert.add_branch('*',strpart[0])
-					strpart=strpart[1:]
-				
-				if len(exp_insert.elements)==1:
-					exp_py.add_branch('+', exp_insert.elements[0][1])
-				else:
-					maxindex=exp_py.elements[:,0].max()
-					for x1 in exp_insert.elements:
-						x1[0]=x1[0]+1+maxindex
-						if x1[2]!=None:
-							x1[2]=x1[2]+1+maxindex
-							x1[3]=x1[3]+1+maxindex
-					maxinsindex=exp_insert.elements[:,0].max()
-					oldelements=exp_py.elements
-					exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
-					#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+			try:
+				parseFactor()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-				leafnode=js.find_leaf()
-				operators=js.find_operators()[0]
-				document.getElementById("print-tree").innerHTML=operators
-				exp_insert=cex.Expression()
-		
-				if numpart>0:
-					exp_insert.add_branch('+',str(numpart))
-				elif numpart<0:
-					exp_insert.add_branch('-',str(-1*numpart))
-				elif strpart[0]=='-':
-					exp_py.add_branch('-', '1')
-					strpart=strpart[1:]
-				else:
-					exp_insert.add_branch('+',strpart[0])
-					strpart=strpart[1:]
-				while len(strpart)>0:
-					exp_insert.add_branch('*',strpart[0])
-					strpart=strpart[1:]
-		
-				minindex_py=int(exp_py.elements[:,0].min())
-				maxindex_insert=int(exp_insert.elements[:,0].max())
-				
-				if operators=='+' or operators=='':
-					for x1 in exp_insert.elements:
-						x1[0]=x1[0]-maxindex_insert-1+minindex_py
-						if x1[2] is not None:
-							x1[2]=x1[2]-maxindex_insert-1+minindex_py
-							x1[3]=x1[3]-maxindex_insert-1+minindex_py
-					minindex_insert=int(exp_insert.elements[:,0].min())
-					maxindex_insert=int(exp_insert.elements[:,0].max())
+				document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
+				tops=js.findtops()
+				selectedtop=tops[0]
+				exptop=tops[1]
+				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
 
-					newleaf=[int(minindex_insert-1),exp_py.elements[exp_py.find_pointer(leafnode)][1],None,None]
-					exp_py.elements[exp_py.find_pointer(leafnode)][1]='+'
-					exp_py.elements[exp_py.find_pointer(leafnode)][2]=minindex_insert-1
-					exp_py.elements[exp_py.find_pointer(leafnode)][3]=minindex_py-1
-					oldtree=exp_py
-					exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
-	
-				elif operators=='*+' or operators=='+*' or operators=='*':
+				if selectedtop==exptop or selectedtop==999:
+					exp_insert=cex.Expression()
 
-					for x1 in exp_insert.elements:
-						x1[0]=x1[0]-maxindex_insert-2+minindex_py
-						if x1[2] is not None:
-							x1[2]=x1[2]-maxindex_insert-2+minindex_py
-							x1[3]=x1[3]-maxindex_insert-2+minindex_py
-					minindex_insert=int(exp_insert.elements[:,0].min())
-					maxindex_insert=int(exp_insert.elements[:,0].max())
-
-					pp=js.find_parent(selectedtop)
-					document.getElementById("factor-input").value=str(selectedtop)+","+str(pp)+","+str(minindex_py)
-
-					if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
-						exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
+					if numpart>0:
+						exp_insert.add_branch('+',str(numpart))
+					elif numpart<0:
+						exp_insert.add_branch('-',str(-1*numpart))
+					elif strpart[0]=='-':
+						exp_py.add_branch('-', '1')
+						strpart=strpart[1:]
 					else:
-						exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
+						exp_insert.add_branch('+',strpart[0])
+						strpart=strpart[1:]
+					while len(strpart)>0:
+						exp_insert.add_branch('*',strpart[0])
+						strpart=strpart[1:]
 
-					newnode=[int(minindex_py-1), '+', selectedtop, minindex_py-2]
-					oldtree=exp_py
-					exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
-		
-		
-			for x1 in exp_py.elements:
-				x1[0]=int(x1[0])
-				if x1[2] is not None:
-					x1[2]=int(x1[2])
-					x1[3]=int(x1[3])
-			js.get_exp1(create_proxy(exp_py.elements))
-			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
-			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
-			#document.getElementById("print-tree").innerHTML=""
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('+', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+				else:
+					leafnode=js.find_leaf()
+					operators=js.find_operators()[0]
+					document.getElementById("print-tree").innerHTML=operators
+					exp_insert=cex.Expression()
+
+					if numpart>0:
+						exp_insert.add_branch('+',str(numpart))
+					elif numpart<0:
+						exp_insert.add_branch('-',str(-1*numpart))
+					elif strpart[0]=='-':
+						exp_py.add_branch('-', '1')
+						strpart=strpart[1:]
+					else:
+						exp_insert.add_branch('+',strpart[0])
+						strpart=strpart[1:]
+					while len(strpart)>0:
+						exp_insert.add_branch('*',strpart[0])
+						strpart=strpart[1:]
+
+					minindex_py=int(exp_py.elements[:,0].min())
+					maxindex_insert=int(exp_insert.elements[:,0].max())
+
+					if operators=='+' or operators=='':
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]-maxindex_insert-1+minindex_py
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_insert-1+minindex_py
+								x1[3]=x1[3]-maxindex_insert-1+minindex_py
+						minindex_insert=int(exp_insert.elements[:,0].min())
+						maxindex_insert=int(exp_insert.elements[:,0].max())
+
+						newleaf=[int(minindex_insert-1),exp_py.elements[exp_py.find_pointer(leafnode)][1],None,None]
+						exp_py.elements[exp_py.find_pointer(leafnode)][1]='+'
+						exp_py.elements[exp_py.find_pointer(leafnode)][2]=minindex_insert-1
+						exp_py.elements[exp_py.find_pointer(leafnode)][3]=minindex_py-1
+						oldtree=exp_py
+						exp_py.elements=np.concatenate((oldtree.elements,[newleaf],exp_insert.elements), axis=0)
+
+					elif operators=='*+' or operators=='+*' or operators=='*':
+
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]-maxindex_insert-2+minindex_py
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_insert-2+minindex_py
+								x1[3]=x1[3]-maxindex_insert-2+minindex_py
+						minindex_insert=int(exp_insert.elements[:,0].min())
+						maxindex_insert=int(exp_insert.elements[:,0].max())
+
+						pp=js.find_parent(selectedtop)
+						document.getElementById("factor-input").value=str(selectedtop)+","+str(pp)+","+str(minindex_py)
+
+						if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
+							exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
+						else:
+							exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
+
+						newnode=[int(minindex_py-1), '+', selectedtop, minindex_py-2]
+						oldtree=exp_py
+						exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
+
+
+				for x1 in exp_py.elements:
+					x1[0]=int(x1[0])
+					if x1[2] is not None:
+						x1[2]=int(x1[2])
+						x1[3]=int(x1[3])
+				js.get_exp1(create_proxy(exp_py.elements))
+				js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
+				js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
+				#document.getElementById("print-tree").innerHTML=""
 
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
