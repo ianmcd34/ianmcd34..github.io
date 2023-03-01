@@ -491,7 +491,7 @@
 			strpart="";
 			expString=js.document.getElementById("factor-input").value
 			if not(re.search("^-?[0-9]*[a-z]*$", expString)):
-				return false
+				raise ValueError("your expression must be in the form (-)(number)(lowercase letters)")
 			for i in range(0, len(expString)):
 				if expString[i].isdigit():
 					numpart=int(expString[0:i+1])
