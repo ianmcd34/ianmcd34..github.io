@@ -606,11 +606,44 @@
 				js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 				js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
 				#document.getElementById("print-tree").innerHTML=""
+		
+		def multiply_exp(event):
+			global numpart
+			global strpart
+			global exp_py
+			try:
+				parseFactor()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+			else:
+				document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
+				tops=js.findtops()
+				selectedtop=tops[0]
+				exptop=tops[1]
+				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
+
+				if selectedtop==exptop or selectedtop==999:
+					exp_insert=treeFactor(numpart, strpart)
+
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('*', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
 
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(push_vars))
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
+		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
 
 	</py-script>
 
