@@ -185,6 +185,12 @@ class Expression:
                     var=output[i]
                     power=1
                     final=final+"*"+output[i]
+            elif output[i].isdigit() and var!='':
+                if power>1:
+                    final=final+"^"+str(power)
+                var=''
+                power=0
+                final=final+"*"+output[i]
             elif output[i]=="*":
                 if var=='':
                     final=final+output[i]
