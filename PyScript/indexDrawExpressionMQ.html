@@ -638,6 +638,27 @@
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+				else:
+					exp_insert=treeFactor(numpart, strpart)
+					for x1 in exp_insert.elements:
+						x1[0]=x1[0]-maxindex_insert-2+minindex_py
+						if x1[2] is not None:
+							x1[2]=x1[2]-maxindex_insert-2+minindex_py
+							x1[3]=x1[3]-maxindex_insert-2+minindex_py
+					minindex_insert=int(exp_insert.elements[:,0].min())
+					maxindex_insert=int(exp_insert.elements[:,0].max())
+
+					pp=js.find_parent(selectedtop)
+					document.getElementById("factor-input").value=str(selectedtop)+","+str(pp)+","+str(minindex_py)
+
+					if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
+						exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
+					else:
+						exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
+
+					newnode=[int(minindex_py-1), '*', selectedtop, minindex_py-2]
+					oldtree=exp_py
+					exp_py.elements=np.concatenate((oldtree.elements,[newnode],exp_insert.elements), axis=0)
 			
 			for x1 in exp_py.elements:
 				x1[0]=int(x1[0])
