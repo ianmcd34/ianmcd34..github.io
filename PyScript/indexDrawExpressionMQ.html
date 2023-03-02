@@ -639,7 +639,13 @@
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
 				else:
+					operators=js.find_operators()[0]
+					document.getElementById("print-tree").innerHTML=operators
 					exp_insert=treeFactor(numpart, strpart)
+
+					minindex_py=int(exp_py.elements[:,0].min())
+					maxindex_insert=int(exp_insert.elements[:,0].max())
+
 					for x1 in exp_insert.elements:
 						x1[0]=x1[0]-maxindex_insert-2+minindex_py
 						if x1[2] is not None:
