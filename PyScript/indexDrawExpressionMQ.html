@@ -590,8 +590,12 @@
 
 						if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 							exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
+							if exp_py.elements[exp_py.find_pointer(pp)][1]=='/':
+								exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
 						else:
 							exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
+							if exp_py.elements[exp_py.find_pointer(pp)][1]=='/':
+								exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
 
 						newnode=[int(minindex_py-1), '+', selectedtop, minindex_py-2]
 						oldtree=exp_py
@@ -660,8 +664,12 @@
 
 					if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 						exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
+						if exp_py.elements[exp_py.find_pointer(pp)][1]=='/':
+							exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
 					else:
 						exp_py.elements[exp_py.find_pointer(pp)][3]=minindex_py-1
+						if exp_py.elements[exp_py.find_pointer(pp)][1]=='/':
+							exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
 
 					newnode=[int(minindex_py-1), '*', selectedtop, minindex_py-2]
 					oldtree=exp_py
