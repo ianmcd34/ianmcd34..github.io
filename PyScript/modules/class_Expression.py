@@ -233,7 +233,8 @@ class Expression:
             #check for (1/(..))
             p=re.search(r"[^+-/()]*(\\left\(.*\\right\))*[^+-/()]*\\left\([\w]*/", latex)
             m=re.search(r"\\left\([\w]*/", latex)
-            n=re.search(r"/\\left\([^(\\right)]*", latex)
+            n=re.search(r"/\\left\([^()]*(\([^/()]*\))*(\\right\)){1}", latex)
+
             if m is not None and n is not None:
                 topnum=latex[m.span()[0]+6:dividepos]
                 if topnum=='1':
@@ -246,12 +247,17 @@ class Expression:
                     topnum=topnum[:len(topnum)-1]
                 elif topnum=='*':
                     topnum='1'
-                bottomnum=latex[dividepos+7:n.span()[1]]
-                postfrac=latex[n.span()[1]+14:]
+                bottomnum=latex[dividepos+7:n.span()[1]-7]
+
+                if len(re.findall(r"\\right", latex[dividepos:]))>1:
+                    q=re.search(r"\\right\)", latex[n.span()[1]:])
+
+                    postfrac=latex[n.span()[1]+q.span()[1]:]
+                else:
+                    postfrac=latex[n.span()[1]:]
                 latex=prefac+"\\frac{"+topnum+"}{"+bottomnum+"}"+postfrac
-                p=re.search(r"\\frac{\\left\(.*\\right\)}", latex)
-                if p is not None:
-                    latex=latex[:p.span()[0]+6]+latex[p.span()[0]+12:p.span()[1]-8]+"}"+latex[p.span()[1]:]
+
+                
 
             
 
