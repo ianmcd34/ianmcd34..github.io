@@ -233,7 +233,7 @@ class Expression:
             #check for (1/(..))
             p=re.search(r"[^+-/()]*(\\left\(.*\\right\))*[^+-/()]*\\left\([\w]*/", latex)
             m=re.search(r"\\left\([\w]*/", latex)
-            n=re.search(r"/\\left\([^()]*(\([^/()]*\))*(\\right\)){1}", latex)
+            n=re.search(r"/\\left\(([^()]*(\([^/()]*\))*[^()]*)*(\\right\)){1}", latex)
 
             if m is not None and n is not None:
                 topnum=latex[m.span()[0]+6:dividepos]
