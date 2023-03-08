@@ -681,7 +681,7 @@
 				if x1[2] is not None:
 					x1[2]=int(x1[2])
 					x1[3]=int(x1[3])
-			document.getElementById("print-tree").innerHTML=exp_py.print_tree('o')
+			document.getElementById("print-tree").innerHTML=exp_py.print_tree('f')
 			js.get_exp1(create_proxy(exp_py.elements))
 			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
