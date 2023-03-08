@@ -714,9 +714,9 @@
 							if x1[2]!=None:
 								x1[2]=x1[2]+1+maxindex
 								x1[3]=x1[3]+1+maxindex
-					maxinsindex=exp_insert.elements[:,0].max()
-					oldelements=exp_py.elements
-					exp_py.elements=np.concatenate((oldelements, [[maxinsindex+2, '*', int(maxindex), int(maxinsindex+1)], [maxinsindex+1, '*', int(maxinsindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+				maxinsindex=exp_insert.elements[:,0].max()
+				oldelements=exp_py.elements
+				exp_py.elements=np.concatenate((oldelements, [[maxinsindex+2, '*', int(maxindex), int(maxinsindex+1)], [maxinsindex+1, '*', int(maxinsindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 
 			for x1 in exp_py.elements:
 			x1[0]=int(x1[0])
