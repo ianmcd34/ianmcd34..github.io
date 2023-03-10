@@ -485,7 +485,7 @@
 		
 
 		def show_expression(event):
-			txt=document.getElementById("factor-input").value
+			txt=exp_py.print_tree('l')
 			js.set_answerMathField(create_proxy(txt))
 		
 		def push_vars(event):
