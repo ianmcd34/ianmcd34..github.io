@@ -483,9 +483,9 @@
 		
 		
 		def zero_expression(event):
-			exp_py.elements=[[0, '0', None, None]]
+			exp_py.elements=cex.Expression()
 			document.getElementById("print-tree").innerHTML=exp_py.elements
-			document.getElementById("clear-selection-btn").click()
+
 		
 		def show_expression(event):
 			txt=exp_py.print_tree('l')
