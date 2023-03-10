@@ -483,7 +483,10 @@
 		
 		
 		def zero_expression(event):
-			exp_py.elements=cex.Expression()
+			del exp_py
+			global exp_py
+			exp_py=cex.Expression()
+			exp_py.add_branch('+','0')
 			document.getElementById("print-tree").innerHTML=exp_py.elements
 
 		
