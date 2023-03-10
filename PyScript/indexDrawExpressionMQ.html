@@ -54,6 +54,7 @@
 
     <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
 	    <p><button type="button" id="new-expression-btn">New Expression</button></p>
+	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
 	    <p></br></p>
 	    <button type="button" id="add-btn">Add/Subtract</button></br>
 	    <button type="button" id="multiply-btn">Multiply</button></br>
@@ -64,6 +65,7 @@
             <p></br></p>
 	    <button type="button" id="tidy-btn">Tidy Expression</button></br>
 	    <button type="button" id="expand-btn">Expand Brackets</button></br>
+	    <button type="button" id="factorise-btn">Factorise</button></br>
 	    <button type="button" id="show-btn">Show Expression</button></br>
 	    <p id="print-tree">pre-wassup</p>
     </div>
@@ -479,7 +481,11 @@
 		exp_py.add_branch('*','y') 
 		document.getElementById("factor-input").value=exp_py.print_tree('l')
 		
-
+		
+		def zero_expression(event):
+			exp_py=cex.Expression()
+			exp_py.add_branch('+','0')
+		
 		def show_expression(event):
 			txt=exp_py.print_tree('l')
 			js.set_answerMathField(create_proxy(txt))
@@ -706,6 +712,12 @@
 			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
 			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
 		
+		def factorise_exp(event):
+			exp_py.factorise()
+			js.get_exp1(create_proxy(exp_py.elements))
+			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
+			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
+		
 		
 		def divide_exp(event):
 			global numpart
@@ -782,14 +794,17 @@
 			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
 	
 
-
+		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(zero_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
 		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
 		js.document.getElementById("tidy-btn").addEventListener("click", create_proxy(tidy_exp))
 		js.document.getElementById("expand-btn").addEventListener("click", create_proxy(expand_exp))
+		js.document.getElementById("factorise-btn").addEventListener("click", create_proxy(factorise_exp))
 
 	</py-script>
 
