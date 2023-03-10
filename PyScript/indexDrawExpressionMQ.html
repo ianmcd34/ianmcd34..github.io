@@ -69,7 +69,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false">\frac{(x+2)}{y}</span></p>
+	<p id="problemo" onmouseup="jspaste()" onmousedown="clearmq()" ><span id="problem" contenteditable="false">\frac{(x+2)}{y}</span></p>
 
 
 
@@ -122,6 +122,13 @@
 		  while (exp[i][0]!=index) { i++;}
 		  return i
 		}
+		
+		
+	   function clearmq() {
+		  answerMathField.select();
+		  answerMathField.clearSelection();
+		  answerMathField.latex(exp_latex);
+	   }
 	    
 
 	   function jspaste() {
