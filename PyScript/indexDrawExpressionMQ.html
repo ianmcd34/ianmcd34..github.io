@@ -68,6 +68,7 @@
 	    <button type="button" id="factorise-btn">Factorise</button></br>
 	    <button type="button" id="cancel-btn">Cancel</button></br>
 	    <button type="button" id="add-constants-btn">Add Constants</button></br>
+	    <button type="button" id="multiply-constants-btn">Add Constants</button></br>
 	    <button type="button" id="show-btn">Show Expression</button></br>
 	    <p id="print-tree">pre-wassup</p>
     </div>
@@ -738,6 +739,12 @@
 			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
 		
 		
+		def multiply_constants_exp(event):
+			exp_py.multiply_constants()
+			js.get_exp1(create_proxy(exp_py.elements))
+			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
+			js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
+		
 		def divide_exp(event):
 			global numpart
 			global strpart
@@ -825,6 +832,7 @@
 		js.document.getElementById("factorise-btn").addEventListener("click", create_proxy(factorise_exp))
 		js.document.getElementById("cancel-btn").addEventListener("click", create_proxy(cancel_exp))
 		js.document.getElementById("add-constants-btn").addEventListener("click", create_proxy(add_constants_exp))
+		js.document.getElementById("multiply-constants-btn").addEventListener("click", create_proxy(multiply_constants_exp))
 
 	</py-script>
 
