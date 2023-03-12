@@ -1879,7 +1879,7 @@ class Expression:
                 if find_parent(e[0])!=999:
                     p=find_parent(e[0])
                     #unity case: 0+()=()
-                    if self.elements[self.find_pointer(p),1]=="+" and not tidied:
+                    if not tidied and self.elements[self.find_pointer(p),1]=="+":
                         print("0+()=()")
                         eliminate.append(self.find_pointer(e[0]))
                         eliminate.append(self.find_pointer(p))
