@@ -1912,7 +1912,7 @@ class Expression:
                         tidied=True
 
                     #unity case: 0*()=0
-                    if not tidied andself.elements[self.find_pointer(p),1]=="*" :
+                    if not tidied and self.elements[self.find_pointer(p),1]=="*" :
                         print("0*()=0")
                         cl=self.elements[self.find_pointer(p),2]
                         cr=self.elements[self.find_pointer(p),3]
