@@ -211,6 +211,22 @@ class Expression:
             else:
                 final=final[:p.span()[0]]+final[p.span()[0]+2:p.span()[1]-1]+final[p.span()[1]:]
             p=re.search(r"\+\(-[^()]*\)", final)
+        #check for (-1)*nx
+        p=re.search(r"\(-1\)\*[0-9a-z]+", final)
+        while p:
+            q=re.search(r"\(-1\)\*[0-9]+", final)
+            if q:
+                final=final[:q.span()[0]]+"(-"+final[q.span()[0]+5:q.span()[1]+1]+")"+final[q.span()[1]+1:]
+            else:
+                q=re.search(r"\(-1\)\*[a-z]{1}[^\^]*", final)
+           
+                if q:
+                    final=final[:q.span()[0]]+"(-"+final[q.span()[0]+5:q.span()[0]+6]+")"+final[q.span()[0]+6:]
+                else:
+                    p=None
+            if p:
+                p=re.search(r"\(-1\)\*[0-9a-z]+", final)
+            
             
         latex=''
         powered=0
