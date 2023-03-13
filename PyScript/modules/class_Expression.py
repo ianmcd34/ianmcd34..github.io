@@ -1926,6 +1926,11 @@ class Expression:
                         result = self.elements[mask]
                         self.elements=result
                         tidied=True
+                        
+                    #error case: 1/0->"Divide by zero!"
+                    if self.elements[self.find_pointer(p),1]=="/" and not tidied:
+                        raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
+                        tidied=True
 
                     #unity case: 0*()=0
                     if not tidied and self.elements[self.find_pointer(p),1]=="*" :
