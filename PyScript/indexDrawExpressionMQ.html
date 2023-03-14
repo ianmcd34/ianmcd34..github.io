@@ -712,6 +712,7 @@
 			try:
 				exp_py.tidy_up()
 			except:
+				document.getElementById("print-tree").innerHTML="Error: Division by zero"
 				js.set_answerMathField("Error: Division by zero")	
 			js.get_exp1(create_proxy(exp_py.elements))
 			js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
