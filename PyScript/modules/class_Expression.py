@@ -1929,6 +1929,7 @@ class Expression:
                         
                     #error case: 1/0->"Divide by zero!"
                     if not tidied and self.elements[self.find_pointer(p),1]=="/":
+                        print("Second argument to a division or modulo operation was zero.")
                         raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
 
 
