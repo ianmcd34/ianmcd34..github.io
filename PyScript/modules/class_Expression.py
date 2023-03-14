@@ -1928,7 +1928,7 @@ class Expression:
                         tidied=True
                         
                     #error case: 1/0->"Divide by zero!"
-                    if self.elements[self.find_pointer(p),1]=="/" and not tidied:
+                    if not tidied and self.elements[self.find_pointer(p),1]=="/":
                         raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
                         document.getElementById("show-btn").innerHTML="Second argument to a division or modulo operation was zero."
                         tidied=True
