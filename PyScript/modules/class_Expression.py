@@ -1791,6 +1791,8 @@ class Expression:
                     righttype='node'           
             if find_parent(e[0])!=999:
                 e1=self.elements[self.find_pointer(find_parent(e[0]))]
+                while not e1[2].isdigit() and not e1[3].isdigit() and find_parent(e1[0])!=999:
+                    e1=self.elements[self.find_pointer(find_parent(e1[0]))]
                 if e1[1] in ('+','*'):
                     if self.elements[self.find_pointer(e1[2]), 1][-1].isdigit():
                         lefttype1='digit'
