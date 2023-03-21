@@ -1728,7 +1728,45 @@ class Expression:
                 if e[2]==index or e[3]==index:
                     return e[0]
             return 999
+        
+        def parent_chain(node):
+            parent_chain=[node]
+            while find_parent(node)!=999 and self.elements[self.find_pointer(find_parent(node))][1]==self.elements[self.find_pointer(node)][1]:
+                node=find_parent(node)
+                parent_chain.append(node)
+            return parent_chain
 
+        def family_tree(node):
+            pc=parent_chain(node)
+            family_tree=set(pc)
+            for e in self.elements:
+                pc1=parent_chain(e[0])
+
+                if pc1[-1]==pc[-1] and pc1.count(pc[0])==0:
+                    family_tree.update(pc1)
+            return family_tree
+
+        def left_tree(node):
+            e=self.elements[self.find_pointer(node)]
+            pc=parent_chain(node)
+            left_tree=set(pc)
+
+            added=True
+            while added:
+                to_add=set()
+                for n in left_tree:
+                    e1=self.elements[self.find_pointer(n)]
+                    if self.elements[self.find_pointer(e1[2])][1]==e[1]:
+
+                        to_add.add(self.elements[self.find_pointer(e1[2])][0])
+                if to_add.intersection(left_tree)==to_add:
+                    added=False
+                else:
+                    added=True
+                left_tree.update(to_add)
+            return left_tree
+
+        #swap any adjascent leafs that are in wrong order
         for e in self.elements:
             swap=False
             swapvertical='no'
@@ -1767,129 +1805,151 @@ class Expression:
                     elif righttype=='node':
                         swap=True
             if swap:
-                if e[0]==3:
-                    print(e,"swapsies")
+
                 leftindex=e[2]
                 rightindex=e[3]
                 e[3]=leftindex
                 e[2]=rightindex
-                if e[0]==3:
-                    print(e,"swapsies")
-                    
-            if e[1] in ('+','*'):
-                if self.elements[self.find_pointer(e[2]), 1][-1].isdigit():
-                    lefttype='digit'
-                elif self.elements[self.find_pointer(e[2]), 1].islower():
-                    lefttype='variable'
-                else:
-                    lefttype='node'
-                if self.elements[self.find_pointer(e[3]), 1][-1].isdigit():
-                    righttype='digit'
-                elif self.elements[self.find_pointer(e[3]), 1].islower():
-                    righttype='variable'
-                else:
-                    righttype='node'           
-            if find_parent(e[0])!=999:
-                e1=self.elements[self.find_pointer(find_parent(e[0]))]
-                while not self.elements[self.find_pointer(e1[2]), 2] is None and not self.elements[self.find_pointer(e1[3]), 2] is None and find_parent(e1[0])!=999 and e1[1]!='/':
-                    e1=self.elements[self.find_pointer(find_parent(e1[0]))]
-                if e1[1] in ('+','*'):
-                    if self.elements[self.find_pointer(e1[2]), 1][-1].isdigit():
-                        lefttype1='digit'
-                    elif self.elements[self.find_pointer(e1[2]), 1].islower():
-                        lefttype1='variable'
-                    else:
-                        lefttype1='node'
-                    if self.elements[self.find_pointer(e1[3]), 1][-1].isdigit():
-                        righttype1='digit'
-                    elif self.elements[self.find_pointer(e1[3]), 1].islower():
-                        righttype1='variable'
-                    else:
-                        righttype1='node'
-                    if e1[2]==e[0]:
-                        parenthanded='left'
-                    elif e1[3]==e[0]:
-                        parenthanded='right'
-                    if e1[0]==4:
-                        print(e1, lefttype1,righttype1)
-                #for multiplication nodes, order from l-r digit,variable,bracket       
-                if e[1]=="*" and e1[1]=="*": 
-                    if parenthanded=='left':
-                        if righttype1=='digit' and lefttype!='digit':
-                            swapvertical='left-right'
-                        elif righttype1=='digit' and righttype!='digit':
-                            swapvertical='right-right'
-                        elif righttype1=='variable' and lefttype=='variable':
-                            if self.elements[self.find_pointer(e1[3]), 1]<self.elements[self.find_pointer(e[2]), 1]:
-                                swapvertical='left-right'
-                        elif righttype1=='variable' and righttype=='variable':
-                            if self.elements[self.find_pointer(e1[3]), 1]<self.elements[self.find_pointer(e[3]), 1]:
-                                swapvertical='right-right'
-                        elif righttype1=='variable' and lefttype=='node':
-                            swapvertical='left-right'
-                        elif righttype1=='variable' and righttype=='node':
-                            swapvertical='right-right'
-                    elif parenthanded=='right':
-                        if lefttype1!='digit' and lefttype=='digit':
-                            swapvertical='left-left'
-                        elif lefttype1!='digit' and righttype=='digit':
-                            swapvertical='right-left'
-                        elif lefttype1=='variable' and lefttype=='variable':
-                            if self.elements[self.find_pointer(e1[2]), 1]>self.elements[self.find_pointer(e[2]), 1]:
-                                swapvertical='left-left'
-                        elif lefttype1=='variable' and righttype=='variable':
-                            if self.elements[self.find_pointer(e1[2]), 1]>self.elements[self.find_pointer(e[3]), 1]:
-                                swapvertical='right-left'
-                        elif lefttype1=='node' and lefttype=='variable':
-                            swapvertical='left-left'
-                        elif lefttype1=='node' and righttype=='variable':
-                            swapvertical='right-left'
-                #for addition nodes, order brackets/vars/digits
-                if e[1]=="+" and e1[1]=="+":
-                    if parenthanded=='left':
-                        if righttype1!='digit' and lefttype=='digit':
-                            swapvertical='left-right'
-                        elif righttype1!='digit' and righttype=='digit':
-                            swapvertical='right-right'
-                        elif righttype1=='node' and lefttype=='variable':
-                            swapvertical='left-right'
-                        elif righttype1=='node' and righttype=='variable':
-                            swapvertical='right-right'
-                    elif parenthanded=='right':
-                        if lefttype1=='digit' and lefttype!='digit':
-                            swapvertical='left-left'
-                        elif lefttype1=='digit' and righttype!='digit':
-                            swapvertical='right-left'
-                        elif lefttype1=='variable' and lefttype=='node':
-                            swapvertical='left-left'
-                        elif lefttype1=='variable' and righttype=='node':
-                            swapvertical='right-left'
-                
-                leftnode=e[2]
-                rightnode=e[3]
-                leftnode1=e1[2]
-                rightnode1=e1[3]
-                if e[0]==3:
-                    print(e,"swapsies1")
-                if swapvertical=='left-left':
-                    e1[2]=leftnode
-                    e[2]=leftnode1
-                elif swapvertical=='left-right':
-                    e1[3]=leftnode
-                    e[2]=rightnode1
-                elif swapvertical=='right-left':
-                    e1[2]=rightnode
-                    e[3]=leftnode1
-                elif swapvertical=='right-right':
-                    e1[3]=rightnode
-                    e[3]=rightnode1
-                if e[0]==3:
-                    print(e,"swapsies1")
-            
-            
+
+        
+        #swap non-adjascent leafs that can be profitably swapped
+        for e in self.elements:
+            print(self.elements)
+            print(e)
+            if e[1]=='*' or e[1]=='+':
+                swapped=False
+                e_lefttype='non-leaf'
+                e_righttype='non-leaf'
+                if self.elements[self.find_pointer(e[2])][1][-1].isdigit():
+                    e_lefttype='digit'
+                if self.elements[self.find_pointer(e[3])][1][-1].isdigit():
+                    e_righttype='digit'
+                if self.elements[self.find_pointer(e[2])][1].islower():
+                    e_lefttype='var'
+                if self.elements[self.find_pointer(e[3])][1].islower():
+                    e_righttype='var'
+                if self.elements[self.find_pointer(e[2])][1]=='+' or self.elements[self.find_pointer(e[2])][1]=='/':
+                    e_lefttype='bracket'
+                if self.elements[self.find_pointer(e[3])][1]=='+' or self.elements[self.find_pointer(e[3])][1]=='/':
+                    e_righttype='bracket'
+                print(e_lefttype)
+                print(e_righttype)
+                ft=family_tree(e[0])
+                lt=left_tree(e[0])
+                lt.difference_update([e[0]])
+                print(lt)
+                if lt:
+                    for n in lt:
+                        
+                        print(n)
+                        swap='none'
+                        e1=self.elements[self.find_pointer(n)]
+                        e1_lefttype='non-leaf'
+                        e1_righttype='non-leaf'
+                        if self.elements[self.find_pointer(e1[2])][1]=='+' or self.elements[self.find_pointer(e1[2])][1]=='/':
+                            e1_lefttype='bracket'
+                        if self.elements[self.find_pointer(e1[3])][1]=='+' or self.elements[self.find_pointer(e1[3])][1]=='/':
+                            e1_righttype='bracket'
+                        if self.elements[self.find_pointer(e1[2])][1][-1].isdigit():
+                            e1_lefttype='digit'
+                        if self.elements[self.find_pointer(e1[3])][1][-1].isdigit():
+                            e1_righttype='digit'
+                        if self.elements[self.find_pointer(e1[2])][1].islower():
+                            e1_lefttype='var'
+                        if self.elements[self.find_pointer(e1[3])][1].islower():
+                            e1_righttype='var'
+                        print(e1_lefttype)
+                        print(e1_righttype)
+
+
+                        #for multiplication nodes, order from l-r digit,variable,bracket 
+                        if e[1]=='*' and not swapped:
+                            if e_righttype=='digit':
+                                if e1_lefttype=='var' or e1_lefttype=='bracket':
+                                    swap='er-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='bracket':
+                                    swap='er-e1r'
+                            elif e_lefttype=='digit':
+                                if e1_lefttype=='var' or e1_lefttype=='bracket':
+                                    swap='el-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='bracket':
+                                    swap='el-e1r'
+                            elif e_righttype=='var':
+                                if e1_lefttype=='bracket':
+                                    swap='er-e1l'
+                                elif e1_lefttype=='var' and self.elements[self.find_pointer(e1[2])][1]>self.elements[self.find_pointer(e[3])][1]:
+                                    swap='er-e1l'
+                                elif e1_righttype=='bracket':
+                                    swap='er-e1r'
+                                elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[3])][1]:
+                                    swap='er-e1r'
+                            elif e_lefttype=='var':
+                                if e1_lefttype=='bracket':
+                                    swap='el-e1l'
+                                elif e1_lefttype=='var' and self.elements[self.find_pointer(e1[2])][1]>self.elements[self.find_pointer(e[2])][1]:
+                                    swap='el-e1l'
+                                elif e1_righttype=='bracket':
+                                    swap='el-e1r'
+                                elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[2])][1]:
+                                    swap='el-e1r'
+                        #for addition nodes, order brackets/vars/digits
+                        if e[1]=='+' and not swapped:
+                            if e_righttype=='bracket':
+                                if e1_lefttype=='var' or e1_lefttype=='digit':
+                                    swap='er-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='digit':
+                                    swap='er-e1r'
+                            elif e_lefttype=='bracket':
+                                if e1_lefttype=='var' or e1_lefttype=='digit':
+                                    swap='el-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='digit':
+                                    swap='el-e1r'
+                            elif e_lefttype=='var':
+                                if e1_lefttype=='digit':
+                                    swap='el-e1l'
+                                elif e1_lefttype=='var' and self.elements[self.find_pointer(e1[2])][1]>self.elements[self.find_pointer(e[2])][1]:
+                                    swap='el-e1l'
+                                elif e1_righttype=='digit':
+                                    swap='el-e1r'
+                                elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[2])][1]:
+                                    swap='el-e1r'
+                            elif e_righttype=='var':
+                                if e1_lefttype=='digit':
+                                    swap='er-e1l'
+                                elif e1_lefttype=='var' and self.elements[self.find_pointer(e1[2])][1]>self.elements[self.find_pointer(e[3])][1]:
+                                    swap='er-e1l'
+                                elif e1_righttype=='digit':
+                                    swap='er-e1r'
+                                elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[3])][1]:
+                                    swap='er-e1r'
+
+                        leftnode=e[2]
+                        rightnode=e[3]
+                        leftnode1=e1[2]
+                        rightnode1=e1[3]
+                        print(swap)
+                        print(swapped)
+                        if swap=='el-e1l' and not swapped:
+                            e1[2]=leftnode
+                            e[2]=leftnode1
+                            swapped=True
+                        elif swap=='el-e1r' and not swapped:
+                            e1[3]=leftnode
+                            e[2]=rightnode1
+                            swapped=True
+                        elif swap=='er-e1l' and not swapped:
+                            e1[2]=rightnode
+                            e[3]=leftnode1
+                            swapped=True
+                        elif swap=='er-e1r' and not swapped:
+                            e1[3]=rightnode
+                            e[3]=rightnode1
+                            swapped=True
+
         tidied=False
         i=0
         while not tidied and i<len(self.elements):
+            print(i)
             e=self.elements[i]
             mask = np.ones(len(self.elements), dtype=bool)
             eliminate=[]
@@ -1897,7 +1957,7 @@ class Expression:
                 if find_parent(e[0])!=999:
                     p=find_parent(e[0])
                     #unity case: 0+()=()
-                    if not tidied and self.elements[self.find_pointer(p),1]=="+":
+                    if self.elements[self.find_pointer(p),1]=="+" and not tidied:
                         print("0+()=()")
                         eliminate.append(self.find_pointer(e[0]))
                         eliminate.append(self.find_pointer(p))
@@ -1928,15 +1988,18 @@ class Expression:
                         result = self.elements[mask]
                         self.elements=result
                         tidied=True
-                        
+
                     #error case: 1/0->"Divide by zero!"
-                    if not tidied and self.elements[self.find_pointer(p),1]=="/":
-                        print("Second argument to a division or modulo operation was zero.")
-                        raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
+                    try:
+                        if not tidied and self.elements[self.find_pointer(p),1]=="/":
+                            raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
+                            tidied=True
+                    except:
+                        print("ZeroDivisionError: Second argument to a division or modulo operation was zero.")
 
 
                     #unity case: 0*()=0
-                    if not tidied and self.elements[self.find_pointer(p),1]=="*" :
+                    if not tidied and self.elements[self.find_pointer(p),1]=="*":
                         print("0*()=0")
                         cl=self.elements[self.find_pointer(p),2]
                         cr=self.elements[self.find_pointer(p),3]
@@ -2024,7 +2087,7 @@ class Expression:
                         result = self.elements[mask]
                         self.elements=result
                         tidied=True
-      
+    
             if e[1]=='1':
                 if find_parent(e[0])!=999:
                     p=find_parent(e[0])
@@ -2063,7 +2126,7 @@ class Expression:
                         self.elements=result
                         tidied=True
                         
-                                  
-            i=i+1
+                                
+            i=i+1  
                         
        
