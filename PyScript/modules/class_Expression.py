@@ -1828,9 +1828,9 @@ class Expression:
                     e_lefttype='var'
                 if self.elements[self.find_pointer(e[3])][1].islower():
                     e_righttype='var'
-                if self.elements[self.find_pointer(e[2])][1]=='+' or self.elements[self.find_pointer(e[2])][1]=='/':
+                if (self.elements[self.find_pointer(e[2])][1]=='+' and e[1]=='*')  or (self.elements[self.find_pointer(e[2])][1]=='*' and e[1]=='+') or self.elements[self.find_pointer(e[2])][1]=='/':
                     e_lefttype='bracket'
-                if self.elements[self.find_pointer(e[3])][1]=='+' or self.elements[self.find_pointer(e[3])][1]=='/':
+                if (self.elements[self.find_pointer(e[3])][1]=='+'  and e[1]=='*') or (self.elements[self.find_pointer(e[3])][1]=='*'  and e[1]=='+') or self.elements[self.find_pointer(e[3])][1]=='/':
                     e_righttype='bracket'
                 print(e_lefttype)
                 print(e_righttype)
@@ -1846,9 +1846,9 @@ class Expression:
                         e1=self.elements[self.find_pointer(n)]
                         e1_lefttype='non-leaf'
                         e1_righttype='non-leaf'
-                        if self.elements[self.find_pointer(e1[2])][1]=='+' or self.elements[self.find_pointer(e1[2])][1]=='/':
+                        if (self.elements[self.find_pointer(e1[2])][1]=='+' and e1[1]=='*') or (self.elements[self.find_pointer(e1[2])][1]=='*' and e1[1]=='+') or self.elements[self.find_pointer(e1[2])][1]=='/':
                             e1_lefttype='bracket'
-                        if self.elements[self.find_pointer(e1[3])][1]=='+' or self.elements[self.find_pointer(e1[3])][1]=='/':
+                        if (self.elements[self.find_pointer(e1[3])][1]=='+' and e1[1]=='*') or (self.elements[self.find_pointer(e1[3])][1]=='*' and e1[1]=='+') or self.elements[self.find_pointer(e1[3])][1]=='/':
                             e1_righttype='bracket'
                         if self.elements[self.find_pointer(e1[2])][1][-1].isdigit():
                             e1_lefttype='digit'
@@ -1869,11 +1869,6 @@ class Expression:
                                     swap='er-e1l'
                                 elif e1_righttype=='var' or e1_righttype=='bracket':
                                     swap='er-e1r'
-                            elif e_lefttype=='digit':
-                                if e1_lefttype=='var' or e1_lefttype=='bracket':
-                                    swap='el-e1l'
-                                elif e1_righttype=='var' or e1_righttype=='bracket':
-                                    swap='el-e1r'
                             elif e_righttype=='var':
                                 if e1_lefttype=='bracket':
                                     swap='er-e1l'
@@ -1883,6 +1878,12 @@ class Expression:
                                     swap='er-e1r'
                                 elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[3])][1]:
                                     swap='er-e1r'
+
+                            if e_lefttype=='digit':
+                                if e1_lefttype=='var' or e1_lefttype=='bracket':
+                                    swap='el-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='bracket':
+                                    swap='el-e1r'
                             elif e_lefttype=='var':
                                 if e1_lefttype=='bracket':
                                     swap='el-e1l'
@@ -1899,11 +1900,6 @@ class Expression:
                                     swap='er-e1l'
                                 elif e1_righttype=='var' or e1_righttype=='digit':
                                     swap='er-e1r'
-                            elif e_lefttype=='bracket':
-                                if e1_lefttype=='var' or e1_lefttype=='digit':
-                                    swap='el-e1l'
-                                elif e1_righttype=='var' or e1_righttype=='digit':
-                                    swap='el-e1r'
                             elif e_lefttype=='var':
                                 if e1_lefttype=='digit':
                                     swap='el-e1l'
@@ -1912,6 +1908,12 @@ class Expression:
                                 elif e1_righttype=='digit':
                                     swap='el-e1r'
                                 elif e1_righttype=='var' and self.elements[self.find_pointer(e1[3])][1]>self.elements[self.find_pointer(e[2])][1]:
+                                    swap='el-e1r'
+
+                            if e_lefttype=='bracket':
+                                if e1_lefttype=='var' or e1_lefttype=='digit':
+                                    swap='el-e1l'
+                                elif e1_righttype=='var' or e1_righttype=='digit':
                                     swap='el-e1r'
                             elif e_righttype=='var':
                                 if e1_lefttype=='digit':
