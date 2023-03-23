@@ -1948,6 +1948,128 @@ class Expression:
                             e[3]=rightnode1
                             swapped=True
                             
+        #swap any subtrees that have lower precedence elements
+        for e in self.elements:    
+            if e[1] in ('+','*'):
+                swap=False
+                
+
+                lefthasbracket=False
+                righthasbracket=False
+                lefthasvar=False
+                righthasvar=False
+                lefthasconst=False
+                righthasconst=False
+                treedone=False
+                e1=e
+                
+
+                while not treedone:
+                    
+                    if e1[1]=='+' and e1[0]!=e[0]:
+                        lefthasbracket=True
+                    elif e1[1]=='/' and e1[0]!=e[0]:
+                        lefthasbracket=True
+                    elif e1[1].islower():
+                        lefthasvar=True
+                    elif e1[1][-1].isdigit():
+                        lefthasconst=True
+                    if self.find_pointer(e1[2]) is not None:
+                        e1=self.elements[self.find_pointer(e1[2])]
+                        print("A")
+                        print(e1)
+
+                    else:
+                        cont=True
+                        while cont and find_parent(e1[0])!=999 and e1[0]!=e[0]:
+                            if self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0]:
+                                cont=False
+                                e1=self.elements[self.find_pointer(find_parent(e1[0]))]
+                                print("B")
+                                print(e1)
+                                if e1[0]==e[0]:
+                                    treedone=True
+                                e1=self.elements[self.find_pointer(e1[3])]
+                                print("B")
+                                print(e1)
+                            elif e1[0]!=e[0]:
+                                e1=self.elements[self.find_pointer(find_parent(e1[0]))]
+                                print("C")
+                                print(e1)
+                                if e1[0]==e[0]:
+                                    treedone=True
+                            else:
+                                cont=False
+
+                print("lefthasbracket="+str(lefthasbracket))
+                print("lefthasvar="+str(lefthasvar))
+                print("lefthasconst="+str(lefthasconst))
+                treedone=False
+                if e[3] is not None:
+                    e1=self.elements[self.find_pointer(e[3])]
+                else:
+                    treedone=True
+                while not treedone:
+                    if e1[1]=='+':
+                        righthasbracket=True
+                    elif e1[1]=='/':
+                        righthasbracket=True
+                    elif e1[1].islower():
+                        righthasvar=True
+                    elif e1[1][-1].isdigit():
+                        righthasconst=True
+                    if self.find_pointer(e1[2]) is not None:
+                        e1=self.elements[self.find_pointer(e1[2])]
+                        print("A")
+                        print(e1)
+                    else:
+                        cont=True
+                        while cont and find_parent(e1[0])!=999 and e1[0]!=e[0]:
+                            if self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0]:
+                                cont=False
+                                e1=self.elements[self.find_pointer(find_parent(e1[0]))]
+                                print("B")
+                                print(e1)
+                                if e1[0]==e[0]:
+                                    treedone=True
+                                e1=self.elements[self.find_pointer(e1[3])]
+                                print("B")
+                                print(e1)
+                            elif e1[0]!=e[0]:
+                                e1=self.elements[self.find_pointer(find_parent(e1[0]))]
+                                print("C")
+                                print(e1)
+                                if e1[0]==e[0]:
+                                    treedone=True
+                            else:
+                                cont=False
+
+
+                print("righthasbracket="+str(righthasbracket))
+                print("righthasvar="+str(righthasvar))
+                print("righthasconst="+str(righthasconst))
+                swap=False
+                #for multiplication nodes, order from l-r digit,variable,bracket
+                if not righthasbracket and lefthasbracket and e[1]=='*':
+                    swap=True
+                elif not righthasvar and not righthasbracket and lefthasvar and e[1]=='*':
+                    swap=True
+                elif righthasconst and not righthasvar and not righthasbracket and e[1]=='*':
+                    swap=True
+                #for addition nodes, order brackets/vars/digits
+                if not lefthasbracket and righthasbracket and e[1]=='+':
+                    swap=True
+                elif not lefthasvar and not lefthasbracket and righthasvar and e[1]=='+':
+                    swap=True
+                elif not lefthasvar and not lefthasbracket and righthasconst and e[1]=='+':
+                    swap=True
+                if swap:
+                    leftindex=e[2]
+                    rightindex=e[3]
+                    e[3]=leftindex
+                    e[2]=rightindex
+                print(self.elements)
+                            
         for e in self.elements:
 
             tidied=False
