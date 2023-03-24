@@ -1768,6 +1768,7 @@ class Expression:
                 left_tree.update(to_add)
             return left_tree
 
+        
         #swap any adjascent leafs that are in wrong order
         for e in self.elements:
             swap=False
