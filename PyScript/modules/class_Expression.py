@@ -1758,9 +1758,11 @@ class Expression:
                     e1=self.elements[self.find_pointer(n)]
                     if self.elements[self.find_pointer(e1[2])][1]==e[1]:
                         to_add.add(self.elements[self.find_pointer(e1[2])][0])
+                        
                     if len(parent_chain(e1[0]))>1 and self.elements[self.find_pointer(parent_chain(e1[0])[-2])][0]==self.elements[self.find_pointer(parent_chain(e1[0])[-1])][2]:
                         if self.elements[self.find_pointer(e1[3])][1]==e[1]:
                             to_add.add(self.elements[self.find_pointer(e1[3])][0])
+                            
                 if to_add.intersection(left_tree)==to_add:
                     added=False
                 else:
