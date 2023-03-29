@@ -1615,6 +1615,28 @@ class Expression:
                 else:
                     return None
         
+        def copy_tree(node):
+            copy=np.array([self.elements[self.find_pointer(node)].copy()])
+            n=node
+
+            while (self.elements[self.find_pointer(n)][2] is not None and self.elements[self.find_pointer(n)][2] not in copy[:,0] ) or (self.elements[self.find_pointer(n)][3] is not None and self.elements[self.find_pointer(n)][3] not in copy[:,0] ):
+
+                while self.elements[self.find_pointer(n)][2] is not None:
+
+                    n=self.elements[self.find_pointer(n)][2]
+                    copy=np.concatenate((copy, np.array([self.elements[self.find_pointer(n)].copy()])), axis=0)
+                while n!=node and self.elements[self.find_pointer(find_parent(n))][2]==n:
+
+                    e=self.elements[self.find_pointer(find_parent(n))]
+                    if e[2]==n and e[3] is not None and e[3]!=n:
+                        n=e[3]
+
+                        copy=np.concatenate((copy, np.array([self.elements[self.find_pointer(n)].copy()])), axis=0)
+                    else:
+
+                        n=find_parent(n)
+            return copy
+        
         translation_f=self.translate_flat()
         translation=self.translate()
         result=self.print_tree('r')
@@ -1652,72 +1674,155 @@ class Expression:
             if find_leaf(e[2]) is not None and find_leaf(e[3]) is not None:
                 break
                 
+        if len(candidatepairs)==0:
+            for e in self.elements:
+                if find_parent(e[0]) != 999:
+                    print(e[1], self.elements[self.find_pointer(find_parent(e[0])),1], self.find_depth(e[0]), requireddepth)
+                    if e[1]=='+' and self.elements[self.find_pointer(find_parent(e[0])),1]=="*" and self.elements[self.find_pointer(find_parent(e[0])),2]==e[0] and self.find_depth(e[0])==requireddepth+1:
+                        e1 = self.elements[self.find_pointer(self.elements[self.find_pointer(find_parent(e[0])),3])]
+                        if e1[1]=='+':
+                            candidatetriple=[e,self.elements[self.find_pointer(find_parent(e[0]))], e1]
+                
 
-        minindex=self.elements[:,0].min()
-        newelement1=[1000-1,'*',1000-2, None]
-        newelement2=[1000-2, '', None, None]
-        leaf=find_leaf(e1[0])
-        multiplier=self.elements[self.find_pointer(leaf),1]
-        usenewelements=True
-        if find_leaf(e[2]) is not None and find_leaf(e[3]) is not None:
-            usenewelements=False
-            self.add_subbranch(find_leaf(e[2]), "*", multiplier)
-            self.add_subbranch(find_leaf(e[3]), "*", multiplier)
-        elif find_leaf(e[2]) is not None and find_leaf(e[3]) is None:
-            self.add_subbranch(find_leaf(e[2]), "*", multiplier)
-            newelement2[1]=multiplier
-            newelement1[3]=e[3]
-            e[3]=1000-1
-        elif find_leaf(e[2]) is None and find_leaf(e[3]) is not None:
-            self.add_subbranch(find_leaf(e[3]), "*", multiplier)
-            newelement2[1]=multiplier
-            newelement1[3]=e[2]
-            e[2]=1000-1
-        mask = np.ones(len(self.elements), dtype=bool)
-        twig=find_parent(leaf)
-        if self.elements[self.find_pointer(twig),2]==leaf:
-            twighanded='left'
-        else:
-            twighanded='right'
-        branch=find_parent(twig)
-        if branch!=999:
-            if self.elements[self.find_pointer(branch),2]==twig:
-                branchhanded='left'
-            else:
-                branchhanded='right'
-            if branchhanded=='left' and twighanded=='left':
-                self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(twig),3]
-                if self.elements[self.find_pointer(branch),1]=='/':
-                    self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(branch),2]
-            elif branchhanded=='left' and twighanded=='right':
-                self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(twig),2]
-                if self.elements[self.find_pointer(branch),1]=='/':
-                    self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(branch),2]
-            elif branchhanded=='right' and twighanded=='left':
-                self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(twig),3]
-                if self.elements[self.find_pointer(branch),1]=='/':
-                    self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(branch),3]
-            elif branchhanded=='right' and twighanded=='right':
-                self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(twig),2]
-                if self.elements[self.find_pointer(branch),1]=='/':
-                    self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(branch),3]
-        
-           
-        mask[[self.find_pointer(leaf),self.find_pointer(twig)]] = False
-        result = self.elements[mask]
-        self.elements=result
-        
-        if usenewelements:
+        if len(candidatepairs)>0:
             minindex=self.elements[:,0].min()
-            newelement1[0]=minindex-1
-            newelement1[2]=minindex-2
-            newelement2[0]=minindex-2
-            if e[3]==1000-1:
-                self.elements[self.find_pointer(e[0]), 3]=minindex-1
-            if e[2]==1000-1:
-                self.elements[self.find_pointer(e[0]), 2]=minindex-1
+            newelement1=[1000-1,'*',1000-2, None]
+            newelement2=[1000-2, '', None, None]
+            leaf=find_leaf(e1[0])
+            multiplier=self.elements[self.find_pointer(leaf),1]
+            usenewelements=True
+            if find_leaf(e[2]) is not None and find_leaf(e[3]) is not None:
+                usenewelements=False
+                self.add_subbranch(find_leaf(e[2]), "*", multiplier)
+                self.add_subbranch(find_leaf(e[3]), "*", multiplier)
+            elif find_leaf(e[2]) is not None and find_leaf(e[3]) is None:
+                self.add_subbranch(find_leaf(e[2]), "*", multiplier)
+                newelement2[1]=multiplier
+                newelement1[3]=e[3]
+                e[3]=1000-1
+            elif find_leaf(e[2]) is None and find_leaf(e[3]) is not None:
+                self.add_subbranch(find_leaf(e[3]), "*", multiplier)
+                newelement2[1]=multiplier
+                newelement1[3]=e[2]
+                e[2]=1000-1
+            mask = np.ones(len(self.elements), dtype=bool)
+            twig=find_parent(leaf)
+            if self.elements[self.find_pointer(twig),2]==leaf:
+                twighanded='left'
+            else:
+                twighanded='right'
+            branch=find_parent(twig)
+            if branch!=999:
+                if self.elements[self.find_pointer(branch),2]==twig:
+                    branchhanded='left'
+                else:
+                    branchhanded='right'
+                if branchhanded=='left' and twighanded=='left':
+                    self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(twig),3]
+                    if self.elements[self.find_pointer(branch),1]=='/':
+                        self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(branch),2]
+                elif branchhanded=='left' and twighanded=='right':
+                    self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(twig),2]
+                    if self.elements[self.find_pointer(branch),1]=='/':
+                        self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(branch),2]
+                elif branchhanded=='right' and twighanded=='left':
+                    self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(twig),3]
+                    if self.elements[self.find_pointer(branch),1]=='/':
+                        self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(branch),3]
+                elif branchhanded=='right' and twighanded=='right':
+                    self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(twig),2]
+                    if self.elements[self.find_pointer(branch),1]=='/':
+                        self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(branch),3]
 
-            self.elements=np.concatenate((self.elements,[newelement1,newelement2]), axis=0)
+
+            mask[[self.find_pointer(leaf),self.find_pointer(twig)]] = False
+            result = self.elements[mask]
+            self.elements=result
+
+            if usenewelements:
+                minindex=self.elements[:,0].min()
+                newelement1[0]=minindex-1
+                newelement1[2]=minindex-2
+                newelement2[0]=minindex-2
+                if e[3]==1000-1:
+                    self.elements[self.find_pointer(e[0]), 3]=minindex-1
+                if e[2]==1000-1:
+                    self.elements[self.find_pointer(e[0]), 2]=minindex-1
+
+                self.elements=np.concatenate((self.elements,[newelement1,newelement2]), axis=0)
+                
+        elif len(candidatetriple)>0:
+            el=candidatetriple[0]
+            ep=candidatetriple[1]
+            er=candidatetriple[2]
+            el_l_copy=copy_tree(el[2])
+            el_r_copy=copy_tree(el[3])
+            er_l_copy=copy_tree(er[2])
+            er_r_copy=copy_tree(er[3])
+
+            minindex=self.elements[:,0].min()
+            maxindex=self.elements[:,0].max()
+            el_l_minindex=el_l_copy[:,0].min()
+            el_l_maxindex=el_l_copy[:,0].max()
+            el_r_minindex=el_r_copy[:,0].min()
+            el_r_maxindex=el_r_copy[:,0].max()
+            er_l_minindex=er_l_copy[:,0].min()
+            er_l_maxindex=er_l_copy[:,0].max()
+            er_r_minindex=er_r_copy[:,0].min()
+            er_r_maxindex=er_r_copy[:,0].max()
+
+
+            ep[1]='+'
+            el[2]=minindex-1
+            el[3]=minindex-2
+            er[2]=minindex-3
+            er[3]=minindex-4
+            minindex=minindex-4
+
+            el_l_offset=el_l_maxindex-minindex+1
+            minindex=el_l_minindex-el_l_offset
+            el_r_offset=el_r_maxindex-minindex+1
+            minindex=el_r_minindex-el_r_offset
+            er_l_offset=er_l_maxindex-minindex+1
+            minindex=er_l_minindex-er_l_offset
+            er_r_offset=er_r_maxindex-minindex+1
+            minindex=er_r_minindex-er_r_offset
+
+            multnode_el_l=[el[2],'*',el_l_maxindex, er_l_maxindex]
+            multnode_el_r=[el[3],'*',el_l_maxindex-el_l_offset, er_r_maxindex]
+            multnode_er_l=[er[2],'*',el_r_maxindex, er_l_maxindex-er_l_offset]
+            multnode_er_r=[er[3],'*',el_r_maxindex-el_r_offset, er_r_maxindex-er_r_offset]
+            mult_exp=Expression()
+            mult_exp.elements=[multnode_el_l,multnode_el_r, multnode_er_l, multnode_er_r]
+            print(mult_exp.elements)
+            for n in el_l_copy:
+                n[0]=n[0]-el_l_offset
+                if n[2] is not None:
+                    n[2]=n[2]-el_l_offset
+                    n[3]=n[3]-el_l_offset
+            for n in el_r_copy:
+                n[0]=n[0]-el_r_offset
+                if n[2] is not None:
+                    n[2]=n[2]-el_r_offset
+                    n[3]=n[3]-el_r_offset
+            for n in er_l_copy:
+                n[0]=n[0]-er_l_offset
+                if n[2] is not None:
+                    n[2]=n[2]-er_l_offset
+                    n[3]=n[3]-er_l_offset
+            for n in er_r_copy:
+                n[0]=n[0]-er_r_offset
+                if n[2] is not None:
+                    n[2]=n[2]-er_r_offset
+                    n[3]=n[3]-er_r_offset
+            self.elements=np.concatenate((self.elements,mult_exp.elements,
+                                                         el_l_copy, el_r_copy, er_l_copy, er_r_copy), axis=0)
+            for e in self.elements:
+                e[0]=int(e[0])
+                if e[2] is not None:
+                    e[2]=int(e[2])
+                    e[3]=int(e[3])    
+         
             
 
    
