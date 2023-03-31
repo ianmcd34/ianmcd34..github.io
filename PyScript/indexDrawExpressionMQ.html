@@ -135,7 +135,7 @@
 	   function jspaste() {
 		
 		selectedNodes=[];
-		    
+		alert("jspaste()");  
 	      	selection = document.getSelection();
 	      	selectionString=selection.toString();
 		answerMathField.typedText("#");
@@ -248,7 +248,7 @@
 			n=exp_result1.indexOf("]");
 
 		}
-
+		alert(selectedNodes);
 		trimSelectedNodes();
 
 	      }
@@ -356,7 +356,7 @@
 		
 		
 	function trimSelectedNodes() {
-	
+		  alert("trimSelectedNodes()");
 
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
@@ -458,7 +458,7 @@
 			trimSelectedNodes();
 		} 
 
-
+		alert(selectedNodes);
 	} 
 		
 	</script>
