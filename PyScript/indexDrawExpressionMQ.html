@@ -146,7 +146,11 @@
 		selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
 		
 
-		    
+		if (selectionString1.endsWith('-')) {
+			selectionString1=selectionString1.substr(0,selectionString1.length-1);
+			alert(selectionString1);
+			selectionString='-'+selectionString;
+		}
 
 		   
 		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
