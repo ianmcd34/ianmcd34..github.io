@@ -650,8 +650,7 @@
 				selectedtop=tops[0]
 				exptop=tops[1]
 				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
-				if exptop!=1:
-					raise Exception("Stop here please.")
+
 				if selectedtop==exptop or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
 
