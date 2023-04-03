@@ -361,6 +361,7 @@
 		
 	function trimSelectedNodes() {
 		  alert("trimSelectedNodes()");
+		  alert(selectedNodes);
 
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
@@ -400,6 +401,8 @@
 		  }
 
 		  selectedNodes=newSelectedNodes;
+		  alert("trimSelectedNodes()A");
+		  alert(selectedNodes);
 
 	   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
 		function countleafs(item) {
@@ -455,6 +458,8 @@
 					if (exp[find_pointer(selectedNodes[n])][2] == undefined || exp[find_pointer(selectedNodes[n])][2].toString() == "NaN") {
 						selectedNodes.splice(n,1);
 						removed = true;
+						alert("trimSelectedNodesB()");
+		  				alert(selectedNodes);
 					}
 					else {n--;}
 				} else {n--;}
@@ -462,6 +467,7 @@
 			trimSelectedNodes();
 		} 
 
+		alert("trimSelectedNodesC()");
 		alert(selectedNodes);
 	} 
 		
