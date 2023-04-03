@@ -207,7 +207,8 @@
 				n+=1;
 			}
 
-			
+			if (operand[0]=='-' && operand[1].isdigit()) {operand.replace("-","");}
+								      
 			if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)  || (operand=='*' && selectionString1.indexOf('/')>=0)) {
 				i=selectionString1.indexOf(operand);
 				if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-')-1;}
@@ -240,13 +241,17 @@
 				n+=1;
 			}
 
+			if (operand[0]=='-' && operand[1].isdigit()) {operand.replace("-","");}
+								      
 			if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)  || (operand=='*' && selectionString.indexOf('/')>=0)) {
 				i=selectionString.indexOf(operand);
 				if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
 				if  (operand=='*' && selectionString.indexOf('/')>=0  && (selectionString.indexOf('*')>selectionString.indexOf('/') || selectionString.indexOf('*')==-1 )) {i=selectionString.indexOf('/')-1;}
 				selectedNodes.push(index);
 				selectionString=selectionString.substring(i+operand.length);
-			} else {selectionStringNo=2;}
+			} elif (selectionString.length==0) {
+				selectionStringNo=2;
+			}
 			
 			exp_result1=exp_result1.substring(n+2);
 			n=exp_result1.indexOf("]");
