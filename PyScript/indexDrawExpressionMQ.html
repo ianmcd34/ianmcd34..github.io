@@ -249,7 +249,7 @@
 				if  (operand=='*' && selectionString.indexOf('/')>=0  && (selectionString.indexOf('*')>selectionString.indexOf('/') || selectionString.indexOf('*')==-1 )) {i=selectionString.indexOf('/')-1;}
 				selectedNodes.push(index);
 				selectionString=selectionString.substring(i+operand.length);
-			} elif (selectionString.length==0) {
+			} else if (selectionString.length==0 || exp_result1.length==0) {
 				selectionStringNo=2;
 			}
 			
