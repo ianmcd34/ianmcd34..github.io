@@ -207,7 +207,7 @@
 				n+=1;
 			}
 
-			if (operand[0]=='-' && operand[1].isdigit()) {operand.replace("-","");}
+			if (operand[0]=='-' && operand.length>1) {operand.replace("-","");}
 								      
 			if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)  || (operand=='*' && selectionString1.indexOf('/')>=0)) {
 				i=selectionString1.indexOf(operand);
@@ -241,7 +241,7 @@
 				n+=1;
 			}
 
-			if (operand[0]=='-' && operand[1].isdigit()) {operand.replace("-","");}
+			if (operand[0]=='-' && operand.length>1) {operand.replace("-","");}
 								      
 			if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)  || (operand=='*' && selectionString.indexOf('/')>=0)) {
 				i=selectionString.indexOf(operand);
