@@ -2135,7 +2135,7 @@ class Expression:
                     else:
                         cont=True
                         while cont and find_parent(e1[0])!=999 and e1[0]!=e[0]:
-                            if self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0]:
+                            if self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0] and self.elements[self.find_pointer(find_parent(e1[0]))][3]!=e1[0]:
                                 cont=False
                                 e1=self.elements[self.find_pointer(find_parent(e1[0]))]
                                 print("B")
