@@ -1296,7 +1296,7 @@ class Expression:
                     self.elements[self.find_pointer(leftindex),1]=str(int(topK/commonK))
                     setcommon=True
             print("right=",self.elements[self.find_pointer(rightindex),1])
-            if self.elements[self.find_pointer(rightindex),1][-1].isdigit():
+            if self.elements[self.find_pointer(rightindex),1][-1].isdigit()  and leftindex!=rightindex:
                 if int(self.elements[self.find_pointer(rightindex),1])<0:
                     self.elements[self.find_pointer(rightindex),1]='-1'
                 elif int(self.elements[self.find_pointer(rightindex),1])>0:
@@ -1317,7 +1317,7 @@ class Expression:
                 if not setcommon:
                     self.elements[self.find_pointer(leftindex),1]=str(int(bottomK/commonK))
                     setcommon=True
-            if self.elements[self.find_pointer(rightindex),1][-1].isdigit():
+            if self.elements[self.find_pointer(rightindex),1][-1].isdigit()  and leftindex!=rightindex:
                 if int(self.elements[self.find_pointer(rightindex),1])<0:
                     self.elements[self.find_pointer(rightindex),1]='-1'
                 elif int(self.elements[self.find_pointer(rightindex),1])>0:
@@ -1335,7 +1335,7 @@ class Expression:
                 if commonLcopy.find(self.elements[self.find_pointer(leftindex),1])>-1:
                     commonLcopy=commonLcopy.replace(self.elements[self.find_pointer(leftindex),1],"",1)
                     self.elements[self.find_pointer(leftindex),1]='1'
-            if self.elements[self.find_pointer(rightindex),1].islower():
+            if self.elements[self.find_pointer(rightindex),1].islower()  and leftindex!=rightindex:
                 if commonLcopy.find(self.elements[self.find_pointer(rightindex),1])>-1:
                     commonLcopy=commonLcopy.replace(self.elements[self.find_pointer(rightindex),1],"",1)
                     self.elements[self.find_pointer(rightindex),1]='1'
@@ -1347,7 +1347,7 @@ class Expression:
                 if commonL.find(self.elements[self.find_pointer(leftindex),1])>-1:
                     commonL=commonL.replace(self.elements[self.find_pointer(leftindex),1],"",1)
                     self.elements[self.find_pointer(leftindex),1]='1'
-            if self.elements[self.find_pointer(rightindex),1].islower():
+            if self.elements[self.find_pointer(rightindex),1].islower()  and leftindex!=rightindex:
                 if commonL.find(self.elements[self.find_pointer(rightindex),1])>-1:
                     commonL=commonL.replace(self.elements[self.find_pointer(rightindex),1],"",1)
                     self.elements[self.find_pointer(rightindex),1]='1'
