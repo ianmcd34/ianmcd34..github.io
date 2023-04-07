@@ -1228,7 +1228,7 @@ class Expression:
                     for m in result:
                         if n==m:
                             unique=False
-                    if unique and n!=999:
+                    if unique and n!=999 and self.elements[self.find_pointer(n), 1]!='+':
                         result.append(n)
                 return result
             
