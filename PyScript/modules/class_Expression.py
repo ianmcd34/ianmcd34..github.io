@@ -2084,7 +2084,7 @@ class Expression:
                         lefthasvar=True
                     elif e1[1][-1].isdigit():
                         lefthasconst=True
-                    if self.find_pointer(e1[2]) is not None:
+                    if self.find_pointer(e1[2]) is not None and not lefthasbracket:
                         e1=self.elements[self.find_pointer(e1[2])]
                         print("A")
                         print(e1)
@@ -2128,7 +2128,7 @@ class Expression:
                         righthasvar=True
                     elif e1[1][-1].isdigit():
                         righthasconst=True
-                    if self.find_pointer(e1[2]) is not None:
+                    if self.find_pointer(e1[2]) is not None and not righthasbracket:
                         e1=self.elements[self.find_pointer(e1[2])]
                         print("A")
                         print(e1)
