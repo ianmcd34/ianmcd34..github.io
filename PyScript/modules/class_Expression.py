@@ -663,10 +663,10 @@ class Expression:
                 leftindex=self.elements[self.find_pointer(parentindex),2]
                 rightindex=self.elements[self.find_pointer(parentindex),3]
 
-                if self.elements[self.find_pointer(leftindex),1][-1].isdigit():
+                if self.elements[self.find_pointer(leftindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(self.elements[self.find_pointer(leftindex),1])))>1:
                     denominator=int(self.elements[self.find_pointer(leftindex),1])  
                     denominatorindex=self.elements[self.find_pointer(leftindex),0]
-                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit():
+                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(self.elements[self.find_pointer(rightindex),1])))>1:
                     denominator=int(self.elements[self.find_pointer(rightindex),1])  
                     denominatorindex=self.elements[self.find_pointer(rightindex),0]
                 else:
@@ -691,6 +691,9 @@ class Expression:
                     print("cancel "+str(numerator)+"/"+str(denominator))
                     cancel_constant=True
                     simplify=simplify+"["+str(numeratorindex)+"]["+str(denominatorindex)+"]cancel constants"
+                    
+            if divideindex is not None:
+                parentindex=divideindex
                    
             #check if you can cancel variables
             print("find if cancel variables")
@@ -698,11 +701,11 @@ class Expression:
                 leftindex=self.elements[self.find_pointer(parentindex),2]
                 rightindex=self.elements[self.find_pointer(parentindex),3]
                 print(leftindex,rightindex)
-                if self.elements[self.find_pointer(leftindex),1].islower():
+                if self.elements[self.find_pointer(leftindex),1].islower() and self.elements[self.find_pointer(leftindex),1]==numeratorvar:
                     denominatorvar=self.elements[self.find_pointer(leftindex),1]  
                     denominatorindex=self.elements[self.find_pointer(leftindex),0]
                     print(denominatorvar,denominatorindex)
-                elif self.elements[self.find_pointer(rightindex),1].islower():
+                elif self.elements[self.find_pointer(rightindex),1].islower() and self.elements[self.find_pointer(rightindex),1]==numeratorvar:
                     denominatorvar=self.elements[self.find_pointer(rightindex),1]  
                     denominatorindex=self.elements[self.find_pointer(rightindex),0]
                 
