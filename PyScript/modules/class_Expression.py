@@ -663,10 +663,10 @@ class Expression:
                 leftindex=self.elements[self.find_pointer(parentindex),2]
                 rightindex=self.elements[self.find_pointer(parentindex),3]
 
-                if self.elements[self.find_pointer(leftindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),math.fabs(int(self.elements[self.find_pointer(leftindex),1])))>1:
+                if self.elements[self.find_pointer(leftindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(int(self.elements[self.find_pointer(leftindex),1]))))>1:
                     denominator=int(self.elements[self.find_pointer(leftindex),1])  
                     denominatorindex=self.elements[self.find_pointer(leftindex),0]
-                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),math.fabs(int(self.elements[self.find_pointer(rightindex),1])))>1:
+                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(int(self.elements[self.find_pointer(rightindex),1]))))>1:
                     denominator=int(self.elements[self.find_pointer(rightindex),1])  
                     denominatorindex=self.elements[self.find_pointer(rightindex),0]
                 else:
