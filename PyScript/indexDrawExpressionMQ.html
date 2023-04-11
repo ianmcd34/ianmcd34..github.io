@@ -331,6 +331,10 @@
 
 	    }
 		
+	function isSelectedNode(n) {
+		return n in selectedNodes;
+	}
+		
 		
 	function find_operators() {
 	    operators="";
@@ -568,7 +572,9 @@
 				tops=js.findtops()
 				selectedtop=tops[0]
 				exptop=tops[1]
-				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
+				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop))+","+isSelectedNode(selectedtop)
+				
+				raise Exception("howzat?")
 
 				if selectedtop==exptop or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
