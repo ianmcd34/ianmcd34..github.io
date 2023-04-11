@@ -572,9 +572,9 @@
 				tops=js.findtops()
 				selectedtop=tops[0]
 				exptop=tops[1]
-				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop))+","+isSelectedNode(selectedtop)
+				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
 				
-				raise Exception("howzat?")
+				
 
 				if selectedtop==exptop or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
@@ -667,9 +667,10 @@
 				tops=js.findtops()
 				selectedtop=tops[0]
 				exptop=tops[1]
-				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
+				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)+","+js.isSelectedNode(selectedtop)
 		
-
+				raise Exception("howzat?")
+		
 				if selectedtop==exptop or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
 
