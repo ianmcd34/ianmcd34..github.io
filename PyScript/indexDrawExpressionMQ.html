@@ -669,9 +669,8 @@
 				exptop=tops[1]
 				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)+","+str(js.isSelectedNode(selectedtop))
 		
-				raise Exception("howzat?")
 		
-				if selectedtop==exptop or selectedtop==999:
+				if (selectedtop==exptop and js.isSelectedNode(selectedtop)) or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
 
 					if len(exp_insert.elements)==1:
@@ -696,15 +695,39 @@
 					maxindex_insert=int(exp_insert.elements[:,0].max())
 
 					for x1 in exp_insert.elements:
-						x1[0]=x1[0]-maxindex_insert-2+minindex_py
+						x1[0]=x1[0]-maxindex_insert-1+minindex_py
 						if x1[2] is not None:
-							x1[2]=x1[2]-maxindex_insert-2+minindex_py
-							x1[3]=x1[3]-maxindex_insert-2+minindex_py
+							x1[2]=x1[2]-maxindex_insert-1+minindex_py
+							x1[3]=x1[3]-maxindex_insert-1+minindex_py
 					minindex_insert=int(exp_insert.elements[:,0].min())
 					maxindex_insert=int(exp_insert.elements[:,0].max())
+		
+					numpart=1
+					strpart=''
+					fallenBranch=[]
+					for x1 in exp_py.elements:
+						if js.isSelectedNode(x1[0]) and not js.isSelectedNode(js.find_parent(x1[0])) and x1[2] is None:
+							if x1[1][-1].isdigit():
+								numpart=numpart*int(x1[1])
+							if x1[1].islower():
+								strpart=strpart+x[1]
+						else if js.isSelectedNode(x1[0]):
+							fallenBranch.push(x1)
+							
+					if numpart!=1 or strpart!='':
+						exp_fallenLeafs=treeFactor(numpart, strpart)
+						maxindex_insert=int(exp_fallenLeafs.elements[:,0].max())
+						for x1 in exp_fallenLeafs.elements:
+							x1[0]=x1[0]-maxindex_insert-1+minindex_insert
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_insert-1+minindex_py
+								x1[3]=x1[3]-maxindex_insert-1+minindex_py
+							
 
 					pp=js.find_parent(selectedtop)
-					document.getElementById("factor-input").value=str(selectedtop)+","+str(pp)+","+str(minindex_py)
+					document.getElementById("factor-input").value=str(exp_fallenLeafs.elements)+","+str(fallenBranch)
+		
+					raise Exception("howzat")
 
 					if exp_py.elements[exp_py.find_pointer(pp)][2]==selectedtop:
 						exp_py.elements[exp_py.find_pointer(pp)][2]=minindex_py-1
