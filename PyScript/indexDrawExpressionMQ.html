@@ -543,7 +543,9 @@
 		def treeFactor(numpart, strpart):
 			exp_sub=cex.Expression()
 
-			if numpart>0:
+			if numpart>1:
+				exp_sub.add_branch('+',str(numpart))
+			elif numpart==1 and strpart=='':
 				exp_sub.add_branch('+',str(numpart))
 			elif numpart<0:
 				exp_sub.add_branch('-',str(-1*numpart))
