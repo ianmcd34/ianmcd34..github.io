@@ -730,9 +730,10 @@
 					maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
 		
 					newnode=[minindex_fl-1,'+',minindex_fl-2, maxindex_insert]
-					p=js.find_parent(fallenBranch[0][0])
-					while p in fallenBranch:
-						p=js.find_parent(p)
+					if len(fallenBranch)>0:
+						p=js.find_parent(fallenBranch[0][0])
+						while p in fallenBranch:
+							p=js.find_parent(p)
 		
 					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
 						newnode[2]=p
