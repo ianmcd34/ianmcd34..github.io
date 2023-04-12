@@ -732,6 +732,8 @@
 						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())	
 						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
 						newnode=[minindex_fl-1,'+',minindex_fl-2, maxindex_insert]
+					else:
+						exp_fallenLeafs=cex.Expression()
 					
 					if newnode[1]=='0':
 						newnode=[minindex_insert-1,'+',minindex_insert-2, maxindex_insert]
