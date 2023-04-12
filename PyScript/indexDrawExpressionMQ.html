@@ -734,11 +734,11 @@
 					while p in fallenBranch:
 						p=exp_py.find_parent(p)
 		
-					if len(exp_fallenLeafs.elements)==0 and len(fallenBranch)>0:
+					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
 						newnode[2]=p
-					elif len(exp_fallenLeafs.elements)>0 and len(fallenBranch)==0:
+					elif (numpart!=1 or strpart!='') and len(fallenBranch)==0:
 						newnode[2]=maxindex_fl
-					elif len(exp_fallenLeafs.elements)>0 and len(fallenBranch)>0:
+					elif (numpart!=1 or strpart!='') and len(fallenBranch)>0:
 						newnode1=[minindex_fl-2,'*',p,maxindex_fl]
 		
 					pp=js.find_parent(selectedtop)
