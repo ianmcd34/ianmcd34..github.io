@@ -726,8 +726,12 @@
 		
 					if numpart!=1 or strpart!='':
 						exp_fallenLeafs=treeFactor(numpart, strpart)
+						
 					else:
 						exp_fallenLeafs=cex.Expression()
+		
+					minindex_fl=int(exp_insert.elements[:,0].min())
+					maxindex_fl=int(exp_insert.elements[:,0].max())
 					
 		
 					if len(fallenBranch)>0:
