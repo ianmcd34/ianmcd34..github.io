@@ -713,6 +713,11 @@
 								numpart=numpart*int(x1[1])
 							if x1[1].islower():
 								strpart=strpart+x1[1]
+							if exp_py.elements[exp_py.find_pointer(js.find_parent(x1[0]))][1]=='+':
+								x1[1]='0'
+							else:
+								x1[1]='1'
+							linknode=x1[0]
 						elif js.isSelectedNode(x1[0]):
 							fallenBranch.append([x1[0],x1[1],x1[2],x1[3]])
 		
@@ -721,26 +726,15 @@
 		
 					if numpart!=1 or strpart!='':
 						exp_fallenLeafs=treeFactor(numpart, strpart)
-						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
-						for x1 in exp_fallenLeafs.elements:
-							x1[0]=x1[0]-maxindex_fl-1+minindex_insert
-							if x1[2] is not None:
-								x1[1]=exp_py.elements[exp_py.find_pointer(selectedtop)][1]
-								x1[2]=x1[2]-maxindex_fl-1+minindex_insert
-								x1[3]=x1[3]-maxindex_fl-1+minindex_insert
-			
-						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())	
-						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
-						newnode=[minindex_fl-1,'+',minindex_fl-2, maxindex_insert]
 					else:
 						exp_fallenLeafs=cex.Expression()
 					
-					if newnode[1]=='0':
-						newnode=[minindex_insert-1,'+',minindex_insert-2, maxindex_insert]
 		
 					if len(fallenBranch)>0:
 						p=js.find_parent(fallenBranch[0][0])
+						fallenBranchStump=fallenBranch[0][0]
 						while p in fallenBranch:
+							fallenBranchStump=p
 							p=js.find_parent(p)
 		
 					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
@@ -751,7 +745,7 @@
 						newnode1=[minindex_fl-2,'*',p,maxindex_fl]
 		
 					pp=js.find_parent(selectedtop)
-					document.getElementById("factor-input").value=str(fallenBranch)+','+str(exp_fallenLeafs.elements)+','+str(newnode)+','+str(newnode1)
+					document.getElementById("factor-input").value=str(exp_py.elements)+','+str(fallenBranch)+','+str(exp_fallenLeafs.elements)+','+str(newnode)+','+str(newnode1)
 		
 					raise Exception("howzat")
 
