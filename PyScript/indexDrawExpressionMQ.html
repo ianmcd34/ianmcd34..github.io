@@ -726,7 +726,7 @@
 		
 					if numpart!=1 or strpart!='':
 						exp_fallenLeafs=treeFactor(numpart, strpart)
-						for x1 in exp_fallenLeafs:
+						for x1 in exp_fallenLeafs.elements:
 							if x1[2]!=None:
 								x1[1]=exp_py.elements[exp_py.find_pointer(selectedtop)][1]
 						
