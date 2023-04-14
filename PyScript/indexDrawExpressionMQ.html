@@ -721,8 +721,8 @@
 						elif js.isSelectedNode(x1[0]):
 							fallenBranch.append([x1[0],x1[1],x1[2],x1[3]])
 		
-					newnode=[0,'0',None,None]	
-					newnode1=[0,'0',None,None]
+					newnode=[999,'0',None,None]	
+					newnode1=[998,'0',None,None]
 		
 					if numpart!=1 or strpart!='':
 						exp_fallenLeafs=treeFactor(numpart, strpart)
@@ -745,16 +745,6 @@
 						for x1 in exp_py.elements:
 							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
 								filter_arr.append(False)
-							elif x1[0] in [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
-								newnode[0]=999
-								newnode[1]=x1[1]
-								newnode[2]=x1[2]
-								newnode[3]=x1[3]
-								x1[1]='*'
-								x1[2]=999
-								x1[3]=maxindex_insert
-								
-								filter_arr.append(True)
 							else:
 								filter_arr.append(True)
 						exp_py.elements=exp_py.elements[filter_arr]
