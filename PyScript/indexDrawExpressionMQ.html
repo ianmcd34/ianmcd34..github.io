@@ -733,16 +733,21 @@
 					else:
 						exp_fallenLeafs=cex.Expression()
 		
-					minindex_fl=int(exp_insert.elements[:,0].min())
-					maxindex_fl=int(exp_insert.elements[:,0].max())
 					
 		
 					if len(fallenBranch)>0:
 						p=js.find_parent(fallenBranch[0][0])
 						fallenBranchStump=fallenBranch[0][0]
-						while p in fallenBranch:
+						while p in fallenBranch[:,0]:
 							fallenBranchStump=p
 							p=js.find_parent(p)
+						for x1 in exp_py.elements:
+							if x1[0] in fallenBranch[:,0] and x1[0]!=fallenBranchStump:
+								exp_py.remove(x1)
+							elif x1[0] in fallenBranch[:,0] and x1[0]==fallenBranchStump:
+								x1[1]='*'
+								x1[2]=999
+								x1[3]=maxindex_insert
 		
 					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
 						newnode[2]=p
