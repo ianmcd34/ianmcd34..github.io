@@ -754,13 +754,26 @@
 						exp_py.elements=exp_py.elements[filter_arr]
 						
 					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
+						newnode[0]=minindex_insert-1
 						newnode[2]=linknode
 						newnode[3]=maxindex_insert
 						p=js.find_parent(linknode)
 						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
-							exp_py.elements[exp_py.find_pointer(p)][2]=999
+							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_insert-1
 						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
-							exp_py.elements[exp_py.find_pointer(p)][3]=999
+							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_insert-1
+					elif (numpart!=1 or strpart!='') and len(fallenBranch)==0:
+						minindex_py=int(exp_py.elements[:,0].min())
+						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
+						newnode[0]=minindex_py-1
+						newnode[2]=linknode
+						newnode[3]=maxindex_insert
+						p=js.find_parent(linknode)
+						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_py-1
+						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_py-1
+						
 							
 		
 					
