@@ -741,13 +741,18 @@
 						while p in [x2[0] for x2 in fallenBranch]:
 							fallenBranchStump=p
 							p=js.find_parent(p)
+						filter_arr=[]
 						for x1 in exp_py.elements:
 							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
-								exp_py.elements.remove(x1)
+								filter_arr.append(True)
 							elif x1[0] in [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
 								x1[1]='*'
 								x1[2]=999
 								x1[3]=maxindex_insert
+								filter_arr.append(False)
+							else:
+								filter_arr.append(False)
+							exp_py.elements=exp_py.elements[filter_arr]
 		
 					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
 						newnode[2]=p
