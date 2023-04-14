@@ -754,14 +754,7 @@
 								filter_arr.append(False)
 						exp_py.elements=exp_py.elements[filter_arr]
 		
-					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
-						newnode[2]=p
-					elif (numpart!=1 or strpart!='') and len(fallenBranch)==0:
-						newnode[2]=maxindex_fl
-					elif (numpart!=1 or strpart!='') and len(fallenBranch)>0:
-						newnode1=[minindex_fl-2,'*',p,maxindex_fl]
 		
-					pp=js.find_parent(selectedtop)
 					document.getElementById("factor-input").value=str(exp_py.elements)+','+str(fallenBranch)+','+str(exp_fallenLeafs.elements)+','+str(newnode)+','+str(newnode1)
 		
 					raise Exception("howzat")
