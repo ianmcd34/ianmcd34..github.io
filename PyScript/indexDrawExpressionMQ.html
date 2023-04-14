@@ -744,14 +744,14 @@
 						filter_arr=[]
 						for x1 in exp_py.elements:
 							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
-								filter_arr.append(True)
+								filter_arr.append(False)
 							elif x1[0] in [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
 								x1[1]='*'
 								x1[2]=999
 								x1[3]=maxindex_insert
-								filter_arr.append(False)
+								filter_arr.append(True)
 							else:
-								filter_arr.append(False)
+								filter_arr.append(True)
 						exp_py.elements=exp_py.elements[filter_arr]
 		
 		
