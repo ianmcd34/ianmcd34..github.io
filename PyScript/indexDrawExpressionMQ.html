@@ -753,7 +753,17 @@
 								filter_arr.append(True)
 						exp_py.elements=exp_py.elements[filter_arr]
 						
-
+					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
+						newnode[2]=linknode
+						newnode[3]=maxindex_insert
+						p=js.find_parent(linknode)
+						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][2]=999
+						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][3]=999
+							
+		
+					
 						
 		
 					document.getElementById("factor-input").value=str(exp_py.elements)+','+str(exp_insert.elements)+','+str(fallenBranch)+','+str(exp_fallenLeafs.elements)+','+str(newnode)+','+str(newnode1)
