@@ -742,9 +742,9 @@
 							fallenBranchStump=p
 							p=js.find_parent(p)
 						for x1 in exp_py.elements:
-							if x1[0] in fallenBranch[:,0] and x1[0]!=fallenBranchStump:
+							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
 								exp_py.remove(x1)
-							elif x1[0] in fallenBranch[:,0] and x1[0]==fallenBranchStump:
+							elif x1[0] in [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
 								x1[1]='*'
 								x1[2]=999
 								x1[3]=maxindex_insert
