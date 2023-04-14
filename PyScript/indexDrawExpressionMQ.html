@@ -738,7 +738,7 @@
 					if len(fallenBranch)>0:
 						p=js.find_parent(fallenBranch[0][0])
 						fallenBranchStump=fallenBranch[0][0]
-						while p in fallenBranch[:,0]:
+						while p in [x2[0] for x2 in fallenBranch]:
 							fallenBranchStump=p
 							p=js.find_parent(p)
 						for x1 in exp_py.elements:
