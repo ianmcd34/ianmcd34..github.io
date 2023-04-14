@@ -763,16 +763,27 @@
 						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
 							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_insert-1
 					elif (numpart!=1 or strpart!='') and len(fallenBranch)==0:
+						minindex_insert=int(exp_insert.elements[:,0].min())
+						maxindex_insert=int(exp_insert.elements[:,0].max())
 						minindex_py=int(exp_py.elements[:,0].min())
+		
+						for x1 in exp_fallenLeafs:
+							x1[0]=x1[0]-maxindex_insert-1+minindex_py
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_insert-1+minindex_py
+								x1[3]=x1[3]-maxindex_insert-1+minindex_py
+						
 						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
-						newnode[0]=minindex_py-1
-						newnode[2]=linknode
+						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())
+		
+						newnode[0]=minindex_fl-1
+						newnode[2]=maxindex_fl
 						newnode[3]=maxindex_insert
 						p=js.find_parent(linknode)
 						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
-							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_py-1
+							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_fl-1
 						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
-							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_py-1
+							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_fl-1
 						
 							
 		
