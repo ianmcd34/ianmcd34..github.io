@@ -746,14 +746,19 @@
 							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
 								filter_arr.append(False)
 							elif x1[0] in [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
+								newnode[0]=999
+								newnode[1]=x1[1]
+								newnode[2]=x1[2]
+								newnode[3]=x1[3]
 								x1[1]='*'
 								x1[2]=999
 								x1[3]=maxindex_insert
+								
 								filter_arr.append(True)
 							else:
 								filter_arr.append(True)
 						exp_py.elements=exp_py.elements[filter_arr]
-		
+						
 		
 					document.getElementById("factor-input").value=str(exp_py.elements)+','+str(exp_insert.elements)+','+str(fallenBranch)+','+str(exp_fallenLeafs.elements)+','+str(newnode)+','+str(newnode1)
 		
