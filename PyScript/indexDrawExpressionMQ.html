@@ -373,6 +373,8 @@
 	function trimSelectedNodes() {
 		  alert("trimSelectedNodes()");
 		  alert(selectedNodes);
+		  
+		  lastSelectedNode=selectedNodes[-1];
 
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
@@ -480,6 +482,12 @@
 
 		alert("trimSelectedNodesC()");
 		alert(selectedNodes);
+		lastSelectedNode1=selectedNodes[-1]
+		
+		if (lastSelectedNode1!=lastSelectedNode) {
+			lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
+			endred=answerMathField.latex();
+		}
 	} 
 		
 	</script>
