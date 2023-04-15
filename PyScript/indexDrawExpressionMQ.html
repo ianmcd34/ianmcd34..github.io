@@ -267,11 +267,12 @@
 	 function findtops() {
 
 		var p=parseInt(exp[0][0]);
+
 		while (exp.map(firstEl).includes(p) && find_parent(p)<998) {
 		  p=find_parent(p);
 		}
 		exptop=p;
-		selectedtop=exptop;
+		selectedtop=999;
 
 		parents=[];
 		for (x1 in selectedNodes) {
@@ -688,6 +689,7 @@
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 						#document.getElementById("print-tree").innerHTML= str(exp_insert.elements)+";"+ str(exp_py.elements)
+					
 				else:
 					operators=js.find_operators()[0]
 					document.getElementById("print-tree").innerHTML=operators
