@@ -2366,6 +2366,13 @@ class Expression:
                             tidied=True
 
 
-                i=i+1  
+                i=i+1
+                
+          #make sure top element is maximally indexed
+            p=self.elements[0][0]
+            while find_parent(p)!=999:
+                p=find_parent(p)
+            if p<self.elements[:,0].max():
+                self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1 
                         
        
