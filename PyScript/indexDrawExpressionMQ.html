@@ -478,19 +478,20 @@
 					else {n--;}
 				} else {n--;}
 			}
+			lastSelectedNode1=selectedNodes[selectedNodes.length-1];
+			alert("lastSelectedNode1="+lastSelectedNode1);
+
+			if (lastSelectedNode1!=lastSelectedNode) {
+				lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
+				endred=answerMathField.latex().indexOf(lastSelectedOp+"}");
+				alert(endred);
+			}
 			trimSelectedNodes();
 		} 
 
 		alert("trimSelectedNodesC()");
 		alert(selectedNodes);
-		lastSelectedNode1=selectedNodes[selectedNodes.length-1];
-		alert("lastSelectedNode1="+lastSelectedNode1);
 		
-		if (lastSelectedNode1!=lastSelectedNode) {
-			lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
-			endred=answerMathField.latex().indexOf(lastSelectedOp+"}");
-			alert(endred);
-		}
 	} 
 		
 	</script>
