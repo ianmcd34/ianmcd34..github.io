@@ -375,6 +375,7 @@
 		  alert(selectedNodes);
 		  
 		  lastSelectedNode=selectedNodes[-1];
+		  alert("lastSelectedNode="+lastSelectedNode);
 
 	     //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
@@ -482,7 +483,8 @@
 
 		alert("trimSelectedNodesC()");
 		alert(selectedNodes);
-		lastSelectedNode1=selectedNodes[-1]
+		lastSelectedNode1=selectedNodes[-1];
+		alert("lastSelectedNode1="+lastSelectedNode1);
 		
 		if (lastSelectedNode1!=lastSelectedNode) {
 			lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
