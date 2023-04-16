@@ -490,7 +490,9 @@
 				lastSelectedOp=exp[find_pointer(lastSelectedNode1)][1];
 				endred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace(lastSelectedOp,lastSelectedOp+"}");
-				set_answerMathField(exp_latex)
+				answerMathField.select();
+				answerMathField.clearSelection();
+				answerMathField.latex(exp_latex);
 			}
 			
 			trimSelectedNodes();
