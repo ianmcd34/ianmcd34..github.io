@@ -75,7 +75,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false">\frac{(x+2)}{y}</span></p>
+	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false">\frac{(x+2)}{\colorbox{orange}{y}}</span></p>
 
 
 
@@ -154,7 +154,7 @@
 		}
 
 		   
-		answerMathField.latex(selectionString1+"\\colorbox{orange}{"+selectionString+"}"+selectionString2);
+		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 		
 		exp_result1=exp_result.replaceAll("(","");
 		exp_result1=exp_result1.replaceAll(")","");
@@ -173,8 +173,8 @@
 		}   
 		selectionString1=selectionString1.replaceAll("{","");
 		selectionString1=selectionString1.replaceAll("}","");
-		selectionString1=selectionString1.replaceAll("\colorbox","");
-		selectionString1=selectionString1.replaceAll("orange","");
+		selectionString1=selectionString1.replaceAll("\textcolor","");
+		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString1.replaceAll("\left","");
 		selectionString1=selectionString1.replaceAll("\right","");
 		
