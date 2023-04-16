@@ -486,7 +486,8 @@
 		
 		if (lastSelectedNode1!=lastSelectedNode) {
 			lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
-			endred=answerMathField.latex();
+			endred=answerMathField.latex().indexOf(lastSelectedOp+"}");
+			alert(endred);
 		}
 	} 
 		
