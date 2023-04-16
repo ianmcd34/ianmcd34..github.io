@@ -483,8 +483,14 @@
 
 			if (lastSelectedNode1!=lastSelectedNode) {
 				lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
-				endred=answerMathField.latex().indexOf(lastSelectedOp+"}");
+				exp_latex=answerMathField.latex();
+				endred=exp_latex.indexOf(lastSelectedOp+"}");
 				alert(endred);
+				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace("}","");
+				lastSelectedOp=exp[find_pointer(lastSelectedNode1)][1];
+				endred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
+				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace(lastSelectedOp,lastSelectedOp+"}");
+				set_answerMathField(exp_latex)
 			}
 			trimSelectedNodes();
 		} 
