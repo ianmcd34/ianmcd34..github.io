@@ -601,7 +601,7 @@
 				
 				
 
-				if selectedtop==exptop or selectedtop==999:
+				if (selectedtop==exptop and js.isSelectedNode(selectedtop)):
 					exp_insert=treeFactor(numpart, strpart)
 
 					if len(exp_insert.elements)==1:
