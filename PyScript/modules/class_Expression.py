@@ -950,160 +950,160 @@ class Expression:
 
         
 
-        def add_expressions(self):
+    def add_expressions(self):
         
-            def find_expression(index,e_i):
-                print("index="+str(index))
-                expression=''
-                indices=[find_parent(index)]
-                if self.elements[self.find_pointer(index), 1]=='*':
-                    leftindex=self.elements[self.find_pointer(index), 2]
-                    rightindex=self.elements[self.find_pointer(index), 3]
-                    expression=expression+find_expression(self.elements[self.find_pointer(index), 2],'e')
-                    expression=expression+find_expression(self.elements[self.find_pointer(index), 3],'e')
-                    indices.extend(find_expression(self.elements[self.find_pointer(index), 2],'i'))
-                    indices.extend(find_expression(self.elements[self.find_pointer(index), 3],'i'))
-                elif self.elements[self.find_pointer(index), 1].islower():
-                    expression=expression+self.elements[self.find_pointer(index), 1]
-                elif self.elements[self.find_pointer(index), 1][-1].isdigit():
-                    expression=expression+'K'
-                else:
-                    return 'brackets'
-                if e_i=='e':
-                    print("expression="+expression)
-                    return expression
-                elif e_i=='i':
-                    result=[]
-                    for n in indices:
-                        unique=True
-                        for m in result:
-                            if n==m:
-                                unique=False
-                        if unique and n!=999:
-                            result.append(n)
-                    print("result="+str(result))
-                    return result
-
-
-            def find_parent(index):
-                for e in self.elements:
-                    if e[2]==index or e[3]==index:
-                        return e[0]
-                return 999
-
-
-            simple=self.simplify()
-            x=simple.find("add expressions")
-            if x>-1:
-                depth_needed=int(simple[x-2])
+        def find_expression(index,e_i):
+            print("index="+str(index))
+            expression=''
+            indices=[find_parent(index)]
+            if self.elements[self.find_pointer(index), 1]=='*':
+                leftindex=self.elements[self.find_pointer(index), 2]
+                rightindex=self.elements[self.find_pointer(index), 3]
+                expression=expression+find_expression(self.elements[self.find_pointer(index), 2],'e')
+                expression=expression+find_expression(self.elements[self.find_pointer(index), 3],'e')
+                indices.extend(find_expression(self.elements[self.find_pointer(index), 2],'i'))
+                indices.extend(find_expression(self.elements[self.find_pointer(index), 3],'i'))
+            elif self.elements[self.find_pointer(index), 1].islower():
+                expression=expression+self.elements[self.find_pointer(index), 1]
+            elif self.elements[self.find_pointer(index), 1][-1].isdigit():
+                expression=expression+'K'
             else:
-                return False
+                return 'brackets'
+            if e_i=='e':
+                print("expression="+expression)
+                return expression
+            elif e_i=='i':
+                result=[]
+                for n in indices:
+                    unique=True
+                    for m in result:
+                        if n==m:
+                            unique=False
+                    if unique and n!=999:
+                        result.append(n)
+                print("result="+str(result))
+                return result
 
-            expressions=[]
-            indices=[]
+
+        def find_parent(index):
             for e in self.elements:
-                print(e[0],self.find_depth(e[0]),depth_needed)
-                if e[1]=="+" and self.find_depth(e[0])==depth_needed:
-                    if self.elements[self.find_pointer(e[2]),1]=="*" or self.elements[self.find_pointer(e[2]),1].islower():
-                        if find_expression(e[2],'e').find('brackets')==-1 and find_expression(e[2],'e').count('K')<2:
-                            expressions.append(find_expression(e[2],'e'))
-                            indices.append(find_expression(e[2],'i'))
-                    if self.elements[self.find_pointer(e[3]),1]=="*" or self.elements[self.find_pointer(e[3]),1].islower():
-                        if find_expression(e[3],'e').find('brackets')==-1 and find_expression(e[3],'e').count('K')<2:
-                            expressions.append(find_expression(e[3],'e'))
-                            indices.append(find_expression(e[3],'i'))
-            print(expressions)
-            print(indices)
+                if e[2]==index or e[3]==index:
+                    return e[0]
+            return 999
+
+
+        simple=self.simplify()
+        x=simple.find("add expressions")
+        if x>-1:
+            depth_needed=int(simple[x-2])
+        else:
+            return False
+
+        expressions=[]
+        indices=[]
+        for e in self.elements:
+            print(e[0],self.find_depth(e[0]),depth_needed)
+            if e[1]=="+" and self.find_depth(e[0])==depth_needed:
+                if self.elements[self.find_pointer(e[2]),1]=="*" or self.elements[self.find_pointer(e[2]),1].islower():
+                    if find_expression(e[2],'e').find('brackets')==-1 and find_expression(e[2],'e').count('K')<2:
+                        expressions.append(find_expression(e[2],'e'))
+                        indices.append(find_expression(e[2],'i'))
+                if self.elements[self.find_pointer(e[3]),1]=="*" or self.elements[self.find_pointer(e[3]),1].islower():
+                    if find_expression(e[3],'e').find('brackets')==-1 and find_expression(e[3],'e').count('K')<2:
+                        expressions.append(find_expression(e[3],'e'))
+                        indices.append(find_expression(e[3],'i'))
+        print(expressions)
+        print(indices)
 
 
 
-            addends_found=False
-            for i in range(0,len(expressions)-1):
-                for j in range(i+1,len(expressions)):
-                    print(sorted(expressions[i].replace("K","")),sorted(expressions[j].replace("K","")))
-                    if len(expressions[i])>0 and len(expressions[j])>0 and sorted(expressions[i].replace("K",""))==sorted(expressions[j].replace("K","")):
-                        addends_found=True
-                        break
-                if addends_found:
+        addends_found=False
+        for i in range(0,len(expressions)-1):
+            for j in range(i+1,len(expressions)):
+                print(sorted(expressions[i].replace("K","")),sorted(expressions[j].replace("K","")))
+                if len(expressions[i])>0 and len(expressions[j])>0 and sorted(expressions[i].replace("K",""))==sorted(expressions[j].replace("K","")):
+                    addends_found=True
                     break
-
             if addends_found:
-                print(expressions[i],expressions[j],indices[i],indices[j])
+                break
 
-                if expressions[j].count("K")>0:
-                    for ind in indices[j]:
-                        if self.elements[self.find_pointer(ind),1]=="*":
-                            if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1][-1].isdigit():
-                                constantindex2=self.elements[self.find_pointer(ind),2]
-                                constant2=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]
-                            elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1][-1].isdigit():
-                                constantindex2=self.elements[self.find_pointer(ind),3]
-                                constant2=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]
+        if addends_found:
+            print(expressions[i],expressions[j],indices[i],indices[j])
 
-                else:
-                    varindex=999
-                    for ind in indices[j]:
-                        if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]==expressions[j][0]:
-                            varindex=self.elements[self.find_pointer(ind),2]
-                        elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]==expressions[j][0]:
-                            varindex=self.elements[self.find_pointer(ind),3]
-                        elif self.elements[self.find_pointer(ind),1]==expressions[j][0]:
-                            varindex=ind
-
-                    if varindex!=999:
-                        self.add_subbranch(varindex,'*','1')
-                        indices[j].append(varindex)
-                        constantindex2=self.elements[self.find_pointer(varindex),3]
-                        constant2='1'
-                    else:
-                        print("ERROR: can't find anywhere on LHS to add a constant.")
-                        return False
-
-
-                print(constantindex2,constant2)        
-                print(expressions[i],expressions[j],indices[i],indices[j])
-
-
-
-                if expressions[i].count("K")>0:
-                    for ind in indices[i]:
-                        if self.elements[self.find_pointer(ind),1]=="*":
-                            if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1][-1].isdigit():
-                                constantindex1=self.elements[self.find_pointer(ind),2]
-                                constant1=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]
-                            elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1][-1].isdigit():
-                                constantindex1=self.elements[self.find_pointer(ind),3]
-                                constant1=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]
-                else:
-                    varindex=999
-                    for ind in indices[i]:
-                        if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]==expressions[i][0]:
-                            varindex=self.elements[self.find_pointer(ind),2]
-                        elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]==expressions[i][0]:
-                            varindex=self.elements[self.find_pointer(ind),3]
-                        elif self.elements[self.find_pointer(ind),1]==expressions[i][0]:
-                            varindex=ind
-
-                    if varindex!=999:
-                        self.add_subbranch(varindex,'*','1')
-                        indices[i].append(varindex)
-                        constantindex1=self.elements[self.find_pointer(varindex),3]
-                        constant1='1'
-                    else:
-                        print("ERROR: can't find anywhere on LHS to add a constant.")
-                        return False
-
-                print(constantindex1,constant1)            
-                print(constantindex2,constant2)
-                print(expressions[i],expressions[j],indices[i],indices[j])
-
-                self.elements[self.find_pointer(constantindex1)][1]=str(int(constant1)+int(constant2))
-                self.elements[self.find_pointer(constantindex2)][1]='0'
-                self.tidy_up()
-
+            if expressions[j].count("K")>0:
+                for ind in indices[j]:
+                    if self.elements[self.find_pointer(ind),1]=="*":
+                        if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1][-1].isdigit():
+                            constantindex2=self.elements[self.find_pointer(ind),2]
+                            constant2=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]
+                        elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1][-1].isdigit():
+                            constantindex2=self.elements[self.find_pointer(ind),3]
+                            constant2=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]
 
             else:
-                return False
+                varindex=999
+                for ind in indices[j]:
+                    if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]==expressions[j][0]:
+                        varindex=self.elements[self.find_pointer(ind),2]
+                    elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]==expressions[j][0]:
+                        varindex=self.elements[self.find_pointer(ind),3]
+                    elif self.elements[self.find_pointer(ind),1]==expressions[j][0]:
+                        varindex=ind
+
+                if varindex!=999:
+                    self.add_subbranch(varindex,'*','1')
+                    indices[j].append(varindex)
+                    constantindex2=self.elements[self.find_pointer(varindex),3]
+                    constant2='1'
+                else:
+                    print("ERROR: can't find anywhere on LHS to add a constant.")
+                    return False
+
+
+            print(constantindex2,constant2)        
+            print(expressions[i],expressions[j],indices[i],indices[j])
+
+
+
+            if expressions[i].count("K")>0:
+                for ind in indices[i]:
+                    if self.elements[self.find_pointer(ind),1]=="*":
+                        if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1][-1].isdigit():
+                            constantindex1=self.elements[self.find_pointer(ind),2]
+                            constant1=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]
+                        elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1][-1].isdigit():
+                            constantindex1=self.elements[self.find_pointer(ind),3]
+                            constant1=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]
+            else:
+                varindex=999
+                for ind in indices[i]:
+                    if self.elements[self.find_pointer(self.elements[self.find_pointer(ind),2]), 1]==expressions[i][0]:
+                        varindex=self.elements[self.find_pointer(ind),2]
+                    elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]==expressions[i][0]:
+                        varindex=self.elements[self.find_pointer(ind),3]
+                    elif self.elements[self.find_pointer(ind),1]==expressions[i][0]:
+                        varindex=ind
+
+                if varindex!=999:
+                    self.add_subbranch(varindex,'*','1')
+                    indices[i].append(varindex)
+                    constantindex1=self.elements[self.find_pointer(varindex),3]
+                    constant1='1'
+                else:
+                    print("ERROR: can't find anywhere on LHS to add a constant.")
+                    return False
+
+            print(constantindex1,constant1)            
+            print(constantindex2,constant2)
+            print(expressions[i],expressions[j],indices[i],indices[j])
+
+            self.elements[self.find_pointer(constantindex1)][1]=str(int(constant1)+int(constant2))
+            self.elements[self.find_pointer(constantindex2)][1]='0'
+            self.tidy_up()
+
+
+        else:
+            return False
         
         
         
