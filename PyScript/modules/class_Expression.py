@@ -243,6 +243,9 @@ class Expression:
                 latex+='}'+final[i]
             else:
                 latex+=final[i]
+        if powered>0:
+            for i in range(0,powered):
+                latex+='}'
 
         dividepos=latex.find('/')
         if dividepos>=0:
