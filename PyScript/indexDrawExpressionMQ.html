@@ -209,7 +209,7 @@
 			}
 
 			if (operand[0]=='-' && operand.length>1) {operand.replace("-","");}
-								      
+			alert("operand="+operand)				      
 			if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)  || (operand=='*' && selectionString1.indexOf('/')>=0)) {
 				i=selectionString1.indexOf(operand);
 				if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-')-1;}
