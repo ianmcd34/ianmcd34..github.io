@@ -201,7 +201,7 @@
 		n=exp_result1.indexOf("]");
 	
 		while (n>-1 && selectionStringNo==1) {
-			
+			alert("Aexp_result1="+exp_result1);
 			operand=exp_result1[n+1];
 			while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
 				operand+=exp_result1[n+2];
@@ -233,7 +233,7 @@
 		n=exp_result1.indexOf("]");
 
 		while (n>-1 && selectionStringNo==0) {
-			alert("exp_result1="+exp_result1);
+			alert("Bexp_result1="+exp_result1);
 			index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
 
 			operand=exp_result1[n+1];
