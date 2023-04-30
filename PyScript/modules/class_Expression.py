@@ -2142,15 +2142,12 @@ class Expression:
                             tidied=True
 
                         #error case: 1/0->"Divide by zero!"
-                        try:
-                            print("dividebyzeroA")
-                            if not tidied and self.elements[self.find_pointer(p),1]=="/":
-                                print("dividebyzeroB")
-                                raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
-                                tidied=True
-                        except:
-                            print("dividebyzeroC")
-                            print("ZeroDivisionError: Second argument to a division or modulo operation was zero.")
+
+                        if not tidied and self.elements[self.find_pointer(p),1]=="/":
+                            print("dividebyzeroB")
+                            raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
+                            tidied=True
+
 
 
                         #unity case: 0*()=0
