@@ -415,7 +415,7 @@
 
 		  selectedNodes=newSelectedNodes;
 
-
+		  alert("BselectedNodes="+selectedNodes);
 	   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
 		function countleafs(item) {
 			if (item<998) {
@@ -475,6 +475,7 @@
 					else {n--;}
 				} else {n--;}
 			}
+			alert("CselectedNodes="+selectedNodes);
 			lastSelectedNode1=selectedNodes[selectedNodes.length-1];
 
 
@@ -494,7 +495,7 @@
 			
 			trimSelectedNodes();
 		} 
-		alert("BselectedNodes="+selectedNodes);
+		alert("ZselectedNodes="+selectedNodes);
 		
 	} 
 		
