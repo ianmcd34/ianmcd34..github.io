@@ -162,7 +162,7 @@
 		
 		position=selectionString1.search("frac");
 
-		if (position>-1) {
+		while (position>-1) {
 			selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
 			if (selectionString1.search("}{")>-1) {
 				selectionString1=selectionString1.replace("}{","/");
@@ -177,11 +177,20 @@
 		selectionString1=selectionString1.replaceAll("red","");
 		selectionString1=selectionString1.replaceAll("\left","");
 		selectionString1=selectionString1.replaceAll("\right","");
-		
+		   
+		position = selectionString1.indexOf("^");
+		while (position>-1) {
+		  letter = selectionString1[position-1];
+		  power = selectionString1[position+1];
+		  insert = "*"+letter;
+		  insert = insert.repeat(parseInt(power)-1);
+		  selectionString1 = selectionString1.replace("^"+power, insert);
+		  position = selectionString1.indexOf("^");
+		}
 		
 		position=selectionString.search("frac");
 
-		if (position>-1) {
+		while (position>-1) {
 			selectionString=selectionString.substring(0,position-1)+"*"+selectionString.substring(position+4);
 			selectionString=selectionString.replace("}{","/");
 			position=selectionString.search("frac");
@@ -193,7 +202,15 @@
 		selectionString=selectionString.replaceAll("\left","");
 		selectionString=selectionString.replaceAll("\right","");
 
-		
+		position = selectionString.indexOf("^");
+		while (position>-1) {
+		  letter = selectionString[position-1];
+		  power = selectionString[position+1];
+		  insert = "*"+letter;
+		  insert = insert.repeat(parseInt(power)-1);
+		  selectionString = selectionString.replace("^"+power, insert);
+		  position = selectionString.indexOf("^");
+		}
 		
 
 		selectionStringNo=1;
