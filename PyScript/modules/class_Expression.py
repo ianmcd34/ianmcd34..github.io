@@ -1483,12 +1483,12 @@ class Expression:
         while n!=commonparentnode:
             if self.elements[self.find_pointer(n)][1]!='*':
                 return False
-            n=find_parent(factornode)
+            n=find_parent(n)
         n=find_parent(factornode1)
         while n!=commonparentnode:
             if self.elements[self.find_pointer(n)][1]!='*':
                 return False
-            n=find_parent(factornode)
+            n=find_parent(n)
             
             
 
