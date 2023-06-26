@@ -972,15 +972,25 @@
 		
 		def factorise_exp(event):
 			selectedNodes=js.get_selectedNodes()
+			
 			try:
-				exp_py.factorise_selected(selectedNodes)
+				parseFactor()
 			except:
-				document.getElementById("print-tree").innerHTML="Error in Factorisation"
-				js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-				js.get_exp1(create_proxy(exp_py.elements))
-				js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
-				js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
+				if numpart!=0:
+					factor=str(numpart)
+				else:
+					factor=strpart[0]
+				try:
+					exp_py.factorise_selected(factor,selectedNodes)
+				except:
+					document.getElementById("print-tree").innerHTML="Error in Factorisation"
+					js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
+				else:
+					js.get_exp1(create_proxy(exp_py.elements))
+					js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
+					js.set_answerMathField(create_proxy( exp_py.print_tree('l')))
 		
 		def cancel_exp(event):
 			exp_py.cancel()
