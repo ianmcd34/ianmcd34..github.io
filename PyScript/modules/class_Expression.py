@@ -1317,29 +1317,13 @@ class Expression:
             self.elements=result
             
             
-    def factorise_selected(self, selectedNodes):
+    def factorise_selected(self, factor, selectedNodes):
         def find_parent(index):
             for e in self.elements:
                 if e[2]==index or e[3]==index:
                     return e[0]
             return 999
         
-        def parent_chain(node):
-            parent_chain=[node]
-            while find_parent(node)!=999 and self.elements[self.find_pointer(find_parent(node))][1]==self.elements[self.find_pointer(node)][1]:
-                node=find_parent(node)
-                parent_chain.append(node)
-            return parent_chain
-
-        def family_tree(node):
-            pc=parent_chain(node)
-            family_tree=set(pc)
-            for e in self.elements:
-                pc1=parent_chain(e[0])
-
-                if pc1[-1]==pc[-1] and pc1.count(pc[0])==0:
-                    family_tree.update(pc1)
-            return family_tree
         
         def to_top(node):
             parent_chain=[node]
@@ -1348,48 +1332,7 @@ class Expression:
                 parent_chain.append(node)
             return parent_chain
         
-        def is_complete_subtree(arr):
-            is_complete=True
-            count_top=0
-            for e in arr:
-                if e[2] is None and len(arr)>1 and e[0] not in [x[2] for x in arr] and e[0] not in [x[3] for x in arr]:
-                    is_complete=False
-                elif e[2] is not None and e[2] not in [x[0] for x in arr]:
-                    is_complete=False
-                elif e[2] is not None and e[3] not in [x[0] for x in arr]:
-                    is_complete=False
-                if e[0] not in [x[2] for x in arr] and e[0] not in [x[3] for x in arr]:
-                    count_top=count_top+1
-            if count_top>1:
-                is_complete=False
-            print("iscomplete="+str(is_complete))
-            return is_complete
-                    
-        
-        def to_string(node, so):
-            op=self.elements[self.find_pointer(node)][1]
-            if self.elements[self.find_pointer(node)][2] is None and not((node in selectedNodes) ^ so): # evaluates NOT(XOR) 
-                result=set([op])
-            elif self.elements[self.find_pointer(node)][2] is not None:
-                result=set([])
-                lefts=to_string(self.elements[self.find_pointer(node)][2], so)
-                rights=to_string(self.elements[self.find_pointer(node)][3], so)
-                print(lefts)
-                print(rights)
-                for x in lefts.union(rights):
-                    if len(lefts.intersection({x}))>0:
-                        result.add(x+op)
-                        for y in rights:
-                            if x[-1] not in ('+','*','/') and y[0] not in ('+','*','/'):
-                                result.add(x+op+y)
-                    if len(rights.intersection({x}))>0:
-                        result.add(op+x)
-                        for y in lefts:
-                            if y[-1] not in ('+','*','/') and x[0] not in ('+','*','/'):
-                                result.add(y+op+x)          
-            else:
-                result=set([])              
-            return result
+    
         
         def dist(n1,n2):
             pc1=set(to_top(n1))
@@ -1399,200 +1342,97 @@ class Expression:
             l2=len(pc2.difference(pc1))
 
             return l1+l2
+        
+        
+        
+        def valid_chain(n1,n2):
+            pc1=to_top(n1) 
+            pc2=to_top(n2) 
 
+            chain=''
+            CP=None
+            idx=pc1[0]
+            while idx!=pc2[0]:
+                if self.elements[self.find_pointer(idx)][1] in ('+','*','/'):
+                    chain=chain+self.elements[self.find_pointer(idx)][1]
+                if not idx in pc2:
+                    idx=pc1[pc1.index(idx)+1]
+                else:
+                    if CP is None:
+                        CP=self.elements[self.find_pointer(idx)][1]
+                    idx=pc2[pc2.index(idx)-1]
+            valid=re.search(r"^[*]*[+]+[*]*$", chain)
 
-        print(len(selectedNodes))
-        if len(selectedNodes)==0:
-            return False
-
-        topselected=None
-        for n in selectedNodes:
-            print(topselected)
-            if self.elements[self.find_pointer(n)][2] is None:
-                pc=parent_chain(find_parent(n))
+            if CP=='+' and valid is not None:
+                return True
             else:
-                pc=parent_chain(n)
-            print(pc)
-            if topselected is None:
-                topselected=pc[0]
-            elif not (topselected in pc):
-                for i in parent_chain(topselected):
-                    if not (topselected in pc) and (i in pc):
-                        topselected=i
-            print(topselected)
-            print(parent_chain(topselected))
-            if not (topselected in pc):
-                topselected=999
+                return False
+            
 
-        #/*topselected=999 => no unique top node*/
-
-        print("topselected="+str(topselected))
-        result1=set([])
-        for x1 in to_string(topselected, True):
-            result1.add(x1.strip('+*/'))
-        print(result1)
-
-        factornode=topselected
-        factor=''
-        maxexpression=len(factor)
-        for x in result1:
-            if len(x)>maxexpression:
-                factor=x
-                maxexpression=len(factor)
-        print(factornode, factor)
-
+            
+        #find candidate leafs in selectednodes
         candidatenodes=[]
-        for e in self.elements:
-            if e[0] not in selectedNodes:
-                print("e[0]="+str(e[0]))
-                for x1 in to_string(e[0], False):
-                    if x1.strip('+*/')==factor and self.find_depth(e[0])==self.find_depth(factornode):
-                        for c in candidatenodes:
-                            print((to_top(c),to_top(e[0])))
-                            if e[0] in to_top(c) or c in to_top(e[0]):
-                                if len(to_top(e[0]))>len(to_top(c)):
-                                    candidatenodes1=[x if x!=c else e[0] for x in candidatenodes]
-                                    candidatenodes=candidatenodes1
-                            else:
-                                candidatenodes.append(e[0])
-                        if len(candidatenodes)==0:
-                            candidatenodes.append(e[0])
-                        print(candidatenodes)
-        for e in candidatenodes:
-            print(str(e)+": "+str(dist(e,factornode)))
-        x = lambda a:dist(a,factornode)
-        candidatenodes.sort(key=x, reverse=True)
+        for n in selectedNodes:
+            if factor.islower():
+                if self.elements[self.find_pointer(n)][1]==factor:
+                    candidatenodes.append(n)
+            elif self.elements[self.find_pointer(n)][1][-1].isdigit():
+                if int(self.elements[self.find_pointer(n)][1]) % int(factor)==0:
+                    candidatenodes.append(n)
+
         print(candidatenodes)
 
-        if len(candidatenodes)>0:
-            factornode1=candidatenodes[0]
-        else:
-            return False
+        #pairwise ordering by distance
+        mindist=1000
+        factorpair=None
+        for n in candidatenodes:
+            for m in candidatenodes:
+                if dist(n,m)>0 and dist(n,m)<mindist and valid_chain(m,n):
+                    factorpair=(n,m)
+                    mindist=dist(n,m)
+        print(factorpair)
         
-        pc=to_top(factornode)
-        pc1=to_top(factornode1)
-        i=-1
-        while len(pc)>1 and len(pc1)>1 and pc[i]==pc1[i]:
-            i=i-1
+        if factorpair is None:
+            return False
 
-        commonparentnode=pc[i+1]
-
-        print(commonparentnode)
-
-        n=find_parent(factornode)
-        while n!=commonparentnode:
-            if self.elements[self.find_pointer(n)][1]!='*':
-                return False
-            n=find_parent(n)
-        n=find_parent(factornode1)
-        while n!=commonparentnode:
-            if self.elements[self.find_pointer(n)][1]!='*':
-                return False
-            n=find_parent(n)
-            
-            
-
-        #create a factor tree
-        ft=[]
-        p=1
+        #locate s,s1
+        s=factorpair[0]
+        while self.elements[self.find_pointer(find_parent(s))][1]=='*':
+            s=find_parent(s)
+        s1=factorpair[1]
+        while self.elements[self.find_pointer(find_parent(s1))][1]=='*':
+            s1=find_parent(s1)
+        
+        #create new subtree
         minindex=self.elements[:,0].min()
-        maxindex=self.elements[:,0].max()
-        for i in selectedNodes:
-            e=self.elements[self.find_pointer(i)]
-            ft.append([e[0],e[1],e[2],e[3]])
+        newnode1=[minindex-1,'*',minindex-2,minindex-3]
+        newnode2=[minindex-2,factor,None,None]
+        newnode3=[minindex-3,'+',s,s1]
+        newnode4=[minindex-4,'0',None,None]
 
-        while not is_complete_subtree(ft):
-            print(ft)
-            print([y[0] for y in ft])
-            free1=None
-            free2=None
-            for e in ft:
-                if find_parent(e[0])!=999 and find_parent(e[0]) not in [y[0] for y in ft]:
-                    if free1==None:
-                        free1=e[0]
-                    else:
-                        free2=e[0]
-            if free2 is None:
-                ft.append([maxindex+p,self.elements[self.find_pointer(factornode)][1],free1, maxindex] )
-                p=p+1
-            else:
-                ft.append([minindex-p,self.elements[self.find_pointer(factornode)][1],free1, free2])
-                p=p+1
-            print(ft)
-            print([y[0] for y in ft])
+        #alter values of factor nodes
+        if factor.islower():
+            self.elements[self.find_pointer(factorpair[0])][1]='1'
+            self.elements[self.find_pointer(factorpair[1])][1]='1'
+        else:
+            self.elements[self.find_pointer(factorpair[0])][1]=str(int(self.elements[self.find_pointer(factorpair[0])][1])/int(factor))
+            self.elements[self.find_pointer(factorpair[1])][1]=str(int(self.elements[self.find_pointer(factorpair[1])][1])/int(factor))
 
-        print(ft)
-        if len(ft)==0:
-            return False
-        
-        #make ft indices unique
-        ft_indices=set([y[0] for y in ft])
-        exp_indices=set([y[0] for y in self.elements])
+        #repoint old tree
+        if self.elements[self.find_pointer(find_parent(s))][2]==s:
+            self.elements[self.find_pointer(find_parent(s))][2]=minindex-1
+        else:
+            self.elements[self.find_pointer(find_parent(s))][3]=minindex-1
+        if self.elements[self.find_pointer(find_parent(s1))][2]==s1:
+            self.elements[self.find_pointer(find_parent(s1))][2]=minindex-4
+        else:
+            self.elements[self.find_pointer(find_parent(s1))][3]=minindex-4
 
-        while len(ft_indices.intersection(exp_indices))>0:
-            i=ft_indices.intersection(exp_indices).pop()
-            for n in [y[2] for y in ft]:
-                if n==i:
-                    ft[[y[2] for y in ft].index(n)][2]=minindex-p
-            for n in [y[3] for y in ft]:
-                if n==i:
-                    ft[[y[3] for y in ft].index(n)][3]=minindex-p
-            for n in [y[0] for y in ft]:
-                if n==i:
-                    ft[[y[0] for y in ft].index(n)][0]=minindex-p
-            p=p+1
-            ft_indices=set([y[0] for y in ft])
-            print(ft_indices)
-        
-        for e in ft:
-            if e[0] not in [x[2] for x in ft] and e[0] not in [x[3] for x in ft]:
-                topftnode=e[0]
+        #splice together
+        oldelements=self.elements
+        newelements=[newnode1,newnode2,newnode3,newnode4]
+        self.elements=np.concatenate((oldelements,newelements), axis=0)
 
-        join_e=[minindex-p,'*',topftnode , commonparentnode]
-        ft.append(join_e)
-        for e in self.elements:
-            if e[2]==commonparentnode:
-                e[2]=minindex-p
-            if e[3]==commonparentnode:
-                e[3]=minindex-p
-        print(self.elements) 
-        print(ft)
-
-        #set obselete leafs to unity
-        e=self.elements[self.find_pointer(factornode1)]
-        e1=e
-        while len(factor)>0:
-            while e1[2] is not None:
-                e1=e1[2]
-            subfactor=e1[1]
-            if len(factor)>len(subfactor) and self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0]:
-                subfactor=subfactor+self.elements[self.find_pointer(find_parent(e1[0]))][1]
-
-            if factor.find(subfactor)>-1:
-                self.elements[self.find_pointer(e1[0])][1]='1'
-                factor=factor[len(subfactor):]
-            if self.elements[self.find_pointer(find_parent(e1[0]))][2]==e1[0]:
-                e1=self.elements[self.find_pointer(find_parent(e1[0]))]
-                e1=self.elements[self.find_pointer(e1[3])]
-            else:
-                while self.elements[self.find_pointer(find_parent(e1[0]))][3]==e1[0] and e1[0]!=e[0]:
-                    e1=self.elements[self.find_pointer(find_parent(e1[0]))]
-
-        for i in selectedNodes:
-            if self.elements[self.find_pointer(i)][2] is None:
-                self.elements[self.find_pointer(i)][1]='1'
-
-        #splice in ft
-        self.elements=np.concatenate((self.elements,[x for x in ft]), axis=0)
-        print(self.elements)
-
-        #make sure top element is maximally indexed
-        p=self.elements[0][0]
-        while find_parent(p)!=999:
-            p=find_parent(p)
-        if p<self.elements[:,0].max():
-            self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1
-        print(self.elements)
 
               
             
