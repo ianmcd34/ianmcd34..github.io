@@ -1856,6 +1856,13 @@ class Expression:
                 if e[2] is not None:
                     e[2]=int(e[2])
                     e[3]=int(e[3])    
+
+        #make sure top element is maximally indexed
+        p=self.elements[0][0]
+        while find_parent(p)!=999:
+            p=find_parent(p)
+        if p<self.elements[:,0].max():
+            self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1
          
             
 
