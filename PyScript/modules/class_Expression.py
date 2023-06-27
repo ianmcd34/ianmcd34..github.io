@@ -1415,8 +1415,8 @@ class Expression:
             self.elements[self.find_pointer(factorpair[0])][1]='1'
             self.elements[self.find_pointer(factorpair[1])][1]='1'
         else:
-            self.elements[self.find_pointer(factorpair[0])][1]=str(int(self.elements[self.find_pointer(factorpair[0])][1])/int(factor))
-            self.elements[self.find_pointer(factorpair[1])][1]=str(int(self.elements[self.find_pointer(factorpair[1])][1])/int(factor))
+            self.elements[self.find_pointer(factorpair[0])][1]=str(int(int(self.elements[self.find_pointer(factorpair[0])][1])/int(factor)))
+            self.elements[self.find_pointer(factorpair[1])][1]=str(int(int(self.elements[self.find_pointer(factorpair[1])][1])/int(factor)))
 
         #repoint old tree
         if self.elements[self.find_pointer(find_parent(s))][2]==s:
