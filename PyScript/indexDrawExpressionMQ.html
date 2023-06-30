@@ -96,8 +96,8 @@
 		  answerMathField.select();
 		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
+		  document.getElementById('factor-input').select();
 		  selectedNodes=[];
-		  alert(exp);
 	  }
 		
 	  function get_exp1(obj) {
@@ -512,9 +512,9 @@
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace(lastSelectedOp,lastSelectedOp+"}");
 				answerMathField.select();
 				answerMathField.clearSelection();
-				alert(exp_latex);
+
 				answerMathField.latex(exp_latex);
-				alert(exp_latex);
+				document.getElementById('factor-input').select();
 			}
 			
 			trimSelectedNodes();
