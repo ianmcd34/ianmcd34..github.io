@@ -506,6 +506,7 @@
 				lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
 				exp_latex=answerMathField.latex();
 				endred=exp_latex.indexOf(lastSelectedOp+"}");
+				alert("lastSelectedOp="+lastSelectedOp+",exp_latex="+exp_latex+",endred="+endred);
 
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace("}","");
 				lastSelectedOp=exp[find_pointer(lastSelectedNode1)][1];
