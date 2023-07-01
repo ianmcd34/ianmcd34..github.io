@@ -154,7 +154,8 @@
 			selectionString='-'+selectionString;
 		}
 
-
+		answerMathField.select();
+		answerMathField.clearSelection();
 		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 		answerMathField.blur();
 		
