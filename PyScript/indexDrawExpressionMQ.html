@@ -96,7 +96,7 @@
 		  answerMathField.select();
 		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
-		  document.getElementById('factor-input').select();
+		  answerMathField.blur();
 		  selectedNodes=[];
 	  }
 		
@@ -156,7 +156,7 @@
 
 
 		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
-		document.getElementById('factor-input').select();
+		answerMathField.blur();
 		
 		exp_result1=exp_result.replaceAll("(","");
 		exp_result1=exp_result1.replaceAll(")","");
@@ -515,7 +515,7 @@
 
 				answerMathField.latex(exp_latex);
 				alert(exp_latex);
-				document.getElementById('factor-input').select();
+				answerMathField.blur();
 			}
 			
 			trimSelectedNodes();
