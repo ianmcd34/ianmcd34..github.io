@@ -155,7 +155,7 @@
 		}
 
 		answerMathField.select();
-		answerMathField.clearSelection();
+		answerMathField.latex("");
 		answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 		answerMathField.blur();
 		
@@ -512,7 +512,7 @@
 				endred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace(lastSelectedOp,lastSelectedOp+"}");
 				answerMathField.select();
-				answerMathField.clearSelection();
+				answerMathField.latex("");
 
 				answerMathField.latex(exp_latex);
 				alert(exp_latex);
