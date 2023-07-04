@@ -506,18 +506,25 @@
 				lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
 				exp_latex=answerMathField.latex();
 				endred=exp_latex.indexOf(lastSelectedOp+"}");
-				alert("lastSelectedOp="+lastSelectedOp+",exp_latex="+exp_latex+",endred="+endred);
+				startred=exp_latex.indexOf("{red}");
 
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace("}","");
 				lastSelectedOp=exp[find_pointer(lastSelectedNode1)][1];
-				endred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
-				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace(lastSelectedOp,lastSelectedOp+"}");
-				alert("lastSelectedOp="+lastSelectedOp+",exp_latex="+exp_latex+",endred="+endred);
+				newendred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
+
+
+				if (text.substring(startred,newendred).lastIndexOf("right")<text.substring(startred,newendred).lastIndexOf("left")) {
+					newtext=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace("right)","right)}");
+				  }
+				  else {
+				    newtext=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace(lastSelectedOp,lastSelectedOp+"}";
+				  }
+
 				answerMathField.select();
 				answerMathField.latex("");
 
 				answerMathField.latex(exp_latex);
-				alert(exp_latex);
+
 				answerMathField.blur();
 			}
 			
