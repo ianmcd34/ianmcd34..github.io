@@ -513,11 +513,11 @@
 				newendred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
 
 
-				if (text.substring(startred,newendred).lastIndexOf("right")<text.substring(startred,newendred).lastIndexOf("left")) {
-					newtext=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace("right)","right)}");
+				if (exp_latex.substring(startred,newendred).lastIndexOf("right")<exp_latex.substring(startred,newendred).lastIndexOf("left")) {
+					exp_latex=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace("right)","right)}");
 				  }
 				  else {
-				    newtext=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace(lastSelectedOp,lastSelectedOp+"}";
+				    exp_latex=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace(lastSelectedOp,lastSelectedOp+"}");
 				  }
 
 				answerMathField.select();
