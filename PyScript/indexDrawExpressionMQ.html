@@ -75,7 +75,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" onmousedown="set_answerMathField(exp_latex)"><span id="problem" contenteditable="false">\frac{(x+2)}{\colorbox{orange}{y}}</span></p>
+	<p id="problemo" onmouseup="jspaste()" onmouseenter="set_answerMathField(exp_latex)"><span id="problem" contenteditable="false">\frac{(x+2)}{\colorbox{orange}{y}}</span></p>
 
 
 
@@ -96,6 +96,7 @@
 		  answerMathField.select();
 		  answerMathField.clearSelection();
 		  answerMathField.latex(text);
+		  anserMathField.blur();
 		  selectedNodes=[];
 	  }
 		
