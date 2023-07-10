@@ -93,6 +93,17 @@
 		  text=text.replace("'","");
 		  text=text.replace("'","");
 		  text=text.replaceAll("\\\\","\\");
+		  if (text.indexOf("\textcolor{red}{")>-1) {
+			  bracket=1;
+			  p=text.indexOf("\textcolor{red}{")+16;
+			  while (bracket>0) {
+				  p=p+1;
+				  if (text[p]=='{') {bracket++;}
+				  if (text[p]=='}') {bracket--;}
+			  }
+			  text=text.substring(0,p)+text.substring(p+1);
+			  text=text.replace("\textcolor{red}{","");
+		  }
 
 		  answerMathField.select();
 		  answerMathField.clearSelection();
