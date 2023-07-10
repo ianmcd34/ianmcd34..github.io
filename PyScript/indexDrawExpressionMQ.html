@@ -96,7 +96,7 @@
 
 		  answerMathField.select();
 		  answerMathField.clearSelection();
-		  alert(text);
+		 
 		  answerMathField.latex(text);
 		  answerMathField.blur();
 		  selectedNodes=[];
@@ -398,7 +398,7 @@
 		
 		
 	function trimSelectedNodes() {
-		  alert("trimselectednodes() "+selectedNodes);
+		  
 		  lastSelectedNode=selectedNodes[selectedNodes.length-1];
 
 
@@ -521,7 +521,7 @@
 				  else {
 				    exp_latex=exp_latex.substr(0,newendred)+exp_latex.substr(newendred).replace(lastSelectedOp,lastSelectedOp+"}");
 				  }
-				alert(exp_latex);
+				
 				answerMathField.select();
 				answerMathField.latex("");
 
