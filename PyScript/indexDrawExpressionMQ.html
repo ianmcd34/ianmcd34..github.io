@@ -517,12 +517,14 @@
 
 
 			if (lastSelectedNode1!=lastSelectedNode) {
+				alert("trim"+exp_latex);
 				lastSelectedOp=exp[find_pointer(lastSelectedNode)][1];
 				exp_latex=answerMathField.latex();
 				endred=exp_latex.indexOf(lastSelectedOp+"}");
 				startred=exp_latex.indexOf("{red}");
 
 				exp_latex=exp_latex.substr(0,endred)+exp_latex.substr(endred).replace("}","");
+				alert("A"+exp_latex);
 				lastSelectedOp=exp[find_pointer(lastSelectedNode1)][1];
 				newendred=exp_latex.substr(0,endred).lastIndexOf(lastSelectedOp);
 
@@ -536,7 +538,7 @@
 				
 				answerMathField.select();
 				answerMathField.latex("");
-				alert(exp_latex);
+				alert("B"+exp_latex);
 				answerMathField.latex(exp_latex);
 
 				answerMathField.blur();
