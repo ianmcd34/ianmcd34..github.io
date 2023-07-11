@@ -75,7 +75,7 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" onmouseenter="document.getElementById('clear-selection-btn').click"><span id="problem" contenteditable="false">\frac{(x+2)}{\colorbox{orange}{y}}</span></p>
+	<p id="problemo" onmouseup="jspaste()" onmouseenter="clear_answerMathField()"><span id="problem" contenteditable="false">\frac{(x+2)}{\colorbox{orange}{y}}</span></p>
 
 
 
@@ -87,6 +87,10 @@
 	  var selectedNodes=[];
 	  let problemSpan = document.getElementById('problem');
 	  let answerMathField = MQ.MathField(problemSpan);
+
+	  function clear_answerMathField() {
+		  document.getElementById("clear-selection-btn").click;
+	  }
 		
 	  function set_answerMathField(text) {
 
