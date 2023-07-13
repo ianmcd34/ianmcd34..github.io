@@ -125,7 +125,10 @@ class Expression:
             self.find_divide(self.elements[self.find_pointer(rightindex),0])
 
 
-    def print_tree(self,o_r):
+    def print_tree(self,o_r, *selectedNodes):
+        firstrednode=None
+        lastrednode=None
+        
         maxindex=self.elements[:,0].max()
         absmaxindex=np.where(self.elements[:,0]==maxindex)[0][0]
         result=""
@@ -141,6 +144,23 @@ class Expression:
         else:
             result="("+"["+str(maxindex)+"]"+self.elements[absmaxindex][1]+")"
 
+        if len(selectedNodes)>0 and selectedNodes[0].startswith("selectedNodes"):
+            x = re.findall("\[-?\d+\]", result)
+            y = [z[1:-1] for z in x]
+
+            selectedNodesList=selectedNodes[0][13:].split(",")
+
+            for i in y:
+                if i in selectedNodesList:
+                    lastrednode=i
+                    if firstrednode is None:
+                        firstrednode=i
+            
+            a=result.index("["+str(firstrednode)+"]")
+            searchtxt="\["+str(lastrednode)+"\]-?\w+|\["+str(lastrednode)+"\]\+|\["+str(lastrednode)+"\]\*"
+            b=re.search(searchtxt, result)
+            result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
+            result=result1
    
         output=result.replace("(!", "{")
         output=output.replace("!)","}")
@@ -235,6 +255,10 @@ class Expression:
                 latex+='\\left('
             elif final[i]==')':
                 latex+='\\right)'
+            elif final[i]=='R':
+                latex+='\\textcolor{red}{'
+            elif final[i]=='S':
+                latex+='}'
             elif final[i]=='^':
                 latex+='^{'
                 powered+=1
@@ -277,11 +301,13 @@ class Expression:
                 latex=prefac+"\\frac{"+topnum+"}{"+bottomnum+"}"+postfrac
 
                 
-
+        output.replace("R","")
+        output.replace("S","")
+        result.replace("R","")
+        result.replace("S","")
+        final.replace("R","")
+        final.replace("S","")
             
-
-                
-    
         if o_r=='o':
             return output
         elif o_r=='r':
