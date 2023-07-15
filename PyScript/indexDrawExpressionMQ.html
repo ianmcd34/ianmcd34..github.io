@@ -613,6 +613,7 @@
 				selectedtop=tops[0]
 				exptop=tops[1]
 				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
+				return False
 
 				if (selectedtop==exptop and js.isSelectedNode(selectedtop)) or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
@@ -629,8 +630,7 @@
 						maxinsindex=exp_insert.elements[:,0].max()
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
-						document.getElementById("print-tree").innerHTML= "A" + str(exp_insert.elements)+";"+ str(exp_py.elements)
-						return False
+
 				else:
 					operators=js.find_operators()[0]
 					document.getElementById("print-tree").innerHTML=operators
