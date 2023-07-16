@@ -553,6 +553,9 @@
 			exp_py.add_branch('+','0')
 			document.getElementById("factor-input").value=exp_py.print_tree('l')
 
+		def clear_selection(event):
+			js.document.getElementById("print-tree").innerHTML=""
+
 		
 		def show_expression(event):
 			txt=exp_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
@@ -1094,7 +1097,7 @@
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(zero_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(push_vars))
-		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(function(){ document.getElementById("print-tree").innerHTML=""; }))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(clear_selection))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
