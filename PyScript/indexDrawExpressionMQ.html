@@ -55,6 +55,7 @@
     <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
 	    <p><button type="button" id="new-expression-btn">New Expression</button></p>
 	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
+	    <p><button type="button" id="show-btn">Show Expression</button></br></p>
 	    <p></br></p>
 	    <button type="button" id="add-btn">Add/Subtract</button></br>
 	    <button type="button" id="multiply-btn">Multiply</button></br>
@@ -70,7 +71,7 @@
 	    <button type="button" id="add-constants-btn">Add Constants</button></br>
 	    <button type="button" id="multiply-constants-btn">Multiply Constants</button></br>
 	    <button type="button" id="add-expressions-btn">Add Expressions</button></br>
-	    <button type="button" id="show-btn">Show Expression</button></br>
+	    
 	    <p id="print-tree">pre-wassup</p>
     </div>
 
@@ -1093,8 +1094,11 @@
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(zero_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", function(){ document.getElementById("print=tree").innerHTML=""; })
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
 		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
