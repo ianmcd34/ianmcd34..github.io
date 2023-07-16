@@ -613,7 +613,7 @@
 				selectedtop=tops[0]
 				exptop=tops[1]
 				document.getElementById("print-tree").innerHTML=str(exptop)+","+str(selectedtop)
-				return False
+
 
 				if (selectedtop==exptop and js.isSelectedNode(selectedtop)) or selectedtop==999:
 					exp_insert=treeFactor(numpart, strpart)
@@ -757,7 +757,7 @@
 						
 						exp_py.elements=np.concatenate((exp_py.elements,[newnode],[newnode1],exp_fallenLeafs.elements, fallenBranch ,exp_insert.elements), axis=0)
 						document.getElementById("print-tree").innerHTML= "B" + str(exp_py.elements)
-						return False
+
 					
 
 
@@ -767,7 +767,7 @@
 						x1[2]=int(x1[2])
 						x1[3]=int(x1[3])
 				document.getElementById("print-tree").innerHTML=exp_py.elements
-				return False
+
 				
 				js.get_exp1(create_proxy(exp_py.elements))
 				js.get_printTree(create_proxy([exp_py.print_tree('r'), exp_py.print_tree('l')]))
