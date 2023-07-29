@@ -153,15 +153,28 @@ class Expression:
 
             for i in y:
                 if i in selectedNodesList:
-                    lastrednode=i
+                    lastrednode=int(i)
                     if firstrednode is None:
-                        firstrednode=i
+                        firstrednode=int(i)
+            
+            print(firstrednode,lastrednode)
             
             a=result.index("["+str(firstrednode)+"]")
             searchtxt="\["+str(lastrednode)+"\]-?\w+|\["+str(lastrednode)+"\]\+|\["+str(lastrednode)+"\]\*"
             b=re.search(searchtxt, result)
-            result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
+            print(b)
+            print("depths="+str(self.find_depth(firstrednode))+","+str(self.find_depth(lastrednode)))
+            if self.find_depth(firstrednode)>self.find_depth(lastrednode):
+                print("depth1>depth2")
+                a=result[0:a].rindex('!(')
+                result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
+            if self.find_depth(firstrednode)<self.find_depth(lastrednode):
+                print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2],result[b.span()[1]+result[b.span()[1]:].index('!)')+2:])
+                
+                result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+2:]
+            print(result, result1)
             result=result1
+            print(result, result1)
    
         output=result.replace("(!", "{")
         output=output.replace("!)","}")
