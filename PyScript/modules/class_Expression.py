@@ -144,7 +144,7 @@ class Expression:
         else:
             result="("+"["+str(maxindex)+"]"+self.elements[absmaxindex][1]+")"
 
-        if len(selectedNodes)>0 and selectedNodes[0].startswith("selectedNodes"):
+        if len(selectedNodes)>13 and selectedNodes[0].startswith("selectedNodes"):
             print(selectedNodes[0])
             x = re.findall("\[-?\d+\]", result)
             y = [z[1:-1] for z in x]
