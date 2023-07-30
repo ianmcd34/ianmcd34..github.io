@@ -172,6 +172,8 @@ class Expression:
             if self.find_depth(firstrednode)<self.find_depth(lastrednode):
                 print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2],result[b.span()[1]+result[b.span()[1]:].index('!)')+2:])           
                 result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+2:]
+            else:
+                result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
 
             result=result1
 
