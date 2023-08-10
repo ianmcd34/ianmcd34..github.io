@@ -1099,13 +1099,14 @@
 	
 
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(zero_expression))
-		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("new-expression-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(clear_selection))
-		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
-		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
 		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
