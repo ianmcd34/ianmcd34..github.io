@@ -13,17 +13,36 @@
          margin: 0;
          background-color: #f0e8c5;
       }
+      form {
+        float: right;
+        margin-top: 20%;
+        margin-bottom: 50%;
+        margin-right: 50px;
+      }
+      input {
+        float: right;
+        margin-left: 10px;
+      }
+      .button-div {
+        float: right;
+        width: 50%;
+        margin: auto;
+      }
     </style>
     <title>Algebra Trainer</title>
   </head>
   <body>
-
-
-
      <img src="indexBackground.png" alt="" width="80%" height="80%" style="vertical-align:middle"> 
 
-
+     <form>
+      <label for="inputEmail1" >Email address</label>
+      <input type="email"  id="inputEmail1" />
+      <p></p>
+      <label for="inputpwd1" >Password</label>
+      <input type="password"  id="inputpwd1" />
+      <p></p>
+      <div class="button-div" onclick="document.location='EquationSolver.html'"><button type="submit" >Enter</button></div>
+     </form>
 
   </body>
 </html>
-
