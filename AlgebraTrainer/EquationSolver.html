@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    <title>Equation Solver</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    
+    <link rel="stylesheet" href="./modules/mathquill-0.10.1/mathquill.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="./modules/mathquill-0.10.1//mathquill.js"></script>
+	  
+    <link rel="stylesheet" href="./modules/styles/styles.css" />
+
+    <style>
+        #problemo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+	    }
+	#problem {
+	    height: 300px;
+  	    width: 800px; 
+	    padding: 50px 0;
+	    }
+
+    </style>
+
+    <py-env>
+      - matplotlib
+      - numpy
+      - paths:
+        - modules/class_Expression.py
+    </py-env>
+	  
+    <script>
+      var MQ = MathQuill.getInterface(2);
+    </script>
+	  
+
+  </head>
+  <body >
+    <h1>EQUATION SOLVER</h1>
+    <h4 id='date'>date here</h4>
+
+    <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
+	    <p><button type="button" id="restart-btn">Restart</button></p>
+	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
+	    <p></br></p>
+	    <button type="button" id="add-btn">Add/Subtract</button></br>
+	    <button type="button" id="multiply-btn">Multiply</button></br>
+	    <button type="button" id="divide-btn">Divide</button></br>
+            <p></br></p>
+	    <p><label for="factor-input">By:</label></br>
+            <input type="text" id="factor-input" placeholder="2x" /></p>
+            <p></br></p>
+	    <button type="button" id="tidy-btn">Tidy Expression</button></br>
+	    <button type="button" id="expand-btn">Expand Brackets</button></br>
+	    <button type="button" id="factorise-btn">Factorise</button></br>
+	    <button type="button" id="cancel-btn">Cancel</button></br>
+	    <button type="button" id="add-constants-btn">Add Constants</button></br>
+	    <button type="button" id="multiply-constants-btn">Multiply Constants</button></br>
+	    <button type="button" id="add-expressions-btn">Add Expressions</button></br>
+	    <button type="button" id="show-btn">Show Expression</button></br>
+	    <p id="print-tree">pre-wassup</p>
+    </div>
+
+
+	<p id="problemo" onmouseup="jspaste()" onmouseenter="clear_answerMathField()"><span id="problem" contenteditable="false"></span></p>
+
+
+
+
+	<script>
+
+
+		var selectedNodes=[];
+		let problemSpan = document.getElementById('problem');
+		let answerMathField = MQ.MathField(problemSpan);
+
+		function set_answerMathField(textL, textR) {
+
+			textL=textL.replace("'","");
+			textL=textL.replace("'","");
+			textL=textL.replaceAll("\\\\","\\");
+
+			textR=textR.replace("'","");
+			textR=textR.replace("'","");
+			textR=textR.replaceAll("\\\\","\\");
+
+			answerMathField.select();
+			answerMathField.clearSelection();
+
+			answerMathField.latex(textL + " = " + textR);
+			answerMathField.blur();
+			selectedNodes=[];
+		}
+	  
+		
+	</script>
+
+
+
+	<script async src="./modules/index.js"></script>
+
+	<py-script>
+		
+		import class_Expression as cex
+		from pyodide import create_proxy, to_js
+		import js
+		import numpy as np
+		import re
+
+		numpart=0
+		strpart=""
+		expLeft_py=cex.Expression()
+		expRight_py=cex.Expression()
+
+		def restart(event):
+			global expLeft_py
+			global expRight_py
+			del expLeft_py
+			del expRight_py
+
+			expLeft_py.add_branch('+','x')
+			expLeft_py.add_branch('+','2')
+			expLeft_py.add_branch('*','y') 
+
+			expRight_py.add_branch('+',3)
+
+		def show_expression(event):
+			txtL=expLeft_py.print_tree('l')
+			txtR=expRight_py.print_tree('l')
+			js.set_answerMathField(create_proxy(txtL, txtR))
+
+		
+	
+
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
+		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
+		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
+		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
+		js.document.getElementById("tidy-btn").addEventListener("click", create_proxy(tidy_exp))
+		js.document.getElementById("expand-btn").addEventListener("click", create_proxy(expand_exp))
+		js.document.getElementById("factorise-btn").addEventListener("click", create_proxy(factorise_exp))
+		js.document.getElementById("cancel-btn").addEventListener("click", create_proxy(cancel_exp))
+		js.document.getElementById("add-constants-btn").addEventListener("click", create_proxy(add_constants_exp))
+		js.document.getElementById("multiply-constants-btn").addEventListener("click", create_proxy(multiply_constants_exp))
+		js.document.getElementById("add-expressions-btn").addEventListener("click", create_proxy(add_expressions_exp))
+
+	</py-script>
+
+
+  </body>
+
+</html>
