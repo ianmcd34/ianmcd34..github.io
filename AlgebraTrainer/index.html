@@ -30,18 +30,24 @@
       }
     </style>
     <title>Algebra Trainer</title>
+    <script>
+      function submitForm() {
+        window.location.href = 'EquationSolver.html';
+      }
+      document.querySelector(".customform").addEventListener("submit", submitForm);
+    </script>
   </head>
   <body>
      <img src="indexBackground.png" alt="" width="80%" height="80%" style="vertical-align:middle"> 
 
-     <form>
+     <form class="customform">
       <label for="inputEmail1" >Email address</label>
       <input type="email"  id="inputEmail1" />
       <p></p>
       <label for="inputpwd1" >Password</label>
       <input type="password"  id="inputpwd1" />
       <p></p>
-      <div class="button-div" ><button type="button" onclick="window.location.href = 'EquationSolver.html'">Enter</button></div>
+      <div class="button-div" ><button type="submit" >Enter</button></div>
      </form>
 
   </body>
