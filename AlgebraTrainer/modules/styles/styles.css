@@ -1,0 +1,27 @@
+
+h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+body {
+  text-align: center;
+  background-color: #FFFACD;
+  font-size: large;
+}
+
+#problemo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: xx-large;
+}
+
+foot {
+  position: absolute;
+  bottom: 25px;
+  left: 200px;
+  text-align: center;
+}
