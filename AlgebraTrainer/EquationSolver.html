@@ -82,7 +82,12 @@
 
 	<script>
 
-
+		expLeft=[[0,'0',,]]
+		expRight=[[0,'0',,]]
+		expLeft_result="";
+	    expLeft_latex="";
+		expRight_result="";
+	    expRight_latex="";
 		var selectedNodes=[];
 		let problemSpan = document.getElementById('problem');
 		let answerMathField = MQ.MathField(problemSpan);
@@ -104,7 +109,38 @@
 			answerMathField.blur();
 			selectedNodes=[];
 		}
+
+		function get_exp1(obj, side) {
+		  
+		  objString=obj.toString();
+		  arraystart=objString.indexOf("[[");
+		  arrayend=objString.indexOf("]]");
+		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
+		  eval("exp1=[" + objString + "]");
+		  for (x1 in exp1) {
+			  x1[0]=parseInt(x1[0]);
+		  }
+
+		  if (side=='left')  {
+		  	expLeft=exp1;
+		  }
+		  else{
+		    expRight=exp1
+		  }
+
+		}
 	  
+		function get_printTree(obj, side) {
+		  objString=obj.toString(); 
+		  if (side=='left') {
+			expLeft_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
+		    expLeft_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+		  } else {
+			expRight_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
+		    expRight_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+		  }
+		  
+	   	}
 		
 	</script>
 
@@ -141,6 +177,13 @@
 			txtL=expLeft_py.print_tree('l')
 			txtR=expRight_py.print_tree('l')
 			js.set_answerMathField(create_proxy(txtL, txtR))
+
+		def push_vars(event):
+			js.get_exp1(create_proxy(expLeft_py.elements), 'left')
+			js.get_printTree(create_proxy([expLeft_py.print_tree('r'), expLeft_py.print_tree('l')]))
+
+			js.get_exp1(create_proxy(expRight_py.elements), 'right')
+			js.get_printTree(create_proxy([expRight_py.print_tree('r'), expRight_py.print_tree('l')]))
 
 		
 	
