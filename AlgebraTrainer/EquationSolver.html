@@ -92,6 +92,10 @@
 		let problemSpan = document.getElementById('problem');
 		let answerMathField = MQ.MathField(problemSpan);
 
+		function clear_answerMathField() {
+		  document.getElementById("clear-selection-btn").click();
+	  	}
+
 		function set_answerMathField(textL, textR) {
 
 			textL=textL.replace("'","");
