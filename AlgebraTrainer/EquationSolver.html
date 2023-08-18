@@ -97,9 +97,9 @@
 	  	}
 
 		function set_answerMathField(text) {
-			alert(typeof text);
-			textL=text.split(",")[0];
-			textR=text.split(",")[1];
+
+			textL=text.toString().split(",")[0];
+			textR=text.toString().split(",")[1];
 			alert(textL,textR);
 
 			textL=textL.replace("'","");
@@ -188,7 +188,7 @@
 			txtL=expLeft_py.print_tree('l')
 			txtR=expRight_py.print_tree('l')
 			document.getElementById("print-tree").innerHTML=txtL
-			js.set_answerMathField(create_proxy([txtL, txtR]))
+			js.set_answerMathField(create_proxy(txtL+","+txtR))
 
 		def push_vars(event):
 			js.get_exp1(create_proxy(expLeft_py.elements), 'left')
