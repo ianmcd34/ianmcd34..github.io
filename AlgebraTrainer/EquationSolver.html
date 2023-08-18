@@ -96,7 +96,9 @@
 		  document.getElementById("clear-selection-btn").click();
 	  	}
 
-		function set_answerMathField(textL, textR) {
+		function set_answerMathField(text) {
+			textL=text[0]
+			textR=text[1]
 
 			textL=textL.replace("'","");
 			textL=textL.replace("'","");
@@ -183,7 +185,7 @@
 		def show_expression(event):
 			txtL=expLeft_py.print_tree('l')
 			txtR=expRight_py.print_tree('l')
-			js.set_answerMathField(create_proxy(txtL, txtR))
+			js.set_answerMathField(create_proxy([txtL, txtR]))
 
 		def push_vars(event):
 			js.get_exp1(create_proxy(expLeft_py.elements), 'left')
