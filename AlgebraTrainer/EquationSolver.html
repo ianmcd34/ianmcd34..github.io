@@ -187,7 +187,7 @@
 		def show_expression(event):
 			txtL=expLeft_py.print_tree('l')
 			txtR=expRight_py.print_tree('l')
-			document.getElementByID("print-tree").value=txtL
+			document.getElementById("print-tree").innerHTML=txtL
 			js.set_answerMathField(create_proxy([txtL, txtR]))
 
 		def push_vars(event):
