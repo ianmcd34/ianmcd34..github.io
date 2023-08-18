@@ -98,8 +98,8 @@
 
 		function set_answerMathField(text) {
 			alert(text);
-			textL=text[0];
-			textR=text[1];
+			textL=text.split(",")[0];
+			textR=text.split(",")[1];
 			alert(textL,textR);
 
 			textL=textL.replace("'","");
