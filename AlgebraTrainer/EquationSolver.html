@@ -100,7 +100,6 @@
 
 			textL=text.toString().split(",")[0];
 			textR=text.toString().split(",")[1];
-			alert(textL,textR);
 
 			textL=textL.replace("'","");
 			textL=textL.replace("'","");
@@ -128,7 +127,7 @@
 		  for (x1 in exp1) {
 			  x1[0]=parseInt(x1[0]);
 		  }
-
+		  alert(exp1);
 		  if (side=='left')  {
 		  	expLeft=exp1;
 		  }
@@ -142,10 +141,10 @@
 		  objString=obj.toString(); 
 		  if (side=='left') {
 			expLeft_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
-		    expLeft_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+			expLeft_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
 		  } else {
 			expRight_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
-		    expRight_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+		    	expRight_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
 		  }
 		  
 	   	}
