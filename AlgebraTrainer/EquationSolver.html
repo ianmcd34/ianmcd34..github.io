@@ -148,6 +148,166 @@
 		  }
 		  
 	   	}
+
+		function jspaste() {
+		
+			selectedNodes=[];
+			side='';
+	
+		      	selection = document.getSelection();
+		      	selectionString=selection.toString();
+			answerMathField.typedText("#");
+	
+	
+	
+		      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
+			selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
+			
+	
+			if (selectionString1.endsWith('-')) {
+				selectionString1=selectionString1.substr(0,selectionString1.length-1);
+	
+				selectionString='-'+selectionString;
+			}
+
+			if (selectionString1.index('=')>-1) {
+				side='right';
+			} else if (selectionString2.index('=')>-1) {
+				side='left';
+			} else {
+				selectionString2=selectionString.substring(selectionString.indexOf('='),selectionString.length)+selectionString2;
+				selectionString=selectionString.substring(0,selectionString.indexOf('='));
+				side='left';
+			}
+	
+			answerMathField.select();
+			answerMathField.latex("");
+			answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
+			answerMathField.blur();
+			
+			exp_result1=exp_result.replaceAll("(","");
+			exp_result1=exp_result1.replaceAll(")","");
+			exp_result1=exp_result1.replaceAll("!","");
+			
+			position=selectionString1.search("frac");
+	
+			while (position>-1) {
+				selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
+				if (selectionString1.search("}{")>-1) {
+					selectionString1=selectionString1.replace("}{","/");
+				} else {
+					selectionString=selectionString.replace("}{","/");
+				}
+				position=selectionString1.search("frac");
+			}   
+			selectionString1=selectionString1.replaceAll("{","");
+			selectionString1=selectionString1.replaceAll("}","");
+			selectionString1=selectionString1.replaceAll("\textcolor","");
+			selectionString1=selectionString1.replaceAll("red","");
+			selectionString1=selectionString1.replaceAll("\left","");
+			selectionString1=selectionString1.replaceAll("\right","");
+			   
+			position = selectionString1.indexOf("^");
+			while (position>-1) {
+			  letter = selectionString1[position-1];
+			  power = selectionString1[position+1];
+			  insert = "*"+letter;
+			  insert = insert.repeat(parseInt(power)-1);
+			  selectionString1 = selectionString1.replace("^"+power, insert);
+			  position = selectionString1.indexOf("^");
+			}
+			
+			position=selectionString.search("frac");
+	
+			while (position>-1) {
+				selectionString=selectionString.substring(0,position-1)+"*"+selectionString.substring(position+4);
+				selectionString=selectionString.replace("}{","/");
+				position=selectionString.search("frac");
+			}
+			selectionString=selectionString.replaceAll("{","");
+			selectionString=selectionString.replaceAll("}","");
+			selectionString=selectionString.replaceAll("\textcolor","");
+			selectionString=selectionString.replaceAll("red","");
+			selectionString=selectionString.replaceAll("\left","");
+			selectionString=selectionString.replaceAll("\right","");
+	
+			position = selectionString.indexOf("^");
+			while (position>-1) {
+			  letter = selectionString[position-1];
+			  power = selectionString[position+1];
+			  insert = "*"+letter;
+			  insert = insert.repeat(parseInt(power)-1);
+			  selectionString = selectionString.replace("^"+power, insert);
+			  position = selectionString.indexOf("^");
+			}
+			
+	
+			selectionStringNo=1;
+			    
+			n=exp_result1.indexOf("]");
+		
+			while (n>-1 && selectionStringNo==1) {
+	
+				operand=exp_result1[n+1];
+				while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
+					operand+=exp_result1[n+2];
+					n+=1;
+				}
+	
+				if (operand[0]=='-' && operand.length>1) {operand=operand.replace("-","");}
+					      
+				if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)  || (operand=='*' && selectionString1.indexOf('/')>=0)) {
+					i=selectionString1.indexOf(operand);
+					if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-')-1;}
+					if  (operand=='*' && selectionString1.indexOf('/')>=0  && (selectionString1.indexOf('*')>selectionString1.indexOf('/') || selectionString1.indexOf('*')==-1 )) {i=selectionString1.indexOf('/')-1;}
+					
+					exp_result1=exp_result1.substring(n+2);
+					selectionString1=selectionString1.substring(i+operand.length);
+	
+				}
+				else {
+	
+					selectionStringNo=0;
+				}
+				
+	
+				n=exp_result1.indexOf("]");
+	
+			}
+	
+	
+			n=exp_result1.indexOf("]");
+	
+			while (n>-1 && selectionStringNo==0) {
+	
+				index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
+	
+				operand=exp_result1[n+1];
+				while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
+					operand+=exp_result1[n+2];
+					n+=1;
+				}
+	
+				if (operand[0]=='-' && operand.length>1) {operand=operand.replace("-","");}
+									      
+				if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)  || (operand=='*' && selectionString.indexOf('/')>=0)) {
+					i=selectionString.indexOf(operand);
+					if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
+					if  (operand=='*' && selectionString.indexOf('/')>=0  && (selectionString.indexOf('*')>selectionString.indexOf('/') || selectionString.indexOf('*')==-1 )) {i=selectionString.indexOf('/')-1;}
+					selectedNodes.push(index);
+					selectionString=selectionString.substring(i+operand.length);
+				} else if (selectionString.length==0 || exp_result1.length==0) {
+					selectionStringNo=2;
+				}
+				
+				exp_result1=exp_result1.substring(n+2);
+				n=exp_result1.indexOf("]");
+	
+			}
+	
+			trimSelectedNodes();
+
+	      }
 		
 	</script>
 
