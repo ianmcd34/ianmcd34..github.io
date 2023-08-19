@@ -85,9 +85,9 @@
 		expLeft=[[0,'0',,]]
 		expRight=[[0,'0',,]]
 		expLeft_result="";
-	    expLeft_latex="";
+	    	expLeft_latex="";
 		expRight_result="";
-	    expRight_latex="";
+	    	expRight_latex="";
 		var selectedNodes=[];
 		let problemSpan = document.getElementById('problem');
 		let answerMathField = MQ.MathField(problemSpan);
@@ -95,6 +95,86 @@
 		function clear_answerMathField() {
 		  document.getElementById("clear-selection-btn").click();
 	  	}
+
+		function find_pointer(index, side) {
+		  if (side=='left') {
+			  exp=expLeft;
+		  } else {
+			  exp=expRight;
+		  }
+		  i=0;
+		  while (exp[i][0]!=index) { i++;}
+		  return i
+		}
+
+		function findtops(side) {
+			if (side=='left') {
+			  	exp=expLeft;
+			  } else {
+				exp=expRight;
+			  }
+
+			var p=parseInt(exp[0][0]);
+	
+			while (exp.map(firstEl).includes(p) && find_parent(p, side)<998) {
+			  p=find_parent(p, side);
+			}
+			exptop=p;
+			selectedtop=999;
+	
+			parents=[];
+			for (x1 in selectedNodes) {
+				if (selectedNodes[x1]<998) {
+					p=selectedNodes[x1];
+					parents.push([parseInt(p)]);
+					while(find_parent(p, side)<998) {
+						p=find_parent(p, side);
+						parents[parents.length-1].push(parseInt(p));
+					}
+				}
+			}
+		
+
+
+		function containsSelectedtop(value, index, array) {
+
+			return value.includes(parseInt(selectedtop));
+		}
+
+		n=0;
+		if (parents.length>0) {
+
+			while (n < parents[0].length) {
+				n=n+1;
+				selectedtop=parseInt(parents[0][parents[0].length-n]);
+
+				if (!parents.every(containsSelectedtop)) {
+					selectedtop=parseInt(parents[0][parents[0].length-n+1]);
+					n=parents[0].length+1;
+				}
+			}
+
+
+		}
+
+		return [selectedtop,exptop];
+	    }
+
+	  function find_parent(index , side) {
+		  if (side=='left') {
+			  	exp=expLeft;
+			  } else {
+				exp=expRight;
+			  }
+		  
+		  p_prime=999;
+		  for (x in exp) {
+		    if (exp[x][2]!=undefined && exp[x][3]!=undefined && exp[x][2].toString()!="NaN" && exp[x][3].toString()!="NaN") {
+			if(exp[x][2]==index || exp[x][3]==index) {p_prime=parseInt(exp[x][0]);}
+		    }
+		  }
+		  return p_prime;
+		}
 
 		function set_answerMathField(text) {
 
@@ -172,12 +252,15 @@
 
 			if (selectionString1.index('=')>-1) {
 				side='right';
+				exp_result=expRight_result;
 			} else if (selectionString2.index('=')>-1) {
 				side='left';
+				exp_result=expLeft_result;
 			} else {
 				selectionString2=selectionString.substring(selectionString.indexOf('='),selectionString.length)+selectionString2;
 				selectionString=selectionString.substring(0,selectionString.indexOf('='));
 				side='left';
+				exp_result=expLeft_result;
 			}
 	
 			answerMathField.select();
@@ -305,9 +388,126 @@
 	
 			}
 	
-			trimSelectedNodes();
+			trimSelectedNodes(side);
 
 	      }
+
+	   function trimSelectedNodes(side) {
+		  
+		  lastSelectedNode=selectedNodes[selectedNodes.length-1];
+		  if (side=='left') {
+			  exp=expLeft;
+		  } else {
+			  exp=expRight;
+		  }
+
+	     	  //reduce to leaf nodes or completely selected subtrees
+		  toRemove=[];
+		  for (x1 in selectedNodes) {
+
+		    y=selectedNodes[x1];
+
+		    include=true;
+		    if(y!=999 && y!=998 && (exp[find_pointer(y, side)][1]=='*' || exp[find_pointer(y, side)][1]=='+' || exp[find_pointer(y, side)][1]=='/')) {
+
+		       var p=parseInt(exp[find_pointer(y, side)][2]);
+
+		       while(include && p!=y && find_parent(p, side)!=999) {
+
+		    if (!selectedNodes.includes(p) ) {include=false; }
+
+		    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
+		    else if (parseInt(exp[find_pointer(find_parent(p, side), side)][2])==p && selectedNodes.includes(find_parent(p, side) ))  {p=exp[find_pointer(find_parent(p, side), side)][3]; }
+		    else {
+		    while (find_parent(p, side)!=999 && exp[find_pointer(find_parent(p, side), side)][2]!=p && p!=y) {p=find_parent(p, side); }
+		    if (p!=y && find_parent(p, side)!=999 && p!=exp[find_pointer(find_parent(p, side), side)][3] && selectedNodes.includes(find_parent(p, side), side)) {p=exp[find_pointer(find_parent(p, side), side)][3]; }
+		    else if (p!=y && find_parent(p, side)!=999) {p=find_parent(p, side); }
+		    }
+		       }
+		    }
+		    if (!include) {
+			toRemove.push(x1);
+		    }
+		  }
+
+		  newSelectedNodes=[];
+
+		  for (x1 in selectedNodes) {
+		    if (!toRemove.includes(x1)) {
+			newSelectedNodes.push(parseInt(selectedNodes[x1]));
+		    }
+		  }
+
+		  selectedNodes=newSelectedNodes;
+
+	   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
+		function countleafs(item) {
+			if (item<998) {
+				if (exp[find_pointer(item, side)][2]==undefined || exp[find_pointer(item, side)][2].toString()=="NaN") {
+					leafcount++;
+				}
+			}
+		}
+
+
+
+		retry=false;
+		finished=false;
+		selectedtop=findtops(side)[0];
+
+		exptop=findtops(side)[1];
+		incompleteunit=false;
+		for (x1 in selectedNodes) {
+			if (selectedNodes[x1] < 998) {
+				p=selectedNodes[x1];
+				while (find_parent(p, side) < 998 && p!=selectedtop) {
+					p=find_parent(p, side);
+					if (exp[find_pointer(p, side)][1]=='*' && !selectedNodes.includes(p)) {incompleteunit=true;}
+				}
+			}
+		}
+
+		p=selectedtop;
+		leafcount=0;
+		selectedNodes.forEach(countleafs);
+		while (!retry && !finished && leafcount > 1 && incompleteunit) {
+
+
+			if (!selectedNodes.includes(p) && exp[find_pointer(p, side)][1]=='+') {
+				retry=true;
+			} else if (exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {
+				p=parseInt(exp[find_pointer(p, side)][2]);
+			} else if ((exp[find_pointer(p, side)][2]==undefined || exp[find_pointer(p, side)][2].toString()=="NaN") && exp[find_pointer(find_parent(p, side), side)][2]==p) {
+				p=parseInt(exp[find_pointer(find_parent(p, side), side)][3]);
+			} else if ((exp[find_pointer(p, side)][2]==undefined || exp[find_pointer(p, side)][2].toString()=="NaN") && parseInt(exp[find_pointer(find_parent(p, side), side)][3])==p) {
+				while (find_parent(p, side)!=selectedtop && find_parent(p, side)!=999 && find_parent(p, side)!=exptop) {p=find_parent(p, side);}
+				if (parseInt(exp[find_pointer(find_parent(p, side), side)][3])==p) {finished=true;}
+				else {p=parseInt(exp[find_pointer(find_parent(p, side), side)][3]);}
+			}
+		}
+		if (retry) {
+
+			removed=false;
+			n=selectedNodes.length-1;
+			while(!removed && n >= 0) {
+				if (selectedNodes[n] < 998) {
+					if (exp[find_pointer(selectedNodes[n], side)][2] == undefined || exp[find_pointer(selectedNodes[n], side)][2].toString() == "NaN") {
+						selectedNodes.splice(n,1);
+						removed = true;
+
+					}
+					else {n--;}
+				} else {n--;}
+			}
+
+
+			
+			trimSelectedNodes(side);
+
+		} 
+	  
+		
+	}
 		
 	</script>
 
