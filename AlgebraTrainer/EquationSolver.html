@@ -551,10 +551,10 @@
 
 		def push_vars(event):
 			js.get_exp1(create_proxy(expLeft_py.elements), 'left')
-			js.get_printTree(create_proxy([expLeft_py.print_tree('r'), expLeft_py.print_tree('l')]))
+			js.get_printTree(create_proxy([expLeft_py.print_tree('r'), expLeft_py.print_tree('l')]), 'left')
 
 			js.get_exp1(create_proxy(expRight_py.elements), 'right')
-			js.get_printTree(create_proxy([expRight_py.print_tree('r'), expRight_py.print_tree('l')]))
+			js.get_printTree(create_proxy([expRight_py.print_tree('r'), expRight_py.print_tree('l')]), 'right')
 
 		
 	
