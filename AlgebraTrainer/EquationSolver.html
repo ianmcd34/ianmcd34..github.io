@@ -550,7 +550,7 @@
 			expRight_py.add_branch('+','3')
 
 		def show_expression(event):
-			console.log(event.target)
+			console.log(event.target.id)
 			txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			document.getElementById("print-tree").innerHTML=txtL
