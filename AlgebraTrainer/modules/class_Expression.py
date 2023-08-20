@@ -150,7 +150,7 @@ class Expression:
             x = re.findall("\[-?\d+\]", result)
             y = [z[1:-1] for z in x]
 
-            selectedNodesList=selectedNodes[0][13:].split(",")
+            selectedNodesList=selectedNodes[0][14:].split(",")
 
             for i in y:
                 if i in selectedNodesList:
