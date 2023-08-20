@@ -250,10 +250,10 @@
 				selectionString='-'+selectionString;
 			}
 
-			if (selectionString1.index('=')>-1) {
+			if (selectionString1.indexOf('=')>-1) {
 				side='right';
 				exp_result=expRight_result;
-			} else if (selectionString2.index('=')>-1) {
+			} else if (selectionString2.indexOf('=')>-1) {
 				side='left';
 				exp_result=expLeft_result;
 			} else {
