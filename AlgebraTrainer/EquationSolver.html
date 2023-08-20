@@ -553,11 +553,12 @@
 
 		def show_expression(event):
 			if event.target.id=='clear-selection-btn':
-				document.getElementById("print-tree").innerHTML=""
+				js.document.getElementById("print-tree").innerHTML=""
 		
 			txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
-			
+
+			js.document.getElementById("print-tree").innerHTML=txtL+","+txtR
 			js.set_answerMathField(create_proxy(txtL+","+txtR))
 
 		def push_vars(event):
