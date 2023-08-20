@@ -397,9 +397,15 @@
 			trimSelectedNodes(side);
 			document.getElementById("print-tree").innerHTML="selectedNodes"+selectedNodes;
 
-	  		setTimeout(document.getElementById("show-btn").click(), 1000);
+			setTimeout(delay, 1000);
+
+	  		document.getElementById("show-btn");
 
 	      }
+
+	   function delay() {
+		   return true;
+	   }
 
 	   function trimSelectedNodes(side) {
 		  
