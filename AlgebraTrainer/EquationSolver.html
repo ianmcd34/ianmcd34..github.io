@@ -550,6 +550,7 @@
 			expRight_py.add_branch('+','3')
 
 		def show_expression(event):
+			console.log(event.target)
 			txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			document.getElementById("print-tree").innerHTML=txtL
@@ -568,8 +569,12 @@
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(push_vars))
+		
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
+		
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
 
 
 	</py-script>
