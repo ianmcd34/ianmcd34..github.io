@@ -409,8 +409,11 @@
 			document.getElementById("print-tree").innerHTML = mssgeStr;
 
 			setTimeout(delay, 1000);
-
-	  		document.getElementById("show-btn").click();
+			if (selectedNodes.length>=1) {
+	  			document.getElementById("show-btn").click();
+			} else {
+				document.getElementById("clear-selection-btn").click();
+			}
 
 	      }
 
