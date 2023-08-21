@@ -557,6 +557,23 @@
 		expLeft_py=cex.Expression()
 		expRight_py=cex.Expression()
 
+		def parseFactor():
+			document.getElementById("print-tree").innerHTML="parseFactor"
+			global numpart
+			global strpart
+
+			numpart=0;
+			strpart="";
+			expString=js.document.getElementById("factor-input").value
+			if not(re.search("^-?[0-9]*[a-z]*$", expString)):
+				raise ValueError("your expression must be in the form (-)(number)(lowercase letters)")
+			for i in range(0, len(expString)):
+				if expString[i].isdigit():
+					numpart=int(expString[0:i+1])
+					strpart=expString[i+1:]
+			if numpart==0 and strpart=="":
+				strpart=expString
+
 		def restart(event):
 			global expLeft_py
 			global expRight_py
@@ -593,6 +610,63 @@
 			js.get_exp1(create_proxy(expRight_py.elements), 'right')
 			js.get_printTree(create_proxy([expRight_py.print_tree('r'), expRight_py.print_tree('l')]), 'right')
 
+		def treeFactor(numpart, strpart):
+			exp_sub=cex.Expression()
+
+			if numpart>1:
+				exp_sub.add_branch('+',str(numpart))
+			elif numpart==1 and strpart=='':
+				exp_sub.add_branch('+',str(numpart))
+			elif numpart<0:
+				exp_sub.add_branch('-',str(-1*numpart))
+			elif strpart[0]=='-':
+				exp_sub.add_branch('-', '1')
+				strpart=strpart[1:]
+			else:
+				exp_sub.add_branch('+',strpart[0])
+				strpart=strpart[1:]
+			while len(strpart)>0:
+				exp_sub.add_branch('*',strpart[0])
+				strpart=strpart[1:]
+			return exp_sub
+		
+
+		def add_exp(event):
+			global numpart
+			global strpart
+			global exp_py
+			try:
+				parseFactor()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+			else:
+				document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
+
+
+			exp_insert=treeFactor(numpart, strpart)
+	
+			if len(exp_insert.elements)==1:
+				exp_py.add_branch('+', exp_insert.elements[0][1])
+			else:
+				maxindex=exp_py.elements[:,0].max()
+				for x1 in exp_insert.elements:
+					x1[0]=x1[0]+1+maxindex
+					if x1[2]!=None:
+						x1[2]=x1[2]+1+maxindex
+						x1[3]=x1[3]+1+maxindex
+				maxinsindex=exp_insert.elements[:,0].max()
+				oldelements=exp_py.elements
+				exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+
+			for x1 in exp_py.elements:
+				x1[0]=int(x1[0])
+				if x1[2] is not None:
+					x1[2]=int(x1[2])
+					x1[3]=int(x1[3])
+				
+			push_vars()
+			js.document.getElementById("show-btn").click()
+
 		
 	
 
@@ -605,6 +679,8 @@
 		
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
+
+		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 
 
 	</py-script>
