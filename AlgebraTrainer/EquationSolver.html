@@ -396,8 +396,17 @@
 			}
 	
 			trimSelectedNodes(side);
-			alert("selectedNodes"+selectedNodes);
-			document.getElementById("print-tree").innerHTML="selectedNodes"+selectedNodes;
+			mssgeStr="selectedNodes"
+			if (side=='left') {
+				mssgeStr+='L';
+			}
+			else {
+				mssgeStr+='R';
+			}
+			mssgeStr+=selectedNodes;
+			alert(mssgeStr);
+			
+			document.getElementById("print-tree").innerHTML = mssgeStr;
 
 			setTimeout(delay, 1000);
 
@@ -563,9 +572,14 @@
 		def show_expression(event):
 			if event.target.id=='clear-selection-btn':
 				js.document.getElementById("print-tree").innerHTML=""
-		
-			txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
-			txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
+			else:
+				txtL=expLeft_py.print_tree('l')
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
+			else:
+				txtR=expRight_py.print_tree('l')
 
 			js.set_answerMathField(create_proxy(txtL+","+txtR))
 
