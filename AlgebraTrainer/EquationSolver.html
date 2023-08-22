@@ -55,7 +55,7 @@
     <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
 	    <p><button type="button" id="restart-btn">Restart</button></p>
 	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
-	    <p><button type="button" id="show-btn">Show Expression</button></p>
+	    <p><button type="button" id="show-btn" >Show Expression</button></p>
 		    
 	    <p></br></p>
 	    <button type="button" id="add-btn">Add/Subtract</button></br>
@@ -184,7 +184,7 @@
 
 		function set_answerMathField(text) {
 
-
+			alert("set_answerMathField;"+text);
 			textL=text.toString().split(",")[0];
 			textR=text.toString().split(",")[1];
 
@@ -600,7 +600,7 @@
 				txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
 			else:
 				txtR=expRight_py.print_tree('l')
-			alert(txtL+","+txtR)
+			
 			js.set_answerMathField(create_proxy(txtL+","+txtR))
 
 		def push_vars(event):
