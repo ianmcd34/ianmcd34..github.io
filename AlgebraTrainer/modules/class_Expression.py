@@ -126,6 +126,62 @@ class Expression:
             self.find_divide(self.elements[self.find_pointer(rightindex),0])
 
 
+    def fractionise(self, txt):
+        txt="("+txt+")"
+        print(txt)
+        x = re.search("\([^\(]*?\)", txt)
+        dict={}
+        pointer=0
+        keylist='ABCDEFGHIJ'
+
+        while x:
+
+            print(x.group())
+            group=x.group()
+            
+            txt=txt.replace(x.group(), keylist[0] )
+
+            if txt.find("*(1/"+keylist[0]+")")>-1:
+                txt=txt.replace("*(1/"+keylist[0]+")", "/"+keylist[0])
+            if len(group)==3 and group[1].islower():
+                group=group[1]
+            
+            
+            dict[keylist[0]]=group
+            keylist=keylist[1:]
+
+            print(txt)
+
+        
+            x = re.search("\([^\(]*?\)", txt)
+
+
+        print(dict)
+
+        for x1, y1 in dict.items():
+            if y1.find("/")>-1:
+                y1=y1[0:y1.find("/")-1]+"\\frac{"+y1[y1.find("/")-1:y1.find("/")+2]+"}"+y1[y1.find("/")+2:]
+                y1=y1.replace("/","}{")
+                dict[x1]=y1
+
+        finish=False
+
+        while not finish:
+            replace=False
+            for x1 in txt:
+                if x1.isupper():
+                    txt=txt.replace(x1, dict[x1])
+                    replace=True
+            if not replace:
+                finish=True
+
+        if txt[0]=="(" and txt[-1]==")":
+            txt=txt[1:len(txt)-1]
+            
+
+        return txt
+
+
     def print_tree(self,o_r, *selectedNodes):
         firstrednode=None
         lastrednode=None
@@ -264,57 +320,35 @@ class Expression:
                 p=re.search(r"\(-1\)\*[0-9a-z]+", final)
             
             
+        dividepos=final.find('/')
+        if dividepos>=0:
+            final1=self.fractionise(final)
+        else:
+            final1=final
+
         latex=''
         powered=0
-        for i in range(0,len(final)):
-            if final[i]=='(':
+        for i in range(0,len(final1)):
+            if final1[i]=='(':
                 latex+='\\left('
-            elif final[i]==')':
+            elif final1[i]==')':
                 latex+='\\right)'
-            elif final[i]=='R':
+            elif final1[i]=='R':
                 latex+='\\textcolor{red}{'
-            elif final[i]=='S':
+            elif final1[i]=='S':
                 latex+='}'
-            elif final[i]=='^':
+            elif final1[i]=='^':
                 latex+='^{'
                 powered+=1
-            elif not final[i].isdigit() and powered>0:
+            elif not final1[i].isdigit() and powered>0:
                 powered-=1
-                latex+='}'+final[i]
+                latex+='}'+final1[i]
             else:
-                latex+=final[i]
+                latex+=final1[i]
         if powered>0:
             for i in range(0,powered):
                 latex+='}'
 
-        dividepos=latex.find('/')
-        if dividepos>=0:
-            #check for (1/(..))
-            p=re.search(r"[^+-/()]*(\\left\(.*\\right\))*[^+-/()]*\\left\([\w]*/", latex)
-            m=re.search(r"\\left\([\w]*/", latex)
-            n=re.search(r"/\\left\(([^()]*(\([^/()]*\))*[^()]*)*(\\right\)){1}", latex)
-
-            if m is not None and n is not None:
-                topnum=latex[m.span()[0]+6:dividepos]
-                if topnum=='1':
-                    topnum=''
-                else:
-                    topnum='*'+topnum
-                prefac=latex[:p.span()[0]]
-                topnum=latex[p.span()[0]:m.span()[0]]+topnum
-                if topnum[-1]=='*' and topnum!='*':
-                    topnum=topnum[:len(topnum)-1]
-                elif topnum=='*':
-                    topnum='1'
-                bottomnum=latex[dividepos+7:n.span()[1]-7]
-
-                if len(re.findall(r"\\right", latex[dividepos:]))>1:
-                    q=re.search(r"\\right\)", latex[n.span()[1]:])
-
-                    postfrac=latex[n.span()[1]+q.span()[1]:]
-                else:
-                    postfrac=latex[n.span()[1]:]
-                latex=prefac+"\\frac{"+topnum+"}{"+bottomnum+"}"+postfrac
 
                 
         output.replace("R","")
