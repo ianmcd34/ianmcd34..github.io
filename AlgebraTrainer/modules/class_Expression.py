@@ -1,10 +1,13 @@
+import sys
 
+for path in sys.path:
+    print(path)
 
+sys.path.append("C:\\Users\\ianmc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\")
 
 import numpy as np
 import math
 import re
-
 
 class Expression:
     def __init__(self):
@@ -92,7 +95,7 @@ class Expression:
             
     def find_pointer(self, index):
         for i in range(0, len(self.elements)):
-            if self.elements[i,0]==index:
+            if self.elements[i][0]==index:
                 return i
             
                 
@@ -126,10 +129,67 @@ class Expression:
             self.find_divide(self.elements[self.find_pointer(rightindex),0])
 
 
+    def fractionise(self, txt):
+        txt="("+txt+")"
+        print(txt)
+        x = re.search("\([^\(]*?\)", txt)
+        dict={}
+        pointer=0
+        keylist='ABCDEFGHIJ'
+
+        while x:
+
+            print(x.group())
+            group=x.group()
+            
+            txt=txt.replace(x.group(), keylist[0] )
+
+            if txt.find("*(1/"+keylist[0]+")")>-1:
+                txt=txt.replace("*(1/"+keylist[0]+")", "/"+keylist[0])
+            if len(group)==3 and group[1].islower():
+                group=group[1]
+            
+            
+            dict[keylist[0]]=group
+            keylist=keylist[1:]
+
+            print(txt)
+
+        
+            x = re.search("\([^\(]*?\)", txt)
+
+
+        print(dict)
+
+        for x1, y1 in dict.items():
+            if y1.find("/")>-1:
+                y1=y1[0:y1.find("/")-1]+"\\frac{"+y1[y1.find("/")-1:y1.find("/")+2]+"}"+y1[y1.find("/")+2:]
+                y1=y1.replace("/","}{")
+                dict[x1]=y1
+
+        finish=False
+
+        while not finish:
+            replace=False
+            for x1 in txt:
+                if x1.isupper():
+                    txt=txt.replace(x1, dict[x1])
+                    replace=True
+            if not replace:
+                finish=True
+
+        if txt[0]=="(" and txt[-1]==")":
+            txt=txt[1:len(txt)-1]
+            
+
+        return txt
+
+
     def print_tree(self,o_r, *selectedNodes):
         firstrednode=None
         lastrednode=None
-        
+
+
         maxindex=self.elements[:,0].max()
         absmaxindex=np.where(self.elements[:,0]==maxindex)[0][0]
         result=""
@@ -145,12 +205,14 @@ class Expression:
         else:
             result="("+"["+str(maxindex)+"]"+self.elements[absmaxindex][1]+")"
 
-        if selectedNodes and len(selectedNodes[0].strip())>13 and selectedNodes[0].startswith("selectedNodes"):
-            print(selectedNodes[0])
+        if len(selectedNodes)>0 and selectedNodes[0].startswith("selectedNodes"):
             x = re.findall("\[-?\d+\]", result)
             y = [z[1:-1] for z in x]
 
             selectedNodesList=selectedNodes[0][14:].split(",")
+
+            print(y)
+            print(selectedNodesList)
 
             for i in y:
                 if i in selectedNodesList:
@@ -165,18 +227,17 @@ class Expression:
             b=re.search(searchtxt, result)
             print(b)
             print("depths="+str(self.find_depth(firstrednode))+","+str(self.find_depth(lastrednode)))
-            result1=result
             if self.find_depth(firstrednode)>self.find_depth(lastrednode):
                 print("depth1>depth2")
                 a=result[0:a].rindex('(!')
                 result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
             if self.find_depth(firstrednode)<self.find_depth(lastrednode):
-                print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2],result[b.span()[1]+result[b.span()[1]:].index('!)')+2:])           
+                print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2],result[b.span()[1]+result[b.span()[1]:].index('!)')+2:])
+                
                 result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+2:]
-            else:
-                result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
-
+            print(result, result1)
             result=result1
+            print(result, result1)
 
         output=result.replace("(!", "{")
         output=output.replace("!)","}")
@@ -184,6 +245,7 @@ class Expression:
         output=output.replace(")","")
         output=output.replace("{","(")
         output=output.replace("}",")")
+
         while output.find("[") != -1:
             output=output.partition("[")[0]+output.partition("]")[2]
 
@@ -238,6 +300,8 @@ class Expression:
                 final=final+output[i]
         if power>1:
             final=final+"^"+str(power)
+
+
         #check for +(-X)
         p=re.search(r"\+\(-[^()]*\)", final)
         while p:
@@ -252,78 +316,57 @@ class Expression:
         while p:
             q=re.search(r"\(-1\)\*[0-9]+", final)
             if q:
-                final=final[:q.span()[0]]+"(-"+final[q.span()[0]+5:q.span()[1]]+")"+final[q.span()[1]:]
+                final=final[:q.span()[0]]+"(-"+final[q.span()[0]+5:q.span()[1]+1]+")"+final[q.span()[1]+1:]
             else:
                 q=re.search(r"\(-1\)\*[a-z]{1}[^\^]", final)
-           
+                print(q)
                 if q:
                     final=final[:q.span()[0]]+"(-"+final[q.span()[0]+5:q.span()[0]+6]+")"+final[q.span()[0]+6:]
                 else:
                     p=None
             if p:
                 p=re.search(r"\(-1\)\*[0-9a-z]+", final)
-            
-            
+
+        dividepos=final.find('/')
+        if dividepos>=0:
+            final1=self.fractionise(final)
+        else:
+            final1=final
+
         latex=''
         powered=0
-        for i in range(0,len(final)):
-            if final[i]=='(':
+        for i in range(0,len(final1)):
+            if final1[i]=='(':
                 latex+='\\left('
-            elif final[i]==')':
+            elif final1[i]==')':
                 latex+='\\right)'
-            elif final[i]=='R':
+            elif final1[i]=='R':
                 latex+='\\textcolor{red}{'
-            elif final[i]=='S':
+            elif final1[i]=='S':
                 latex+='}'
-            elif final[i]=='^':
+            elif final1[i]=='^':
                 latex+='^{'
                 powered+=1
-            elif not final[i].isdigit() and powered>0:
+            elif not final1[i].isdigit() and powered>0:
                 powered-=1
-                latex+='}'+final[i]
+                latex+='}'+final1[i]
             else:
-                latex+=final[i]
+                latex+=final1[i]
         if powered>0:
             for i in range(0,powered):
                 latex+='}'
+            
 
-        dividepos=latex.find('/')
-        if dividepos>=0:
-            #check for (1/(..))
-            p=re.search(r"[^+-/()]*(\\left\(.*\\right\))*[^+-/()]*\\left\([\w]*/", latex)
-            m=re.search(r"\\left\([\w]*/", latex)
-            n=re.search(r"/\\left\(([^()]*(\([^/()]*\))*[^()]*)*(\\right\)){1}", latex)
-
-            if m is not None and n is not None:
-                topnum=latex[m.span()[0]+6:dividepos]
-                if topnum=='1':
-                    topnum=''
-                else:
-                    topnum='*'+topnum
-                prefac=latex[:p.span()[0]]
-                topnum=latex[p.span()[0]:m.span()[0]]+topnum
-                if topnum[-1]=='*' and topnum!='*':
-                    topnum=topnum[:len(topnum)-1]
-                elif topnum=='*':
-                    topnum='1'
-                bottomnum=latex[dividepos+7:n.span()[1]-7]
-
-                if len(re.findall(r"\\right", latex[dividepos:]))>1:
-                    q=re.search(r"\\right\)", latex[n.span()[1]:])
-
-                    postfrac=latex[n.span()[1]+q.span()[1]:]
-                else:
-                    postfrac=latex[n.span()[1]:]
-                latex=prefac+"\\frac{"+topnum+"}{"+bottomnum+"}"+postfrac
-
-                
+                       
+        
         output.replace("R","")
         output.replace("S","")
         result.replace("R","")
         result.replace("S","")
         final.replace("R","")
         final.replace("S","")
-            
+                
+    
         if o_r=='o':
             return output
         elif o_r=='r':
@@ -708,10 +751,10 @@ class Expression:
                 leftindex=self.elements[self.find_pointer(parentindex),2]
                 rightindex=self.elements[self.find_pointer(parentindex),3]
 
-                if self.elements[self.find_pointer(leftindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(int(self.elements[self.find_pointer(leftindex),1]))))>1:
+                if self.elements[self.find_pointer(leftindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(self.elements[self.find_pointer(leftindex),1])))>1:
                     denominator=int(self.elements[self.find_pointer(leftindex),1])  
                     denominatorindex=self.elements[self.find_pointer(leftindex),0]
-                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(int(self.elements[self.find_pointer(rightindex),1]))))>1:
+                elif self.elements[self.find_pointer(rightindex),1][-1].isdigit() and math.gcd(int(math.fabs(numerator)),int(math.fabs(self.elements[self.find_pointer(rightindex),1])))>1:
                     denominator=int(self.elements[self.find_pointer(rightindex),1])  
                     denominatorindex=self.elements[self.find_pointer(rightindex),0]
                 else:
@@ -736,10 +779,10 @@ class Expression:
                     print("cancel "+str(numerator)+"/"+str(denominator))
                     cancel_constant=True
                     simplify=simplify+"["+str(numeratorindex)+"]["+str(denominatorindex)+"]cancel constants"
-                    
+                   
             if divideindex is not None:
                 parentindex=divideindex
-                   
+                
             #check if you can cancel variables
             print("find if cancel variables")
             while numeratorvar!='' and parentindex is not None and denominatorvar=='':
@@ -1029,14 +1072,14 @@ class Expression:
                 print("result="+str(result))
                 return result
 
-
+        
         def find_parent(index):
             for e in self.elements:
                 if e[2]==index or e[3]==index:
                     return e[0]
             return 999
 
-
+        
         simple=self.simplify()
         x=simple.find("add expressions")
         if x>-1:
@@ -1060,8 +1103,8 @@ class Expression:
         print(expressions)
         print(indices)
 
-
-
+        
+    
         addends_found=False
         for i in range(0,len(expressions)-1):
             for j in range(i+1,len(expressions)):
@@ -1071,10 +1114,10 @@ class Expression:
                     break
             if addends_found:
                 break
-
+       
         if addends_found:
             print(expressions[i],expressions[j],indices[i],indices[j])
-
+            
             if expressions[j].count("K")>0:
                 for ind in indices[j]:
                     if self.elements[self.find_pointer(ind),1]=="*":
@@ -1084,7 +1127,7 @@ class Expression:
                         elif self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1][-1].isdigit():
                             constantindex2=self.elements[self.find_pointer(ind),3]
                             constant2=self.elements[self.find_pointer(self.elements[self.find_pointer(ind),3]), 1]
-
+ 
             else:
                 varindex=999
                 for ind in indices[j]:
@@ -1094,7 +1137,7 @@ class Expression:
                         varindex=self.elements[self.find_pointer(ind),3]
                     elif self.elements[self.find_pointer(ind),1]==expressions[j][0]:
                         varindex=ind
-
+                    
                 if varindex!=999:
                     self.add_subbranch(varindex,'*','1')
                     indices[j].append(varindex)
@@ -1103,7 +1146,7 @@ class Expression:
                 else:
                     print("ERROR: can't find anywhere on LHS to add a constant.")
                     return False
-
+                
 
             print(constantindex2,constant2)        
             print(expressions[i],expressions[j],indices[i],indices[j])
@@ -1128,7 +1171,7 @@ class Expression:
                         varindex=self.elements[self.find_pointer(ind),3]
                     elif self.elements[self.find_pointer(ind),1]==expressions[i][0]:
                         varindex=ind
-
+                    
                 if varindex!=999:
                     self.add_subbranch(varindex,'*','1')
                     indices[i].append(varindex)
@@ -1146,7 +1189,7 @@ class Expression:
             self.elements[self.find_pointer(constantindex2)][1]='0'
             self.tidy_up()
 
-
+           
         else:
             return False
         
@@ -1254,7 +1297,7 @@ class Expression:
                     self.elements[self.find_pointer(leftindex),1]=str(int(topK/commonK))
                     setcommon=True
             print("right=",self.elements[self.find_pointer(rightindex),1])
-            if self.elements[self.find_pointer(rightindex),1][-1].isdigit()  and leftindex!=rightindex:
+            if self.elements[self.find_pointer(rightindex),1][-1].isdigit() and leftindex!=rightindex:
                 if int(self.elements[self.find_pointer(rightindex),1])<0:
                     self.elements[self.find_pointer(rightindex),1]='-1'
                 elif int(self.elements[self.find_pointer(rightindex),1])>0:
@@ -1264,6 +1307,7 @@ class Expression:
                     setcommon=True
         print(find_expression(p, 'e'))
         setcommon=False
+        print("find_expression(e1[2], 'i')=",find_expression(e1[2], 'i'))
         for n in find_expression(e1[2], 'i'):
             leftindex=self.elements[self.find_pointer(n),2]
             rightindex=self.elements[self.find_pointer(n),3]
@@ -1357,8 +1401,8 @@ class Expression:
             mask[pointers] = False
             result = self.elements[mask]
             self.elements=result
-            
-            
+
+              
     def factorise_selected(self, factor, selectedNodes):
         def find_parent(index):
             for e in self.elements:
@@ -1476,8 +1520,6 @@ class Expression:
         self.elements=np.concatenate((oldelements,newelements), axis=0)
 
 
-              
-            
     def factorise(self):
         def find_parent(index):
             for e in self.elements:
@@ -1670,7 +1712,7 @@ class Expression:
                         break
     
             
-           
+
 
     def expand_brackets(self):
         
@@ -1690,7 +1732,7 @@ class Expression:
                     return find_leaf(self.elements[self.find_pointer(index), 3])
                 else:
                     return None
-        
+                
         def copy_tree(node):
             copy=np.array([self.elements[self.find_pointer(node)].copy()])
             n=node
@@ -1712,7 +1754,7 @@ class Expression:
 
                         n=find_parent(n)
             return copy
-        
+            
         translation_f=self.translate_flat()
         translation=self.translate()
         result=self.print_tree('r')
@@ -1749,7 +1791,7 @@ class Expression:
             e1=p[1]
             if find_leaf(e[2]) is not None and find_leaf(e[3]) is not None:
                 break
-                
+
         if len(candidatepairs)==0:
             for e in self.elements:
                 if find_parent(e[0]) != 999:
@@ -1758,8 +1800,8 @@ class Expression:
                         e1 = self.elements[self.find_pointer(self.elements[self.find_pointer(find_parent(e[0])),3])]
                         if e1[1]=='+':
                             candidatetriple=[e,self.elements[self.find_pointer(find_parent(e[0]))], e1]
+                    
                 
-
         if len(candidatepairs)>0:
             minindex=self.elements[:,0].min()
             newelement1=[1000-1,'*',1000-2, None]
@@ -1809,12 +1851,12 @@ class Expression:
                     self.elements[self.find_pointer(branch),3]=self.elements[self.find_pointer(twig),2]
                     if self.elements[self.find_pointer(branch),1]=='/':
                         self.elements[self.find_pointer(branch),2]=self.elements[self.find_pointer(branch),3]
-
-
+            
+            
             mask[[self.find_pointer(leaf),self.find_pointer(twig)]] = False
             result = self.elements[mask]
             self.elements=result
-
+            
             if usenewelements:
                 minindex=self.elements[:,0].min()
                 newelement1[0]=minindex-1
@@ -1826,7 +1868,7 @@ class Expression:
                     self.elements[self.find_pointer(e[0]), 2]=minindex-1
 
                 self.elements=np.concatenate((self.elements,[newelement1,newelement2]), axis=0)
-                
+
         elif len(candidatetriple)>0:
             el=candidatetriple[0]
             ep=candidatetriple[1]
@@ -1897,16 +1939,15 @@ class Expression:
                 e[0]=int(e[0])
                 if e[2] is not None:
                     e[2]=int(e[2])
-                    e[3]=int(e[3])    
-
+                    e[3]=int(e[3])
+        
         #make sure top element is maximally indexed
         p=self.elements[0][0]
         while find_parent(p)!=999:
             p=find_parent(p)
         if p<self.elements[:,0].max():
             self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1
-         
-            
+
 
    
     def tidy_up(self):
@@ -1946,11 +1987,9 @@ class Expression:
                     e1=self.elements[self.find_pointer(n)]
                     if self.elements[self.find_pointer(e1[2])][1]==e[1]:
                         to_add.add(self.elements[self.find_pointer(e1[2])][0])
-                        
                     if len(parent_chain(e1[0]))>1 and self.elements[self.find_pointer(parent_chain(e1[0])[-2])][0]==self.elements[self.find_pointer(parent_chain(e1[0])[-1])][2]:
                         if self.elements[self.find_pointer(e1[3])][1]==e[1]:
                             to_add.add(self.elements[self.find_pointer(e1[3])][0])
-                            
                 if to_add.intersection(left_tree)==to_add:
                     added=False
                 else:
@@ -1958,7 +1997,6 @@ class Expression:
                 left_tree.update(to_add)
             return left_tree
 
-        
         #swap any adjascent leafs that are in wrong order
         for e in self.elements:
             swap=False
@@ -2140,7 +2178,7 @@ class Expression:
                             e1[3]=rightnode
                             e[3]=rightnode1
                             swapped=True
-                            
+
         #swap any subtrees that have lower precedence elements
         for e in self.elements:    
             if e[1] in ('+','*'):
@@ -2182,9 +2220,16 @@ class Expression:
                                 print(e1)
                                 if e1[0]==e[0]:
                                     treedone=True
-                                e1=self.elements[self.find_pointer(e1[3])]
-                                print("B")
-                                print(e1)
+                                if e1[2]==e1[3]:
+                                    e1=self.elements[self.find_pointer(find_parent(e1[0]))]
+                                    print("C")
+                                    print(e1)
+                                    if e1[0]==e[0]:
+                                        treedone=True
+                                else:
+                                    e1=self.elements[self.find_pointer(e1[3])]
+                                    print("B")
+                                    print(e1)
                             elif e1[0]!=e[0]:
                                 e1=self.elements[self.find_pointer(find_parent(e1[0]))]
                                 print("C")
@@ -2262,197 +2307,226 @@ class Expression:
                     e[3]=leftindex
                     e[2]=rightindex
                 print(self.elements)
-                            
-        for e in self.elements:
 
-            tidied=False
-            i=0
-            while not tidied and i<len(self.elements):
-                print(i)
-                e=self.elements[i]
-                mask = np.ones(len(self.elements), dtype=bool)
-                eliminate=[]
-                if e[1]=='0':
-                    if find_parent(e[0])!=999:
-                        p=find_parent(e[0])
-                        #unity case: 0+()=()
-                        if self.elements[self.find_pointer(p),1]=="+" and not tidied:
-                            print("0+()=()")
-                            eliminate.append(self.find_pointer(e[0]))
-                            eliminate.append(self.find_pointer(p))
-                            if self.elements[self.find_pointer(p),2]==e[0]:
-                                phanded='left'
+        #swap any leafs that are lower precedence elements
+        for e in self.elements: 
+            swapvertical=False
+            leftisconst=False
+            rightisconst=False
+            leftisvar=False
+            rightisdivide=False
+            if e[1]=='+' and self.elements[self.find_pointer(e[2])][1]=='+':
+                e1=self.elements[self.find_pointer(e[2])]
+                if self.elements[self.find_pointer(e1[3])][1][-1].isdigit():
+                    leftisconst=True
+                if self.elements[self.find_pointer(e[3])][1][-1].isdigit():
+                    rightisconst=True
+                if self.elements[self.find_pointer(e1[3])][1].islower():
+                    leftisvar=True
+                if self.elements[self.find_pointer(e[3])][1]=='/':
+                    rightisdivide=True
+                if leftisconst and not rightisconst:
+                    swapvertical=True
+                if leftisvar and rightisdivide:
+                    swapvertical=True
+
+                if swapvertical:
+                    toprightnode=e[3]
+                    bottomrightnode=self.elements[self.find_pointer(e[2])][3]
+                    e[3]=bottomrightnode
+                    self.elements[self.find_pointer(e[2])][3]=toprightnode
+
+            
+                
+
+
+
+        tidied=False
+        i=0
+        while not tidied and i<len(self.elements):
+            print(i)
+            e=self.elements[i]
+            mask = np.ones(len(self.elements), dtype=bool)
+            eliminate=[]
+            if e[1]=='0':
+                if find_parent(e[0])!=999:
+                    p=find_parent(e[0])
+                    #unity case: 0+()=()
+                    if self.elements[self.find_pointer(p),1]=="+" and not tidied:
+                        print("0+()=()")
+                        eliminate.append(self.find_pointer(e[0]))
+                        eliminate.append(self.find_pointer(p))
+                        if self.elements[self.find_pointer(p),2]==e[0]:
+                            phanded='left'
+                        else:
+                            phanded='right'
+                        if find_parent(p)!=999:
+                            pp=find_parent(p)
+                            if self.elements[self.find_pointer(pp),2]==p:
+                                pphanded='left'
                             else:
-                                phanded='right'
-                            if find_parent(p)!=999:
-                                pp=find_parent(p)
-                                if self.elements[self.find_pointer(pp),2]==p:
-                                    pphanded='left'
-                                else:
-                                    pphanded='right'
-                            else:
-                                pphanded=None
+                                pphanded='right'
+                        else:
+                            pphanded=None
+                        
+                        if pphanded is not None:
+                            if pphanded=='left' and phanded=='left':
+                                self.elements[self.find_pointer(pp),2]=self.elements[self.find_pointer(p),3]
+                            elif pphanded=='left' and phanded=='right':
+                                self.elements[self.find_pointer(pp),2]=self.elements[self.find_pointer(p),2]
+                            elif pphanded=='right' and phanded=='left':
+                                self.elements[self.find_pointer(pp),3]=self.elements[self.find_pointer(p),3]
+                            elif pphanded=='right' and phanded=='right':
+                                self.elements[self.find_pointer(pp),3]=self.elements[self.find_pointer(p),2]
+                        print(eliminate)
+                        mask[eliminate] = False
+                        result = self.elements[mask]
+                        self.elements=result
+                        tidied=True
 
-                            if pphanded is not None:
-                                if pphanded=='left' and phanded=='left':
-                                    self.elements[self.find_pointer(pp),2]=self.elements[self.find_pointer(p),3]
-                                elif pphanded=='left' and phanded=='right':
-                                    self.elements[self.find_pointer(pp),2]=self.elements[self.find_pointer(p),2]
-                                elif pphanded=='right' and phanded=='left':
-                                    self.elements[self.find_pointer(pp),3]=self.elements[self.find_pointer(p),3]
-                                elif pphanded=='right' and phanded=='right':
-                                    self.elements[self.find_pointer(pp),3]=self.elements[self.find_pointer(p),2]
-                            print(eliminate)
-                            mask[eliminate] = False
-                            result = self.elements[mask]
-                            self.elements=result
-                            tidied=True
-
-                        #error case: 1/0->"Divide by zero!"
-
+                    #error case: 1/0->"Divide by zero!"
+                    try:
                         if not tidied and self.elements[self.find_pointer(p),1]=="/":
-                            print("dividebyzeroB")
                             raise ZeroDivisionError("Second argument to a division or modulo operation was zero.")
                             tidied=True
+                    except:
+                        print("ZeroDivisionError: Second argument to a division or modulo operation was zero.")
 
 
-
-                        #unity case: 0*()=0
-                        if not tidied and self.elements[self.find_pointer(p),1]=="*":
-                            print("0*()=0")
-                            cl=self.elements[self.find_pointer(p),2]
-                            cr=self.elements[self.find_pointer(p),3]
-                            if cl==e[0]:
-                                while cr is not None:
-                                    #eliminate.append(self.find_pointer(cl))
-                                    eliminate.append(self.find_pointer(cr))
-                                    p=cr
-                                    cl=self.elements[self.find_pointer(p),2]
-                                    cr=self.elements[self.find_pointer(p),3]
-                                    while cl is not None:
-                                        eliminate.append(self.find_pointer(cl))
-                                        eliminate.append(self.find_pointer(cr))
-                                        if self.elements[self.find_pointer(cl),2] is None:
-                                            eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),3]))
-                                        p=cl
-                                        cl=self.elements[self.find_pointer(p),2]
-                            elif cr==e[0]:
+                    #unity case: 0*()=0
+                    if not tidied and self.elements[self.find_pointer(p),1]=="*":
+                        print("0*()=0")
+                        cl=self.elements[self.find_pointer(p),2]
+                        cr=self.elements[self.find_pointer(p),3]
+                        if cl==e[0]:
+                            while cr is not None:
+                                #eliminate.append(self.find_pointer(cl))
+                                eliminate.append(self.find_pointer(cr))
+                                p=cr
+                                cl=self.elements[self.find_pointer(p),2]
+                                cr=self.elements[self.find_pointer(p),3]
                                 while cl is not None:
                                     eliminate.append(self.find_pointer(cl))
-                                    #eliminate.append(self.find_pointer(cr)
+                                    eliminate.append(self.find_pointer(cr))
+                                    if self.elements[self.find_pointer(cl),2] is None:
+                                        eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),3]))
                                     p=cl
                                     cl=self.elements[self.find_pointer(p),2]
+                        elif cr==e[0]:
+                            while cl is not None:
+                                eliminate.append(self.find_pointer(cl))
+                                #eliminate.append(self.find_pointer(cr)
+                                p=cl
+                                cl=self.elements[self.find_pointer(p),2]
+                                cr=self.elements[self.find_pointer(p),3]
+                                while cr is not None:
+                                    eliminate.append(self.find_pointer(cl))
+                                    eliminate.append(self.find_pointer(cr))
+                                    if self.elements[self.find_pointer(cr),3] is None:
+                                        eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),2]))
+                                    p=cr
                                     cr=self.elements[self.find_pointer(p),3]
-                                    while cr is not None:
-                                        eliminate.append(self.find_pointer(cl))
-                                        eliminate.append(self.find_pointer(cr))
-                                        if self.elements[self.find_pointer(cr),3] is None:
-                                            eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),2]))
-                                        p=cr
-                                        cr=self.elements[self.find_pointer(p),3]
-                            print(eliminate)
-                            p=find_parent(e[0])
-                            if self.elements[self.find_pointer(p),2]==e[0]:
-                                phanded='left'
-                            elif self.elements[self.find_pointer(p),3]==e[0]:
-                                phanded='right'
-                            pp=find_parent(p)
-                            if pp!=999:
-                                ppp=find_parent(pp)
-                                if self.elements[self.find_pointer(pp),2]==p:
-                                    pphanded='left'
-                                elif self.elements[self.find_pointer(pp),3]==p:
-                                    pphanded='right'                                
-                            else:
-                                ppp=999
-                            print(e[0],p,pp,ppp)
-                            if ppp!=999:
-                                if self.elements[self.find_pointer(ppp),2]==pp:
-                                    ppphanded='left'
-                                elif self.elements[self.find_pointer(ppp),3]==pp:
-                                    ppphanded='right' 
-                            if pp==999:
-                                eliminate.append(self.find_pointer(p))
-                            else:
-                                if self.elements[self.find_pointer(pp),1]=="/":
-                                    eliminate.append(self.find_pointer(p))
-                                    self.elements[self.find_pointer(pp),2]=e[0]
-                                    self.elements[self.find_pointer(pp),3]=e[0]
-                                    print("ERROR: divide by 0 in expression!")
-                                elif self.elements[self.find_pointer(pp),1]=="*":
-                                    print("pp=*")
-                                    eliminate.append(self.find_pointer(p))
-                                    if pphanded=='left':
-                                        self.elements[self.find_pointer(pp),2]=e[0]
-                                    elif pphanded=='right':
-                                        self.elements[self.find_pointer(pp),3]=e[0]
-                                elif self.elements[self.find_pointer(pp),1]=="+":
-                                    print("pp=+")
-                                    eliminate.append(self.find_pointer(p))
-                                    eliminate.append(self.find_pointer(e[0]))
-                                    eliminate.append(self.find_pointer(pp))
-                                    if ppp!=999:
-                                        print("ppp!=999")
-                                        if ppphanded=='left' and pphanded=='left':
-                                            self.elements[self.find_pointer(ppp),2]=self.elements[self.find_pointer(pp),3]
-                                        elif ppphanded=='left' and pphanded=='right':
-                                            self.elements[self.find_pointer(ppp),2]=self.elements[self.find_pointer(pp),2] 
-                                        elif ppphanded=='right' and pphanded=='left':
-                                            self.elements[self.find_pointer(ppp),3]=self.elements[self.find_pointer(pp),3] 
-                                        elif ppphanded=='right' and pphanded=='right':
-                                            self.elements[self.find_pointer(ppp),3]=self.elements[self.find_pointer(pp),2] 
-                            print(eliminate)
-                            mask[eliminate] = False
-                            result = self.elements[mask]
-                            self.elements=result
-                            tidied=True
-
-                if e[1]=='1':
-                    if find_parent(e[0])!=999:
+                        print(eliminate)
                         p=find_parent(e[0])
-                        #unity case: 1*()=()
-                        if not tidied and self.elements[self.find_pointer(p),1]=="*":
-                            if self.elements[self.find_pointer(p),2]==e[0]:
-                                phanded='left'
-                                otherchildindex=self.elements[self.find_pointer(p),3]
-                            elif self.elements[self.find_pointer(p),3]==e[0]:
-                                phanded='right'
-                                otherchildindex=self.elements[self.find_pointer(p),2]
+                        if self.elements[self.find_pointer(p),2]==e[0]:
+                            phanded='left'
+                        elif self.elements[self.find_pointer(p),3]==e[0]:
+                            phanded='right'
+                        pp=find_parent(p)
+                        if pp!=999:
+                            ppp=find_parent(pp)
+                            if self.elements[self.find_pointer(pp),2]==p:
+                                pphanded='left'
+                            elif self.elements[self.find_pointer(pp),3]==p:
+                                pphanded='right'                                
+                        else:
+                            ppp=999
+                        print(e[0],p,pp,ppp)
+                        if ppp!=999:
+                            if self.elements[self.find_pointer(ppp),2]==pp:
+                                ppphanded='left'
+                            elif self.elements[self.find_pointer(ppp),3]==pp:
+                                ppphanded='right' 
+                        if pp==999:
+                            eliminate.append(self.find_pointer(p))
+                        else:
+                            if self.elements[self.find_pointer(pp),1]=="/":
+                                eliminate.append(self.find_pointer(p))
+                                self.elements[self.find_pointer(pp),2]=e[0]
+                                self.elements[self.find_pointer(pp),3]=e[0]
+                                print("ERROR: divide by 0 in expression!")
+                            elif self.elements[self.find_pointer(pp),1]=="*":
+                                print("pp=*")
+                                eliminate.append(self.find_pointer(p))
+                                if pphanded=='left':
+                                    self.elements[self.find_pointer(pp),2]=e[0]
+                                elif pphanded=='right':
+                                    self.elements[self.find_pointer(pp),3]=e[0]
+                            elif self.elements[self.find_pointer(pp),1]=="+":
+                                print("pp=+")
+                                eliminate.append(self.find_pointer(p))
+                                eliminate.append(self.find_pointer(e[0]))
+                                eliminate.append(self.find_pointer(pp))
+                                if ppp!=999:
+                                    print("ppp!=999")
+                                    if ppphanded=='left' and pphanded=='left':
+                                        self.elements[self.find_pointer(ppp),2]=self.elements[self.find_pointer(pp),3]
+                                    elif ppphanded=='left' and pphanded=='right':
+                                        self.elements[self.find_pointer(ppp),2]=self.elements[self.find_pointer(pp),2] 
+                                    elif ppphanded=='right' and pphanded=='left':
+                                        self.elements[self.find_pointer(ppp),3]=self.elements[self.find_pointer(pp),3] 
+                                    elif ppphanded=='right' and pphanded=='right':
+                                        self.elements[self.find_pointer(ppp),3]=self.elements[self.find_pointer(pp),2] 
+                        print(eliminate)
+                        mask[eliminate] = False
+                        result = self.elements[mask]
+                        self.elements=result
+                        tidied=True
+    
+            if e[1]=='1':
+                if find_parent(e[0])!=999:
+                    p=find_parent(e[0])
+                    #unity case: 1*()=()
+                    if not tidied and self.elements[self.find_pointer(p),1]=="*":
+                        if self.elements[self.find_pointer(p),2]==e[0]:
+                            phanded='left'
+                            otherchildindex=self.elements[self.find_pointer(p),3]
+                        elif self.elements[self.find_pointer(p),3]==e[0]:
+                            phanded='right'
+                            otherchildindex=self.elements[self.find_pointer(p),2]
 
-                            pp=find_parent(p)
+                        pp=find_parent(p)
+                        
+                        if not(pp==999 and self.elements[self.find_pointer(otherchildindex),1]=='/'):
+                            if pp!=999:
+                                if self.elements[self.find_pointer(pp),2]==p:
+                                    self.elements[self.find_pointer(pp),2]=otherchildindex
+                                if self.elements[self.find_pointer(pp),3]==p:
+                                    self.elements[self.find_pointer(pp),3]=otherchildindex
 
-                            if not(pp==999 and self.elements[self.find_pointer(otherchildindex),1]=='/'):
-                                if pp!=999:
-                                    if self.elements[self.find_pointer(pp),2]==p:
-                                        self.elements[self.find_pointer(pp),2]=otherchildindex
-                                    if self.elements[self.find_pointer(pp),3]==p:
-                                        self.elements[self.find_pointer(pp),3]=otherchildindex
-
-                                eliminate.append(self.find_pointer(self.elements[self.find_pointer(e[0]),0]))
-                                eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),0]))
-                                mask[eliminate] = False
-                                result = self.elements[mask]
-                                self.elements=result
-                                tidied=True
-                        #unity case: ()/1=()
-                        if not tidied and self.elements[self.find_pointer(p),1]=="/":
-                            self.elements[self.find_pointer(p),1]='1'
-                            self.elements[self.find_pointer(p),2]=None
-                            self.elements[self.find_pointer(p),3]=None
-                            eliminate.append(self.find_pointer(e[0]))
+                            eliminate.append(self.find_pointer(self.elements[self.find_pointer(e[0]),0]))
+                            eliminate.append(self.find_pointer(self.elements[self.find_pointer(p),0]))
                             mask[eliminate] = False
                             result = self.elements[mask]
                             self.elements=result
                             tidied=True
-
-
-                i=i+1
-                
-          #make sure top element is maximally indexed
-            p=self.elements[0][0]
-            while find_parent(p)!=999:
-                p=find_parent(p)
-            if p<self.elements[:,0].max():
-                self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1 
+                    #unity case: ()/1=()
+                    if not tidied and self.elements[self.find_pointer(p),1]=="/":
+                        self.elements[self.find_pointer(p),1]='1'
+                        self.elements[self.find_pointer(p),2]=None
+                        self.elements[self.find_pointer(p),3]=None
+                        eliminate.append(self.find_pointer(e[0]))
+                        mask[eliminate] = False
+                        result = self.elements[mask]
+                        self.elements=result
+                        tidied=True
                         
-       
+                                
+            i=i+1    
+
+        #make sure top element is maximally indexed
+        p=self.elements[0][0]
+        while find_parent(p)!=999:
+            p=find_parent(p)
+        if p<self.elements[:,0].max():
+            self.elements[self.find_pointer(p)][0]=self.elements[:,0].max()+1
