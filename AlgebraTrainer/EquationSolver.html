@@ -764,10 +764,10 @@
 			selectednodes=[]
 			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
 				exp_py=expLeft_py
-				selectedNodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+				selectednodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
 			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
 				exp_py=expRight_py
-				selectedNodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+				selectednodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
 			document.getElementById("print-tree").innerHTML=len(selectednodes)
 			if len(selectednodes)>0:
 				try:
@@ -785,7 +785,7 @@
 						document.getElementById("print-tree").innerHTML="Error in Factorisation"
 						js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
 				
-			#js.document.getElementById("clear-selection-btn").click()
+			js.document.getElementById("clear-selection-btn").click()
 			
 
 		
