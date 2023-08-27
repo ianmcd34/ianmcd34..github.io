@@ -764,10 +764,10 @@
 			selectednodes=[]
 			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
 				exp_py=expLeft_py
-				selectednodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
 			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
 				exp_py=expRight_py
-				selectednodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
 			document.getElementById("print-tree").innerHTML=len(selectednodes)
 			if len(selectednodes)>0:
 				try:
@@ -780,6 +780,7 @@
 					else:
 						factor=strpart[0]
 					try:
+						print(factor,selectednodes)
 						exp_py.factorise_selected(factor,selectednodes)
 					except:
 						document.getElementById("print-tree").innerHTML="Error in Factorisation"
