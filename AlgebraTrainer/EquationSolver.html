@@ -808,6 +808,13 @@
 			
 			js.document.getElementById("clear-selection-btn").click()
 
+
+		def add_expressions_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.add_expressions()
+			
+			js.document.getElementById("clear-selection-btn").click()
+
 			
 	
 
@@ -836,6 +843,8 @@
 		js.document.getElementById("add-constants-btn").addEventListener("click", create_proxy(add_constants_exp))
 
 		js.document.getElementById("multiply-constants-btn").addEventListener("click", create_proxy(multiply_constants_exp))
+
+		js.document.getElementById("add-expressions-btn").addEventListener("click", create_proxy(add_expressions_exp))
 
 
 	</py-script>
