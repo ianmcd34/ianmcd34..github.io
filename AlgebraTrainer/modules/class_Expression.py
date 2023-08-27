@@ -1394,6 +1394,7 @@ class Expression:
             
             
     def factorise_selected(self, factor, selectedNodes):
+        print("factorise_selected")
         def find_parent(index):
             for e in self.elements:
                 if e[2]==index or e[3]==index:
