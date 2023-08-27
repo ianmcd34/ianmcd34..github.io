@@ -919,8 +919,6 @@ class Expression:
                     break
 
                             
-        print(constantindex,constantindex1,commonparentindex)
-        print(pt,pt1)
         if constantindex is not None and constantindex1 is not None:
             multiplicand=int(self.elements[self.find_pointer(constantindex),1])
             multiplicand1=int(self.elements[self.find_pointer(constantindex1),1])
