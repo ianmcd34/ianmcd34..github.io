@@ -787,6 +787,12 @@
 						js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
 				
 			js.document.getElementById("clear-selection-btn").click()
+
+		def cancel_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.cancel()
+			
+			js.document.getElementById("clear-selection-btn").click()
 			
 
 		
@@ -811,6 +817,8 @@
 		js.document.getElementById("expand-btn").addEventListener("click", create_proxy(expand_exp))
 
 		js.document.getElementById("factorise-btn").addEventListener("click", create_proxy(factorise_exp))
+
+		js.document.getElementById("cancel-btn").addEventListener("click", create_proxy(cancel_exp))
 
 
 	</py-script>
