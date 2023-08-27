@@ -801,7 +801,12 @@
 			js.document.getElementById("clear-selection-btn").click()
 
 		
+		def multiply_constants_exp(event):
 
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.multiply_constants()
+			
+			js.document.getElementById("clear-selection-btn").click()
 
 			
 	
@@ -829,6 +834,8 @@
 		js.document.getElementById("cancel-btn").addEventListener("click", create_proxy(cancel_exp))
 
 		js.document.getElementById("add-constants-btn").addEventListener("click", create_proxy(add_constants_exp))
+
+		js.document.getElementById("multiply-constants-btn").addEventListener("click", create_proxy(multiply_constants_exp))
 
 
 	</py-script>
