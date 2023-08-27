@@ -744,6 +744,16 @@
 				
 				js.document.getElementById("show-btn").click()
 
+		def tidy_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				try:
+					exp_py.tidy_up()
+				except:
+					document.getElementById("print-tree").innerHTML="Error: Division by zero"
+					js.set_answerMathField(create_proxy("\\text{Error: Division by zero}"))	
+				else:
+					js.document.getElementById("clear-selection-btn").click()
+
 		
 	
 
@@ -760,6 +770,7 @@
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
 		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
+				
 
 
 	</py-script>
