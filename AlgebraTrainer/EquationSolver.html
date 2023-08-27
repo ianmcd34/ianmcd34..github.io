@@ -760,6 +760,33 @@
 
 			js.document.getElementById("clear-selection-btn").click()
 
+		def factorise_exp(event):
+			selectednodes=[]
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				exp_py=expLeft_py
+				selectedNodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				exp_py=expRight_py
+				selectedNodes=js.document.getElementById("print-tree").innerHTML[14:].split(",")
+
+			if len(selectednodes)>0:
+				try:
+					parseFactor()
+				except:
+					document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+				else:
+					if numpart!=0:
+						factor=str(numpart)
+					else:
+						factor=strpart[0]
+					try:
+						exp_py.factorise_selected(factor,selectedNodes)
+					except:
+						document.getElementById("print-tree").innerHTML="Error in Factorisation"
+						js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
+				
+			js.document.getElementById("clear-selection-btn").click()
+
 		
 	
 
