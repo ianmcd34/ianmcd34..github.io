@@ -558,7 +558,7 @@
 		expRight_py=cex.Expression()
 
 		def parseFactor(expString):
-	
+		
 			numpart=0;
 			strpart="";
 			
@@ -568,10 +568,10 @@
 				if expString[i].isdigit():
 					numpart=int(expString[0:i+1])
 					strpart=expString[i+1:]
-				if numpart==0 and strpart=="":
-					strpart=expString
-
-            		return(numpart, strpart)
+			if numpart==0 and strpart=="":
+				strpart=expString
+			
+			return(numpart, strpart)
 
 		def parse_tree_input():
 			txt=document.getElementById("print-tree").innerHTML
