@@ -586,7 +586,7 @@
 			for x1 in txtArr:
 				if len(x1)>0:
 					exp1=treeFactor(parseFactor(x1)[0],parseFactor(x1)[1])
-					print(exp1.elements)
+					document.getElementById("factor-input").innerHTML=exp1.elements
 					if not(len(exp_parse.elements)==1 and exp_parse.elements[0][1]=='0'):
 						maxindex=exp_parse.elements[:,0].max()
 						for e1 in exp1.elements:
@@ -610,7 +610,7 @@
 						if e1[3] is not None:
 							e1[2]=int(e1[2])
 							e1[3]=int(e1[3])
-					print(exp_parse)
+					document.getElementById("print-tree").innerHTML=exp_parse.elements
 				
 			return(exp_parse)
 
