@@ -582,12 +582,12 @@
 			txt=txt.replace("-","+-")
 			
 			txtArr=txt.split("+")
-			document.getElementById("factor-input").innerHTML=txtArr
+			document.getElementById("print-tree").innerHTML=txtArr
 			
 			for x1 in txtArr:
 				if len(x1)>0:
 					exp1=treeFactor(parseFactor(x1)[0],parseFactor(x1)[1])
-					document.getElementById("factor-input").innerHTML=exp1.elements
+					document.getElementById("factor-input").value=exp1.elements
 					if not(len(exp_parse.elements)==1 and exp_parse.elements[0][1]=='0'):
 						maxindex=exp_parse.elements[:,0].max()
 						for e1 in exp1.elements:
