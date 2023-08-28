@@ -681,14 +681,10 @@
 
 				
 			try:
-				parseFactor()
+				exp_insert=parse_tree_input()
 			except:
 				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-				document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
-
-
-				exp_insert=treeFactor(numpart, strpart)
 	
 				for exp_py in [expLeft_py, expRight_py]:
 		
