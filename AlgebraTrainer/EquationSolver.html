@@ -573,45 +573,45 @@
 
             return(numpart, strpart)
 
-        def parse_tree_input():
-            txt=document.getElementById("print-tree").innerHTML
-
-            exp_parse=cex.Expression()
-            exp_parse.elements[0][1]='0'
-
-            txt=txt.replace("-","+-")
-
-            txtArr=txt.split("+")
-
-            for x1 in txtArr:
-                if len(x1)>0:
-                    exp1=treeFactor(parseFactor(x1)[0],parseFactor(x1)[1])
-
-                    if not(len(exp_parse.elements)==1 and exp_parse.elements[0][1]=='0'):
-                        maxindex=exp_parse.elements[:,0].max()
-                        for e1 in exp1.elements:
-                            e1[0]+=maxindex+1
-                            if e1[3] is not None:
-                                e1[2]+=maxindex+1
-                                e1[3]+=maxindex+1
-                            e1[0]=int(e1[0])
-                            if e1[3] is not None:
-                                e1[2]=int(e1[2])
-                                e1[3]=int(e1[3])
-                        maxindex1=exp1.elements[:,0].max()
-                        newel=[maxindex1+1,'+',maxindex,maxindex1]
-
-                        exp_parse.elements=np.concatenate((exp_parse.elements,[newel],exp1.elements), axis=0)
-                    else:
-                        exp_parse=exp1
-                    
-                    for e1 in exp_parse.elements:
-                        e1[0]=int(e1[0])
-                        if e1[3] is not None:
-                            e1[2]=int(e1[2])
-                            e1[3]=int(e1[3])
-
-            return(exp_parse)
+		def parse_tree_input():
+		    txt=document.getElementById("print-tree").innerHTML
+	
+		    exp_parse=cex.Expression()
+		    exp_parse.elements[0][1]='0'
+	
+		    txt=txt.replace("-","+-")
+	
+		    txtArr=txt.split("+")
+	
+		    for x1 in txtArr:
+			if len(x1)>0:
+			    exp1=treeFactor(parseFactor(x1)[0],parseFactor(x1)[1])
+	
+			    if not(len(exp_parse.elements)==1 and exp_parse.elements[0][1]=='0'):
+				maxindex=exp_parse.elements[:,0].max()
+				for e1 in exp1.elements:
+				    e1[0]+=maxindex+1
+				    if e1[3] is not None:
+					e1[2]+=maxindex+1
+					e1[3]+=maxindex+1
+				    e1[0]=int(e1[0])
+				    if e1[3] is not None:
+					e1[2]=int(e1[2])
+					e1[3]=int(e1[3])
+				maxindex1=exp1.elements[:,0].max()
+				newel=[maxindex1+1,'+',maxindex,maxindex1]
+	
+				exp_parse.elements=np.concatenate((exp_parse.elements,[newel],exp1.elements), axis=0)
+			    else:
+				exp_parse=exp1
+			    
+			    for e1 in exp_parse.elements:
+				e1[0]=int(e1[0])
+				if e1[3] is not None:
+				    e1[2]=int(e1[2])
+				    e1[3]=int(e1[3])
+	
+		    return(exp_parse)
 
 
 		def restart(event):
