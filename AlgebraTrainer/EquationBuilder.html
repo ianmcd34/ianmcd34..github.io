@@ -49,16 +49,11 @@
 
   </head>
   <body >
-    <h1>EQUATION SOLVER</h1>
+    <h1>EQUATION BUILDER</h1>
     <h4 id='date'>date here</h4>
 
     <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
-	    <label for="starts">Selected Equation:</label>
-	    <select id="starts" >
-		  <option value="x+3=2">x+3=2</option>
-		  <option value="2x-3=5">2x-3=5</option>
-		  <option value="(x+2)*y=3" selected>(x+2)*y=3</option>
-	    </select>
+
 	    <p></br></p>
 	    <p><button type="button" id="restart-btn">Restart</button></p>
 	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
@@ -84,7 +79,11 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false" > </span></p>
+	<p id="problemo" onmouseup="jspaste()" >
+		<span id="problem1" contenteditable="false" > 
+			<span id="equalspan">=</span>
+		<span id="problem2" contenteditable="false" > 
+	</span></p>
 
 
 
