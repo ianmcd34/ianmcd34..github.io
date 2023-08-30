@@ -1,0 +1,901 @@
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    
+    <title>Equation Solver</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    
+    <link rel="stylesheet" href="./modules/mathquill-0.10.1/mathquill.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="./modules/mathquill-0.10.1//mathquill.js"></script>
+	  
+    <link rel="stylesheet" href="./modules/styles/styles.css" />
+
+    <style>
+        #problemo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+	    }
+	#problem {
+	    height: 300px;
+  	    width: 800px; 
+	    padding: 50px 0;
+	    }
+
+    </style>
+
+    <py-env>
+      - matplotlib
+      - numpy
+      - paths:
+        - modules/class_Expression.py
+    </py-env>
+	  
+    <script>
+      var MQ = MathQuill.getInterface(2);
+    </script>
+	  
+
+  </head>
+  <body >
+    <h1>EQUATION SOLVER</h1>
+    <h4 id='date'>date here</h4>
+
+    <div style="position: absolute;  right: 0px; margin: 30px;" width="100" >
+	    <label for="starts">Selected Equation:</label>
+	    <select id="starts" >
+		  <option value="x+3=2">x+3=2</option>
+		  <option value="2x-3=5">2x-3=5</option>
+		  <option value="(x+2)*y=3" selected>(x+2)*y=3</option>
+	    </select>
+	    <p></br></p>
+	    <p><button type="button" id="restart-btn">Restart</button></p>
+	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
+	    <p><button type="button" id="show-btn" >Show Expression</button></p>
+		    
+	    <p></br></p>
+	    <button type="button" id="add-btn">Add/Subtract</button></br>
+	    <button type="button" id="multiply-btn">Multiply</button></br>
+	    <button type="button" id="divide-btn">Divide</button></br>
+            <p></br></p>
+	    <p><label for="factor-input">By:</label></br>
+            <input type="text" id="factor-input" placeholder="2x" /></p>
+            <p></br></p>
+	    <button type="button" id="tidy-btn">Tidy Expression</button></br>
+	    <button type="button" id="expand-btn">Expand Brackets</button></br>
+	    <button type="button" id="factorise-btn">Factorise</button></br>
+	    <button type="button" id="cancel-btn">Cancel</button></br>
+	    <button type="button" id="add-constants-btn">Add Constants</button></br>
+	    <button type="button" id="multiply-constants-btn">Multiply Constants</button></br>
+	    <button type="button" id="add-expressions-btn">Add Expressions</button></br>
+	    </br>
+	    <p id="print-tree">pre-wassup</p>
+    </div>
+
+
+	<p id="problemo" onmouseup="jspaste()" ><span id="problem" contenteditable="false" > </span></p>
+
+
+
+
+	<script>
+
+		expLeft=[[0,'0',,]]
+		expRight=[[0,'0',,]]
+		expLeft_result="";
+	    	expLeft_latex="";
+		expRight_result="";
+	    	expRight_latex="";
+		var selectedNodes=[];
+		let problemSpan = document.getElementById('problem');
+		let answerMathField = MQ.MathField(problemSpan);
+
+		function clear_answerMathField() {
+		  document.getElementById("clear-selection-btn").click();
+	  	}
+
+		function find_pointer(index, side) {
+		  if (side=='left') {
+			  exp=expLeft;
+		  } else {
+			  exp=expRight;
+		  }
+		  i=0;
+		  while (exp[i][0]!=index) { i++;}
+		  return i
+		}
+
+		function findtops(side) {
+			if (side=='left') {
+			  	exp=expLeft;
+			  } else {
+				exp=expRight;
+			  }
+
+			var p=parseInt(exp[0][0]);
+	
+			while (exp.map(firstEl).includes(p) && find_parent(p, side)<998) {
+			  p=find_parent(p, side);
+			}
+			exptop=p;
+			selectedtop=999;
+	
+			parents=[];
+			for (x1 in selectedNodes) {
+				if (selectedNodes[x1]<998) {
+					p=selectedNodes[x1];
+					parents.push([parseInt(p)]);
+					while(find_parent(p, side)<998) {
+						p=find_parent(p, side);
+						parents[parents.length-1].push(parseInt(p));
+					}
+				}
+			}
+		
+
+
+		function containsSelectedtop(value, index, array) {
+
+			return value.includes(parseInt(selectedtop));
+		}
+
+		n=0;
+		if (parents.length>0) {
+
+			while (n < parents[0].length) {
+				n=n+1;
+				selectedtop=parseInt(parents[0][parents[0].length-n]);
+
+				if (!parents.every(containsSelectedtop)) {
+					selectedtop=parseInt(parents[0][parents[0].length-n+1]);
+					n=parents[0].length+1;
+				}
+			}
+
+
+		}
+
+		return [selectedtop,exptop];
+	    }
+
+	  function firstEl(arr) {
+		    return arr[0];
+	        }
+
+	  function find_parent(index , side) {
+		  if (side=='left') {
+			  	exp=expLeft;
+			  } else {
+				exp=expRight;
+			  }
+		  
+		  p_prime=999;
+		  for (x in exp) {
+		    if (exp[x][2]!=undefined && exp[x][3]!=undefined && exp[x][2].toString()!="NaN" && exp[x][3].toString()!="NaN") {
+			if(exp[x][2]==index || exp[x][3]==index) {p_prime=parseInt(exp[x][0]);}
+		    }
+		  }
+		  return p_prime;
+		}
+
+		function set_answerMathField(text) {
+
+			alert("set_answerMathField;"+text);
+			textL=text.toString().split(",")[0];
+			textR=text.toString().split(",")[1];
+
+			textL=textL.replace("'","");
+			textL=textL.replace("'","");
+			textL=textL.replaceAll("\\\\","\\");
+
+			textR=textR.replace("'","");
+			textR=textR.replace("'","");
+			textR=textR.replaceAll("\\\\","\\");
+
+			answerMathField.select();
+			answerMathField.clearSelection();
+
+			answerMathField.latex(textL + " = " + textR);
+			answerMathField.blur();
+			selectedNodes=[];
+		}
+
+		function get_exp1(obj, side) {
+		  
+		  objString=obj.toString();
+		  arraystart=objString.indexOf("[[");
+		  arrayend=objString.indexOf("]]");
+		  objString=objString.substring(arraystart+1,arrayend+1).replaceAll("None","undefined");
+		  eval("exp1=[" + objString + "]");
+		  for (x1 in exp1) {
+			  x1[0]=parseInt(x1[0]);
+		  }
+		  alert("get_exp1;"+exp1);
+		  if (side=='left')  {
+		  	expLeft=exp1;
+		  }
+		  else{
+		    expRight=exp1
+		  }
+
+		}
+	  
+		function get_printTree(obj, side) {
+		  objString=obj.toString(); 
+		  if (side=='left') {
+			expLeft_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
+			expLeft_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+		  } else {
+			expRight_result=objString.substring(objString.indexOf("['")+2,objString.indexOf("',"));
+		    	expRight_latex=objString.substring(objString.indexOf(", '")+3,objString.indexOf("']"));
+		  }
+		  
+	   	}
+
+		function jspaste() {
+		
+			selectedNodes=[];
+			side='';
+	
+		      	selection = document.getSelection();
+		      	selectionString=selection.toString();
+			answerMathField.typedText("#");
+	
+	
+	
+		      	selectionString1 = answerMathField.latex().toString().substring(0,answerMathField.latex().toString().indexOf("#"));
+			selectionString2 = answerMathField.latex().toString().substring(answerMathField.latex().toString().indexOf("#")+1,answerMathField.latex().toString().length);   
+			
+	
+			if (selectionString1.endsWith('-')) {
+				selectionString1=selectionString1.substr(0,selectionString1.length-1);
+	
+				selectionString='-'+selectionString;
+			}
+
+			if (selectionString1.indexOf('=')>-1) {
+				side='right';
+				exp_result=expRight_result;
+			} else if (selectionString2.indexOf('=')>-1) {
+				side='left';
+				exp_result=expLeft_result;
+			} else {
+				selectionString2=selectionString.substring(selectionString.indexOf('='),selectionString.length)+selectionString2;
+				selectionString=selectionString.substring(0,selectionString.indexOf('='));
+				side='left';
+				exp_result=expLeft_result;
+			}
+	
+			answerMathField.select();
+			answerMathField.latex("");
+			answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
+			answerMathField.blur();
+			
+			exp_result1=exp_result.replaceAll("(","");
+			exp_result1=exp_result1.replaceAll(")","");
+			exp_result1=exp_result1.replaceAll("!","");
+			
+			position=selectionString1.search("frac");
+	
+			while (position>-1) {
+				selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
+				if (selectionString1.search("}{")>-1) {
+					selectionString1=selectionString1.replace("}{","/");
+				} else {
+					selectionString=selectionString.replace("}{","/");
+				}
+				position=selectionString1.search("frac");
+			}   
+			selectionString1=selectionString1.replaceAll("{","");
+			selectionString1=selectionString1.replaceAll("}","");
+			selectionString1=selectionString1.replaceAll("\textcolor","");
+			selectionString1=selectionString1.replaceAll("red","");
+			selectionString1=selectionString1.replaceAll("\left","");
+			selectionString1=selectionString1.replaceAll("\right","");
+			   
+			position = selectionString1.indexOf("^");
+			while (position>-1) {
+			  letter = selectionString1[position-1];
+			  power = selectionString1[position+1];
+			  insert = "*"+letter;
+			  insert = insert.repeat(parseInt(power)-1);
+			  selectionString1 = selectionString1.replace("^"+power, insert);
+			  position = selectionString1.indexOf("^");
+			}
+			
+			position=selectionString.search("frac");
+	
+			while (position>-1) {
+				selectionString=selectionString.substring(0,position-1)+"*"+selectionString.substring(position+4);
+				selectionString=selectionString.replace("}{","/");
+				position=selectionString.search("frac");
+			}
+			selectionString=selectionString.replaceAll("{","");
+			selectionString=selectionString.replaceAll("}","");
+			selectionString=selectionString.replaceAll("\textcolor","");
+			selectionString=selectionString.replaceAll("red","");
+			selectionString=selectionString.replaceAll("\left","");
+			selectionString=selectionString.replaceAll("\right","");
+	
+			position = selectionString.indexOf("^");
+			while (position>-1) {
+			  letter = selectionString[position-1];
+			  power = selectionString[position+1];
+			  insert = "*"+letter;
+			  insert = insert.repeat(parseInt(power)-1);
+			  selectionString = selectionString.replace("^"+power, insert);
+			  position = selectionString.indexOf("^");
+			}
+			
+	
+			selectionStringNo=1;
+			    
+			n=exp_result1.indexOf("]");
+		
+			while (n>-1 && selectionStringNo==1) {
+	
+				operand=exp_result1[n+1];
+				while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
+					operand+=exp_result1[n+2];
+					n+=1;
+				}
+	
+				if (operand[0]=='-' && operand.length>1) {operand=operand.replace("-","");}
+					      
+				if (selectionString1.indexOf(operand)>=0 || (operand=='+' && selectionString1.indexOf('-')>=0)  || (operand=='*' && selectionString1.indexOf('/')>=0)) {
+					i=selectionString1.indexOf(operand);
+					if  (operand=='+' && selectionString1.indexOf('-')>=0  && selectionString1.indexOf('-')<selectionString1.indexOf('+')) {i=selectionString1.indexOf('-')-1;}
+					if  (operand=='*' && selectionString1.indexOf('/')>=0  && (selectionString1.indexOf('*')>selectionString1.indexOf('/') || selectionString1.indexOf('*')==-1 )) {i=selectionString1.indexOf('/')-1;}
+					
+					exp_result1=exp_result1.substring(n+2);
+					selectionString1=selectionString1.substring(i+operand.length);
+	
+				}
+				else {
+	
+					selectionStringNo=0;
+				}
+				
+	
+				n=exp_result1.indexOf("]");
+	
+			}
+	
+	
+			n=exp_result1.indexOf("]");
+	
+			while (n>-1 && selectionStringNo==0) {
+	
+				index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
+	
+				operand=exp_result1[n+1];
+				while ((exp_result1[n+2]>='0' && exp_result1[n+2]<='9') || (exp_result1[n+2]=='-') || (exp_result1[n+2]>='a' && exp_result1[n+2]<='z')) {
+					operand+=exp_result1[n+2];
+					n+=1;
+				}
+	
+				if (operand[0]=='-' && operand.length>1) {operand=operand.replace("-","");}
+									      
+				if (selectionString.indexOf(operand)>=0 || (operand=='+' && selectionString.indexOf('-')>=0)  || (operand=='*' && selectionString.indexOf('/')>=0)) {
+					i=selectionString.indexOf(operand);
+					if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
+					if  (operand=='*' && selectionString.indexOf('/')>=0  && (selectionString.indexOf('*')>selectionString.indexOf('/') || selectionString.indexOf('*')==-1 )) {i=selectionString.indexOf('/')-1;}
+					selectedNodes.push(index);
+					selectionString=selectionString.substring(i+operand.length);
+				} else if (selectionString.length==0 || exp_result1.length==0) {
+					selectionStringNo=2;
+				}
+				
+				exp_result1=exp_result1.substring(n+2);
+				n=exp_result1.indexOf("]");
+	
+			}
+	
+			trimSelectedNodes(side);
+			mssgeStr="selectedNodes"
+			if (side=='left') {
+				mssgeStr+='L';
+			}
+			else {
+				mssgeStr+='R';
+			}
+			mssgeStr+=selectedNodes;
+
+			
+			document.getElementById("print-tree").innerHTML = mssgeStr;
+
+			setTimeout(delay, 1000);
+			if (selectedNodes.length>=1) {
+	  			document.getElementById("show-btn").click();
+			} else {
+				document.getElementById("clear-selection-btn").click();
+			}
+
+	      }
+
+	   function delay() {
+		   return true;
+	   }
+
+	   function trimSelectedNodes(side) {
+		  
+		  lastSelectedNode=selectedNodes[selectedNodes.length-1];
+		  if (side=='left') {
+			  exp=expLeft;
+		  } else {
+			  exp=expRight;
+		  }
+
+	     	  //reduce to leaf nodes or completely selected subtrees
+		  toRemove=[];
+		  for (x1 in selectedNodes) {
+
+		    y=selectedNodes[x1];
+
+		    include=true;
+		    if(y!=999 && y!=998 && (exp[find_pointer(y, side)][1]=='*' || exp[find_pointer(y, side)][1]=='+' || exp[find_pointer(y, side)][1]=='/')) {
+
+		       var p=parseInt(exp[find_pointer(y, side)][2]);
+
+		       while(include && p!=y && find_parent(p, side)!=999) {
+
+		    if (!selectedNodes.includes(p) ) {include=false; }
+
+		    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
+		    else if (parseInt(exp[find_pointer(find_parent(p, side), side)][2])==p && selectedNodes.includes(find_parent(p, side) ))  {p=exp[find_pointer(find_parent(p, side), side)][3]; }
+		    else {
+		    while (find_parent(p, side)!=999 && exp[find_pointer(find_parent(p, side), side)][2]!=p && p!=y) {p=find_parent(p, side); }
+		    if (p!=y && find_parent(p, side)!=999 && p!=exp[find_pointer(find_parent(p, side), side)][3] && selectedNodes.includes(find_parent(p, side), side)) {p=exp[find_pointer(find_parent(p, side), side)][3]; }
+		    else if (p!=y && find_parent(p, side)!=999) {p=find_parent(p, side); }
+		    }
+		       }
+		    }
+		    if (!include) {
+			toRemove.push(x1);
+		    }
+		  }
+
+		  newSelectedNodes=[];
+
+		  for (x1 in selectedNodes) {
+		    if (!toRemove.includes(x1)) {
+			newSelectedNodes.push(parseInt(selectedNodes[x1]));
+		    }
+		  }
+
+		  selectedNodes=newSelectedNodes;
+
+	   //if there are any + nodes in containing tree and an incompletely selected multiplication unit, eliminate highest leaf and retry
+		function countleafs(item) {
+			if (item<998) {
+				if (exp[find_pointer(item, side)][2]==undefined || exp[find_pointer(item, side)][2].toString()=="NaN") {
+					leafcount++;
+				}
+			}
+		}
+
+
+
+		retry=false;
+		finished=false;
+		selectedtop=findtops(side)[0];
+
+		exptop=findtops(side)[1];
+		incompleteunit=false;
+		for (x1 in selectedNodes) {
+			if (selectedNodes[x1] < 998) {
+				p=selectedNodes[x1];
+				while (find_parent(p, side) < 998 && p!=selectedtop) {
+					p=find_parent(p, side);
+					if (exp[find_pointer(p, side)][1]=='*' && !selectedNodes.includes(p)) {incompleteunit=true;}
+				}
+			}
+		}
+
+		p=selectedtop;
+		leafcount=0;
+		selectedNodes.forEach(countleafs);
+		while (!retry && !finished && leafcount > 1 && incompleteunit) {
+
+
+			if (!selectedNodes.includes(p) && exp[find_pointer(p, side)][1]=='+') {
+				retry=true;
+			} else if (exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {
+				p=parseInt(exp[find_pointer(p, side)][2]);
+			} else if ((exp[find_pointer(p, side)][2]==undefined || exp[find_pointer(p, side)][2].toString()=="NaN") && exp[find_pointer(find_parent(p, side), side)][2]==p) {
+				p=parseInt(exp[find_pointer(find_parent(p, side), side)][3]);
+			} else if ((exp[find_pointer(p, side)][2]==undefined || exp[find_pointer(p, side)][2].toString()=="NaN") && parseInt(exp[find_pointer(find_parent(p, side), side)][3])==p) {
+				while (find_parent(p, side)!=selectedtop && find_parent(p, side)!=999 && find_parent(p, side)!=exptop) {p=find_parent(p, side);}
+				if (parseInt(exp[find_pointer(find_parent(p, side), side)][3])==p) {finished=true;}
+				else {p=parseInt(exp[find_pointer(find_parent(p, side), side)][3]);}
+			}
+		}
+		if (retry) {
+
+			removed=false;
+			n=selectedNodes.length-1;
+			while(!removed && n >= 0) {
+				if (selectedNodes[n] < 998) {
+					if (exp[find_pointer(selectedNodes[n], side)][2] == undefined || exp[find_pointer(selectedNodes[n], side)][2].toString() == "NaN") {
+						selectedNodes.splice(n,1);
+						removed = true;
+
+					}
+					else {n--;}
+				} else {n--;}
+			}
+
+
+			
+			trimSelectedNodes(side);
+
+		} 
+	  
+		
+	}
+		
+	</script>
+
+
+
+	<script async src="./modules/index.js"></script>
+
+	<py-script>
+		
+		import class_Expression as cex
+		from pyodide import create_proxy, to_js
+		import js
+		import numpy as np
+		import re
+
+		numpart=0
+		strpart=""
+		expLeft_py=cex.Expression()
+		expRight_py=cex.Expression()
+		equation_dict={
+			"x+3=2": [[[0,'x',None,None],[2,'+',0,1],[1,'3',None,None]],[[0,'2',None,None]]],
+			"2x-3=5": [[[0,'2',None,None],[2,'*',0,1],[1,'x',None,None],[4,'+',2,3],[3,'-3',None,None]],[[0,'5',None,None]]],
+			"(x+2)*y=3": [[[0,'x',None,None],[2,'+',0,1],[1,'2',None,None],[4,'*',2,3],[3,'y',None,None]],[[0,'3',None,None]]]
+		}
+
+		def parseFactor(expString):
+		
+			numpart=0;
+			strpart="";
+			
+			if not(re.search(r"^-?[0-9]*[a-z]*$", expString)):
+				raise ValueError("simple expressions in the form 3x+2y-z only please")
+			for i in range(0, len(expString)):
+				if expString[i].isdigit():
+					numpart=int(expString[0:i+1])
+					strpart=expString[i+1:]
+			if numpart==0 and strpart=="":
+				strpart=expString
+			
+			return(numpart, strpart)
+
+		def parse_tree_input():
+			txt=document.getElementById("factor-input").value
+			
+			exp_parse=cex.Expression()
+			exp_parse.elements[0][1]='0'
+			
+			txt=txt.replace("-","+-")
+			
+			txtArr=txt.split("+")
+
+			
+			for x1 in txtArr:
+				if len(x1)>0:
+					exp1=treeFactor(parseFactor(x1)[0],parseFactor(x1)[1])
+
+					if not(len(exp_parse.elements)==1 and exp_parse.elements[0][1]=='0'):
+						maxindex=exp_parse.elements[:,0].max()
+						for e1 in exp1.elements:
+							e1[0]+=maxindex+1
+							if e1[3] is not None:
+								e1[2]+=maxindex+1
+								e1[3]+=maxindex+1
+							e1[0]=int(e1[0])
+							if e1[3] is not None:
+								e1[2]=int(e1[2])
+								e1[3]=int(e1[3])
+						maxindex1=exp1.elements[:,0].max()
+						newel=[maxindex1+1,'+',maxindex,maxindex1]
+						
+						exp_parse.elements=np.concatenate((exp_parse.elements,[newel],exp1.elements), axis=0)
+					else:
+						exp_parse=exp1
+					
+					for e1 in exp_parse.elements:
+						e1[0]=int(e1[0])
+						if e1[3] is not None:
+							e1[2]=int(e1[2])
+							e1[3]=int(e1[3])
+
+				
+			return(exp_parse)
+
+
+		def restart(event):
+			global expLeft_py
+			global expRight_py
+			global equation_dict
+			del expLeft_py
+			del expRight_py
+
+			expLeft_py=cex.Expression()
+			expRight_py=cex.Expression()
+
+			expLeft_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][0])
+			expRight_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][1])
+
+		def show_expression(event):
+			if event.target.id=='clear-selection-btn':
+				js.document.getElementById("print-tree").innerHTML=""
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				txtL=expLeft_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
+			else:
+				txtL=expLeft_py.print_tree('l')
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				txtR=expRight_py.print_tree('l', js.document.getElementById("print-tree").innerHTML)
+			else:
+				txtR=expRight_py.print_tree('l')
+			
+			js.set_answerMathField(create_proxy(txtL+","+txtR))
+
+		def push_vars(event):
+			js.get_exp1(create_proxy(expLeft_py.elements), 'left')
+			js.get_printTree(create_proxy([expLeft_py.print_tree('r'), expLeft_py.print_tree('l')]), 'left')
+
+			js.get_exp1(create_proxy(expRight_py.elements), 'right')
+			js.get_printTree(create_proxy([expRight_py.print_tree('r'), expRight_py.print_tree('l')]), 'right')
+
+		def treeFactor(numpart, strpart):
+			exp_sub=cex.Expression()
+
+			if numpart>1:
+				exp_sub.add_branch('+',str(numpart))
+			elif numpart==1 and strpart=='':
+				exp_sub.add_branch('+',str(numpart))
+			elif numpart<0:
+				exp_sub.add_branch('-',str(-1*numpart))
+			elif strpart[0]=='-':
+				exp_sub.add_branch('-', '1')
+				strpart=strpart[1:]
+			else:
+				exp_sub.add_branch('+',strpart[0])
+				strpart=strpart[1:]
+			while len(strpart)>0:
+				exp_sub.add_branch('*',strpart[0])
+				strpart=strpart[1:]
+			return exp_sub
+		
+
+		def add_exp(event):
+			global numpart
+			global strpart
+			global expLeft_py
+			global expRight_py
+
+				
+			try:
+				exp_insert=parse_tree_input()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+			else:
+	
+				for exp_py in [expLeft_py, expRight_py]:
+		
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('+', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+		
+					for x1 in exp_py.elements:
+						x1[0]=int(x1[0])
+						if x1[2] is not None:
+							x1[2]=int(x1[2])
+							x1[3]=int(x1[3])
+					
+					
+				js.document.getElementById("show-btn").click()
+
+		def multiply_exp(event):
+			global numpart
+			global strpart
+			global expLeft_py
+			global expRight_py
+				
+			try:
+				exp_insert=parse_tree_input()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+			else:
+				for exp_py in [expLeft_py, expRight_py]:
+
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('*', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+					for x1 in exp_py.elements:
+						x1[0]=int(x1[0])
+						if x1[2] is not None:
+							x1[2]=int(x1[2])
+							x1[3]=int(x1[3])
+				
+				
+				js.document.getElementById("show-btn").click()
+
+
+		def divide_exp(event):
+			global numpart
+			global strpart
+			global expLeft_py
+			global expRight_py
+				
+			try:
+				exp_insert=parse_tree_input()
+			except:
+				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+			else:
+
+				for exp_py in [expLeft_py, expRight_py]:
+	
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('/', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+2, '*', int(maxindex), int(maxinsindex+1)], [maxinsindex+1, '/', int(maxinsindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+
+						for x1 in exp_py.elements:
+							x1[0]=int(x1[0])
+							if x1[2] is not None:
+								x1[2]=int(x1[2])
+								x1[3]=int(x1[3])
+				
+				js.document.getElementById("show-btn").click()
+
+		def tidy_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				try:
+					exp_py.tidy_up()
+				except:
+					document.getElementById("print-tree").innerHTML="Error: Division by zero"
+					js.set_answerMathField(create_proxy("\\text{Error: Division by zero}"))	
+	
+			js.document.getElementById("clear-selection-btn").click()
+
+		def expand_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.expand_brackets()
+
+			js.document.getElementById("clear-selection-btn").click()
+
+		def factorise_exp(event):
+			selectednodes=[]
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				exp_py=expLeft_py
+				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
+			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				exp_py=expRight_py
+				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
+			document.getElementById("print-tree").innerHTML=len(selectednodes)
+			if len(selectednodes)>0:
+				try:
+					parseFactor()
+				except:
+					document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
+				else:
+					if numpart!=0:
+						factor=str(numpart)
+					else:
+						factor=strpart[0]
+					try:
+						print(factor,selectednodes)
+						exp_py.factorise_selected(factor,selectednodes)
+					except:
+						document.getElementById("print-tree").innerHTML="Error in Factorisation"
+						js.set_answerMathField(create_proxy("\\text{Error in Factorisation}"))	
+				
+			js.document.getElementById("clear-selection-btn").click()
+
+		def cancel_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.cancel()
+			
+			js.document.getElementById("clear-selection-btn").click()
+
+		def add_constants_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.add_constants()
+			
+			js.document.getElementById("clear-selection-btn").click()
+
+		
+		def multiply_constants_exp(event):
+
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.multiply_constants()
+			
+			js.document.getElementById("clear-selection-btn").click()
+
+
+		def add_expressions_exp(event):
+			for exp_py in [expLeft_py, expRight_py]:
+				exp_py.add_expressions()
+			
+			js.document.getElementById("clear-selection-btn").click()
+
+			
+	
+
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(push_vars))
+		
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("clear-selection-btn").addEventListener("click", create_proxy(push_vars))
+		
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
+		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
+
+		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
+		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
+		js.document.getElementById("divide-btn").addEventListener("click", create_proxy(divide_exp))
+
+		js.document.getElementById("tidy-btn").addEventListener("click", create_proxy(tidy_exp))	
+
+		js.document.getElementById("expand-btn").addEventListener("click", create_proxy(expand_exp))
+
+		js.document.getElementById("factorise-btn").addEventListener("click", create_proxy(factorise_exp))
+
+		js.document.getElementById("cancel-btn").addEventListener("click", create_proxy(cancel_exp))
+
+		js.document.getElementById("add-constants-btn").addEventListener("click", create_proxy(add_constants_exp))
+
+		js.document.getElementById("multiply-constants-btn").addEventListener("click", create_proxy(multiply_constants_exp))
+
+		js.document.getElementById("add-expressions-btn").addEventListener("click", create_proxy(add_expressions_exp))
+
+
+	</py-script>
+
+
+  </body>
+
+</html>
