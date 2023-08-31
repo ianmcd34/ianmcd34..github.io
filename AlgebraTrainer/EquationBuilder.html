@@ -20,12 +20,19 @@
     <link rel="stylesheet" href="./modules/styles/styles.css" />
 
     <style>
-        #problemo {
+        #problemo1 {
             position: absolute;
             top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+            left: 25%;
+            -ms-transform: translate(-75%, -50%);
+            transform: translate(-75%, -50%);
+	    }
+	#problemo2 {
+            position: absolute;
+            top: 50%;
+            left: 75%;
+            -ms-transform: translate(-25%, -50%);
+            transform: translate(-25%, -50%);
 	    }
 	#problem1 {
 	    float:left;
@@ -90,11 +97,13 @@
     </div>
 
 
-	<p id="problemo" onmouseup="jspaste()" >
-		<span id="problem1" contenteditable="false" > 
+	<div id="problemo1" onmouseup="jspaste()" >
+		<span id="problem1" contenteditable="false" > 1</span>
+	</div>	
 			<span id="equalspan">=</span>
-		<span id="problem2" contenteditable="false" > 
-	</span></p>
+	< div id="problemo2" onmouseup="jspaste()" >
+		<span id="problem2" contenteditable="false" >2 </span>
+	</div>
 
 
 
