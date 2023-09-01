@@ -147,6 +147,11 @@
 		  return i
 		}
 
+		function isSelectedNode(n) {
+			return selectedNodes.includes(n);
+		}
+	
+
 		function findtops(side) {
 			if (side=='left') {
 			  	exp=expLeft;
@@ -721,8 +726,10 @@
 
 			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
 				exp_py=expLeft_py
+				side='left'
 			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
 				exp_py=expRight_py
+				side='right'
 			else:
 				document.getElementById("print-tree").innerHTML="You haven't selected Left or Right to add to"
 				return False
@@ -732,19 +739,23 @@
 			except:
 				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-		
-				if len(exp_insert.elements)==1:
-					exp_py.add_branch('+', exp_insert.elements[0][1])
-				else:
-					maxindex=exp_py.elements[:,0].max()
-					for x1 in exp_insert.elements:
-						x1[0]=x1[0]+1+maxindex
-						if x1[2]!=None:
-							x1[2]=x1[2]+1+maxindex
-							x1[3]=x1[3]+1+maxindex
-					maxinsindex=exp_insert.elements[:,0].max()
-					oldelements=exp_py.elements
-					exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
+				tops=js.findtops(side)
+				selectedtop=tops[0]
+				exptop=tops[1]
+
+				if (selectedtop==exptop and js.isSelectedNode(selectedtop)) or selectedtop==999:
+					if len(exp_insert.elements)==1:
+						exp_py.add_branch('+', exp_insert.elements[0][1])
+					else:
+						maxindex=exp_py.elements[:,0].max()
+						for x1 in exp_insert.elements:
+							x1[0]=x1[0]+1+maxindex
+							if x1[2]!=None:
+								x1[2]=x1[2]+1+maxindex
+								x1[3]=x1[3]+1+maxindex
+						maxinsindex=exp_insert.elements[:,0].max()
+						oldelements=exp_py.elements
+						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 	
 				for x1 in exp_py.elements:
 					x1[0]=int(x1[0])
