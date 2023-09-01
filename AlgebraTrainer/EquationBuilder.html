@@ -719,19 +719,19 @@
 			global expLeft_py
 			global expRight_py
 
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				exp_py=expLeft_py
+			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				exp_py=expRight_py
+			else:
+				document.getElementById("print-tree").innerHTML="You haven't selected Left or Right to add to"
+				return False
 				
 			try:
 				exp_insert=parse_tree_input()
 			except:
 				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-				if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
-					exp_py=expLeft_py
-				elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
-					exp_py=expLeft_py
-				else:
-					document.getElementById("print-tree").innerHTML="you haven't selected Left or Right to add to"
-					return False
 		
 				if len(exp_insert.elements)==1:
 					exp_py.add_branch('+', exp_insert.elements[0][1])
