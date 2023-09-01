@@ -284,8 +284,16 @@
 		function jspaste(event) {
 		
 			selectedNodes=[];
-			side='';
-			alert(event.currentTarget.id);
+			if (event.currentTarget.id=='problemo1') {
+				side='left';
+				answerMathField=answerMathField1;
+				exp_result=expLeft_result;
+			} else {
+				side='right';
+				answerMathField=answerMathField2;
+				exp_result=expRight_result;
+			}
+			
 		      	selection = document.getSelection();
 		      	selectionString=selection.toString();
 			answerMathField.typedText("#");
@@ -302,18 +310,6 @@
 				selectionString='-'+selectionString;
 			}
 
-			if (selectionString1.indexOf('=')>-1) {
-				side='right';
-				exp_result=expRight_result;
-			} else if (selectionString2.indexOf('=')>-1) {
-				side='left';
-				exp_result=expLeft_result;
-			} else {
-				selectionString2=selectionString.substring(selectionString.indexOf('='),selectionString.length)+selectionString2;
-				selectionString=selectionString.substring(0,selectionString.indexOf('='));
-				side='left';
-				exp_result=expLeft_result;
-			}
 	
 			answerMathField.select();
 			answerMathField.latex("");
