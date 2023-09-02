@@ -179,7 +179,36 @@
 				}
 			}
 		
-
+		function find_operators(side) {
+		    operators="";
+		    operators1="";
+		    var p=0;
+		    for (let index=selectedNodes.length-1; index>-1;index--) {
+			if (selectedNodes[index] < 998 && (exp[find_pointer(selectedNodes[index], side)][2] == undefined || exp[find_pointer(selectedNodes[index], side)][2].toString()=="NaN") ) {
+				p=selectedNodes[index];
+	
+				while (find_parent(p, side) < 998  && p!=findtops()[0] ) {
+	
+					if (selectedNodes.includes(p)) {
+						p=find_parent(p, side);
+						operators=operators+exp[find_pointer(p, side)][1];
+					} else {
+						p=find_parent(p, side);
+						operators1=operators1+exp[find_pointer(p, side)][1];
+					}
+				}
+			}
+		    }
+		    operatorsSet=new Set(operators.split(""));
+		    text="";
+		    operatorsSet.forEach(function(value) {text += value;});
+	
+		    operatorsSet=new Set((operators+operators1).split(""));
+		    text1="";
+		    operatorsSet.forEach(function(value) {text1 += value;});
+	
+		    return [text,text1];
+		}
 
 		function containsSelectedtop(value, index, array) {
 
@@ -894,14 +923,27 @@
 			global strpart
 			global expLeft_py
 			global expRight_py
+
+			if js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesL":
+				exp_py=expLeft_py
+				side='left'
+			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
+				exp_py=expRight_py
+				side='right'
+			else:
+				document.getElementById("print-tree").innerHTML="You haven't selected Left or Right to multiply"
+				return False
 				
 			try:
 				exp_insert=parse_tree_input()
 			except:
 				document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 			else:
-				for exp_py in [expLeft_py, expRight_py]:
+				tops=js.findtops(side)
+				selectedtop=tops[0]
+				exptop=tops[1]
 
+				if (selectedtop==exptop and js.isSelectedNode(selectedtop)) or selectedtop==999:
 					if len(exp_insert.elements)==1:
 						exp_py.add_branch('*', exp_insert.elements[0][1])
 					else:
@@ -919,7 +961,133 @@
 						if x1[2] is not None:
 							x1[2]=int(x1[2])
 							x1[3]=int(x1[3])
-				
+				else:
+					operators=js.find_operators()[0]
+					document.getElementById("print-tree").innerHTML=operators
+					exp_insert=treeFactor(numpart, strpart)
+
+					minindex_py=int(exp_py.elements[:,0].min())
+					maxindex_insert=int(exp_insert.elements[:,0].max())
+
+					for x1 in exp_insert.elements:
+						x1[0]=x1[0]-maxindex_insert-1+minindex_py
+						if x1[2] is not None:
+							x1[2]=x1[2]-maxindex_insert-1+minindex_py
+							x1[3]=x1[3]-maxindex_insert-1+minindex_py
+					minindex_insert=int(exp_insert.elements[:,0].min())
+					maxindex_insert=int(exp_insert.elements[:,0].max())
+		
+					numpart=1
+					strpart=''
+					fallenBranch=[]
+					for x1 in exp_py.elements:
+						if js.isSelectedNode(x1[0]) and not js.isSelectedNode(js.find_parent(x1[0])) and x1[2] is None:
+							if x1[1][-1].isdigit():
+								numpart=numpart*int(x1[1])
+							if x1[1].islower():
+								strpart=strpart+x1[1]
+							if exp_py.elements[exp_py.find_pointer(js.find_parent(x1[0]))][1]=='+':
+								x1[1]='0'
+							else:
+								x1[1]='1'
+							linknode=x1[0]
+						elif js.isSelectedNode(x1[0]):
+							fallenBranch.append([x1[0],x1[1],x1[2],x1[3]])
+		
+					newnode=[999,'*',None,None]	
+					newnode1=[998,'0',None,None]
+		
+					if numpart!=1 or strpart!='':
+						exp_fallenLeafs=treeFactor(numpart, strpart)
+						for x1 in exp_fallenLeafs.elements:
+							if x1[2]!=None:
+								x1[1]=exp_py.elements[exp_py.find_pointer(selectedtop)][1]
+						
+					else:
+						exp_fallenLeafs=cex.Expression()
+		
+					
+		
+					if len(fallenBranch)>0:
+						p=js.find_parent(fallenBranch[0][0])
+						fallenBranchStump=fallenBranch[0][0]
+						while p in [x2[0] for x2 in fallenBranch]:
+							fallenBranchStump=p
+							p=js.find_parent(p)
+						filter_arr=[]
+						for x1 in exp_py.elements:
+							if x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]!=fallenBranchStump:
+								filter_arr.append(False)
+							elif x1[0] in  [x2[0] for x2 in fallenBranch] and x1[0]==fallenBranchStump:
+								filter_arr.append(False)
+							else:
+								filter_arr.append(True)
+						exp_py.elements=exp_py.elements[filter_arr]
+						linknode=fallenBranchStump
+						
+					if not (numpart!=1 or strpart!='') and len(fallenBranch)>0:
+						newnode[0]=minindex_insert-1
+						newnode[2]=linknode
+						newnode[3]=maxindex_insert
+						p=js.find_parent(linknode)
+						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_insert-1
+						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_insert-1
+						exp_py.elements=np.concatenate((exp_py.elements,[newnode], fallenBranch ,exp_insert.elements), axis=0)
+					elif (numpart!=1 or strpart!='') and len(fallenBranch)==0:
+						minindex_insert=int(exp_insert.elements[:,0].min())
+						maxindex_insert=int(exp_insert.elements[:,0].max())
+						minindex_py=int(exp_py.elements[:,0].min())
+						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
+						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())
+		
+						for x1 in exp_fallenLeafs.elements:
+							x1[0]=x1[0]-maxindex_fl-1+minindex_insert
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_fl-1+minindex_insert
+								x1[3]=x1[3]-maxindex_fl-1+minindex_insert
+						
+						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
+						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())
+		
+						exp_py.elements[exp_py.find_pointer(linknode)][1]='*'
+						exp_py.elements[exp_py.find_pointer(linknode)][2]=maxindex_fl
+						exp_py.elements[exp_py.find_pointer(linknode)][3]=maxindex_insert
+						exp_py.elements=np.concatenate((exp_py.elements,exp_fallenLeafs.elements ,exp_insert.elements), axis=0)
+					elif (numpart!=1 or strpart!='') and len(fallenBranch)>0:
+						minindex_insert=int(exp_insert.elements[:,0].min())
+						maxindex_insert=int(exp_insert.elements[:,0].max())
+						minindex_py=int(exp_py.elements[:,0].min())
+						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
+						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())
+		
+						for x1 in exp_fallenLeafs.elements:
+							x1[0]=x1[0]-maxindex_fl-1+minindex_insert
+							if x1[2] is not None:
+								x1[2]=x1[2]-maxindex_fl-1+minindex_insert
+								x1[3]=x1[3]-maxindex_fl-1+minindex_insert
+						
+						maxindex_fl=int(exp_fallenLeafs.elements[:,0].max())
+						minindex_fl=int(exp_fallenLeafs.elements[:,0].min())
+		
+						newnode[0]=minindex_fl-1
+						newnode[2]=minindex_fl-2
+						newnode[3]=maxindex_insert
+						p=js.find_parent(linknode)
+						if exp_py.elements[exp_py.find_pointer(p)][2]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][2]=minindex_fl-1
+						if exp_py.elements[exp_py.find_pointer(p)][3]==linknode:
+							exp_py.elements[exp_py.find_pointer(p)][3]=minindex_fl-1
+		
+						newnode1[0]=minindex_fl-2
+						newnode1[2]=linknode
+						newnode1[3]=maxindex_fl
+						newnode1[1]=exp_py.elements[exp_py.find_pointer(selectedtop)][1]
+						
+						exp_py.elements=np.concatenate((exp_py.elements,[newnode],[newnode1],exp_fallenLeafs.elements, fallenBranch ,exp_insert.elements), axis=0)
+
+			
 				
 				js.document.getElementById("show-btn").click()
 
