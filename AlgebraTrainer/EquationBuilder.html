@@ -179,36 +179,6 @@
 				}
 			}
 		
-		function find_operators(side) {
-		    operators="";
-		    operators1="";
-		    var p=0;
-		    for (let index=selectedNodes.length-1; index>-1;index--) {
-			if (selectedNodes[index] < 998 && (exp[find_pointer(selectedNodes[index], side)][2] == undefined || exp[find_pointer(selectedNodes[index], side)][2].toString()=="NaN") ) {
-				p=selectedNodes[index];
-	
-				while (find_parent(p, side) < 998  && p!=findtops(side)[0] ) {
-	
-					if (selectedNodes.includes(p)) {
-						p=find_parent(p, side);
-						operators=operators+exp[find_pointer(p, side)][1];
-					} else {
-						p=find_parent(p, side);
-						operators1=operators1+exp[find_pointer(p, side)][1];
-					}
-				}
-			}
-		    }
-		    operatorsSet=new Set(operators.split(""));
-		    text="";
-		    operatorsSet.forEach(function(value) {text += value;});
-	
-		    operatorsSet=new Set((operators+operators1).split(""));
-		    text1="";
-		    operatorsSet.forEach(function(value) {text1 += value;});
-	
-		    return [text,text1];
-		}
 
 		function containsSelectedtop(value, index, array) {
 
@@ -962,7 +932,6 @@
 							x1[2]=int(x1[2])
 							x1[3]=int(x1[3])
 				else:
-					operators=js.find_operators(side)[0]
 
 					minindex_py=int(exp_py.elements[:,0].min())
 					maxindex_insert=int(exp_insert.elements[:,0].max())
