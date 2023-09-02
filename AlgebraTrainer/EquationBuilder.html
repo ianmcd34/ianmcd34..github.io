@@ -771,13 +771,14 @@
 					numpart=1
 					strpart=''
 					fallenBranch=[]
+				    	document.getElementById("print-tree").innerHTML=exp_py.elements
 					for x1 in exp_py.elements:
-						if js.isSelectedNode(x1[0]) and not js.isSelectedNode(js.find_parent(x1[0])) and x1[2] is None:
+						if js.isSelectedNode(x1[0]) and not js.isSelectedNode(js.find_parent(x1[0], side)) and x1[2] is None:
 							if x1[1][-1].isdigit():
 								numpart=numpart*int(x1[1])
 							if x1[1].islower():
 								strpart=strpart+x1[1]
-							if exp_py.elements[exp_py.find_pointer(js.find_parent(x1[0]))][1]=='+':
+							if exp_py.elements[exp_py.find_pointer(js.find_parent(x1[0], side), side)][1]=='+':
 								x1[1]='0'
 							else:
 								x1[1]='1'
