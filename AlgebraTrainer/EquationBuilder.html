@@ -756,9 +756,6 @@
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '+', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 				else:
-					operators=js.find_operators()[0]
-					document.getElementById("print-tree").innerHTML=operators
-					exp_insert=treeFactor(numpart, strpart)
 
 					minindex_py=int(exp_py.elements[:,0].min())
 					maxindex_insert=int(exp_insert.elements[:,0].max())
