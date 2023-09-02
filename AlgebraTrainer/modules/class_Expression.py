@@ -169,7 +169,7 @@ class Expression:
         while not finish:
             replace=False
             for x1 in txt:
-                if x1.isupper():
+                if x1 in dict.keys():
                     txt=txt.replace(x1, dict[x1])
                     replace=True
             if not replace:
