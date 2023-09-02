@@ -926,11 +926,7 @@
 						maxinsindex=exp_insert.elements[:,0].max()
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+1, '*', int(maxindex), int(maxinsindex)]], exp_insert.elements), axis=0)
-					for x1 in exp_py.elements:
-						x1[0]=int(x1[0])
-						if x1[2] is not None:
-							x1[2]=int(x1[2])
-							x1[3]=int(x1[3])
+
 				else:
 
 					minindex_py=int(exp_py.elements[:,0].min())
@@ -1055,6 +1051,11 @@
 						exp_py.elements=np.concatenate((exp_py.elements,[newnode],[newnode1],exp_fallenLeafs.elements, fallenBranch ,exp_insert.elements), axis=0)
 
 			
+				for x1 in exp_py.elements:
+					x1[0]=int(x1[0])
+					if x1[2] is not None:
+						x1[2]=int(x1[2])
+						x1[3]=int(x1[3])
 				
 				js.document.getElementById("show-btn").click()
 
@@ -1099,11 +1100,6 @@
 						oldelements=exp_py.elements
 						exp_py.elements=np.concatenate((oldelements, [[maxinsindex+2, '*', int(maxindex), int(maxinsindex+1)], [maxinsindex+1, '/', int(maxinsindex), int(maxinsindex)]], exp_insert.elements), axis=0)
 
-						for x1 in exp_py.elements:
-							x1[0]=int(x1[0])
-							if x1[2] is not None:
-								x1[2]=int(x1[2])
-								x1[3]=int(x1[3])
 
 				else:
 					minindex_py=int(exp_py.elements[:,0].min())
@@ -1133,6 +1129,11 @@
 					oldtree=exp_py
 					exp_py.elements=np.concatenate((oldtree.elements,[newnode1, newnode2],exp_insert.elements), axis=0)
 					
+				for x1 in exp_py.elements:
+					x1[0]=int(x1[0])
+					if x1[2] is not None:
+						x1[2]=int(x1[2])
+						x1[3]=int(x1[3])
 				
 				js.document.getElementById("show-btn").click()
 
