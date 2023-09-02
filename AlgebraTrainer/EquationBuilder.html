@@ -771,7 +771,7 @@
 					numpart=1
 					strpart=''
 					fallenBranch=[]
-				    	document.getElementById("print-tree").innerHTML=exp_py.elements
+					document.getElementById("print-tree").innerHTML=exp_py.elements
 					for x1 in exp_py.elements:
 						if js.isSelectedNode(x1[0]) and not js.isSelectedNode(js.find_parent(x1[0], side)) and x1[2] is None:
 							if x1[1][-1].isdigit():
