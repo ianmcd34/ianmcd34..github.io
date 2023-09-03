@@ -359,12 +359,16 @@ class Expression:
         final.replace("S","")
             
         if o_r=='o':
+            print(output)
             return output
         elif o_r=='r':
+            print(result)
             return result
         elif o_r=='f':
+            print(final)
             return final
         elif o_r=='l':
+            print(latex)
             return latex
             
  
