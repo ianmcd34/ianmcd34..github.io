@@ -611,6 +611,7 @@
 			strpart="";
 			
 			if not(re.search(r"^-?[0-9]*[a-z]*$", expString)):
+				print("raising ValueError")
 				raise ValueError("simple expressions in the form 3x+2y-z only please")
 			for i in range(0, len(expString)):
 				if expString[i].isdigit():
