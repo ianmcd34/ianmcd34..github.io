@@ -1167,7 +1167,7 @@
 			document.getElementById("print-tree").innerHTML=len(selectednodes)
 			if len(selectednodes)>0:
 				try:
-					parseFactor()
+					parseFactor(document.getElementById("factor-input").value)
 				except:
 					document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 				else:
