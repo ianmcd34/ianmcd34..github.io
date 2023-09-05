@@ -1164,10 +1164,12 @@
 			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
 				exp_py=expRight_py
 				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
-			document.getElementById("print-tree").innerHTML=len(selectednodes)
+			
 			if len(selectednodes)>0:
+				
 				try:
 					parseFactor(document.getElementById("factor-input").value)
+					document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
 				except:
 					document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
 				else:
