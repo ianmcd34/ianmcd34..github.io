@@ -1169,7 +1169,9 @@
 			if len(selectednodes)>0:
 				
 				try:
-					parseFactor(document.getElementById("factor-input").value)
+					parse=parseFactor(document.getElementById("factor-input").value)
+					numpart=parse[0]
+					strpart=parse[1]
 					document.getElementById("print-tree").innerHTML=str(numpart)+","+strpart
 				except:
 					document.getElementById("print-tree").innerHTML="your expression must be in the form (-)(number)(lowercase letters)"
