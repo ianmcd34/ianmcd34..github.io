@@ -411,7 +411,7 @@
 	
 	
 			n=exp_result1.indexOf("]");
-	
+			document.getElementById("print-tree").innerHTML=exp_result1;
 			while (n>-1 && selectionStringNo==0) {
 	
 				index=parseInt(exp_result1.substring(exp_result1.substring(0,n).lastIndexOf("[")+1 ,n));
@@ -441,7 +441,9 @@
 				n=exp_result1.indexOf("]");
 	
 			}
-	
+			document.getElementById("print-tree").innerHTML+=selectedNodes;
+			return false;
+			
 			trimSelectedNodes(side);
 			mssgeStr="selectedNodes"
 			if (side=='left') {
