@@ -429,7 +429,7 @@
 					alert("CselectionString;"+selectionString);
 					if  (operand=='+' && selectionString.indexOf('-')>=0 && selectionString.indexOf('-')<selectionString.indexOf('+') ) {i=selectionString.indexOf('-')-1;}
 					if  (operand=='*' && selectionString.indexOf('/')>=0  && (selectionString.indexOf('*')>selectionString.indexOf('/') || selectionString.indexOf('*')==-1 )) {i=selectionString.indexOf('/')-1;}
-					
+					alert("i;"+str(i)+";operand.length;"+str(operand.length));
 					selectionString=selectionString.substring(i+operand.length);
 					alert("DselectionString;"+selectionString);
 				} else if (selectionString.length==0 || exp_result1.length==0) {
