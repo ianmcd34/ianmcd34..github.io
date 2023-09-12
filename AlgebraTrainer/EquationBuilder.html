@@ -319,7 +319,7 @@
 			answerMathField.latex("");
 			answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 			answerMathField.blur();
-			alert("pause");
+
 			
 			exp_result1=exp_result.replaceAll("(","");
 			exp_result1=exp_result1.replaceAll(")","");
@@ -336,14 +336,18 @@
 				}
 				position=selectionString1.search("frac");
 			}   
-			selectionString1=selectionString1.replaceAll("{","");
-			selectionString1=selectionString1.replaceAll("}","");
-			selectionString1=selectionString1.replaceAll("\textcolor","");
-			selectionString1=selectionString1.replaceAll("red","");
-			selectionString1=selectionString1.replaceAll("\left","");
-			alert(selectionString1);
-			selectionString1=selectionString1.replace(/\\right/g,"");
-			alert(selectionString1);
+			 position=selectionString1.search("frac");
+	
+			while (position>-1) {
+				selectionString1=selectionString1.substring(0,position-1)+"*"+selectionString1.substring(position+4);
+				if (selectionString1.search("}{")>-1) {
+					selectionString1=selectionString1.replace("}{","/");
+				} else {
+					selectionString=selectionString.replace("}{","/");
+				}
+				position=selectionString1.search("frac");
+			}   
+			selectionString1=selectionString1.replace(/[{}]/g,"").replace(/\\textcolor/g,"").replace(/red/g,"").replace(/\\right/g,"").replace(/\\left/g,"").replace(/[^a-z0-9-/\+\*]/g,"")
 			   
 			position = selectionString1.indexOf("^");
 			while (position>-1) {
@@ -354,6 +358,36 @@
 			  selectionString1 = selectionString1.replace("^"+power, insert);
 			  position = selectionString1.indexOf("^");
 			}
+
+			position=selectionString2.search("frac");
+	
+			while (position>-1) {
+				selectionString2=selectionString2.substring(0,position-1)+"*"+selectionString2.substring(position+4);
+				if (selectionString2.search("}{")>-1) {
+					selectionString2=selectionString1.replace("}{","/");
+				} 
+				position=selectionString2.search("frac");
+			}   
+			 position=selectionString2.search("frac");
+	
+			while (position>-1) {
+				selectionString2=selectionString2.substring(0,position-1)+"*"+selectionString2.substring(position+4);
+				if (selectionString2.search("}{")>-1) {
+					selectionString2=selectionString2.replace("}{","/");
+				} 
+				position=selectionString2.search("frac");
+			}   
+			selectionString2=selectionString2.replace(/[{}]/g,"").replace(/\\textcolor/g,"").replace(/red/g,"").replace(/\\right/g,"").replace(/\\left/g,"").replace(/[^a-z0-9-/\+\*]/g,"")
+			   
+			position = selectionString2.indexOf("^");
+			while (position>-1) {
+			  letter = selectionString2[position-1];
+			  power = selectionString2[position+1];
+			  insert = "*"+letter;
+			  insert = insert.repeat(parseInt(power)-1);
+			  selectionString2 = selectionString2.replace("^"+power, insert);
+			  position = selectionString2.indexOf("^");
+			}
 			
 			position=selectionString.search("frac");
 	
@@ -362,12 +396,7 @@
 				selectionString=selectionString.replace("}{","/");
 				position=selectionString.search("frac");
 			}
-			selectionString=selectionString.replaceAll("{","");
-			selectionString=selectionString.replaceAll("}","");
-			selectionString=selectionString.replaceAll("\textcolor","");
-			selectionString=selectionString.replaceAll("red","");
-			selectionString=selectionString.replaceAll("\left","");
-			selectionString=selectionString.replaceAll("\right","");
+			selectionString=selectionString.replace(/[{}]/g,"").replace(/\\textcolor/g,"").replace(/red/g,"").replace(/\\right/g,"").replace(/\\left/g,"").replace(/[^a-z0-9-/\+\*]/g,"")
 	
 			position = selectionString.indexOf("^");
 			while (position>-1) {
