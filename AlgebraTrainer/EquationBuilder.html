@@ -378,7 +378,7 @@
 			
 			alert(selectionString1+";"+selectionString+";"+selectionString2+";"+exp_result);
 			function myFunction(el) {
-			return el.split("]");
+				return el.split("]");
 			  }
 			function indices(el) {
 				return el[0];
@@ -422,7 +422,7 @@
 			  totest1="";
 			  endmatch1=0;
 			}
-			
+			alert("totest1="+totest1+";endmatch1="+endmatch1);
 			
 			
 			
@@ -446,6 +446,7 @@
 			  totest2="";
 			  startmatch2=operators.length-1;
 			}
+			alert("totest2="+totest2+";startmatch2="+startmatch2);
 			
 			regex=RegExp(escapeRegExp(selectionString));
 			
@@ -471,6 +472,8 @@
 			} else {
 			  totestmain="";
 			}
+			alert("totestmain="+totestmain+";startmatch="+startmatch+";endmatch="+endmatch);
+			
 			selectedNodes=indices.slice(startmatch,endmatch);
 
 			
