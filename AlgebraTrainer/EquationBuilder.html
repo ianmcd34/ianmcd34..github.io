@@ -409,7 +409,7 @@
 			startmatch=0;
 			endmatch=operators.length;
 			totest=operators.slice(startmatch,endmatch).join("");
-			
+			alert(regex+";"+totest+";"+regex.test(totest));
 			if (selectionString1.length>0) {
 			  while (regex.test(totest)) {
 			    endmatch--;
