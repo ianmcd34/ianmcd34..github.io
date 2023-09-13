@@ -536,14 +536,14 @@
 	   }
 
 	   function trimSelectedNodes(side) {
-
+		  
 		  lastSelectedNode=selectedNodes[selectedNodes.length-1];
 		  if (side=='left') {
 			  exp=expLeft;
 		  } else {
 			  exp=expRight;
 		  }
-
+		  alert(exp+";"+selectedNodes);
 	     	  //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
 		  for (x1 in selectedNodes) {
