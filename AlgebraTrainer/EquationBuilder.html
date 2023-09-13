@@ -441,7 +441,7 @@
 			startmatch=0;
 			endmatch=operators.length;
 			totest=operators.slice(startmatch,endmatch).join("");
-
+			alert("totest="+totest);
 			if (selectionString1.length>0) {
 			  while (regex.test(totest)) {
 			    endmatch--;
@@ -454,7 +454,7 @@
 			  totest1="";
 			  endmatch1=0;
 			}
-
+			alert(totest1+" ; "+endmatch1);
 			
 			
 			
@@ -478,7 +478,7 @@
 			  totest2="";
 			  startmatch2=operators.length-1;
 			}
-
+			alert(totest2+" ; "+startmatch2);
 			
 			regex=RegExp(escapeRegExp(selectionString));
 			
@@ -504,7 +504,7 @@
 			} else {
 			  totestmain="";
 			}
-
+			alert(totestmain+" ; "+startmatch+" ; "+endmatch);
 			
 			selectedNodes=indices.slice(startmatch,endmatch).map(function(value) {return parseInt(value)});
 
