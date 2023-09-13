@@ -407,7 +407,7 @@
 			  position = selectionString.indexOf("^");
 			}
 			
-			alert(selectionString1+";"+selectionString+";"+selectionString2+";"+exp_result);
+
 			function myFunction(el) {
 				return el.split("]");
 			  }
@@ -441,7 +441,7 @@
 			startmatch=0;
 			endmatch=operators.length;
 			totest=operators.slice(startmatch,endmatch).join("");
-			alert(regex+";"+totest+";"+regex.test(totest));
+
 			if (selectionString1.length>0) {
 			  while (regex.test(totest)) {
 			    endmatch--;
@@ -454,7 +454,7 @@
 			  totest1="";
 			  endmatch1=0;
 			}
-			alert("totest1="+totest1+";endmatch1="+endmatch1);
+
 			
 			
 			
@@ -478,7 +478,7 @@
 			  totest2="";
 			  startmatch2=operators.length-1;
 			}
-			alert("totest2="+totest2+";startmatch2="+startmatch2);
+
 			
 			regex=RegExp(escapeRegExp(selectionString));
 			
@@ -504,9 +504,9 @@
 			} else {
 			  totestmain="";
 			}
-			alert("totestmain="+totestmain+";startmatch="+startmatch+";endmatch="+endmatch);
+
 			
-			selectedNodes=indices.slice(startmatch,endmatch);
+			selectedNodes=indices.slice(startmatch,endmatch).map(function(value) {return parseInt(value)});
 
 			
 			trimSelectedNodes(side);
@@ -536,20 +536,20 @@
 	   }
 
 	   function trimSelectedNodes(side) {
-                  alert("selectedNodes;"+selectedNodes+";"+side);
+
 		  lastSelectedNode=selectedNodes[selectedNodes.length-1];
 		  if (side=='left') {
 			  exp=expLeft;
 		  } else {
 			  exp=expRight;
 		  }
-		  alert(exp);
+
 	     	  //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
 		  for (x1 in selectedNodes) {
 
 		    y=selectedNodes[x1];
-		    alert(y+";"+exp[find_pointer(y, side)][1]);
+
 		    include=true;
 		    if(y!=999 && y!=998 && (exp[find_pointer(y, side)][1]=='*' || exp[find_pointer(y, side)][1]=='+' || exp[find_pointer(y, side)][1]=='/')) {
 
@@ -557,7 +557,7 @@
 
 		       while(include && p!=y && find_parent(p, side)!=999) {
 
-			    if (!selectedNodes.includes(p) ) {include=false; alert("removed when p="+p+";typeof p="+typeof p+";typeof selectedNodes="+typeof selectedNodes[0]);}
+			    if (!selectedNodes.includes(p) ) {include=false;}
 	
 			    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
 			    else if (parseInt(exp[find_pointer(find_parent(p, side), side)][2])==p && selectedNodes.includes(find_parent(p, side) ))  {p=exp[find_pointer(find_parent(p, side), side)][3]; }
@@ -572,7 +572,7 @@
 			toRemove.push(x1);
 		    }
 		  }
-		  alert("toRemove="+toRemove);
+
 		  newSelectedNodes=[];
 
 		  for (x1 in selectedNodes) {
