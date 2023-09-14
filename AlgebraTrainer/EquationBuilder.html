@@ -562,7 +562,7 @@
 			    else {
 				    while (find_parent(p, side)!=999 && exp[find_pointer(find_parent(p, side), side)][2]!=p && p!=y) {p=find_parent(p, side); }
 				    if (p!=y && find_parent(p, side)!=999 && p!=exp[find_pointer(find_parent(p, side), side)][3] && selectedNodes.includes(find_parent(p, side), side)) {p=exp[find_pointer(find_parent(p, side), side)][3]; }
-				    else if (p!=y && find_parent(p, side)!=999) {p=find_parent(p, side); }
+				    else if (p!=y && find_parent(p, side)!=999) {p=y; }
 			    }
 		       }
 		    }
