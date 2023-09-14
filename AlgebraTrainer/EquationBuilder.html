@@ -320,8 +320,6 @@
 			answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
 			answerMathField.blur();
 
-			
-			exp_result1=exp_result.replace(/[()!]/g,"");
 
 			
 			position=selectionString1.search("frac");
@@ -427,9 +425,9 @@
 			
 			}
 			alert("exp_result="+exp_result);
-			exp_result=exp_result.replace(/[()]/g,"");
+			exp_result1=exp_result.replace(/[()!{}]/g,"");
 
-			arr = exp_result.split("[").slice(1);
+			arr = exp_result1.split("[").slice(1);
 			newArr=arr.map(myFunction);
 			indices=newArr.map(indices);
 			operators=newArr.map(operators);
