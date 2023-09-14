@@ -426,8 +426,8 @@
 			  return string;
 			
 			}
-			
-			exp_result=exp_result.replace(/[()]/g,"")
+			alert("exp_result="+exp_result);
+			exp_result=exp_result.replace(/[()]/g,"");
 
 			arr = exp_result.split("[").slice(1);
 			newArr=arr.map(myFunction);
