@@ -558,7 +558,7 @@
 			    if (!selectedNodes.includes(p) ) {include=false;}
 	
 			    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
-			    else if (parseInt(exp[find_pointer(find_parent(p, side), side)][2])==p && selectedNodes.includes(find_parent(p, side) ))  {p=exp[find_pointer(find_parent(p, side), side)][3]; }
+			    else if (parseInt(exp[find_pointer(find_parent(p, side), side)][2])==p && selectedNodes.includes(find_parent(p, side) && exp[find_pointer(find_parent(p, side), side)][1]!='/' ))  {p=exp[find_pointer(find_parent(p, side), side)][3]; }
 			    else {
 				    while (find_parent(p, side)!=999 && exp[find_pointer(find_parent(p, side), side)][2]!=p && p!=y) {p=find_parent(p, side); }
 				    if (p!=y && find_parent(p, side)!=999 && p!=exp[find_pointer(find_parent(p, side), side)][3] && selectedNodes.includes(find_parent(p, side), side)) {p=exp[find_pointer(find_parent(p, side), side)][3]; }
