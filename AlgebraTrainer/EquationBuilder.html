@@ -314,7 +314,7 @@
 				selectionString='-'+selectionString;
 			}
 
-			alert(selectionString);
+
 			answerMathField.select();
 			answerMathField.latex("");
 			answerMathField.latex(selectionString1+"\\textcolor{red}{"+selectionString+"}"+selectionString2);
@@ -424,7 +424,7 @@
 			  return string;
 			
 			}
-			alert("exp_result="+exp_result);
+
 			exp_result1=exp_result.replace(/[()!{}]/g,"");
 
 			arr = exp_result1.split("[").slice(1);
@@ -432,14 +432,14 @@
 			indices=newArr.map(indices);
 			operators=newArr.map(operators);
 
-			alert(selectionString1+" ; "+selectionString+" ; "+selectionString2);
+
 			regex=RegExp(escapeRegExp(selectionString1));
 			
 			
 			startmatch=0;
 			endmatch=operators.length;
 			totest=operators.slice(startmatch,endmatch).join("");
-			alert("totest="+totest);
+
 			if (selectionString1.length>0) {
 			  while (regex.test(totest)) {
 			    endmatch--;
@@ -452,7 +452,7 @@
 			  totest1="";
 			  endmatch1=0;
 			}
-			alert(totest1+" ; "+endmatch1);
+
 			
 			
 			
@@ -476,7 +476,7 @@
 			  totest2="";
 			  startmatch2=operators.length-1;
 			}
-			alert(totest2+" ; "+startmatch2);
+
 			
 			regex=RegExp(escapeRegExp(selectionString));
 			
@@ -502,7 +502,7 @@
 			} else {
 			  totestmain="";
 			}
-			alert(totestmain+" ; "+startmatch+" ; "+endmatch);
+
 			
 			selectedNodes=indices.slice(startmatch,endmatch).map(function(value) {return parseInt(value)});
 
@@ -554,7 +554,7 @@
 		       var p=parseInt(exp[find_pointer(y, side)][2]);
 
 		       while(include && p!=y && find_parent(p, side)!=999) {
-
+			    alert("p="+p);
 			    if (!selectedNodes.includes(p) ) {include=false;}
 	
 			    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
@@ -562,7 +562,7 @@
 			    else {
 				    while (find_parent(p, side)!=999 && exp[find_pointer(find_parent(p, side), side)][2]!=p && p!=y) {p=find_parent(p, side); }
 				    if (p!=y && find_parent(p, side)!=999 && p!=exp[find_pointer(find_parent(p, side), side)][3] && selectedNodes.includes(find_parent(p, side), side)) {p=exp[find_pointer(find_parent(p, side), side)][3]; }
-				    else if (p!=y && find_parent(p, side)!=999) {p=y; }
+				    else if (p!=y && find_parent(p, side)!=999) {p=find_parent(p, side); }
 			    }
 		       }
 		    }
