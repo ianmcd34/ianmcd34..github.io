@@ -228,12 +228,12 @@ class Expression:
             if self.find_depth(firstrednode)>self.find_depth(lastrednode):
                 print("depth1>depth2")
                 a=result[0:a].rindex('(!')
-                result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
+                result1=result[0:a]+"(!R"+result[a:b.span()[1]]+"S!)"+result[b.span()[1]:]
             if self.find_depth(firstrednode)<self.find_depth(lastrednode):
                 print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+ddepth],result[b.span()[1]+result[b.span()[1]:].index('!)')+ddepth:])           
-                result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+ddepth]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+ddepth:]
+                result1=result[0:a]+"(!R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+ddepth]+"S!)"+result[b.span()[1]+result[b.span()[1]:].index('!)')+ddepth:]
             else:
-                result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
+                result1=result[0:a]+"(!R"+result[a:b.span()[1]]+"S!)"+result[b.span()[1]:]
 
             result=result1
 
