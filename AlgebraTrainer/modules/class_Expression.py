@@ -331,7 +331,7 @@ class Expression:
 
         latex=''
         powered=0
-        print(final1)
+
         for i in range(0,len(final1)):
             if final1[i]=='(':
                 if final1[i+1]!='R':
