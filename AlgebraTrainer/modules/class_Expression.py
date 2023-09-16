@@ -331,12 +331,13 @@ class Expression:
 
         latex=''
         powered=0
+        alert(final1)
         for i in range(0,len(final1)):
             if final1[i]=='(':
-                if final[i+1]!='R':
+                if final1[i+1]!='R':
                     latex+='\\left('
             elif final1[i]==')':
-                if final[i-1]!='S':
+                if final1[i-1]!='S':
                     latex+='\\right)'
             elif final1[i]=='R':
                 latex+='\\textcolor{red}{'
