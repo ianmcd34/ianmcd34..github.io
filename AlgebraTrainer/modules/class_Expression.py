@@ -221,14 +221,17 @@ class Expression:
             b=re.search(searchtxt, result)
             print(b)
             print("depths="+str(self.find_depth(firstrednode))+","+str(self.find_depth(lastrednode)))
+            depth1=self.find_depth(firstrednode)
+            depth2=self.find_depth(lastrednode)
+            ddepth=abs(depth2-depth1)*2
             result1=result
             if self.find_depth(firstrednode)>self.find_depth(lastrednode):
                 print("depth1>depth2")
                 a=result[0:a].rindex('(!')
                 result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
             if self.find_depth(firstrednode)<self.find_depth(lastrednode):
-                print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2],result[b.span()[1]+result[b.span()[1]:].index('!)')+2:])           
-                result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+2]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+2:]
+                print("depth1<depth2",result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+ddepth],result[b.span()[1]+result[b.span()[1]:].index('!)')+ddepth:])           
+                result1=result[0:a]+"R"+result[a:b.span()[1]]+result[b.span()[1]:b.span()[1]+result[b.span()[1]:].index('!)')+ddepth]+"S"+result[b.span()[1]+result[b.span()[1]:].index('!)')+ddepth:]
             else:
                 result1=result[0:a]+"R"+result[a:b.span()[1]]+"S"+result[b.span()[1]:]
 
