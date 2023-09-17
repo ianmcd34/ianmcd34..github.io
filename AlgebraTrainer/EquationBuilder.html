@@ -226,7 +226,6 @@
 
 		function set_answerMathField(text) {
 
-			alert(text);
 			textL=text.toString().split(",")[0];
 			textR=text.toString().split(",")[1];
 
@@ -541,7 +540,7 @@
 		  } else {
 			  exp=expRight;
 		  }
-		  alert(exp+";"+selectedNodes);
+
 	     	  //reduce to leaf nodes or completely selected subtrees
 		  toRemove=[];
 		  for (x1 in selectedNodes) {
@@ -554,7 +553,7 @@
 		       var p=parseInt(exp[find_pointer(y, side)][2]);
 
 		       while(include && p!=y && find_parent(p, side)!=999) {
-			    alert("p="+p);
+
 			    if (!selectedNodes.includes(p) ) {include=false;}
 	
 			    else if (selectedNodes.includes(p) && exp[find_pointer(p, side)][2]!=undefined && exp[find_pointer(p, side)][2].toString()!="NaN") {p=exp[find_pointer(p, side)][2]; }
