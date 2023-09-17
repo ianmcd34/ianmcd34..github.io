@@ -84,6 +84,7 @@
 	    <p><button type="button" id="restart-btn">Restart</button></p>
 	    <p><button type="button" id="clear-selection-btn">Clear Selection</button></p>
 	    <p><button type="button" id="show-btn" >Show Expression</button></p>
+	    <p><button type="button" id="add-eqn-btn" >Store Equation</button></p>
 		    
 	    <p></br></p>
 	    <button type="button" id="add-btn">Add/Subtract</button></br>
@@ -663,10 +664,16 @@
 		import numpy as np
 		import re
 
+
 		numpart=0
 		strpart=""
 		expLeft_py=cex.Expression()
 		expRight_py=cex.Expression()
+
+
+		def add_equation():
+			global equation_dict
+			document.getElementById("print-tree").innerHTML=equation_dict
 		
 
 		def parseFactor(expString):
@@ -1292,6 +1299,8 @@
 		
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(show_expression))
 		js.document.getElementById("show-btn").addEventListener("click", create_proxy(push_vars))
+
+		js.document.getElementById("add-eqn-btn").addEventListener("click", create_proxy(add_equation))
 
 		js.document.getElementById("add-btn").addEventListener("click", create_proxy(add_exp))
 		js.document.getElementById("multiply-btn").addEventListener("click", create_proxy(multiply_exp))
