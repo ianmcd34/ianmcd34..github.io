@@ -35,7 +35,7 @@
   <body>
      <img src="indexBackground.png" alt="" width="80%" height="80%" style="vertical-align:middle"> 
 
-     <form class="customform" action="onSubmit">
+     <form class="customform" action="equationSolver.html" onsubmit="return onSubmit()">
       <label for="inputEmail1" >Email address</label>
       <input type="email"  id="inputEmail1" />
       <p></p>
@@ -49,9 +49,13 @@
       function onSubmit() {
         addy=document.getElementById("inputEmail1").value;
         pwd=document.getElementById("inputpwd1").value;
+        if (addy.length<1) {
+          alert("Need a name, please.");
+          return false;
+        }
         localStorage.setItem("addy", addy);
         localStorage.setItem("pwd", pwd);
-        window.location.assign("EquationSolver.html")
+        return true;
       }
     </script>
 
