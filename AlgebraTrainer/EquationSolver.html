@@ -585,7 +585,6 @@
 		def toEquationArray(txt1):
 			txt1=re.sub("\[","(",txt1)
 			txt1=re.sub("\]",")",txt1)
-			print(txt1)
 			
 			
 			x = re.search("\([^\(]*?\)", txt1)
@@ -602,11 +601,8 @@
 			  dict[keylist[0]]=group
 			  keylist=keylist[1:]
 			
-			  print(txt1)
-			
 			  x = re.search("\([^\(]*?\)", txt1)
 			
-			print(dict)
 			
 			for k1 in dict.keys():
 			  x1=dict[k1]
@@ -625,10 +621,8 @@
 			    
 			    dict[k1]=[y1,y2,y3,y4]
 			
-			print(dict)
 			for k1 in dict.keys():
 			  x1=dict[k1]
-			  print(type(x1))
 			  if type(x1)==str:
 			    val=[]
 			    for y1 in x1[1:-1].split(","):
@@ -637,10 +631,8 @@
 			    if len(val)>0:
 			      dict[k1]=val
 			      
-			print(dict)
 			for k1 in dict.keys():
 			  x1=dict[k1]
-			  print(type(x1))
 			  if type(x1)==str:
 			    val=[]
 			    for y1 in x1[1:-1].split(","):
@@ -648,7 +640,6 @@
 			        val.append(dict[y1])
 			    if len(val)>0:
 			      dict[k1]=val
-			print(dict)
 			returnkey='';
 			for k1 in dict.keys():
 			  if len(dict[k1])==2:
@@ -656,7 +647,7 @@
 			       if type(dict[k1][0][0])==list and type(dict[k1][1][0])==list:
 			         if type(dict[k1][0][0][0])==int and type(dict[k1][1][0][0])==int:
 			           returnkey=k1
-			print(dict[returnkey])
+
 			return dict[returnkey]
 		
 
