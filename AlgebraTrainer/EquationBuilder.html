@@ -674,8 +674,15 @@
 
 
 		def add_equation(event):
-			global equation_dict
-			document.getElementById("print-tree").innerHTML=equation_dict
+			global expLeft_py
+			global expRight_py
+
+			txt=expLeft_py.print_tree('f')+"="+expRight_py.print_tree('f')
+			document.getElementById("print-tree").innerHTML=txt
+
+			js.localStorage.setItem(txt, [expLeft_py,expRight_py])
+			
+			
 		
 
 		def parseFactor(expString):
