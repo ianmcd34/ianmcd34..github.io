@@ -108,7 +108,8 @@
 
 		function onLoad() {
 			addy=localStorage.getItem("addy");
-			alert("Welcome to Algebra Solver, "+addy);
+			eqns=localStorage.getItem(addy);
+			alert("Welcome to Algebra Solver, "+addy+", your equations are "+eqns);
 			localStorage.setItem("x+3=2", "[[[0,'x',None,None],[2,'+',0,1],[1,'3',None,None]],[[0,'2',None,None]]]");
 			localStorage.setItem("2x-3=5", "[[[0,'2',None,None],[2,'*',0,1],[1,'x',None,None],[4,'+',2,3],[3,'-3',None,None]],[[0,'5',None,None]]]");
 			localStorage.setItem("(x+2)*y=3", "[[[0,'x',None,None],[2,'+',0,1],[1,'2',None,None],[4,'*',2,3],[3,'y',None,None]],[[0,'3',None,None]]]");
