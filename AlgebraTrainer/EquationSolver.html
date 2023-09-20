@@ -107,11 +107,12 @@
 		let answerMathField = MQ.MathField(problemSpan);
 
 		function onLoad() {
-			addy=localStorage.getItem("addy");
+			addy=sessionStorage.getItem("addy");
 			alert("Welcome to Algebra Solver, "+addy);
 			localStorage.setItem("x+3=2", "[[[0,'x',None,None],[2,'+',0,1],[1,'3',None,None]],[[0,'2',None,None]]]");
 			localStorage.setItem("2x-3=5", "[[[0,'2',None,None],[2,'*',0,1],[1,'x',None,None],[4,'+',2,3],[3,'-3',None,None]],[[0,'5',None,None]]]");
 			localStorage.setItem("(x+2)*y=3", "[[[0,'x',None,None],[2,'+',0,1],[1,'2',None,None],[4,'*',2,3],[3,'y',None,None]],[[0,'3',None,None]]]");
+			
 		}
 		
 		function clear_answerMathField() {
@@ -579,13 +580,91 @@
 
 		myEquations=js.localStorage.getItem(js.addy)
 		document.getElementById("print-tree").innerHTML=myEquations
+
 		
-		equation_dict={
-			"x+3=2": [[[0,'x',None,None],[2,'+',0,1],[1,'3',None,None]],[[0,'2',None,None]]],
-			"2x-3=5": [[[0,'2',None,None],[2,'*',0,1],[1,'x',None,None],[4,'+',2,3],[3,'-3',None,None]],[[0,'5',None,None]]],
-			"(x+2)*y=3": [[[0,'x',None,None],[2,'+',0,1],[1,'2',None,None],[4,'*',2,3],[3,'y',None,None]],[[0,'3',None,None]]]
-		}
-		
+		equation_dict={}
+		for  x1 in myEquations.split(","):
+			txt1=js.localStorage.getItem(x1);
+			if txt1:
+				equation_dict[x1]=toEquationArray(txt1);
+
+
+		def toEquationArray(txt1):
+			txt1=re.sub("\[","(",txt1)
+			txt1=re.sub("\]",")",txt1)
+			print(txt1)
+			
+			
+			x = re.search("\([^\(]*?\)", txt1)
+			dict={}
+			pointer=0
+			keylist='ABCDEFGHIJKLMOP'
+			
+			while x:
+			  print(x.group())
+			  group=x.group()
+			
+			  txt1=txt1.replace(x.group(), keylist[0] )
+			
+			  dict[keylist[0]]=group
+			  keylist=keylist[1:]
+			
+			  print(txt1)
+			
+			  x = re.search("\([^\(]*?\)", txt1)
+			
+			print(dict)
+			
+			for k1 in dict.keys():
+			  x1=dict[k1]
+			  hasupper=False
+			  for y1 in x1:
+			    if y1.isupper() and y1!='N':
+			      hasupper=True
+			  
+			  if not hasupper:
+			    y1=int(x1[1:-1].split(",")[0])
+			    y2=str(x1[1:-1].split(",")[1][1:-1])
+			    try: y3=int(x1[1:-1].split(",")[2])
+			    except: y3=None
+			    try: y4=int(x1[1:-1].split(",")[3])
+			    except: y4=None
+			    
+			    dict[k1]=[y1,y2,y3,y4]
+			
+			print(dict)
+			for k1 in dict.keys():
+			  x1=dict[k1]
+			  print(type(x1))
+			  if type(x1)==str:
+			    val=[]
+			    for y1 in x1[1:-1].split(","):
+			      if type(dict[y1])==list:
+			        val.append(dict[y1])
+			    if len(val)>0:
+			      dict[k1]=val
+			      
+			print(dict)
+			for k1 in dict.keys():
+			  x1=dict[k1]
+			  print(type(x1))
+			  if type(x1)==str:
+			    val=[]
+			    for y1 in x1[1:-1].split(","):
+			      if type(dict[y1])==list:
+			        val.append(dict[y1])
+			    if len(val)>0:
+			      dict[k1]=val
+			print(dict)
+			returnkey='';
+			for k1 in dict.keys():
+			  if len(dict[k1])==2:
+			     if type(dict[k1][0])==list and type(dict[k1][1])==list:
+			       if type(dict[k1][0][0])==list and type(dict[k1][1][0])==list:
+			         if type(dict[k1][0][0][0])==int and type(dict[k1][1][0][0])==int:
+			           returnkey=k1
+			print(dict[returnkey])
+			return dict[returnkey]
 		
 
 		def parseFactor(expString):
