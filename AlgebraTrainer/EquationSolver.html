@@ -952,8 +952,8 @@
 					newoption=js.document.createElement("option")
 					newoption.value=x1
 					newoption.innerText=x1
-					const optionlist=js.document.getElementById("starts")
-					optionlist.appendChild(newoption)
+					js.document.getElementById("starts").appendChild(newoption)
+
 
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
