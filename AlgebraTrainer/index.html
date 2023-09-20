@@ -53,9 +53,11 @@
           alert("Need a name, please.");
           return false;
         }
-        localStorage.setItem("addy", addy);
-        localStorage.setItem("pwd", pwd);
-        localStorage.setItem(addy, "x+3=2,2x-3=5,(x+2)*y=3");
+        sessionStorage.setItem("addy", addy);
+        sessionStorage.setItem("pwd", pwd);
+        if (localStorage.getItem(addy)==null) {
+          localStorage.setItem(addy, "x+3=2,2x-3=5,(x+2)*y=3');
+          }
         return true;
       }
     </script>
