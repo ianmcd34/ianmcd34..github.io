@@ -581,13 +581,6 @@
 		myEquations=js.localStorage.getItem(js.addy)
 		document.getElementById("print-tree").innerHTML=myEquations
 
-		
-		equation_dict={}
-		for  x1 in myEquations.split(","):
-			txt1=js.localStorage.getItem(x1);
-			if txt1:
-				equation_dict[x1]=toEquationArray(txt1);
-
 
 		def toEquationArray(txt1):
 			txt1=re.sub("\[","(",txt1)
@@ -960,7 +953,11 @@
 			js.document.getElementById("clear-selection-btn").click()
 
 			
-	
+		equation_dict={}
+		for  x1 in myEquations.split(","):
+			txt1=js.localStorage.getItem(x1)
+			if txt1:
+				equation_dict[x1]=toEquationArray(txt1)
 
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
