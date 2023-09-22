@@ -585,8 +585,8 @@
 		expLeft_py=cex.Expression()
 		expRight_py=cex.Expression()
 
-		myEquations=js.localStorage.getItem(js.addy)
-		document.getElementById("print-tree").innerHTML=myEquations
+		#myEquations=js.localStorage.getItem(js.addy)
+		#document.getElementById("print-tree").innerHTML=myEquations
 
 
 		def toEquationArray(txt1):
@@ -950,7 +950,7 @@
 			
 			js.document.getElementById("clear-selection-btn").click()
 
-			
+		"""	
 		equation_dict={}
 		for  x1 in myEquations.split(","):
 			txt1=js.localStorage.getItem(x1)
@@ -962,7 +962,7 @@
 					newoption.value=x1
 					newoption.innerText=x1
 					js.document.getElementById("starts").appendChild(newoption)
-
+		"""
 
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(restart))
 		js.document.getElementById("restart-btn").addEventListener("click", create_proxy(show_expression))
