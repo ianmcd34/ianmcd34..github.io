@@ -949,6 +949,7 @@
 		for  x1 in myEquations.split(","):
 			txt1=js.localStorage.getItem(x1)
 			if txt1:
+				document.getElementById("print-tree").innerHTML=txt1
 				equation_dict[x1]=toEquationArray(txt1)
 				if x1 not in ('x+3=2','2x-3=5','(x+2)*y=3'):
 					newoption=js.document.createElement("option")
