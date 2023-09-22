@@ -680,7 +680,7 @@
 			txt=expLeft_py.print_tree('f')+"="+expRight_py.print_tree('f')
 			document.getElementById("print-tree").innerHTML=txt
 
-			js.localStorage.setItem(txt, [str(expLeft_py.elements), str(expRight_py.elements)])
+			js.localStorage.setItem(txt, [str(expLeft_py.elements.tolist()), str(expRight_py.elements.tolist())])
 			addy=js.localStorage.getItem("addy")
 			if js.localStorage.getItem(addy).find(txt)==-1:
 			  js.localStorage.setItem(addy, js.localStorage.getItem(addy)+","+txt)
