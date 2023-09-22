@@ -599,6 +599,7 @@
 			  txt1=txt1.replace(x.group(), keylist[0] )
 			
 			  dict[keylist[0]]=group
+			  document.getElementById("print-tree").innerHTML=dict
 			  keylist=keylist[1:]
 			
 			  x = re.search("\([^\(]*?\)", txt1)
