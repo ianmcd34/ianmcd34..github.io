@@ -610,7 +610,7 @@
 			
 			  x = re.search("\([^\(]*?\)", txt1)
 			
-			document.getElementById("print-tree").innerHTML=dict
+
 			for k1 in dict.keys():
 			  x1=dict[k1]
 			  hasupper=False
@@ -728,7 +728,7 @@
 
 			expLeft_py=cex.Expression()
 			expRight_py=cex.Expression()
-
+			document.getElementById("print-tree").innerHTML=equation_dict[js.document.getElementById("starts").value][0]
 			expLeft_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][0])
 			expRight_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][1])
 
