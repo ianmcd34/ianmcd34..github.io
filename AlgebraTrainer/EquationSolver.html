@@ -620,7 +620,7 @@
 			  
 			  if not hasupper:
 			    y1=int(x1[1:-1].split(",")[0])
-			    y2=str(x1[1:-1].split(",")[1][1:-1])
+			    y2=str(x1[1:-1].split(",")[1][1:-1].replace("'","")
 			    try: y3=int(x1[1:-1].split(",")[2])
 			    except: y3=None
 			    try: y4=int(x1[1:-1].split(",")[3])
