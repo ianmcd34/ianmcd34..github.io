@@ -610,7 +610,7 @@
 			
 			  x = re.search("\([^\(]*?\)", txt1)
 			
-			
+			document.getElementById("print-tree").innerHTML=dict
 			for k1 in dict.keys():
 			  x1=dict[k1]
 			  hasupper=False
@@ -633,6 +633,7 @@
 			  if type(x1)==str:
 			    val=[]
 			    for y1 in x1[1:-1].split(","):
+			      y1=y1.strip()
 			      if type(dict[y1])==list:
 			        val.append(dict[y1])
 			    if len(val)>0:
@@ -643,6 +644,7 @@
 			  if type(x1)==str:
 			    val=[]
 			    for y1 in x1[1:-1].split(","):
+			      y1=y1.strip()
 			      if type(dict[y1])==list:
 			        val.append(dict[y1])
 			    if len(val)>0:
