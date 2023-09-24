@@ -898,12 +898,12 @@ class Expression:
             return 999
         
         for e in self.elements:
-            print("multiply consts  e="+e)
+            print("multiply consts  e="+str(e))
             commonparentindex=None
             if e[1][-1].isdigit():
                 print("multiply consts digit found")
                 for e1 in self.elements:
-                    print("multiply consts  e1="+e1)
+                    print("multiply consts  e1="+str(e1))
                     constantindex=None
                     constantindex1=None
                     commonparentindex=None
