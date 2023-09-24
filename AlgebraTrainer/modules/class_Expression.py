@@ -896,6 +896,10 @@ class Expression:
                 if e[2]==index or e[3]==index:
                     return e[0]
             return 999
+
+        constantindex=None
+        constantindex1=None
+        commonparentindex=None
         
         for e in self.elements:
             print("multiply consts  e="+str(e))
