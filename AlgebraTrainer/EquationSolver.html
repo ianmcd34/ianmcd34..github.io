@@ -581,7 +581,6 @@
 		expRight_py=cex.Expression()
 
 		myEquations=js.localStorage.getItem(js.addy)
-		document.getElementById("print-tree").innerHTML=myEquations
 
 
 		def toEquationArray(txt1):
@@ -723,7 +722,7 @@
 
 			expLeft_py=cex.Expression()
 			expRight_py=cex.Expression()
-			document.getElementById("print-tree").innerHTML=equation_dict[js.document.getElementById("starts").value][0]
+
 			expLeft_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][0])
 			expRight_py.elements=np.array(equation_dict[js.document.getElementById("starts").value][1])
 
@@ -900,7 +899,7 @@
 			elif js.document.getElementById("print-tree").innerHTML[0:14]=="selectedNodesR":
 				exp_py=expRight_py
 				selectednodes=[int(x) for x in js.document.getElementById("print-tree").innerHTML[14:].split(",")]
-			document.getElementById("print-tree").innerHTML=len(selectednodes)
+
 			if len(selectednodes)>0:
 				try:
 					parseFactor()
@@ -952,7 +951,7 @@
 		for  x1 in myEquations.split(","):
 			txt1=js.localStorage.getItem(x1)
 			if txt1:
-				document.getElementById("print-tree").innerHTML=txt1
+
 				equation_dict[x1]=toEquationArray(txt1)
 				if x1 not in ('x+3=2','2x-3=5','(x+2)*y=3'):
 					newoption=js.document.createElement("option")
