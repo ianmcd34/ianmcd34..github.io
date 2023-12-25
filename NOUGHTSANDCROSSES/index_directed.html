@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <script async src="./javascript/two.min.js"></script>
+    
+    <title>My webpage!</title>
+  </head>
+  <body onLoad="makeSum()">
+    <h1>DIRECTED NUMBERS</h1>
+    <h4 id='date'></h4>
+	<div style="padding: 70px 0; text-align: center; display: inline-block;  float: left; margin-top: 200px; margin-left: auto; width: 50%; font-size: 200%;">
+		<h1 id="sum_p">1 + 0 = 1</h1>
+		<p></p>
+		<label for="answer">?:</label>
+  		<input type="text" id="answer" name="answer">
+		<input type="button" onclick="checkAnswer()" value="Answer">
+	</div>
+	<div>
+		<canvas id="directedCanvas" width="400" height="600" style="border:1px solid #000000; float: right; margin-right: 300px; margin-top: 100px; background-color: white;">
+		</canvas>
+	</div>
+	<p id="check" hidden></p>
+
+    <script >
+	const c = document.getElementById("directedCanvas");
+	const ctx = c.getContext("2d");
+	ctx.translate(200, 300);
+
+	ctx.lineWidth = 5;
+	ctx.lineJoin="round";
+	ctx.beginPath();
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, 250);
+	ctx.lineTo(-10, 240);
+	ctx.moveTo(0, 250);
+	ctx.lineTo(10, 240);
+	ctx.strokeStyle = "blue";
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.moveTo(0, 0);
+	ctx.lineTo(0, -250);
+	ctx.lineTo(-10, -240);
+	ctx.moveTo(0, -250);
+	ctx.lineTo(10, -240);
+	ctx.strokeStyle = "red";
+	ctx.stroke();
+	ctx.beginPath();
+	ctx.moveTo(-10, 0);
+	ctx.lineTo(10, 0);
+	ctx.strokeStyle = "black";
+	ctx.stroke();
+	ctx.lineWidth = 1;
+	ctx.font = "30px Georgia";
+	ctx.strokeText("0", -30, 5);
+
+	function makeSum() {
+		const A = Math.floor(Math.random() * 40) + 1 - 20;
+		const B = Math.floor(Math.random() * 40) + 1 - 20;
+		const maxscale = Math.max(Math.abs(A), Math.abs(B), Math.abs(A-B), Math.abs(A+B));
+		len_A = Math.floor(200 * Math.abs(A/maxscale));
+		len_B = Math.floor(200 * Math.abs(B/maxscale));
+		rand=Math.random()<0.5;
+		if (rand) {
+			operator=' + ';
+			C = A + B;
+		} else {
+			operator = ' - ';
+			C = A - B;
+		}
+
+		
+		if (A>0) { ctx.strokeStyle = "red"; } else { ctx.strokeStyle = "blue"; }
+		ctx.lineWidth = 5;
+		ctx.lineJoin="round";
+		ctx.beginPath();
+		ctx.moveTo(15, 0);
+		if (A>0) {
+			len_A=-1*len_A;
+			ctx.lineTo(15, len_A);
+			ctx.lineTo(5, len_A+10);
+			ctx.moveTo(15, len_A);
+			ctx.lineTo(25, len_A+10);
+			ctx.stroke();
+		}
+		else {
+			ctx.lineTo(15, len_A);
+			ctx.lineTo(5, len_A-10);
+			ctx.moveTo(15, len_A);
+			ctx.lineTo(25, len_A-10);
+			ctx.stroke();
+		}
+		if (B>0) { ctx.strokeStyle = "red"; } else { ctx.strokeStyle = "blue"; }
+		ctx.lineWidth = 5;
+		ctx.lineJoin="round";
+		ctx.beginPath();
+		ctx.moveTo(30, len_A);
+		if ((B>0 && operator==' + ') || (B<=0 && operator==' - ')) {
+			len_B = -1*len_B;
+			ctx.lineTo(30, len_A+len_B);
+			ctx.lineTo(20, len_A+len_B+10);
+			ctx.moveTo(30, len_A+len_B);
+			ctx.lineTo(40, len_A+len_B+10);
+			ctx.stroke();
+		} else {
+			ctx.lineTo(30, len_A+len_B);
+			ctx.lineTo(20, len_A+len_B-10);
+			ctx.moveTo(30, len_A+len_B);
+			ctx.lineTo(40, len_A+len_B-10);
+			ctx.stroke();
+		}
+		
+		rand=Math.floor(Math.random()*4)+1;
+		if (rand==1) {
+			document.getElementById("sum_p").innerHTML=" ? "+operator+B+" = "+C;
+			document.getElementById("check").innerHTML=A;
+		} else if (rand==2) {
+			document.getElementById("sum_p").innerHTML=A+" ? "+B+" = "+C;
+			document.getElementById("check").innerHTML=operator;
+		} else if (rand==3) {
+			document.getElementById("sum_p").innerHTML=A+operator+" ? "+" = "+C;
+			document.getElementById("check").innerHTML=B;
+		} else {
+			document.getElementById("sum_p").innerHTML=A+operator+B+" = "+" ? ";
+			document.getElementById("check").innerHTML=C;
+		}
+
+			
+		
+	}
+
+	function checkAnswer() {
+		if (document.getElementById("check").innerHTML.trim()==document.getElementById("answer").value.trim()) {
+			alert("correct");
+		} else {
+			alert("No, you said "+document.getElementById("answer").value+" but it should be "+document.getElementById("check").innerHTML+".");
+		}
+		ctx.clearRect(5, -200, 50, 400);
+		document.getElementById("answer").value="";
+		makeSum();
+	}
+
+
+    </script>
+  </body>
+
+</html>
