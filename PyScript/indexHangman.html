@@ -7,14 +7,14 @@
 
 </head>
 <body>
-  <iframe src="./modules/en" id="text" description="text">
-  </iframe>
+  <embed src="./modules/en" id="text" type="text">
+  </embed>
   <p id="placeholder">Placeholder</p>
   <button onclick="alert_dic()">PopUp the dic</button>
   <script>
     function alert_dic() {
 	myIFrame=document.getElementById("text");
-	var content = myIFrame.contentWindow.document;
+	var content = myIFrame.innerHTML;
     }
   </script>
 </body>
