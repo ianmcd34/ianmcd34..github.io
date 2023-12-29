@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
 
 </head>
 <body>
-  <p id="text" >
+  <p id="text" hidden>
 a
 aa
 aal
@@ -235899,7 +235900,8 @@ Zyzzogeton
   <script>
     function alert_dic() {
 	myIFrame=document.getElementById("text");
-	var content = myIFrame.innerHTML;
+	var content = myIFrame.innerHTML.split();
+	document.getElementById("placeholder").innerHTML=content[10];
     }
   </script>
 </body>
