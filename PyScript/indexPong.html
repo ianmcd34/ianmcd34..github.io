@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <script async src="./javascript/two.min.js"></script>
+    
+    <title>My webpage!</title>
+  </head>
+  <body>
+    <h1>PONG PONG</h1>
+    <h4 id='date'></h4>
+	<div>
+	<canvas id="pongCanvas" width="800" height="600" style="border:1px solid #000000; float: center; margin: 50px;">
+	</canvas>
+	</div>
+        <p id="velocity"></p>
+    <script >
+const canvas = document.getElementById("pongCanvas");
+const ctx = canvas.getContext("2d");
+const pixels=[];
+const pixelsize=20;
+var xloc=100;
+var yloc=300;
+var xdot=2;
+var ydot=2;
+var xloc1=700;
+var yloc1=300;
+var xdot1=-2;
+var ydot1=-2;
+
+
+
+  function pixel() {
+	for (n=0; n<800/pixelsize; n+=1) {
+	  pixels.push([]);
+	  for (m=0; m<=600/pixelsize; m+=1) {
+		  pixels.push([]);
+		  if (n*pixelsize>400) {
+			pixels[n][m]="red";	
+		  } else {
+			pixels[n][m]="white";	
+		  }
+	  }
+	}
+  }
+
+  function drawCanvas() {
+	for (n=0; n<800/pixelsize; n+=1) {
+	  for (m=0; m<=600/pixelsize; m+=1) {
+		  ctx.fillStyle=pixels[n][m];
+		  ctx.fillRect(n*pixelsize, m*pixelsize, pixelsize, pixelsize);
+	  }
+	}
+  }
+
+  function ball(clr, x, y)  {
+	ctx.beginPath();
+	ctx.arc(x, y, 10, 0, 2 * Math.PI);
+	ctx.fillStyle = clr;
+	ctx.fill();
+  }
+
+  function unball(clr, x, y)  {
+	ctx.beginPath();
+	ctx.arc(x, y, 11, 0, 2 * Math.PI);
+	ctx.fillStyle = clr;
+	ctx.fill();
+  }
+
+  function move() {
+	unball("white", xloc, yloc);
+	unball("red", xloc1, yloc1);
+	if (xloc+xdot<800 && xloc+xdot>0) {
+		xloc+=xdot;
+	} else {
+		xdot=-1*xdot;
+	}
+	if (yloc+ydot<600 && yloc+ydot>0) {
+		yloc+=ydot;
+	} else {
+		ydot=-1*ydot;
+	}
+	if (xloc1+xdot1<800 && xloc1+xdot1>0) {
+		xloc1+=xdot1;
+	} else {
+		xdot1=-1*xdot1;
+	}
+	if (yloc1+ydot1<600 && yloc1+ydot1>0) {
+		yloc1+=ydot1;
+	} else {
+		ydot1=-1*ydot1;
+	}
+	if (Math.abs(xdot/ydot)>3) {
+		xdot*=0.9;
+		ydot*=1.1;
+	}
+	if (Math.abs(ydot/xdot)>3) {
+		ydot*=0.9;
+		xdot*=1.1;
+	}
+	if (Math.abs(xdot1/ydot1)>3) {
+		xdot1*=0.9;
+		ydot1*=1.1;
+	}
+	if (Math.abs(ydot1/xdot1)>3) {
+		ydot1*=0.9;
+		xdot1*=1.1;
+	}
+	nfwd=Math.floor((xloc+xdot)/pixelsize);
+	if (nfwd<0) {nfwd=0;} 
+	mfwd=Math.floor((yloc+ydot)/pixelsize);
+	if (mfwd<0) {mfwd=0;} 
+	nhor=Math.floor((xloc+xdot)/pixelsize);
+	if (nhor<0) {nhor=0;} 
+	mhor=Math.floor((yloc)/pixelsize);
+	if (mhor<0) {mhor=0;} 
+	nver=Math.floor((xloc)/pixelsize);
+	if (nver<0) {nver=0;} 
+	mver=Math.floor((yloc+ydot)/pixelsize);
+	if (mver<0) {mver=0;} 
+	if (pixels[nfwd][mfwd]=="red") {
+
+		if (pixels[nhor][mhor]=="red" && pixels[nver][mver]=="red") {
+			xdot=-1*xdot+(Math.random()-0.5)/Math.abs(xdot);
+			ydot=-1*ydot+(Math.random()-0.5)/Math.abs(ydot);
+		} 
+		else if (pixels[nhor][mhor]=="red" && pixels[nver][mver]!="red") {
+			xdot=-1*xdot+(Math.random()-0.5)/Math.abs(xdot);
+			ydot=ydot+(Math.random()-0.5)/Math.abs(ydot);
+		} 
+		else if (pixels[nhor][mhor]!="red" && pixels[nver][mver]=="red") {
+			xdot=xdot+(Math.random()-0.5)/Math.abs(xdot);
+			ydot=-1*ydot+(Math.random()-0.5)/Math.abs(ydot);
+		} 
+		else {
+			xdot=-1*xdot+(Math.random()-0.5)/Math.abs(xdot);
+			ydot=ydot+(Math.random()-0.5)/Math.abs(ydot);
+		}
+		document.getElementById("velocity").innerHTML="xdot="+xdot+"; ydot="+ydot;
+		pixels[nfwd][mfwd]="white";
+	}
+	nfwd1=Math.floor((xloc1+xdot1)/pixelsize);
+	if (nfwd1<0) {nfwd1=0;} 
+	mfwd1=Math.floor((yloc1+ydot1)/pixelsize);
+	if (mfwd1<0) {mfwd1=0;} 
+	nhor1=Math.floor((xloc1+xdot1)/pixelsize);
+	if (nfwd1<0) {nfwd1=0;} 
+	mhor1=Math.floor((yloc1)/pixelsize);
+	nver1=Math.floor((xloc1)/pixelsize);
+	mver1=Math.floor((yloc1+ydot1)/pixelsize);
+	if (pixels[nfwd1][mfwd1]=="white") {
+
+		if (pixels[nhor1][mhor1]=="white" && pixels[nver1][mver1]=="white") {
+			xdot1=-1*xdot1+(Math.random()-0.5)/Math.abs(xdot1);
+			ydot1=-1*ydot1+(Math.random()-0.5)/Math.abs(ydot1);
+		} 
+		else if (pixels[nhor1][mhor1]=="white" && pixels[nver1][mver1]!="white") {
+			xdot1=-1*xdot1+(Math.random()-0.5)/Math.abs(xdot1);
+			ydot1=ydot1+(Math.random()-0.5)/Math.abs(ydot1);
+		} 
+		else if (pixels[nhor1][mhor]!="white" && pixels[nver1][mver1]=="white") {
+			xdot1=xdot1+(Math.random()-0.5)/Math.abs(xdot1);
+			ydot1=-1*ydot1+(Math.random()-0.5)/Math.abs(ydot1);
+		} 
+		else {
+			xdot1=-1*xdot1+(Math.random()-0.5)/Math.abs(xdot1);
+			ydot1=ydot1+(Math.random()-0.5)/Math.abs(ydot1);
+		}
+		pixels[nfwd1][mfwd1]="red";
+	}
+	if (Math.abs(xdot)<1) {
+		xdot*=1.1;
+	}
+	if (Math.abs(xdot1)<1) {
+		xdot1*=1.1;
+	}
+	if (Math.abs(ydot)<1) {
+		ydot*=1.1;
+	}
+	if (Math.abs(ydot1)<1) {
+		ydot1*=1.1;
+	}
+
+	drawCanvas();	
+	ball("red", xloc, yloc);
+	ball("white", xloc1, yloc1);
+	window.requestAnimationFrame(move);
+  }
+
+  pixel();
+  drawCanvas();
+
+  window.requestAnimationFrame(move);
+ 
+    </script>
+  </body>
+
+</html>
