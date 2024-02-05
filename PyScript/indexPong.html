@@ -14,7 +14,7 @@
 	<canvas id="pongCanvas" width="800" height="600" style="border:1px solid #000000; float: center; margin: 50px;">
 	</canvas>
 	</div>
-        <p id="velocity"></p>
+
     <script >
 const canvas = document.getElementById("pongCanvas");
 const ctx = canvas.getContext("2d");
@@ -137,7 +137,6 @@ var ydot1=-2;
 			xdot=-1*xdot+(Math.random()-0.5)/Math.abs(xdot);
 			ydot=ydot+(Math.random()-0.5)/Math.abs(ydot);
 		}
-		document.getElementById("velocity").innerHTML="xdot="+xdot+"; ydot="+ydot;
 		pixels[nfwd][mfwd]="white";
 	}
 	nfwd1=Math.floor((xloc1+xdot1)/pixelsize);
