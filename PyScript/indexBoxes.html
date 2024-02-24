@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <script async src="./javascript/two.min.js"></script>
+    <style>
+td {
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>My webpage!</title>
+  </head>
+  <body>
+    <h1>BOXES GAME</h1>
+    <h4 id='date'></h4>
+    
+    <div class="playerInfo">
+    <ul>
+	<li id="p1" class="active">Player1</li>
+    </ul>
+
+    <form>
+	<p><label for="playerName">Player Name: </label>
+	<input type="text" id="playerName" name="playerName"></p>
+
+	<p><button type="button" onclick="changeName()" id="btnChangeName">Change Name</button>
+	<button type="button" onclick="addPlayer()" id="btnAddPlayer">Add Player</button></p>
+    </form>
+    </div>
+
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A1" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_A4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A6"onclick="choose(event)"></td>
+		<td class="plyer" id="P_A7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_A9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_A0" onclick="choose(event)"></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_B4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_B7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_B9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_B0" onclick="choose(event)"></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_C4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_C7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_C9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_C0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_D2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_D3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_D4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_D5" onclick="choose(event)"></td>
+    		<td class="plyer"id="P_D6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_D7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_D8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_D9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_D0" onclick="choose(event)"></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_E4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_E7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_E9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_E0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1"  onclick="choose(event)"></td>
+    		<td class="plyer"id="P_F2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_F3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_F4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_F5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_F6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_F7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_F8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_F9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_F0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_G1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_G4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_G7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_G9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_G0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_H1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_H4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_H7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_H9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_H0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_I1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_I4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_I7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_I9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_I0" onclick="choose(event)"></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_J1"  onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J2" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J3" onclick="choose(event)"></td>
+		<td class="plyer" id="P_J4" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J5" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J6" onclick="choose(event)"></td>
+		<td class="plyer" id="P_J7" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J8" onclick="choose(event)"></td>
+		<td class="plyer" id="P_J9" onclick="choose(event)"></td>
+    		<td class="plyer" id="P_J0" onclick="choose(event)"></td>
+  	   </tr>
+    </table>
+    <script >
+	function choose(e) {
+		el=e.target;
+		if (el.innerHTML=="") {
+			let primed=false;
+			let tds=document.getElementsByTagName("tr");
+			for (i=0; i<tds.length; i++) {
+				for (j=0; j<tds[i].children.length; j++) {
+					if (tds[i].children[j].classList.contains("hilght")) {
+						primed=true;
+					}
+				}
+			}
+			if (primed) {
+				secondClick(e);
+			} else {
+				firstClick(e);
+			}
+		}
+	}
+
+	function firstClick(e) {
+		el=e.target;
+		if (el.id=="P_A1" && !el.classList.contains("plyer1") && !el.classList.contains("plyer4")) {
+			el.classList.add("plyer1");
+			el.classList.add("plyer4");
+			ownSquare();
+		} else if (el.id=="P_A0" && !el.classList.contains("plyer1") && !el.classList.contains("plyer2")) {
+			el.classList.add("plyer1");
+			el.classList.add("plyer2");
+			ownSquare();
+		} else if (el.id=="P_J1" && !el.classList.contains("plyer3") && !el.classList.contains("plyer4")) {
+			el.classList.add("plyer3");
+			el.classList.add("plyer4");
+			ownSquare();
+		} else if (el.id=="P_J0" && !el.classList.contains("plyer2") && !el.classList.contains("plyer3")) {
+			el.classList.add("plyer2");
+			el.classList.add("plyer3");
+			ownSquare();
+		} else if (el.id[2]=='A' && !el.classList.contains("plyer1")) {
+			el.classList.add("plyer1");
+			ownSquare();
+		} else if (el.id[2]=='J' && !el.classList.contains("plyer3")) {
+			el.classList.add("plyer3");
+			ownSquare();
+		} else if (el.id[3]=='1' && !el.classList.contains("plyer4")) {
+			el.classList.add("plyer4");
+			ownSquare();
+		} else if (el.id[3]=='0' && !el.classList.contains("plyer2")) {
+			el.classList.add("plyer2");
+			ownSquare();
+		} else {
+			el.classList.add("hilght");
+		}
+	}
+
+	function secondClick(e) {
+		el=e.target;
+		let tds=document.getElementsByTagName("tr");
+		for (i=0; i<tds.length; i++) {
+			for (j=0; j<tds[i].children.length; j++) {
+				if (tds[i].children[j].classList.contains("hilght")) {
+					elprimed=tds[i].children[j];
+				}
+			}
+		}
+
+		if (elprimed.id[2]!=el.id[2] && elprimed.id[3]!=el.id[3]) {
+			/*alert("too far");*/
+			elprimed.classList.remove("hilght");	
+		} else if (elprimed.id[2]==el.id[2]) {
+			if ((el.id[3]-elprimed.id[3]==1 && elprimed.id[3]!='0') || (elprimed.id[3]=='9' && el.id[3]=='0')) {
+				if (elprimed.classList.contains("plyer2") && el.classList.contains("plyer4")) {
+					/*alert("already clicked");*/
+					elprimed.classList.remove("hilght");	
+				} else {
+					elprimed.classList.add("plyer2");
+					el.classList.add("plyer4");
+					elprimed.classList.remove("hilght");		
+					ownSquare();
+				}
+			} else if((elprimed.id[3]-el.id[3]==1 && elprimed.id[3]!='1')  || (elprimed.id[3]=='0' && el.id[3]=='9')) {
+				if (elprimed.classList.contains("plyer4") && el.classList.contains("plyer2")) {
+					/*alert("already clicked");*/
+					elprimed.classList.remove("hilght");	
+				} else {
+					elprimed.classList.add("plyer4");
+					el.classList.add("plyer2");
+					elprimed.classList.remove("hilght");		
+					ownSquare();
+				}
+			} else {
+				/*alert("too far");*/
+				elprimed.classList.remove("hilght");	
+			}
+		} else {
+			if (el.id.charCodeAt(2)-elprimed.id.charCodeAt(2)==1) {
+				if (elprimed.classList.contains("plyer3") && el.classList.contains("plyer1")) {
+					/*alert("already clicked");*/
+					elprimed.classList.remove("hilght");	
+				} else {
+					elprimed.classList.add("plyer3");
+					el.classList.add("plyer1");
+					elprimed.classList.remove("hilght");		
+					ownSquare();
+				}
+			} else if (el.id.charCodeAt(2)-elprimed.id.charCodeAt(2)==-1) {
+				if (elprimed.classList.contains("plyer1") && el.classList.contains("plyer3")) {
+					/*alert("already clicked");*/
+					elprimed.classList.remove("hilght");	
+				} else {
+					elprimed.classList.add("plyer1");
+					el.classList.add("plyer3");
+					elprimed.classList.remove("hilght");		
+					ownSquare();
+				}
+			} else {
+				/*alert("too far");*/
+				elprimed.classList.remove("hilght");	
+			}
+		}
+	}
+
+
+	function ownSquare() {
+		nameLi=document.getElementsByClassName("active")[0];
+		if (nameLi.id=="p1") {
+			plyerColor="Green";
+		}
+		if (nameLi.id=="p2") {
+			plyerColor="Red";
+		}
+		if (nameLi.id=="p3") {
+			plyerColor="Blue";
+		}
+		if (nameLi.id=="p4") {
+			plyerColor="Orange";
+		}
+		squareOwned=false;
+
+		let tds=document.getElementsByTagName("tr");
+		for (i=0; i<tds.length; i++) {
+			for (j=0; j<tds[i].children.length; j++) {
+				if (tds[i].children[j].classList.contains("plyer1")  && tds[i].children[j].classList.contains("plyer2")  && tds[i].children[j].classList.contains("plyer3")  && tds[i].children[j].classList.contains("plyer4") && tds[i].children[j].innerHTML=="" ) {
+					tds[i].children[j].innerHTML=nameLi.innerHTML[0];
+					tds[i].children[j].style.backgroundColor=plyerColor;
+					squareOwned=true;
+				}
+			}
+		}
+		if (!squareOwned) {
+			if (nameLi.nextElementSibling) {
+				nextLi=document.getElementById(nameLi.nextElementSibling.id);
+			} else {
+				nextLi=document.getElementsByTagName("ul")[0].children[0];
+			}
+			nameLi.classList.remove("active");
+			nextLi.classList.add("active");
+		} else {
+			scores();
+		}
+	}
+
+	function changeName() {
+		newName=document.getElementById("playerName").value;
+		nameLi=document.getElementsByClassName("active")[0];
+		if (newName.length>0) {
+			nameLi.innerHTML=newName;
+		}
+	}
+	
+	function addPlayer() {
+		newName=document.getElementById("playerName").value;
+		nameLi=document.createElement("li");
+		playerList=document.getElementsByTagName("ul")[0];
+		if (newName.length>0) {
+			nameLi.innerHTML=newName;
+			playerList.appendChild(nameLi);
+			nameLi.id="p"+playerList.children.length;
+		}
+	}
+
+	function scores() {
+		players=document.getElementsByTagName("ul")[0].children;
+		for (n=0; n<players.length; n++) {
+			playername=players[n].innerHTML.split(" ")[0];
+			if (players[n].id=="p1") {
+				playercolor="green";
+			}
+			if (players[n].id=="p2") {
+				playercolor="red";
+			}
+			if (players[n].id=="p3") {
+				playercolor="blue";
+			}
+			if (players[n].id=="p4") {
+				playercolor="orange";
+			}
+			score=0;
+			let tds=document.getElementsByTagName("tr");
+			for (i=0; i<tds.length; i++) {
+				for (j=0; j<tds[i].children.length; j++) {
+					if (tds[i].children[j].innerHTML==playername[0] && tds[i].children[j].style.backgroundColor==playercolor) {
+						score++;
+					}
+				}
+			}
+			players[n].innerHTML=playername+" "+score;
+		}
+	}
+	
+
+    </script>
+  </body>
+
+</html>
