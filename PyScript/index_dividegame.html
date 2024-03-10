@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+.box {
+	display: inline-block;
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 20px;
+	padding: 20px;
+	border-width: 2px;
+	background-color: DarkOrange;
+}
+#front, #back { position: absolute; width: 100vw; }
+#back { 
+	min-height: 100vh; 
+	z-index: 1; 
+	background-image: url("climbingframe.png");
+	opacity: 0.5;
+  	background-repeat: no-repeat;
+  	background-position: center;
+  	background-size: cover;
+}
+#front { z-index: 2; }
+    </style>
+    <title>Dividegame</title>
+  </head>
+  <body onload="initiate()">
+    <div id="back"></div>
+    <div id="front">
+    <h1>DIVIDE GAME</h1>
+    <h4 id='date'></h4>
+    
+    
+    
+    <p class="layer">
+    <div class="box" id="x" ></div>
+    </p>
+    <br>
+    <p class="layer">
+    <div class="box" style="margin: 0px 180px;" id="y" ></input></div>
+    <div class="box" style="margin: 0px 180px;" id="z" ><input type="text" size=1 style="font-size: 25px;" id="inz" onchange="answer(event)"  ></input></div>
+    </p>
+    <br>
+    <p class="layer">
+    <div class="box" id="m" style="margin: 0px 85px;"><input type="text" size=1 style="font-size: 25px;" id="inm" onchange="answer(event)"  ></input></div>
+    <div class="box" id="n" style="margin: 0px 85px;"><input type="text" size=1 style="font-size: 25px;" id="inn" onchange="answer(event)"  ></input></div>
+    <div class="box" id="o" style="margin: 0px 85px;"><input type="text" size=1 style="font-size: 25px;" id="ino" onchange="answer(event)"  ></input></div>
+    <div class="box" id="p" style="margin: 0px 85px;"><input type="text" size=1 style="font-size: 25px;" id="inp" onchange="answer(event)"  ></input></div>
+    </p>
+    </div>
+    <script >
+	function initiate() {
+		multiplicands=[2,3,4,5,6,7,8,9,10,11,12];
+
+		y=multiplicands[Math.floor(Math.random() * 11)];
+		z=multiplicands[Math.floor(Math.random() * 11)];
+		document.getElementById("x").innerHTML=y*z;
+		document.getElementById("y").innerHTML=y;
+				
+	}
+
+	function answer(e) {
+		el=e.target;
+		
+		
+		if (el.id=="inz") {
+			
+			x=document.getElementById("x").innerHTML;
+			y=document.getElementById("y").innerHTML;
+			if (x>0 && y>0) {
+				if (x==el.value*y) {
+					document.getElementById("z").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+		}
+		if (el.id=="inm") {
+			
+			n=parseInt(document.getElementById("n").innerHTML);
+			y=parseInt(document.getElementById("y").innerHTML);
+			if (n!="NaN" && n>0 && y>0) {
+				if (y==el.value*n) {
+					document.getElementById("m").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+			else if (y>0) {
+				if (el.value!=1 && el.value!=y) {
+					if(y%el.value==0) {
+						document.getElementById("m").innerHTML=el.value;
+						el.style.visibility='hidden';
+					}
+					else {
+						el.value=0;
+					}
+				}
+				else if ([2,3,5,7,11].includes(y)) {
+					document.getElementById("m").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			} else {
+				el.value=0;
+			}
+		}
+		if (el.id=="inn") {
+			
+			n=parseInt(document.getElementById("m").innerHTML);
+			y=parseInt(document.getElementById("y").innerHTML);
+			if (m!="NaN" && m>0 && y>0) {
+				if (y==el.value*m) {
+					document.getElementById("n").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+			else if (y>0) {
+				if (el.value!=1 && el.value!=y) {
+					if(y%el.value==0) {
+						document.getElementById("n").innerHTML=el.value;
+						el.style.visibility='hidden';
+					}
+					else {
+						el.value=0;
+					}
+				}
+				else if ([2,3,5,7,11].includes(y)) {
+					document.getElementById("n").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			} else {
+				el.value=0;
+			}
+		}
+		if (el.id=="ino") {
+			
+			p=parseInt(document.getElementById("p").innerHTML);
+			z=parseInt(document.getElementById("z").innerHTML);
+			if (p!="NaN" && p>0 && z>0) {
+				if (z==el.value*p) {
+					document.getElementById("o").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+			else if (z>0) {
+				if (el.value!=1 && el.value!=z) {
+					if(z%el.value==0) {
+						document.getElementById("o").innerHTML=el.value;
+						el.style.visibility='hidden';
+					}
+					else {
+						el.value=0;
+					}
+				}
+				else if ([2,3,5,7,11].includes(z)) {
+					document.getElementById("o").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			} else {
+				el.value=0;
+			}
+		}
+		if (el.id=="inp") {
+			
+			o=parseInt(document.getElementById("o").innerHTML);
+			z=parseInt(document.getElementById("z").innerHTML);
+			if (o!="NaN" && o>0 && z>0) {
+				if (z==el.value*o) {
+					document.getElementById("p").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+			else if (z>0) {
+				if (el.value!=1 && el.value!=z) {
+					if(z%el.value==0) {
+						document.getElementById("p").innerHTML=el.value;
+						el.style.visibility='hidden';
+					}
+					else {
+						el.value=0;
+					}
+				}
+				else if ([2,3,5,7,11].includes(z)) {
+					document.getElementById("p").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			} else {
+				el.value=0;
+			}
+		}
+		setTimeout(checkwon,500);
+		
+	}
+
+	function checkwon() {
+		boxes=document.getElementsByClassName("box");
+		alldone=true;
+		for (i=0; i<boxes.length; i++) {
+			if (isNaN(parseInt(boxes[i].innerHTML))) {
+				alldone=false;
+			}
+		}
+		if (alldone) {
+			alert("You won!");
+			window.location.href="file:///C:/Users/ianmc/OneDrive/Documents%201/NOUGHTSANDCROSSES/index_timesgame.html";
+		}
+
+	}
+
+
+    </script>
+  </body>
+
+</html>

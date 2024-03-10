@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+.box {
+	display: inline-block;
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 20px;
+	padding: 20px;
+	border-width: 2px;
+	background-color: DarkOrange;
+}
+#front, #back { position: absolute; width: 100vw; }
+#back { 
+	min-height: 100vh; 
+	z-index: 1; 
+	background-image: url("climbingframe.png");
+	opacity: 0.5;
+  	background-repeat: no-repeat;
+  	background-position: center;
+  	background-size: cover;
+}
+#front { z-index: 2; }
+    </style>
+    <title>Timesgame</title>
+  </head>
+  <body onload="initiate()">
+    <div id="back"></div>
+    <div id="front">
+    <h1>TIMES GAME</h1>
+    <h4 id='date'></h4>
+    
+    
+    
+    <p class="layer">
+    <div class="box" id="x" ><input type="text" size=1 style="font-size: 25px;" id="inx" onchange="answer(event)" ></div>
+    </p>
+    <br>
+    <p class="layer">
+    <div class="box" style="margin: 0px 180px;" id="y" ><input type="text" size=1 style="font-size: 25px;" id="iny" onchange="answer(event)"  ></input></div>
+    <div class="box" style="margin: 0px 180px;" id="z" ><input type="text" size=1 style="font-size: 25px;" id="inz" onchange="answer(event)"  ></input></div>
+    </p>
+    <br>
+    <p class="layer">
+    <div class="box" id="m" style="margin: 0px 85px;">a</div>
+    <div class="box" id="n" style="margin: 0px 85px;">b</div>
+    <div class="box" id="o" style="margin: 0px 85px;">c</div>
+    <div class="box" id="p" style="margin: 0px 85px;">d</div>
+    </p>
+    </div>
+    <script >
+	function initiate() {
+		multiplicands=[2,3,4,5,6,7,8,9,10,11,12];
+
+		y=multiplicands[Math.floor(Math.random() * 11)];
+		z=multiplicands[Math.floor(Math.random() * 11)];
+
+
+		switch(y) {
+			case 2:
+				document.getElementById("m").innerHTML=1;
+				document.getElementById("n").innerHTML=2;
+				break;
+			case 3:
+				document.getElementById("m").innerHTML=1;
+				document.getElementById("n").innerHTML=3;
+				break;
+			case 4:
+				document.getElementById("m").innerHTML=2;
+				document.getElementById("n").innerHTML=2;
+				break;
+			case 5:
+				document.getElementById("m").innerHTML=1;
+				document.getElementById("n").innerHTML=5;
+				break;
+			case 6:
+				document.getElementById("m").innerHTML=2;
+				document.getElementById("n").innerHTML=3;
+				break;
+			case 7:
+				document.getElementById("m").innerHTML=1;
+				document.getElementById("n").innerHTML=7;
+				break;
+			case 8:
+				document.getElementById("m").innerHTML=2;
+				document.getElementById("n").innerHTML=4;
+				break;
+			case 9:
+				document.getElementById("m").innerHTML=3;
+				document.getElementById("n").innerHTML=3;
+				break;
+			case 10:
+				document.getElementById("m").innerHTML=2;
+				document.getElementById("n").innerHTML=5;
+				break;
+			case 11:
+				document.getElementById("m").innerHTML=1;
+				document.getElementById("n").innerHTML=11;
+				break;
+			case 12:
+				if (Math.floor(Math.random() * 11)<5) {
+					document.getElementById("m").innerHTML=2;
+					document.getElementById("n").innerHTML=6;
+				}
+				else {
+					document.getElementById("m").innerHTML=3;
+					document.getElementById("n").innerHTML=4;
+				}
+				break;
+		}
+
+		switch(z) {
+			case 2:
+				document.getElementById("o").innerHTML=1;
+				document.getElementById("p").innerHTML=2;
+				break;
+			case 3:
+				document.getElementById("o").innerHTML=1;
+				document.getElementById("p").innerHTML=3;
+				break;
+			case 4:
+				document.getElementById("o").innerHTML=2;
+				document.getElementById("p").innerHTML=2;
+				break;
+			case 5:
+				document.getElementById("o").innerHTML=1;
+				document.getElementById("p").innerHTML=5;
+				break;
+			case 6:
+				document.getElementById("o").innerHTML=2;
+				document.getElementById("p").innerHTML=3;
+				break;
+			case 7:
+				document.getElementById("o").innerHTML=1;
+				document.getElementById("p").innerHTML=7;
+				break;
+			case 8:
+				document.getElementById("o").innerHTML=2;
+				document.getElementById("p").innerHTML=4;
+				break;
+			case 9:
+				document.getElementById("o").innerHTML=3;
+				document.getElementById("p").innerHTML=3;
+				break;
+			case 10:
+				document.getElementById("o").innerHTML=2;
+				document.getElementById("p").innerHTML=5;
+				break;
+			case 11:
+				document.getElementById("o").innerHTML=1;
+				document.getElementById("p").innerHTML=11;
+				break;
+			case 12:
+				if (Math.floor(Math.random() * 11)<5) {
+					document.getElementById("o").innerHTML=2;
+					document.getElementById("p").innerHTML=6;
+				}
+				else {
+					document.getElementById("o").innerHTML=3;
+					document.getElementById("p").innerHTML=4;
+				}
+				break;
+		}
+	}
+
+	function answer(e) {
+		el=e.target;
+		
+		if (el.id=="inx") {
+			
+			y=document.getElementById("y").innerHTML;
+			z=document.getElementById("z").innerHTML;
+			if (y>0 && z>0) {
+				if (el.value==y*z) {
+					document.getElementById("x").innerHTML=el.value;
+					el.style.visibility='hidden';
+					setTimeout(checkwon,500);
+				}
+				else {
+					el.value=0;
+				}
+			}
+		}
+		if (el.id=="iny") {
+			
+			m=document.getElementById("m").innerHTML;
+			n=document.getElementById("n").innerHTML;
+			if (m>0 && n>0) {
+				if (el.value==m*n) {
+					document.getElementById("y").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+		}
+		if (el.id=="inz") {
+			
+			o=document.getElementById("o").innerHTML;
+			p=document.getElementById("p").innerHTML;
+			if (o>0 && p>0) {
+				if (el.value==o*p) {
+					document.getElementById("z").innerHTML=el.value;
+					el.style.visibility='hidden';
+				}
+				else {
+					el.value=0;
+				}
+			}
+		}
+		
+	}
+
+	function checkwon() {
+
+		alert("You won!");
+		window.location.href="file:///C:/Users/ianmc/OneDrive/Documents%201/NOUGHTSANDCROSSES/index_dividegame.html";
+
+	}
+
+
+    </script>
+  </body>
+
+</html>
