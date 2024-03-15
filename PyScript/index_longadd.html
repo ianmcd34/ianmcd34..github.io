@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+body {
+	background-color: CornflowerBlue;
+}
+.box {
+	display: inline-block;
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 20px;
+	padding: 20px;
+	border-width: 2px;
+}
+.center {
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.sumline {
+  height: 20px;
+  width:600px;
+  color: Lime;
+  background-color: Black;
+
+}
+    </style>
+    <title>Sumgame</title>
+  </head>
+  <body onload="setup()">
+    <h1>LONG ADDITION</h1>
+    <h4 id='date'></h4>
+<h2 style="text-align: right; margin: 40px;" id="timer">80:00</h2>
+<table class="center">
+<tr>
+<td></td>
+<td><span id="d" class="box" ></span></td>
+<td><span id="c" class="box" >1</span></td>
+<td><span id="b" class="box" >2</span></td>
+<td><span id="a" class="box" >3</span></td>
+</tr>
+
+<tr>
+<td></td>
+<td><span id="h" class="box" >+</span></td>
+<td><span id="g" class="box" >9</span></td>
+<td><span id="f" class="box" >8</span></td>
+<td><span id="e" class="box" >7</span></td>
+</tr>
+</table >
+
+<table class="center">
+<tr>
+<td colspan="4"><span class="sumline"><canvas id="myCanvas" class="sumline" style="height:40px; background-color: rgba(158, 167, 184, 0.0);"></canvas></span></td>
+</tr>
+<tr >
+<td><span id="z" class="box" ></span></td>
+<td><span id="y" class="box" ><input type="text" size=1 style="font-size: 25px;" id="iny" onchange="answer(event)"  ></input></span></td>
+<td><span id="x" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inx" onchange="answer(event)"  ></input></span></td>
+<td><span id="w" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inw" onchange="answer(event)" autofocus  ></input></span></td>
+</tr>
+</table>
+<br><br>
+
+<h1><span id="sum"></span><span id="sumequals"></span></h1>
+    <script >
+
+window.setInterval(timerTick, 1000);
+
+function answer(e) {
+	el=e.target;
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d")
+	ctx.fillStyle = "white";
+	ctx.font = "100px Arial";
+	if (el.id=="inw") {
+		carry=0;
+		w=parseInt(document.getElementById("a").innerHTML)+parseInt(document.getElementById("e").innerHTML);
+		if (el.value==w) {
+			document.getElementById("w").innerHTML=w%10;
+			if (w>9) {
+				carry=Math.floor(w/10)%10;
+				ctx.fillText(carry, 180, 150, 10);
+			}
+			el.style.visibility='hidden';
+			inx=document.getElementById("inx");
+			inx.style.visibility="visible";
+			inx.focus();
+		} else {
+			el.value=0;
+		}
+		
+	}
+	if (el.id=="inx") {
+		carry=0;
+		x=parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("f").innerHTML)*10+parseInt(document.getElementById("a").innerHTML)+parseInt(document.getElementById("e").innerHTML);
+
+		if (el.value==Math.floor(x/10)) {
+			document.getElementById("x").innerHTML=Math.floor(x/10)%10;
+			if (Math.floor(x/10)>9) {
+				carry=Math.floor(Math.floor(x/10)/10)%10;
+				ctx.fillText(carry, 100, 150, 10);
+			}
+			el.style.visibility='hidden';
+			iny=document.getElementById("iny");
+			iny.style.visibility="visible";
+			iny.focus();
+		} else {
+			el.value=0;
+		}	
+	}
+	if (el.id=="iny") {
+		carry=0;
+		y=parseInt(document.getElementById("c").innerHTML)*100+parseInt(document.getElementById("g").innerHTML)*100+parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("f").innerHTML)*10+parseInt(document.getElementById("a").innerHTML)+parseInt(document.getElementById("e").innerHTML);
+
+		if (el.value==Math.floor(y/100)) {
+			document.getElementById("y").innerHTML=Math.floor(y/100)%10;
+			if (Math.floor(y/100)>9) {
+				carry=Math.floor(Math.floor(y/100)/10)%10;
+				document.getElementById("z").innerHTML=carry;
+			}
+			el.style.visibility='hidden';
+		} else {
+			el.value=0;
+		}	
+	}
+}
+
+function setup() {
+	topno=Math.floor(Math.random() * 1000);
+	document.getElementById("a").innerHTML=topno%10;
+	if (topno>9) {
+		document.getElementById("b").innerHTML=Math.floor(topno/10)%10;
+		if (topno>99) {
+			document.getElementById("c").innerHTML=Math.floor(topno/100)%10;
+		}
+	}
+	
+
+	topno=Math.floor(Math.random() * 1000);
+	document.getElementById("e").innerHTML=topno%10;
+	if (topno>9) {
+		document.getElementById("f").innerHTML=Math.floor(topno/10)%10;
+		if (topno>99) {
+			document.getElementById("g").innerHTML=Math.floor(topno/100)%10;
+		}
+	}
+	inw=document.getElementById("inw");
+	inx=document.getElementById("inx");
+	iny=document.getElementById("iny");
+	inw.focus();
+	inx.style.visibility='hidden';
+	iny.style.visibility='hidden';
+		
+	
+}
+
+function timerTick() {
+	timer=document.getElementById("timer");
+	
+	count=parseInt(timer.innerHTML.substr(0,2))-1;
+	if (count==0) {
+		lose();
+	}
+	if (count<10) {
+		count="0"+count;
+	}
+	
+	timer.innerHTML=count+":00";
+
+}
+
+    </script>
+  </body>
+
+</html>
