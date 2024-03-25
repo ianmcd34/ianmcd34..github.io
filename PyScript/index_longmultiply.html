@@ -1,0 +1,624 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+body {
+	background-color: CornflowerBlue;
+}
+.box {
+	display: inline-block;
+	width: 55px;
+	height: 55px;
+	font-size: 300%;
+	text-align: center;
+	border-style: solid;
+	margin: 10px;
+	padding: 10px;
+	border-width: 2px;
+}
+.center {
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+  padding-left: 200px;
+  align: center;
+  
+}
+.sumline {
+  height: 5px;
+  width:400px;
+  color: Lime;
+  background-color: Black;
+
+}
+    </style>
+    <title>Long Multiplication</title>
+  </head>
+  <body onload="setup()">
+    <h1>LONG MULTIPLICATION</h1>
+    <h4 id='date'></h4>
+<p>
+<form style="display: inline;" onchange="clear()">
+ <input type="radio" id="integers" name="numbers" value="integers" onchange="clearsc()">
+  <label for="integers">Whole numbers</label>
+  <input type="radio" id="decimals" name="numbers" value="decimals" onchange="clearsc()">
+  <label for="decimals">Decimal values</label>
+</form>
+<h2 style="display: inline; text-align: right; margin: 40px;" id="timer">80:00</h2>
+</p>
+<table class="center">
+<tr>
+<td></td>
+<td><span id="d" class="box" ></span></td>
+<td><span id="c" class="box" ></span></td>
+<td><span id="b" class="box" ></span></td>
+<td><span id="a" class="box" ></span></td>
+</tr>
+
+<tr>
+<td></td>
+<td><span id="h" class="box" >x</span></td>
+<td><span id="g" class="box" ></span></td>
+<td><span id="f" class="box" ></span></td>
+<td><span id="e" class="box" ></span></td>
+</tr>
+</table >
+
+<table class="center">
+<tr>
+<td colspan="4"><span class="sumline"><canvas id="myCanvas" class="sumline" style="height:25px; background-color: rgba(158, 167, 184, 0.0);"></canvas></span></td>
+</tr>
+<tr >
+<td><span id="o" class="box" ><input type="text" size=1 style="font-size: 25px;" id="ino" onchange="answer(event)"  ></span></td>
+<td><span id="n" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inn" onchange="answer(event)" ></span></td>
+<td><span id="m" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inm" onchange="answer(event)" ></span></td>
+<td><span id="l" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inl" onchange="answer(event)" autofocus  ></span></td>
+</tr>
+<tr>
+<td colspan="4"><span><canvas id="myCanvas1" class="sumline" style="height:20px; background-color: rgba(158, 167, 184, 0.0);"></canvas></span></td>
+</tr>
+<tr >
+<td><span id="s" class="box" ><input type="text" size=1 style="font-size: 25px;" id="ins" onchange="answer(event)"  ></input></span></td>
+<td><span id="r" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inr" onchange="answer(event)"  ></input></span></td>
+<td><span id="q" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inq" onchange="answer(event)"  ></input></span></td>
+<td><span id="p" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inp" onchange="answer(event)" ></input></span></td>
+</tr>
+<tr>
+<td colspan="4"><span class="sumline"><canvas id="myCanvas2" class="sumline" style="height:20px; background-color: rgba(158, 167, 184, 0.0);"></canvas></span></td>
+</tr>
+<tr >
+<td><span id="z" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inz" onchange="answer(event)"  ></input></span></td>
+<td><span id="y" class="box" ><input type="text" size=1 style="font-size: 25px;" id="iny" onchange="answer(event)"  ></input></span></td>
+<td><span id="x" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inx" onchange="answer(event)"  ></input></span></td>
+<td><span id="w" class="box" ><input type="text" size=1 style="font-size: 25px;" id="inw" onchange="answer(event)"  ></input></span></td>
+</tr>
+</table>
+<br><br>
+
+<h1><span id="sum"></span><span id="sumequals"></span></h1>
+    <script >
+
+window.setInterval(timerTick, 1000);
+
+function answer(e) {
+	el=e.target;
+	if (el.id<"inp") {
+		var c = document.getElementById("myCanvas");
+	} else if (el.id<"inw") {
+		var c = document.getElementById("myCanvas1");
+	} else {
+		var c = document.getElementById("myCanvas2");
+	}
+	var ctx = c.getContext("2d")
+	ctx.fillStyle = "white";
+	ctx.font = "100px Arial";
+	
+	if (el.id=="inl") {
+		carry=0;
+		l=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("e").innerHTML);
+		if (el.value==l) {
+			document.getElementById("l").innerHTML=l%10;
+			if (l>9) {
+				carry=Math.floor(l/10)%10;
+				ctx.fillText(carry, 180, 150, 10);
+			}
+			el.style.visibility='hidden';
+			if ((parseInt(document.getElementById("b").innerHTML)>=0 && parseInt(document.getElementById("b").innerHTML)<=9) ||  carry>0) {
+				inm=document.getElementById("inm");
+				inm.style.display="table-cell";
+				inm.focus();
+			} else if (parseInt(document.getElementById("f").innerHTML)>=0 && parseInt(document.getElementById("f").innerHTML)<=9)  {
+				inp=document.getElementById("inp");
+				inp.style.display="table-cell";
+				inp.focus();
+			} else {
+				decimalise();
+			}
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="inm") {
+		carry=0;
+		
+		if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+			m=(parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("a").innerHTML))*parseInt(document.getElementById("e").innerHTML);
+		} else {
+			m=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("e").innerHTML);
+		}
+
+		if (el.value==Math.floor(m/10)) {
+			document.getElementById("m").innerHTML=Math.floor(m/10)%10;
+			if (Math.floor(m/10)>9) {
+				carry=Math.floor(Math.floor(m/10)/10)%10;
+				ctx.fillText(carry, 100, 150, 10);
+			}
+			el.style.visibility='hidden';
+			if ((parseInt(document.getElementById("c").innerHTML)>=0 && parseInt(document.getElementById("c").innerHTML)<=9) ||  carry>0) {
+				inn=document.getElementById("inn");
+				inn.style.display="table-cell";
+				inn.focus();
+			} else if (parseInt(document.getElementById("f").innerHTML)>=0 && parseInt(document.getElementById("f").innerHTML)<=9)  {
+				inp=document.getElementById("inp");
+				inp.style.display="table-cell";
+				inp.focus();
+			} else {
+				decimalise();
+			}
+		} else {
+			el.value="";
+		}	
+	}
+	if (el.id=="inn") {
+		carry=0;
+		if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+			n=(parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("a").innerHTML))*parseInt(document.getElementById("e").innerHTML);
+		} else {
+			n=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("e").innerHTML);
+		}
+		
+
+		if (el.value==Math.floor(n/100)) {
+			document.getElementById("n").innerHTML=Math.floor(n/100)%10;
+			el.style.visibility='hidden';
+			if (parseInt(document.getElementById("f").innerHTML)>=0 && parseInt(document.getElementById("f").innerHTML)<=9)  {
+				inp=document.getElementById("inp");
+				inp.style.display="table-cell";
+				inp.focus();
+			} else {
+				decimalise();
+			}
+		} else {
+			el.value="";
+		}	
+	}
+	if (el.id=="inp") {
+
+		if (parseInt(el.value)>0 || parseInt(el.value)<0) {
+			el.value="";
+		} 
+		else {
+			document.getElementById("p").innerHTML=0;
+			el.style.visibility='hidden';
+			inq=document.getElementById("inq");
+			inq.style.display="table-cell";
+			inq.focus();
+		}
+
+	}
+	if (el.id=="inq") {
+		carry=0;
+		q=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("f").innerHTML);
+		if (el.value==q) {
+			document.getElementById("q").innerHTML=q%10;
+			if (q>9) {
+				carry=Math.floor(q/10)%10;
+				ctx.fillText(carry, 100, 150, 10);
+			}
+			el.style.visibility='hidden';
+			if ((parseInt(document.getElementById("b").innerHTML)>=0 && parseInt(document.getElementById("b").innerHTML)<=9) ||  carry>0) {
+				inr=document.getElementById("inr");
+				inr.style.display="table-cell";
+				inr.focus();
+			}  else {
+				inw=document.getElementById("inw");
+				inw.style.display="table-cell";
+				inw.focus();
+			}
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="inr") {
+		carry=0;
+		if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+			r=(parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("a").innerHTML))*parseInt(document.getElementById("f").innerHTML);
+		} else {
+			r=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("f").innerHTML);
+		}
+		if (el.value==Math.floor(r/10)) {
+			document.getElementById("r").innerHTML=Math.floor(r/10)%10;
+			if (Math.floor(r/10)>9) {
+				carry=Math.floor(r/100)%10;
+				ctx.fillText(carry, 25, 150, 10);
+			}
+			el.style.visibility='hidden';
+			if ( carry>0) {
+				ins=document.getElementById("ins");
+				ins.style.display="table-cell";
+				ins.focus();
+			} else {
+				inw=document.getElementById("inw");
+				inw.style.display="table-cell";
+				inw.focus();
+			}
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="ins") {
+		carry=0;
+		if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+			s=(parseInt(document.getElementById("b").innerHTML)*10+parseInt(document.getElementById("a").innerHTML))*parseInt(document.getElementById("f").innerHTML);
+		} else {
+			s=parseInt(document.getElementById("a").innerHTML)*parseInt(document.getElementById("f").innerHTML);
+		}
+		carry=Math.floor(s/100)%10;
+		if (el.value==carry) {
+			document.getElementById("s").innerHTML=carry;
+			el.style.visibility='hidden';
+			inw=document.getElementById("inw");
+			inw.style.display="table-cell";
+			inw.focus();
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="inw") {
+		carry=0;
+		w=parseInt(document.getElementById("l").innerHTML)+parseInt(document.getElementById("p").innerHTML);
+		
+		if (el.value==w) {
+			document.getElementById("w").innerHTML=w%10;
+			el.style.visibility='hidden';
+			carry=Math.floor(Math.floor(w/10)/10)%10;
+			if (carry>0) {
+				ctx.fillText(carry, 180, 150, 10);
+			}
+			if (carry>0 || (parseInt(document.getElementById("m").innerHTML)>0 && parseInt(document.getElementById("m").innerHTML)<=9) || (parseInt(document.getElementById("q").innerHTML)>0 && parseInt(document.getElementById("q").innerHTML)<=9) || document.getElementById("decimals").checked) {
+				inx=document.getElementById("inx");
+				inx.style.display="table-cell";
+				inx.focus();
+			} else {
+				decimalise();
+			}
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="inx") {
+		carry=0;
+		x=0;
+		w=parseInt(document.getElementById("l").innerHTML)+parseInt(document.getElementById("p").innerHTML);
+		carry=Math.floor(w/10)%10;
+		if (parseInt(document.getElementById("m").innerHTML)>0 && parseInt(document.getElementById("m").innerHTML)<=9) {
+			if (parseInt(document.getElementById("q").innerHTML)>0 && parseInt(document.getElementById("q").innerHTML)<=9) {
+				x=parseInt(document.getElementById("m").innerHTML) + parseInt(document.getElementById("q").innerHTML);
+			} else {
+				x=parseInt(document.getElementById("m").innerHTML);
+			}
+		}
+		else {
+			if (parseInt(document.getElementById("q").innerHTML)>0 && parseInt(document.getElementById("q").innerHTML)<=9) {
+				x=parseInt(document.getElementById("q").innerHTML);
+			}
+		}
+		x=x+carry;
+		
+		if (el.value==x) {
+			document.getElementById("x").innerHTML=x%10;
+			el.style.visibility='hidden';
+			carry=Math.floor(x/10)%10;
+			if (carry>0) {
+				ctx.fillText(carry, 100, 150, 10);
+			}
+			if (carry>0 || (parseInt(document.getElementById("n").innerHTML)>0 && parseInt(document.getElementById("n").innerHTML)<=9) || (parseInt(document.getElementById("r").innerHTML)>0 && parseInt(document.getElementById("r").innerHTML)<=9) || document.getElementById("decimals").checked) {
+				iny=document.getElementById("iny");
+				iny.style.display="table-cell";
+				iny.focus();
+			} else {
+				decimalise();
+			}
+			
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="iny") {
+		carry=0;
+		y=0;
+		w=parseInt(document.getElementById("l").innerHTML)+parseInt(document.getElementById("p").innerHTML);
+		carry=Math.floor(w/10)%10;
+		if (parseInt(document.getElementById("m").innerHTML)>0 && parseInt(document.getElementById("m").innerHTML)<=9) {
+			if (parseInt(document.getElementById("q").innerHTML)>0 && parseInt(document.getElementById("q").innerHTML)<=9) {
+				x=parseInt(document.getElementById("m").innerHTML) + parseInt(document.getElementById("q").innerHTML);
+			} else {
+				x=parseInt(document.getElementById("m").innerHTML);
+			}
+		}
+		else {
+			if (parseInt(document.getElementById("q").innerHTML)>0 && parseInt(document.getElementById("q").innerHTML)<=9) {
+				x=parseInt(document.getElementById("q").innerHTML);
+			}
+		}
+		x=x+carry;
+		carry=Math.floor(x/10)%10;
+		if (parseInt(document.getElementById("n").innerHTML)>0 && parseInt(document.getElementById("n").innerHTML)<=9) {
+			if (parseInt(document.getElementById("r").innerHTML)>0 && parseInt(document.getElementById("r").innerHTML)<=9) {
+				y=parseInt(document.getElementById("n").innerHTML) + parseInt(document.getElementById("r").innerHTML);
+			} else {
+				y=parseInt(document.getElementById("n").innerHTML);
+			}
+		}
+		else {
+			if (parseInt(document.getElementById("r").innerHTML)>0 && parseInt(document.getElementById("r").innerHTML)<=9) {
+				y=parseInt(document.getElementById("r").innerHTML);
+			}
+		}
+		y=y+carry;
+		
+		if (el.value==y) {
+			document.getElementById("y").innerHTML=y%10;
+			el.style.visibility='hidden';
+			carry=Math.floor(y/10)%10;
+			if (carry>0) {
+				ctx.fillText(carry, 30, 150, 10);
+			}
+			if (carry>0 || (parseInt(document.getElementById("o").innerHTML)>0 && parseInt(document.getElementById("o").innerHTML)<=9) || (parseInt(document.getElementById("s").innerHTML)>0 && parseInt(document.getElementById("s").innerHTML)<=9) || document.getElementById("decimals").checked) {
+				inz=document.getElementById("inz");
+				inz.style.display="table-cell";
+				inz.focus();
+			} else {
+				decimalise();
+			}
+		} else {
+			el.value="";
+		}
+		
+	}
+	if (el.id=="inz") {
+		a=0; 
+		b=0; 
+		e=0; 
+		f=0;
+		a=parseInt(document.getElementById("a").innerHTML);
+		if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+			b=parseInt(document.getElementById("b").innerHTML);
+		}
+		e=parseInt(document.getElementById("e").innerHTML);
+		if (parseInt(document.getElementById("f").innerHTML)>0 && parseInt(document.getElementById("f").innerHTML)<=9) {
+			f=parseInt(document.getElementById("f").innerHTML);
+		}
+		ans=(b*10+a)*(f*10+e);
+		carry=Math.floor(ans/1000)%10;
+		if (el.value==carry) {
+			document.getElementById("z").innerHTML=carry;
+			el.style.visibility='hidden';
+			decimalise();
+		}  else {
+			el.value="";
+		}
+
+	}
+
+
+}
+
+function decimalise() {
+  if (document.getElementById("decimals").checked) {
+	a=0; 
+	b=0; 
+	e=0; 
+	f=0;
+	a=parseInt(document.getElementById("a").innerHTML);
+	if (parseInt(document.getElementById("b").innerHTML)>0 && parseInt(document.getElementById("b").innerHTML)<=9) {
+		b=parseInt(document.getElementById("b").innerHTML);
+	}
+	e=parseInt(document.getElementById("e").innerHTML);
+	if (parseInt(document.getElementById("f").innerHTML)>0 && parseInt(document.getElementById("f").innerHTML)<=9) {
+		f=parseInt(document.getElementById("f").innerHTML);
+	}
+	ans=(b*10+a)*(f*10+e);
+	topdec=0;
+	bottomdec=0;
+	if (document.getElementById("b").innerHTML.includes(".")) {
+		topdec=1;
+	} 
+	if (document.getElementById("c").innerHTML.includes(".")) {
+		topdec=2;
+	}  
+	if (document.getElementById("f").innerHTML.includes(".")) {
+		bottomdec=1;
+	} 
+	if (document.getElementById("g").innerHTML.includes(".")) {
+		bottomdec=2;
+	} 
+	ansdec="w";
+	w=document.getElementById("w").innerHTML;
+	if (parseInt(w)>=0 && parseInt(w)<=9) {
+		x=document.getElementById("x").innerHTML;
+		y=document.getElementById("y").innerHTML;
+		z=document.getElementById("z").innerHTML;
+		if (parseInt(z)>0 && parseInt(z)<=9) {
+			ans1=parseInt(z)*1000+parseInt(y)*100+parseInt(x)*10+parseInt(w);
+		}  else if (parseInt(y)>0 && parseInt(y)<=9) {
+			ans1=parseInt(y)*100+parseInt(x)*10+parseInt(w);
+		} else if (parseInt(x)>0 && parseInt(x)<=9) {
+			ans1=parseInt(x)*10+parseInt(w);
+		} else {
+			ans1=parseInt(w);
+		}
+		ansdec="w";
+		if (topdec+bottomdec==1) {
+			ansdec="x";
+		}
+		if (topdec+bottomdec==2) {
+			ansdec="y";
+		}
+		if (topdec+bottomdec==3) {
+			ansdec="z";
+		}
+		document.getElementById("w").addEventListener("click",  function(){addDecimal("w",ansdec);});
+		document.getElementById("x").addEventListener("click",  function(){addDecimal("x",ansdec);});
+		document.getElementById("y").addEventListener("click",  function(){addDecimal("y",ansdec);});
+		document.getElementById("z").addEventListener("click",  function(){addDecimal("z",ansdec);});
+
+	} else {
+		l=document.getElementById("l").innerHTML;
+		m=document.getElementById("m").innerHTML;
+		n=document.getElementById("n").innerHTML;
+		if (parseInt(n)>0 && parseInt(n)<=9) {
+			ans1=parseInt(n)*100+parseInt(m)*10+parseInt(l);
+		}  else if (parseInt(m)>0 && parseInt(m)<=9) {
+			ans1=parseInt(m)*10+parseInt(l);
+		}  else {
+			ans1=parseInt(l);
+		}
+		ansdec="l";
+		if (topdec+bottomdec==1) {
+			ansdec="m";
+		}
+		if (topdec+bottomdec==2) {
+			ansdec="n";
+		}
+		if (topdec+bottomdec==3) {
+			ansdec="o";
+		}
+		document.getElementById("l").addEventListener("click", function(){addDecimal("l",ansdec);});
+		document.getElementById("m").addEventListener("click", function(){addDecimal("m",ansdec);});
+		document.getElementById("n").addEventListener("click", function(){addDecimal("n",ansdec);});
+		document.getElementById("o").addEventListener("click", function(){addDecimal("o",ansdec);});
+	}
+	alert("now select the place where the decimal point should be");
+	function addDecimal(p1,p2) {
+		if(p1!=p2) {
+			alert("sorry, wrong position");
+		} else {
+			document.getElementById(p1).innerHTML+=".";
+		}
+	}
+	
+  }	
+}
+
+function clearsc() {
+	radiodecimal=document.getElementById("decimals");
+	if (radiodecimal.checked) {
+		localStorage.setItem("decimals","checked");
+	} else {
+		localStorage.setItem("decimals","unchecked");
+	}
+	window.location="file:///C:/Users/ianmc/OneDrive/Documents%201/NOUGHTSANDCROSSES/index_longmultiply.html";
+	}
+
+function setup() {
+	decimals_checked=localStorage.getItem("decimals");
+	if (decimals_checked=="checked") {
+		document.getElementById("decimals").checked=true;
+	} else {
+		document.getElementById("integers").checked=true;
+	}
+		
+	
+	topno=Math.floor(Math.random() * 100);
+	document.getElementById("a").innerHTML=topno%10;
+	if (topno>9) {
+		document.getElementById("b").innerHTML=Math.floor(topno/10)%10;
+	}
+	document.getElementById("c").innerHTML="";	
+
+	topno=Math.floor(Math.random() * 100);
+	document.getElementById("e").innerHTML=topno%10;
+	if (topno>9) {
+		document.getElementById("f").innerHTML=Math.floor(topno/10)%10;
+	}
+	document.getElementById("g").innerHTML="";
+	radiodecimal=document.getElementById("decimals");
+	if (radiodecimal.checked) {
+		topdec=Math.floor(Math.random() * 3);
+		bottomdec=Math.floor(Math.random() * 3);
+		if (topdec==1) {
+			document.getElementById("b").innerHTML+=".";
+			if (document.getElementById("b").innerHTML==".") {
+				document.getElementById("b").innerHTML="0.";
+			}
+		}
+		if (topdec==2) {
+			document.getElementById("c").innerHTML="0.";
+			if (document.getElementById("b").innerHTML=="") {
+				document.getElementById("b").innerHTML="0";
+			}
+		}
+		if (bottomdec==1 || (bottomdec==0 && topdec==0)) {
+			document.getElementById("f").innerHTML+=".";
+			if (document.getElementById("f").innerHTML==".") {
+				document.getElementById("f").innerHTML="0.";
+			}
+		}
+		if (bottomdec==2 && topdec!=2) {
+			document.getElementById("g").innerHTML="0.";
+			if (document.getElementById("f").innerHTML=="") {
+				document.getElementById("f").innerHTML="0";
+			}
+		} 
+		if (bottomdec==2 && topdec==2) {
+			document.getElementById("f").innerHTML+=".";
+			if (document.getElementById("f").innerHTML==".") {
+				document.getElementById("f").innerHTML="0.";
+			}
+		} 
+		
+	}
+
+	colln=document.getElementsByTagName("input");
+	for(i=0; i<colln.length; i++) {
+		colln[i].style.display='none';
+	}	
+	radiointeger=document.getElementById("integers");
+	radiointeger.style.display='inline';
+	radiodecimal=document.getElementById("decimals");
+	radiodecimal.style.display='inline';
+	inl=document.getElementById("inl");
+	inl.style.display='table-cell';
+	inl.focus();
+}
+
+function timerTick() {
+	timer=document.getElementById("timer");
+	
+	count=parseInt(timer.innerHTML.substr(0,2))-1;
+	if (count==0) {
+		lose();
+	}
+	if (count<10) {
+		count="0"+count;
+	}
+	
+	timer.innerHTML=count+":00";
+
+}
+
+    </script>
+  </body>
+
+</html>
