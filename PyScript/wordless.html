@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<HEAD>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Without Words</title>
+
+  <style>
+  .page {
+    position: absolute;
+    width: 750px;
+    height: 750px;
+    margin-left: 30%;
+    margin-right: auto;
+    margin-top: 100px;
+    border-style: solid;
+    border-width: 2px;
+    opacity: 1;
+  }
+  .zeroth {
+    background-color: white;
+    z-index: 6;
+  }
+  .first {
+    background-color: black;
+    z-index: 5;
+  }
+  .second {
+    background-color: red;
+    z-index: 4;
+  }
+  .third {
+    background-color: white;
+    z-index: 3;
+  }
+  .fourth {
+    background-color: gold;
+    z-index: 2;
+  }
+  .fifth {
+    background-color: green;
+    z-index: 1;
+  }
+  </style>
+</HEAD>
+<BODY>
+<DIV class="page  zeroth" onclick="next()"></DIV>
+<DIV class="page  first" ></DIV>
+<DIV class="page  second" ></DIV>
+<DIV class="page  third" ></DIV>
+<DIV class="page  fourth" ></DIV>
+<DIV class="page  fifth" ></DIV>
+</DIV>
+
+<script>
+    cname="";
+    function next() {
+        
+        if (cname=="") {
+            cname="zeroth";
+        } else if (cname=="zeroth") {
+            cname="first";
+        } else if (cname=="first") {
+            cname="second";
+        } else if (cname=="second") {
+            cname="third";
+        }
+        else if (cname=="third") {
+            cname="fourth";
+        } else if (cname=="fourth") {
+            cname="fifth";
+        } else {
+            cname="zeroth";
+        }
+        fadein(cname);
+    }
+
+    function fadein(cname) {
+        page=document.getElementsByClassName(cname)[0];
+        op=1;
+        int=setInterval(function () {page.style.opacity=op; op-=0.01; if (op<=0){endfade();}}, 100);
+
+        function endfade() {
+            clearInterval(int);
+        }
+    }
+
+
+</script>
+</BODY>
+</HTML>
