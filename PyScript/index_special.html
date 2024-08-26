@@ -17,7 +17,7 @@
     <h4 id='date'></h4>
     
     <div>
-        <img src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\alanshouse.png" alt="Alan%'s House" style="width:500px;height:600px;" id="imgEl">
+        <img src="../Github Pics/alanshouse.png" alt="Alan%'s House" style="width:500px;height:600px;" id="imgEl">
     </div>
     <form>
         <label for="myfile">Select a picture:</label>
@@ -32,7 +32,7 @@
 	  document.getElementById('mypic').addEventListener('change', function(event) {
         const file = event.target.files[0];
         const path1 = document.getElementById("mypic").value.slice(12);
-        document.getElementById("imgEl").src="C:\\Users\\ianmc\\OneDrive\\Pictures\\Saved pictures\\"+path1;
+        document.getElementById("imgEl").src="../Github Pics/"+path1;
       }
     );
 
