@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+
+    </style>
+    <title>SpecialRelativity</title>
+  </head>
+  <body >
+
+    <h1>SPECIAL RELATIVITY</h1>
+    <h4 id='date'></h4>
+    
+    <div>
+        <img src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\alanshouse.png" alt="Alan%'s House" style="width:500px;height:600px;" id="imgEl">
+    </div>
+    <form>
+        <label for="myfile">Select a picture:</label>
+        <input type="file" id="mypic" name="mypic">
+    <br>
+        <label for="vel">Velocity (up to c):</label>
+        <input type="range" id="vel" name="vel" min="0" max="500" value="0"  style="width:500px">
+    </form>
+    <p id="outp"></p>
+    
+    <script >
+	  document.getElementById('mypic').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const path1 = document.getElementById("mypic").value.slice(12);
+        document.getElementById("imgEl").src="C:\\Users\\ianmc\\OneDrive\\Pictures\\Saved pictures\\"+path1;
+      }
+    );
+
+    document.getElementById('vel').addEventListener('change', function(event) {
+        const innerlorentz = parseInt(event.target.value)**2/500**2;
+        const lorentz = Math.sqrt(1-innerlorentz);
+        document.getElementById("outp").innerHTML=parseInt(event.target.value)/5+"% of c";
+        document.getElementById("imgEl").style.width=500*lorentz+"px";
+      }
+    );
+
+    </script>
+  </body>
+
+</html>
