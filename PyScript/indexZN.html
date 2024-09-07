@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <script async src="./javascript/two.min.js"></script>
+    <style>
+td {
+	width: 110px;
+	height: 110px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+    webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Standard syntax */
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+    float: left;
+	display: inline-block;
+	margin-top: 40px;
+    margin-left: 350px;
+	border-collapse: collapse;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+    float: left;
+    width: 20%;
+	font-size: 150%;
+    text-align: left;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Z-N!</title>
+  </head>
+  <body onload="setup()" >
+    <h1>Z-N GAME</h1>
+    <h4 id='date'></h4>
+    <ul id="sums">
+
+    </ul>
+
+    <table onmousedown="mousedwn(event)" onmouseup="mouseup(event)">
+	<tr>
+    		<td class="plyer" id="P_A1" onmouseover="choose(this)"></td>
+    		<td class="plyer" id="P_A2" onmouseover="choose(this)">+</td>
+    		<td class="plyer" id="P_A3" onmouseover="choose(this)"></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onmouseover="choose(this)">*</td>
+    		<td class="plyer" id="P_B2" onmouseover="choose(this)"></td>
+    		<td class="plyer" id="P_B3" onmouseover="choose(this)">-</td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onmouseover="choose(this)"></td>
+    		<td class="plyer" id="P_C2" onmouseover="choose(this)">+</td>
+    		<td class="plyer" id="P_C3" onmouseover="choose(this)"></td>
+  	   </tr>
+
+    </table>
+    <script >
+        const sqrs = ["P_A1","P_A2","P_A3","P_B1","P_B2","P_B3","P_C1","P_C2" ,"P_C3" ];
+        const paths = ['123',	'125',	'147',	'145' , '12365',	'12547',	'14785',	'14523',
+            '12369',	'12569',	'14789',	'14563', '1236547',	'12563',	'1478523',	'14569',
+            '1236587',	'12587',	'1478563',	'14587', '1236589',	'12589',	'1478569',	'14589',
+            '1236987',	'1254789',	'1478965',	'1452369', '1236985',	'1256987',	'1478963',	'1456987', '1258963',	'1458963', 
+            '321',	'325',	'369',	'365', '32145',	'32569',	'36985',	'36521', 
+            '32147'	,'32547',	'36987',	'36541', '3214569'	,'32541',	'3698521',	'36547',
+            '3214589',	'32589',	'3698541',	'36589', '3214587',	'32587',	'3698547',	'36587',
+            '3214789',	'3256987',	'3698745',	'3652147', '3214785',	'3254789',	'3698741',	'3654789', '3258741',	'3658741',
+            '123654789', '147852369', '321456987', '369852147',
+            '789',	'785',	'741',	'745', '78965', '78541',	'74125',	'74589', 
+            '78963',	'78563',	'74123',	'74569', '7896541',	'78569',	'7412589',	'74563',
+            '7896521',	'78521',	'7412569',	'74521', '7896523',	'78523',	'7412563',	'74523',
+            '7896321',	'7854123',	'7412365',	'7458963', '7896325',	'7856321',	'7412369',	'7456321',
+            '7852369',		'741258963', '789654123', '987',	'985',	'963',	'965',
+            '98745',	'98563',	'96325',	'96587', '98741',	'98541',	'96321',	'96547',
+            '9874563',	'98547',	'9632587',	'96541', '9874523',	'98523',	'9632547',	'96523',
+            '9874521',	'98521',	'9632541',	'96521', '9874123',	'9856321',	'9632145',	'9658741',
+            '9874125',	'9854123',	'9632147',	'9654123',	'9852147',		'987456321', '963258741',
+            '521',	'523',	'563',	'569',	'589',	'587',	'547',	'541',
+            '52147',	'52369',	'56321',	'56987',	'58963',	'58741'	, '54789',	'54123',
+            '5214789',	'5236987',	'5632147',	'5698741',	'5896321',	'5874123',	'5478963',	'5412369',
+            '521478963',	'523698741',	'563214789',	'569874123',	'589632147',	'587412369',	'547896321',	'541236987'
+                ];
+        var answers = new Set();
+        var mouzdwn=false;
+        var selsum='';
+
+        function test(i1) {
+            for (s1 in sqrs) {
+                document.getElementById(sqrs[s1]).innerHTML="";
+            }
+            
+            path=paths[i1].split("");
+            for (j1 in path) {
+                document.getElementById(sqrs[parseInt(path[j1]-1)]).innerHTML="ABELONIAN".at(j1);
+            }
+            setTimeout(function() {test0(i1)}, 500);
+
+        }
+
+        function test0(i1) {
+            if (confirm("ok?")) {
+                i1++;
+                test(i1);
+            }
+        }
+
+        function setup() {
+            for (i1 in sqrs) {
+                if (i1!=1 && i1!=3 && i1!=5 && i1!=7) {
+                    document.getElementById(sqrs[i1]).innerHTML=Math.floor(Math.random()*9+1);
+                }
+            }
+            setup0();
+
+        }
+
+        function setup0() {
+           
+            for (i1 in paths) {
+                sum="";
+                path=paths[i1].split("");
+                for (j1 in path) {
+                    fig = document.getElementById(sqrs[parseInt(path[j1]-1)]).innerHTML;
+                    sum+=fig;
+                }
+
+                answers.add(eval(sum));
+            }
+
+            ansarr=[];
+            for (v1 of answers.values()) {
+                ansarr.push(parseInt(v1));
+            }
+            ansarr.sort(function(a, b){return a - b});
+            toguess=10;
+
+            for (v1 in ansarr) {
+                if (Math.random()<toguess/(ansarr.length-v1)) {
+                    toguess--;
+                    listitem = document.createElement("li");
+                    listitem.innerHTML = ansarr[v1];
+                    document.getElementById("sums").appendChild(listitem);
+                }
+            }
+            
+                
+               
+        }
+
+        function mousedwn(e) {
+            mouzdwn = true;
+            
+            if (!( ['+','-','*'].includes(e.target.innerHTML) )) {
+                choose(e.target);
+            }
+            
+        }
+        function mouseup(e) {
+            mouzdwn = false;
+            if (['+','-','*'].includes(selsum.at(-1))) {
+                selsum=selsum.slice(0,-1);
+            }
+            
+            ans=document.getElementById("sums").children;
+            if (selsum.length>1) {
+                for (i1 in ans) {
+                    if (eval(selsum)==parseInt(ans[i1].innerHTML)) {
+                        ans[i1].innerHTML+=" = "+selsum;
+                        ans[i1].style.backgroundColor="limegreen";
+                    }
+                }
+            }
+            for (s1 in sqrs) {
+                document.getElementById(sqrs[s1]).style.backgroundColor="white";
+            }
+            selsum='';
+
+        }
+        function choose(obj) {
+            if (obj.style.backgroundColor=="rgb(217, 74, 56)") {
+                mouzdwn=false;
+                return;
+            }
+            if(mouzdwn ) {
+                
+                obj.style.backgroundColor="#D94A38";
+                selsum+=obj.innerHTML;
+            }
+        }
+
+    </script>
+  </body>
+
+</html>
