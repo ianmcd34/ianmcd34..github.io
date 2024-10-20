@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+
+    </style>
+    <title>Kepler's Orbit</title>
+  </head>
+  <body onload="onLoad()">
+
+    <h1>KEPLER'S ORBIT</h1>
+    <h4 id='date'></h4>
+    <img id="sun" src="sun.jpg" alt="The Sun" style="display:none">
+    <img id="planet" src="planet.jpg" alt="The Planet" style="display:none">
+    <form>
+        <label for="vel">Intial Speed:</label>
+        <input type="range" id="vel" name="vel" min="-1" max="1" step="0.1">
+        <label for="kval">Strength of Gravity:</label>
+        <input type="range" id="kval" name="kval" min="0" max="1" step="0.1">
+        <button type="button" onclick="animateorbit()">Click Me!</button>
+    </form>
+    <div>
+        <canvas id="myCanvas" width="1200" height="700" style="border:1px solid #000000; background-color: white;">
+        </canvas>
+    </div>
+    
+    
+    <script >
+    var xpos=900;
+    var ypos=350;
+    var xvel=0;
+    var yvel=-1.5;
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var sun = document.getElementById("sun");
+    var planet = document.getElementById("planet");
+    var dist=300;
+    var k=700;
+    function onLoad() {
+        ctx.drawImage(sun, 500, 270);
+        ctx.drawImage(planet, xpos, ypos);
+
+    }
+    function move() {
+        dist=Math.sqrt((xpos-600)**2+(ypos-350)**2);
+        force=k/(dist**2);
+        angle=Math.abs(Math.asin((ypos-350)/dist));
+        if (xpos>600 && ypos<350) {
+            xvel-=force*Math.cos(angle);
+            yvel+=force*Math.sin(angle);
+        } else if (xpos<=600 && ypos<350) {
+            xvel+=force*Math.cos(angle);
+            yvel+=force*Math.sin(angle);
+        } else if (xpos<=600 && ypos>=350) {
+            xvel+=force*Math.cos(angle);
+            yvel-=force*Math.sin(angle);
+        } else if (xpos>600 && ypos>=350) {
+            xvel-=force*Math.cos(angle);
+            yvel-=force*Math.sin(angle);
+        }
+        //alert("dist="+dist+"\nforce="+force+"\nangle="+angle+"\nxacc="+force*Math.cos(angle)+"\nyacc="+force*Math.sin(angle)+"\nxvel="+xvel+"\nyvel="+yvel);
+        xpos+=xvel;
+        ypos+=yvel;
+        if (xpos<0 || xpos>1200 || ypos<0 || ypos>700) {
+            return false;
+        }
+        ctx.drawImage(planet, xpos, ypos);
+    }
+    function animateorbit() {
+        yvel=parseFloat(document.getElementById("vel").value)*2;
+        k=parseFloat(document.getElementById("kval").value)*1000;
+
+        let id = null;
+        clearInterval(id);
+        id = setInterval(move, 5);
+    }
+
+    </script>
+  </body>
+
+</html>
