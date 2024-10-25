@@ -21,73 +21,15 @@
 </head>
 <body>
   <py-script>print("Hello, World!")</py-script>
-  <py-script>import sys; print(f"Python {sys.version}")</py-script>
+
   <py-script>
-import matplotlib.pyplot as plt
-import numpy as np
+   import requests
 
-time = np.linspace(0, 2 * np.pi, 100)
-plt.plot(time, np.sin(time))
-plt
-  </py-script>
-  <py-inputbox>
-def on_keypress(event):
-    print(event)
-  </py-inputbox>
-  <button>New Word</button>
-  <input id="new-item" type="text" placeholder="Add new item">
-  <div id="Words" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
-<p>Words</p>
-    <ul>
-      <li></li>
-      <li></li>
-    </ul>
-  <div id="LastWord" style="text-align:center;width: 300px;margin: 0 auto;border-style: dotted;">
-<p></p>
-    <ul>
-      <li></li>
-    </ul>
-  </div>
-  <!--<py-script src="modules/popword.py"></py-script>-->
-  <py-script src="modules/wordlink.py"></py-script>
-  <py-script>
-   
-from pyodide import create_proxy
+#the required first parameter of the 'get' method is the 'url':
+x = requests.get('http://olympus.realpython.org/profiles/dionysus/')
 
-    
-def on_add_click(event):
-    global n
-    input_new_item = document.querySelector("#new-item")
-
-    if input_new_item.value:
-      wordn=links[minindex][0]
-      links[minindex]=links[minindex][1:]
-      parent = document.querySelector("#Words ul")
-      child = document.createElement("li")
-      child.innerText = wordn+"/"+input_new_item.value
-      if wordn==input_new_item.value:
-        child.style.backgroundColor = "green"
-      parent.appendChild(child)
-      parent = document.querySelector("#LastWord ul")
-      parent.lastElementChild.innerText=links[minindex][-1]
-
-      input_new_item.value = ""
-
-    
-    
-    
-n=0
-
-
-
-parent = document.querySelector("#LastWord ul")
-parent.lastElementChild.innerText="Target word"
-parent = document.querySelector("#Words ul")
-parent.firstElementChild.innerText="Start word"
-lastChild=parent.lastElementChild
-
-button = document.querySelector("button")
-button.addEventListener("click", create_proxy(on_add_click))
+#print the response text (the content of the requested file):
+print(x.text)
   </py-script>
   
 </body>
