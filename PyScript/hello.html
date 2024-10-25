@@ -23,12 +23,14 @@
   <py-script>print("Hello, World!")</py-script>
 
   <py-script>
-   import urllib.request
+   import requests
+    url = 'https://www.w3schools.com/python/demopage.htm'
 
-url = "http://www.example.com"
-response = urllib.request.urlopen(url)
-html = response.read()
-print(html)
+x = requests.get(url)
+
+print(x.text)
+
+
 
   </py-script>
   
