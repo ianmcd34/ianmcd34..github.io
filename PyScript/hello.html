@@ -12,7 +12,6 @@
     - matplotlib
     - numpy
     - nltk
-    - urllib
     - paths:
       - modules/NeuralNetwork_class.py
       - modules/popword.py
@@ -24,8 +23,14 @@
   <py-script>print("Hello, World!")</py-script>
 
   <py-script>
-  import urllib
-  url = 'https://www.w3schools.com/python/demopage.htm'
+from pyscript import fetch
+
+
+response = await fetch("https://example.com")
+if response.ok:
+    data = await response.text()
+else:
+    print(response.status)
     
   </py-script>
   
