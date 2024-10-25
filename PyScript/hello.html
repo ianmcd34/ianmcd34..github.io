@@ -23,13 +23,13 @@
   <py-script>print("Hello, World!")</py-script>
 
   <py-script>
-   from urllib import requests
+   import urllib.request
 
-#the required first parameter of the 'get' method is the 'url':
-x = requests.get('http://olympus.realpython.org/profiles/dionysus/')
+url = 'http://olympus.realpython.org/profiles/dionysus/'
+response = urllib.request.urlopen(url)
+html = response.read()
+print(html)
 
-#print the response text (the content of the requested file):
-print(x.text)
   </py-script>
   
 </body>
