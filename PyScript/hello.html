@@ -12,7 +12,6 @@
     - matplotlib
     - numpy
     - pyscript
-    - asyncio
     - paths:
       - modules/NeuralNetwork_class.py
       - modules/popword.py
@@ -25,10 +24,15 @@
 
   <py-script>
 import pyscript
-import asyncio
-    
-response = asyncio.run(pyscript.fetch("https://example.com"))
 
+def async init():
+  response = await fetch("https://example.com")
+  if response.ok:
+      data = await response.text()
+  else:
+      print(response.status)
+
+init()
     
   </py-script>
   
