@@ -28,10 +28,7 @@ import pyscript
 import asyncio
     
 response = asyncio.run(pyscript.fetch("https://example.com"))
-if response.ok:
-    data = await response.text()
-else:
-    print(response.status)
+
     
   </py-script>
   
