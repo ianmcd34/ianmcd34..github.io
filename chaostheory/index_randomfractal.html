@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+
+    </style>
+    <title>Random Fractal</title>
+  </head>
+  <body >
+
+    <h1>RANDOM FRACTAL</h1>
+    <h4 id='date'></h4>
+    <img id="sun" src="sun.jpg" alt="The Sun" style="display:none">
+    <img id="planet" src="planet.jpg" alt="The Planet" style="display:none">
+    <form>
+        <button type="button" onclick="animatefractal()">Click Me!</button>
+        <button type="button" onclick="ctx.clearRect(0,0,1200,700)">Clear!</button>
+    </form>
+    <div>
+        <canvas id="myCanvas" width="1200" height="700" style="border:1px solid #000000; background-color: white;">
+        </canvas>
+    </div>
+    
+    
+    <script >
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#FF0000";
+        strokeStyles = ["black", "red", "green"];
+        ctx.strokeStyle=strokeStyles[0];
+        ctx.font = "30px Verdana";
+        xpoints=[270,930,930,270,270];
+        ypoints=[170,170,530,530,170];
+
+        function animatefractal() {
+            ctx.clearRect(0,0,1200,700);
+            ctx.reset();
+            
+            ctx.moveTo(xpoints[0],ypoints[0]);
+
+            for (x1 in xpoints) {
+                
+                ctx.lineTo(xpoints[x1],ypoints[x1]);
+                ctx.stroke();
+            }
+
+
+            nextlevel();
+        }
+
+        function nextlevel() {
+            newxpoints=[xpoints[0]];
+            newypoints=[ypoints[0]];
+
+            for (x1 in xpoints) {
+                if (x1>0) {
+                    midx=xpoints[x1-1]+(xpoints[x1]-xpoints[x1-1])/2;
+                    midy=ypoints[x1-1]+(ypoints[x1]-ypoints[x1-1])/2;
+                    seglength = Math.sqrt((xpoints[x1]-xpoints[x1-1])**2+(ypoints[x1]-ypoints[x1-1])**2)/4;
+
+                    if (Math.random()>0.5) {
+                        perpa=ypoints[x1-1]-ypoints[x1];
+                        perpb=xpoints[x1]-xpoints[x1-1];
+                    } else {
+                        perpa=ypoints[x1]-ypoints[x1-1];
+                        perpb=xpoints[x1-1]-xpoints[x1];
+                    }
+
+                    newx=midx+perpa*seglength/Math.sqrt(perpa**2+perpb**2);
+                    newy=midy+perpb*seglength/Math.sqrt(perpa**2+perpb**2);
+
+                    newxpoints.push(xpoints[x1-1]+(xpoints[x1]-xpoints[x1-1])/4)
+                    newypoints.push(ypoints[x1-1]+(ypoints[x1]-ypoints[x1-1])/4)
+                    newxpoints.push(newx);
+                    newypoints.push(newy);
+                    newxpoints.push(xpoints[x1]-(xpoints[x1]-xpoints[x1-1])/4)
+                    newypoints.push(ypoints[x1]-(ypoints[x1]-ypoints[x1-1])/4)
+                    newxpoints.push(xpoints[x1]);
+                    newypoints.push(ypoints[x1]);
+
+                }
+            }
+            xpoints=newxpoints;
+            ypoints=newypoints;
+        }
+
+    </script>
+  </body>
+
+</html>
