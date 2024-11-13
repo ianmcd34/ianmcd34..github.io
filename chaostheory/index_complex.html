@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.0/math.js"></script>
+    <script async src="./javascript/index.js"></script>
+    <style>
+
+
+  </style>
+    
+    <title>Julia</title>
+  </head>
+  <body  >
+    <h1>Julia Sets of y = z^2 + c</h1>
+    <h4 id='date'></h4>
+
+    <p id="sum"></p>
+    <form>
+      <label for="Re_c"><b>c = </b></label>
+      <input type="number" id="Re_c" name="Re_c" min="-5" max="5" step="0.05" value="-1">
+      <label for="Im_c"><b> + </b></label>
+      <input type="number" id="Im_c" name="Im_c" min="-5" max="5" step="0.05" value="0">
+      <label for="Im_c"><b> i </b></label>
+      <label for="x_min">minimum x value: </label>
+      <input type="number" id="x_min" name="x_min" min="-3" max="3" step="0.1" value="-2">
+      <label for="x_max">maximum x value: </label>
+      <input type="number" id="x_max" name="x_max" min="-3" max="3" step="0.1" value="2">
+      <label for="y_min">minimum y value: </label>
+      <input type="number" id="y_min" name="y_min" min="-3" max="3" step="0.1" value="-2">
+      <label for="y_max">maximum y value: </label>
+      <input type="number" id="y_max" name="y_max" min="-3" max="3" step="0.1" value="2">
+      <button type="button" onclick="drawJulia()">Click Me!</button>
+    </form>
+
+    <div>
+      <canvas id="myCanvas" width="1200" height="700" style="border:1px solid #000000; background-color: white;">
+      </canvas>
+    </div>
+   
+    <script >
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#FF0000";
+  var xmin=-2;
+  var xmax=2;
+  var ymin=-2;
+  var ymax=2;
+  var eps=0.01;
+  const a = math.complex(1, 0.3)   // Complex 2 + 3i
+  const b = math.complex(2, 1)   // Complex 2 + 1i
+  var c = math.complex(-1, 0);
+  math.Complex.compare(a,b) // returns 1
+  
+    document.getElementById("sum").innerText += isJulia(a,0);
+    
+  function isJulia(test1, depth1) {
+    Re_c = parseFloat(document.getElementById("Re_c").value);
+    Im_c = parseFloat(document.getElementById("Im_c").value);
+    c = math.complex(Re_c, Im_c);
+    if (math.abs(test1)>=2) {
+        return false;
+    } else if (depth1>10) {
+        return true;
+    } else {
+        result = isJulia(math.add(math.multiply(test1,test1),c), depth1+1);
+        return result;
+    }
+
+  }
+
+  function drawJulia() {
+    ctx.clearRect(0,0,1200,700);
+    ctx.reset();
+    ctx.fillStyle="red";
+    xmin = parseFloat(document.getElementById("x_min").value);
+    xmax = parseFloat(document.getElementById("x_max").value);
+    ymin = parseFloat(document.getElementById("y_min").value);
+    ymax = parseFloat(document.getElementById("y_max").value);
+    eps = ((xmax-xmin)/1200*3+(ymax-ymin)/700*2)/2;
+    for (x1=xmin; x1<xmax; x1+=eps) {
+      for (y1=ymin; y1<ymax; y1+=eps) {
+        var test1=math.complex(x1, y1);
+        if (isJulia(test1, 0)) {
+          ctx.fillRect(1200*x1/(xmax-xmin)-xmin*1200/(xmax-xmin), 700-700*y1/(ymax-ymin)+ymin*700/(ymax-ymin), 1200*eps/(xmax-xmin), 700*eps/(ymax-ymin));
+        }
+      }
+    }
+    drawAxes();
+
+  }
+
+  function drawAxes() {
+     ctx.strokeStyle="black";
+     ctx.moveTo(-xmin*1200/(xmax-xmin),0);
+     ctx.lineTo(-xmin*1200/(xmax-xmin),700);
+     ctx.stroke();
+     ctx.moveTo(0,700+ymin*700/(ymax-ymin));
+     ctx.lineTo(1200,700+ymin*700/(ymax-ymin));
+     ctx.stroke();
+   }
+
+
+    </script>
+  </body>
+
+</html>
