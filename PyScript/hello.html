@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
-    - imaplib
+    - imaplib2
     - numpy
     - paths:
   </py-env>
@@ -19,10 +19,10 @@
   <py-script>import sys; print(f"Python {sys.version}")</py-script>
  
   <py-script>
-import imaplib
+import imaplib2
 
 # Connect to the IMAP server
-server = imaplib.IMAP4_SSL('outlook.live.com')
+server = imaplib2.IMAP4_SSL('outlook.live.com')
 # Authenticate using the username and password
 server.login('ianmcd34@hotmail.com', 'MbunGo1968')
 # Fetch the list of mailbox names
