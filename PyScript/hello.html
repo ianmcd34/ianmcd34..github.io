@@ -7,28 +7,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Hello, World!</title>
   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-  <!-- This script tag bootstraps PyScript -->
-    <script type="module" src="https://pyscript.net/releases/2024.5.2/core.js"></script>
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
-    - matplotlib
+    - imaplib2
     - numpy
-    - pyscript
     - paths:
-      - modules/NeuralNetwork_class.py
-      - modules/popword.py
-      - modules/wordlink.py
-      - modules/en
+      - /NeuralNetwork_class.py
   </py-env>
 </head>
 <body>
   <py-script>print("Hello, World!")</py-script>
-
+  <py-script>import sys; print(f"Python {sys.version}")</py-script>
+ 
   <py-script>
-import pyscript
+import imaplib2
 
-
-    
+# Connect to the IMAP server
+server = imaplib.IMAP4_SSL('outlook.live.com')
+# Authenticate using the username and password
+server.login('ianmcd34@hotmail.com', 'MbunGo1968')
+# Fetch the list of mailbox names
+response, mailbox_list = server.list()
+# Print the list of mailbox names
+print(mailbox_list)
+# Disconnect from the server
+server.logout()
   </py-script>
-  
 </body>
 </html>
