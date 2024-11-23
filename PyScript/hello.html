@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
-    - imaplib2
+    - imaplib
     - numpy
     - paths:
   </py-env>
@@ -19,7 +19,7 @@
   <py-script>import sys; print(f"Python {sys.version}")</py-script>
  
   <py-script>
-import imaplib2
+import imaplib
 
 # Connect to the IMAP server
 server = imaplib.IMAP4_SSL('outlook.live.com')
