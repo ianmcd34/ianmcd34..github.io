@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
-    - imaplib2
+    - win32com
     - numpy
     - paths:
   </py-env>
@@ -19,18 +19,20 @@
   <py-script>import sys; print(f"Python {sys.version}")</py-script>
  
   <py-script>
-import imaplib2
+import win32com.client
 
-# Connect to the IMAP server
-server = imaplib2.IMAP4_SSL('wss://imap-mail.outlook.com')
-# Authenticate using the username and password
-server.login('ianmcd34@hotmail.com', 'MbunGo1968')
-# Fetch the list of mailbox names
-response, mailbox_list = server.list()
-# Print the list of mailbox names
-print(mailbox_list)
-# Disconnect from the server
-server.logout()
+outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+
+inbox = outlook.GetDefaultFolder(6).Folders
+
+messages = inbox[0].Items
+
+for i in range(len(messages)):
+
+message = messages.Item(i + 1)
+
+body_content = message.body
+print(body_content)
   </py-script>
 </body>
 </html>
