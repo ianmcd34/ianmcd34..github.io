@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
-    - win32com
+    - pypiwin32
     - numpy
     - paths:
   </py-env>
@@ -19,9 +19,9 @@
   <py-script>import sys; print(f"Python {sys.version}")</py-script>
  
   <py-script>
-import win32com.client
+import pypiwin32.client
 
-outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+outlook = pypiwin32.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
 
 inbox = outlook.GetDefaultFolder(6).Folders
 
