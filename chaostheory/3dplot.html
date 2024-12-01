@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello, World!</title>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <!-- <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script> -->
+  
+  <py-env>
+    - matplotlib
+    - numpy
+  </py-env>
+  <style>
+  .div1 {
+    float: left;
+    padding: 15px;
+  }
+  </style>
+</head>
+<body>
+  <py-script>print("Hello, World!")</py-script>
+  <py-script>
+    import sys; print(f"Python {sys.version}")
+  </py-script>
+  
+  <h1>Population Proportions for Herbivores, Carnivores and Total in an Interacting Logistic Model</h1>
+  
+  <div class="div1" id="output">H</div>
+
+
+ 
+  <div class="div1" id="output1">C</div>
+
+
+ 
+  <div class="div1" id="output2">T</div>
+
+  <br>
+
+
+
+  <div>
+    <py-script>
+
+
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.ticker import LinearLocator
+import numpy as np
+
+
+
+
+def H_next(H, C, R_h):  
+    result = R_h*H*(1-H)/(1+C)
+    if result > 1:
+        return 1
+    elif result < 0:
+        return 0
+    else:
+        return result
+
+def C_next(H, C, R_c):  
+    result = R_c*C*(1-C)*(1+H)
+    if result > 1:
+        return 1
+    elif result < 0:
+        return 0
+    else:
+        return result
+
+def population(R_h,R_c):
+    Herbivores = [0.8]
+    Carnivores = [0.1]
+    
+    H = 0.8
+    C = 0.1
+    generation = 0
+    while generation < 200:
+        
+        H_nxt = H_next(H, C, R_h)
+        C_nxt = C_next(H, C, R_c)
+        Herbivores.append(H_nxt)
+        Carnivores.append(C_nxt)
+        H = H_nxt
+        C = C_nxt
+        generation = generation+1
+        
+    
+    epsilon = 0.02
+    cycle = -1
+
+
+    while abs(Herbivores[-1]-Herbivores[cycle-1]) > epsilon:
+        cycle=cycle-1
+    Herbivores = Herbivores[cycle:]
+
+    cycle = -1
+
+    while abs(Carnivores[-1]-Carnivores[cycle-1]) > epsilon:
+        cycle=cycle-1
+    Carnivores = Carnivores[cycle:]
+
+    return (Herbivores, Carnivores)
+
+    
+def lorenz(xyz, *, s=10, r=28, b=2.667):
+    """
+    Parameters
+    ----------
+    xyz : array-like, shape (3,)
+       Point of interest in three-dimensional space.
+    s, r, b : float
+       Parameters defining the Lorenz attractor.
+
+    Returns
+    -------
+    xyz_dot : array, shape (3,)
+       Values of the Lorenz attractor's partial derivatives at *xyz*.
+    """
+    x, y, z = xyz
+    x_dot = s*(y - x)
+    y_dot = r*x - y - x*z
+    z_dot = x*y - b*z
+    return np.array([x_dot, y_dot, z_dot])
+
+
+
+
+
+def graphit():
+    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+    X = np.arange(-5, 5, 0.25)
+    Y = np.arange(-5, 5, 0.25)
+    X, Y = np.meshgrid(X, Y)
+    R = np.sqrt(X**2 + Y**2)
+    Z = np.sin(R)
+    surf = ax.plot_surface(X, Y, Z, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+    ax.set_zlim(-1.01, 1.01)
+    ax.zaxis.set_major_locator(LinearLocator(10))
+    ax.zaxis.set_major_formatter('{x:.02f}')
+    fig.colorbar(surf, shrink=0.5, aspect=5)
+    Element("output").write(fig)
+
+
+def graphlorenz():
+    dt = 0.01
+    num_steps = 10000
+
+    xyzs = np.empty((num_steps + 1, 3))  # Need one more for the initial values
+    xyzs[0] = (0., 1., 1.05)  # Set initial values
+    # Step through "time", calculating the partial derivatives at the current point
+    # and using them to estimate the next point
+    for i in range(num_steps):
+        xyzs[i + 1] = xyzs[i] + lorenz(xyzs[i]) * dt
+
+    # Plot
+    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+
+    ax.plot(*xyzs.T, lw=0.5)
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    ax.set_title("Lorenz Attractor")
+    Element("output").write(fig)
+
+def randrange(n, vmin, vmax):
+    """
+    Helper function to make an array of random numbers having shape (n, )
+    with each number distributed Uniform(vmin, vmax).
+    """
+    return (vmax - vmin)*np.random.rand(n) + vmin
+
+def graphscatter():
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+
+    n = 100
+
+    # For each set of style and range settings, plot n random points in the box
+    # defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].
+    for m, zlow, zhigh in [('o', -50, -25), ('^', -30, -5)]:
+        xs = randrange(n, 23, 32)
+        ys = randrange(n, 0, 100)
+        zs = randrange(n, zlow, zhigh)
+        ax.scatter(xs, ys, zs, marker=m)
+
+    ax.set_xlabel('X Label')
+    ax.set_ylabel('Y Label')
+    ax.set_zlabel('Z Label')
+
+    Element("output").write(fig)
+
+
+def graphPopulation(h_c):
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+
+    dt = 0.015
+    num_steps = 88
+    
+
+  
+    for j in range(num_steps):
+        xs = []
+        ys = []
+        zs = []
+        R_c = 1.1 + j*dt*1.118
+        for i in range(num_steps):
+
+            R_h = 1.2 + i*dt*2.9
+            if h_c=='h':
+                Population = population(R_h, R_c)[0]
+            elif h_c=='c':
+                Population = population(R_h,R_c)[1]
+            else:
+                if len(population(R_h, R_c)[0])==len(population(R_h, R_c)[1]):
+                    Population = np.sum([population(R_h, R_c)[0], population(R_h,R_c)[1]], axis=0)
+            for p1 in Population:
+                if p1>0:
+                    xs.append(R_h)
+                    ys.append(R_c)
+                    zs.append(p1)
+        ax.scatter(xs, ys, zs, marker='.', s=1)
+    
+    
+
+    ax.set_xlabel('Herbivore R')
+    ax.set_ylabel('Carnivore R')
+    ax.set_zlabel('Population Proportion')
+
+    if h_c=='h':
+        Element("output").write(fig)
+    elif h_c=='c':
+        Element("output1").write(fig)
+    else:
+        Element("output2").write(fig)
+
+
+
+
+    
+graphPopulation('h')    
+graphPopulation('c')   
+graphPopulation('t')     
+    </py-repl>
+  </div>
+
+
+</body>
+</html>
