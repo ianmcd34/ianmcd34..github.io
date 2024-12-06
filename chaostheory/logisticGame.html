@@ -123,7 +123,7 @@ def plotPop():
     current_score = round(10*(Herbivores[-1]+Carnivores[-1])/2 , 1)
     if current_score > max_score:
         max_score = current_score
-    score_txt = "Biodiversity: Current "+str(current_score)+" Max "+str(max_score)
+    score_txt = "<b>Biodiversity: Current "+str(current_score)+" Max "+str(max_score)+"</b>"
     Element("score").write(score_txt)
 
     Element("plot").write(fig)
