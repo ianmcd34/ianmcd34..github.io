@@ -48,7 +48,9 @@
     <input type="number" id="R_c" name="R_c" min="1.1" max="5" step="0.05" value="1.5">
     <br>
     <button type="button" id="button1" class="button" >Click!</button>
-
+    <div>
+        <h1 id="score"><b>Biodiversity: Current 0 Max 0</b></h1>
+    </div>
 
 
     <py-script>
@@ -62,6 +64,8 @@ R_h_input = document.querySelector("#R_h")
 R_c_input = document.querySelector("#R_c")
 button = document.querySelector("#button1")
 Herbivores = Carnivores = []
+current_score = 0
+max_score = 0
 
 
 def plotSin():
@@ -88,6 +92,8 @@ def plotSin():
 def plotPop():
     global Herbivores 
     global Carnivores
+    global current_score
+    global max_score
 
     R_h = float(R_h_input.value)
     R_c = float(R_c_input.value)
@@ -113,6 +119,12 @@ def plotPop():
 
     ax.set(xlim=(0, len(Herbivores)), 
     ylim=(0, 1))
+
+    current_score = round(10*(Herbivores[-1]+Carnivores[-1])/2 , 1)
+    if current_score > max_score:
+        max_score = current_score
+    score_txt = "Biodiversity: Current "+str(current_score)+" Max "+str(max_score)
+    Element("score").write(score_txt)
 
     Element("plot").write(fig)
     
