@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <a href="https://www.vecteezy.com/free-png/dice"  style="display:none">Dice PNGs by Vecteezy</a>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-right: 250px;
+	margin-left: 0px;
+	margin-top: 20%;
+	margin-bottom: 0%;
+}
+td {
+	width: 40px;
+	height: 40px;
+	font-size: 140%;
+	text-align: center;
+	border-style: solid;
+    
+	margin: 0px;
+	border-width: 3px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+    border-radius: 15px;
+}
+td.middlesq {
+    border-color: LightGray;
+    border-radius: 15px;
+    background-color: darkgray;
+}
+td.greensq {
+    border-color: LightGray;
+    border-radius: 15px;
+    background-color: green;
+}
+td.bluesq {
+    border-color: LightGray;
+    border-radius: 15px;
+    background-color: blue;
+}
+td.redsq {
+    border-color: LightGray;
+    border-radius: 15px;
+    background-color: red;
+}
+td.yellowsq {
+    border-color: LightGray;
+    border-radius: 15px;
+    background-color: yellow;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	/* border-collapse: collapse; */
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Ludo</title>
+  </head>
+  <body >
+    <h1>Ludo</h1>
+    <h4 id='date'></h4>
+    <div style="display:inline-block;width:100px; height:100px; position:relative; bottom:800px;" onclick="roll()" id="diediv">
+        <img id="dieimg" src="./static/d6_1.png" style="width:100px; height:100px;">
+    </div>
+    
+
+    <table>
+    <tr>
+        <th colspan="6"></th>
+        <td class="plyer" id="P_B13" ></td>
+        <td class="plyer" id="P_B14"  >💡1</td>
+        <td class="plyer" id="P_Y1"  ></td>
+        <td class="plyer" id="P_YA" ><span style="color:orange;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    
+    </tr>
+    <tr>
+        <th colspan="6"></th>
+        <td class="plyer" id="P_B12"  ></td>
+        <td class="plyer" id="P_Y15" ></td>
+        <td class="plyer" id="P_Y2"  ></td>
+        <td class="plyer" id="P_YB" ><span style="color:orange;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    
+    </tr>
+    <tr>
+        <th colspan="6"></th>
+        <td class="plyer" id="P_B11"  ></td>
+        <td class="plyer" id="P_Y16" ></td>
+        <td class="plyer" id="P_Y3"  >🔃</td>
+        <td class="plyer" id="P_YC" ><span style="color:orange;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+
+    </tr>
+    <tr>
+        <th colspan="6"></th>
+        <td class="plyer" id="P_B10" ></td>
+        <td class="yellowsq" id="P_YW"  ></td>
+        <td class="plyer" id="P_Y4"  ></td>
+        <td class="plyer" id="P_YD" ><span style="color:orange;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    
+   </tr>
+    <tr>
+        <th colspan="6"></th>
+        <td class="plyer" id="P_B9"  >↕️</td>
+        <td class="yellowsq" id="P_YX" ></td>
+        <td class="plyer" id="P_Y5"  ></td>
+    
+    </tr>
+    <tr>
+        <td class="plyer" id="P_BA" ><span style="color:blue;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+        <td class="plyer" id="P_BB"  ><span style="color:blue;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+        <td class="plyer" id="P_BC"  ><span style="color:blue;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+        <td class="plyer" id="P_BD"  ><span style="color:blue;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+        <th colspan="2"></th>
+        <td class="plyer" id="P_B8"  ></td>
+        <td class="yellowsq" id="P_YY" ></td>
+        <td class="plyer" id="P_Y6"  ></td>
+
+    </tr>
+	<tr>
+    		<td class="plyer" id="P_B1" ></td>
+    		<td class="plyer" id="P_B2"  >💡4</td>
+    		<td class="plyer" id="P_B3"  ></td>
+            <td class="plyer" id="P_B4"  ></td>
+            <td class="plyer" id="P_B5"  ></td>
+            <td class="plyer" id="P_B6" ></td>
+    		<td class="plyer" id="P_B7"  ></td>
+    		<td class="yellowsq" id="P_YZ"  ></td>
+            <td class="plyer" id="P_Y7"  ></td>
+            <td class="plyer" id="P_Y8"  ></td>
+            <td class="plyer" id="P_Y9"  >⏸️</td>
+            <td class="plyer" id="P_Y10"  ></td>
+            <td class="plyer" id="P_Y11"  ></td>
+            <td class="plyer" id="P_Y12"  ></td>
+            <td class="plyer" id="P_Y13"  >💡5</td>
+		
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_R14"  ></td>
+    		<td class="plyer" id="P_B15" ></td>
+    		<td class="plyer" id="P_B16"  ></td>
+            <td class="bluesq" id="P_BW"  ></td>
+            <td class="bluesq" id="P_BX"  ></td>
+            <td class="bluesq" id="P_BY" ></td>
+    		<td class="bluesq" id="P_BZ"  ></td>
+    		<td class="middlesq" id="P_"  ></td>
+            <td class="greensq" id="P_GZ"  ></td>
+            <td class="greensq" id="P_GY"  ></td>
+            <td class="greensq" id="P_GX" ></td>
+    		<td class="greensq" id="P_GW"  ></td>
+            <td class="plyer" id="P_G16"  ></td>
+            <td class="plyer" id="P_G15"  ></td>
+            <td class="plyer" id="P_Y14"  ></td>
+		
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_R13"  ></td>
+    		<td class="plyer" id="P_R12" >💡6</td>
+    		<td class="plyer" id="P_R11"  ></td>
+            <td class="plyer" id="P_R10"  ></td>
+            <td class="plyer" id="P_R9"  >⏸️</td>
+            <td class="plyer" id="P_R8" ></td>
+    		<td class="plyer" id="P_R7"  ></td>
+    		<td class="redsq" id="P_RZ"  ></td>
+            <td class="plyer" id="P_G7"  ></td>
+            <td class="plyer" id="P_G6"  >💡3</td>
+            <td class="plyer" id="P_G5" ></td>
+    		<td class="plyer" id="P_G4"  ></td>
+            <td class="plyer" id="P_G3"  ></td>
+            <td class="plyer" id="P_G2"  ></td>
+            <td class="plyer" id="P_G1"  ></td>
+
+  	   </tr>
+         <tr>
+            <th colspan="6"></th>
+    		<td class="plyer" id="P_R6" ></td>
+    		<td class="redsq" id="P_RY"  ></td>
+    		<td class="plyer" id="P_G8"  ></td>
+            <th colspan="2"></th>
+            <td class="plyer" id="P_GD" ><span style="color:green;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+            <td class="plyer" id="P_GC" ><span style="color:green;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+            <td class="plyer" id="P_GB" ><span style="color:green;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+            <td class="plyer" id="P_GA" ><span style="color:green;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+		
+ 	  </tr>
+  	  <tr>
+            <th colspan="6"></th>
+    		<td class="plyer" id="P_R5"  >🔃</td>
+    		<td class="redsq" id="P_RX" ></td>
+    		<td class="plyer" id="P_G9"  ></td>
+		
+  	  </tr>
+  	  <tr>
+            <th colspan="5"></th>
+            <td class="plyer" id="P_RD" ><span style="color:red;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    		<td class="plyer" id="P_R4"  ></td>
+    		<td class="redsq" id="P_RW" ></td>
+    		<td class="plyer" id="P_G10"  ></td>
+
+  	   </tr>
+         <tr>
+            <th colspan="5"></th>
+            <td class="plyer" id="P_RC" ><span style="color:red;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    		<td class="plyer" id="P_R3" ></td>
+    		<td class="plyer" id="P_R16"  ></td>
+    		<td class="plyer" id="P_G11"  >↕️</td>
+		
+ 	  </tr>
+  	  <tr>
+            <th colspan="5"></th>
+            <td class="plyer" id="P_RB" ><span style="color:red;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    		<td class="plyer" id="P_R2"  ></td>
+    		<td class="plyer" id="P_R15" ></td>
+    		<td class="plyer" id="P_G12"  ></td>
+		
+  	  </tr>
+  	  <tr>
+            <th colspan="5"></th>
+            <td class="plyer" id="P_RA" ><span style="color:red;" onclick="canmoveto(event)"><i class="fa fa-user"></i></span></td>
+    		<td class="plyer" id="P_R1"  >💡2</td>
+    		<td class="plyer" id="P_G14" ></td>
+    		<td class="plyer" id="P_G13"  ></td>
+
+  	   </tr>
+	  
+    </table>
+
+
+
+    <script >
+        function roll() {
+            document.getElementById("diediv").inert = true;
+            count=0;
+            dice = ["./static/d6_1.png","./static/d6_2.png","./static/d6_3.png","./static/d6_4.png","./static/d6_5.png","./static/d6_6.png"];
+            diceroll = setInterval(myTimer, 100);
+
+            function myTimer() {
+                document.getElementById("dieimg").src = dice[count];
+                count++;
+                count=count%6;
+                if (Math.random() < 0.05) {
+                    clearInterval(diceroll);
+                    document.getElementById("diediv").inert = false;
+                }
+            }
+            
+        }
+
+        function readdie() {
+            src = parseInt(document.getElementById("dieimg").src.at(-5));
+
+            return src;
+        }
+
+        function clearhighlights() {
+            tiles = document.getElementsByTagName("td");
+            
+            for (t1 in tiles) {
+    
+                if (t1.length<3 && tiles[t1].classList.contains("hilght")) {
+                    
+                    tiles[t1].classList.remove("hilght");
+                }
+                
+            }
+            
+        }
+
+        function canmoveto(ev) {
+
+            dievalue = readdie();
+
+            moveto = ev.target.parentNode.parentNode.id;
+
+            if (document.getElementById(moveto).innerHTML.includes("⏸️") && dievalue!=1) {
+                return false;
+            }
+
+            for (n1=0; n1<dievalue; n1++) {
+                moveto = nexttile(moveto, ev.target.parentNode.style.color, "f");
+            }
+            if (document.getElementById(moveto).children.length>0) {
+                return false;
+            }
+            if (!document.getElementById(moveto).classList.contains("hilght"))  {
+                clearhighlights();
+                document.getElementById(moveto).classList.add("hilght");
+            } else {
+                document.getElementById(moveto).classList.remove("hilght");
+                spannode = ev.target.parentNode;
+                ev.target.parentNode.parentNode.removeChild(spannode);
+                if (document.getElementById(moveto).innerHTML.includes("💡")) {
+                    moveto = teleport();
+                } else if (document.getElementById(moveto).innerHTML.includes("🔃")) {
+                    swapid = swap();
+                    if (swapid) {
+                        spannode1 = spannode;
+                        spannodes = document.getElementById(swapid).children;
+                        for (i1 in spannodes) {
+                            if (i1.length<3) {
+                                // alert(spannodes[i1].nodename);
+                                if (spannodes[i1].nodename!="#text") {
+                                    spannode = spannodes[i1];
+                                }
+                            }
+                        }
+                        document.getElementById(swapid).removeChild(spannode);
+                        document.getElementById(swapid).appendChild(spannode1);
+                    }
+                } else if (document.getElementById(moveto).innerHTML.includes("↕️")) {
+                    skidid = skid();
+                    if (skidid) {
+                        moveto = skidid;
+                    }
+                } 
+                document.getElementById(moveto).appendChild(spannode);
+                if (document.getElementById(moveto).classList.contains("redsq")) {
+                    document.getElementById(moveto).classList.remove("redsq");
+                    document.getElementById(moveto).classList.add("plyer");
+                }
+                if (document.getElementById(moveto).classList.contains("bluesq")) {
+                    document.getElementById(moveto).classList.remove("bluesq");
+                    document.getElementById(moveto).classList.add("plyer");
+                }
+                if (document.getElementById(moveto).classList.contains("greensq")) {
+                    document.getElementById(moveto).classList.remove("greensq");
+                    document.getElementById(moveto).classList.add("plyer");
+                }
+                if (document.getElementById(moveto).classList.contains("yellowsq")) {
+                    document.getElementById(moveto).classList.remove("yellowsq");
+                    document.getElementById(moveto).classList.add("plyer");
+                }
+            }
+
+            function teleport() {
+                ranum = Math.floor(Math.random() * 6 + 1);
+                tofind = "💡"+ranum;
+                tiles = document.getElementsByTagName("td");
+                moveto1 = "";
+                for (t1 in tiles) {
+                    if (t1.length<3 && tiles[t1].innerHTML.includes(tofind)) {
+                        moveto1 = tiles[t1].id;
+                    }
+                }
+                return moveto1;
+            }
+
+            function swap() {
+                pieces = document.getElementsByTagName("i");
+                canswap = [];
+                for (p1 in pieces) {
+                    if (p1.length<3 && !"ABCDWXYZ".includes(pieces[p1].parentNode.parentNode.id[3])) {
+                        canswap.push(pieces[p1].parentNode.parentNode.id);
+                    }
+                }
+                if (canswap.length>0) {
+                    i1 = Math.floor(Math.random() * canswap.length);
+                    return canswap[i1];
+                } else {
+                    return false;
+                }
+                
+            }
+
+            function skid() {
+                roll1 = Math.floor(Math.random() * 6 + 1);
+
+                if (Math.random()<0.5) {
+                    for (n1=0; n1<roll1; n1++) {
+                        moveto = nexttile(moveto, ev.target.parentNode.style.color, "b");
+                    }
+                } else {
+                    for (n1=0; n1<roll1; n1++) {
+                        moveto = nexttile(moveto, ev.target.parentNode.style.color, "f");
+                    }
+                }
+
+                if (document.getElementById(moveto).children.length>0) {
+                    return false;
+                } else {
+                    return moveto;
+                }
+            }
+            
+
+        }
+
+
+        function nexttile(tileid, playercolour, f_b) {
+            if (tileid.length==5) {
+                num = parseInt(tileid.substr(3,2));
+            } else {
+                if ("ABCD".includes(tileid.substr(3,1))) {
+                    num = 0;
+                } else if ("WXYZ".includes(tileid.substr(3,1))) {
+                    num = 99;
+                }  else {
+                    num = parseInt(tileid.substr(3,1));
+                }
+                
+            }
+            
+            idcolor = tileid.substr(2,1);
+            
+            if (f_b="f") {
+                nextnum = num+1;
+                if (nextnum==15) {
+                
+                    if (idcolor=="Y")  {
+                        idcolor = "G";
+                        if (playercolour!="green") {
+                            nextnum = 1;   
+                        } 
+                        
+                    } else if (idcolor=="G")  {
+                        idcolor = "R";
+                        if (playercolour!="red") {
+                            nextnum = 1;
+                        } 
+                    } else if (idcolor=="R")  {
+                        idcolor = "B";
+                        if (playercolour!="blue") {
+                            nextnum = 1;
+                        } 
+                        
+                    } else if (idcolor=="B")  {
+                        idcolor = "Y";
+                        if (playercolour!="orange") {
+                            nextnum = 1;
+                        }                    
+                    }
+                }
+                if (nextnum==17) {
+                    nextnum="W";
+                }
+                if (nextnum==100) {
+                    if (tileid.substr(3,1)=="W") {
+                        nextnum = "X";
+                    }
+                    if (tileid.substr(3,1)=="X") {
+                        nextnum = "Y";
+                    }
+                    if (tileid.substr(3,1)=="Y") {
+                        nextnum = "Z";
+                    }
+                    if (tileid.substr(3,1)=="Z") {
+                        nextnum = "Z";
+                    }
+                }
+            } else {
+                nextnum = num-1;
+                if (nextnum==98) {
+                    if (tileid.substr(3,1)=="W") {
+                        nextnum = "16";
+                    }
+                    if (tileid.substr(3,1)=="X") {
+                        nextnum = "W";
+                    }
+                    if (tileid.substr(3,1)=="Y") {
+                        nextnum = "X";
+                    }
+                    if (tileid.substr(3,1)=="Z") {
+                        nextnum = "Y";
+                    }
+                }
+                if (nextnum==0) {
+                    nextnum = 14;
+                    if (idcolor=="Y")  {
+                        idcolor = "B";                        
+                    } else if (idcolor=="G")  {
+                        idcolor = "Y";
+                    } else if (idcolor=="Y")  {
+                        idcolor = "B";
+                    } else if (idcolor=="B")  {
+                        idcolor = "R";                 
+                    }
+
+                }
+            }
+            
+            
+
+            nextid = "P_"+idcolor+nextnum;
+
+            return nextid;
+        }
+
+
+    </script>
+  </body>
+
+</html>
