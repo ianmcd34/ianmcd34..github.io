@@ -328,7 +328,7 @@ li.active {
             
             for (t1 in tiles) {
     
-                if (t1.length<3 && "ABCDWXYZ".includes(tiles[t1].id[3]) && tiles.children.length==0) {
+                if (t1.length<3 && "ABCDWXYZ".includes(tiles[t1].id[3]) && tiles[t1].children.length==0) {
                     if (tiles[t1].id[2]=="Y") {
 			    tiles[t1].classList.add("yellowsq");
 		    }
