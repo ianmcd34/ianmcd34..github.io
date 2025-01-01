@@ -299,6 +299,7 @@ li.active {
                     document.getElementById("diediv").inert = false;
                 }
             }
+	    clearhometiles();
             
         }
 
@@ -321,6 +322,31 @@ li.active {
             }
             
         }
+
+	function clearhometiles() {
+            tiles = document.getElementsByTagName("td");
+            
+            for (t1 in tiles) {
+    
+                if (t1.length<3 && "ABCDWXYZ".includes(tiles[t1].id[3]) && tiles.children.length==0) {
+                    if (tiles[t1].id[2]=="Y") {
+			    tiles[t1].classList.add("yellowsq");
+		    }
+		    if (tiles[t1].id[2]=="G") {
+			    tiles[t1].classList.add("greensq");
+		    }
+		    if (tiles[t1].id[2]=="R") {
+			    tiles[t1].classList.add("redsq");
+		    }
+		    if (tiles[t1].id[2]=="B") {
+			    tiles[t1].classList.add("bluesq");
+		    }
+                }
+                
+            }
+            
+        }
+	
 
         function canmoveto(ev) {
 
