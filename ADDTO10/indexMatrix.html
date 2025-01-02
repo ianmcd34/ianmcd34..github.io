@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+    width: 50%;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>The Matrix</title>
+  </head>
+  <body onload="setup()">
+    <h1>The Matrix</h1>
+    <h4 id='date'></h4>
+    <h2 id="target"> </h2>
+    
+
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A1" onclick="fix(event)"></td>
+    		<td class="plyer" id="P_A2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_A3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_A4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_A5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_A6" onclick="fix(event)"></td>
+		<td class="plyer" id="P_A7"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_A8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_A9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_A0"  onclick="fix(event)" ></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_B2" onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_B3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_B4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_B5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_B6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_B7"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_B8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_B9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_B0"  onclick="fix(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_C4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_C7"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_C8"  onclick="fix(event)"></td>
+		<td class="plyer" id="P_C9"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_C0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_D4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_D5"  onclick="fix(event)"></td>
+    		<td class="plyer"id="P_D6"  onclick="fix(event)"></td>
+		<td class="plyer" id="P_D7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_D9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D0" onclick="fix(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_E4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_E7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_E9"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_E0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1" onclick="fix(event)" ></td>
+    		<td class="plyer"id="P_F2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_F4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_F5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_F7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_F9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_G1"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_G2"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_G3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_G4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_G5" onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_G6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_G7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_G8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_G9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_G0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_H1" onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_H2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_H3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_H4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_H5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_H6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_H7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_H8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_H9"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_H0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr id="R_8">
+    		<td class="plyer" id="P_I1" onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_I2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_I3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_I4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_I5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_I6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_I7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_I8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_I9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_I0" onclick="fix(event)" ></td>
+  	   </tr>
+	   <tr id="R_9">
+    		<td class="plyer" id="P_J1"  onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_J2"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_J3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_J4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_J5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_J6" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_J7" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_J8" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_J9" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_J0" onclick="fix(event)" ></td>
+  	   </tr>
+    </table>
+
+
+
+    <script >
+        let clicked = "";
+        targetlength = 4;
+
+        function setup() {
+            settarget();
+            clicked = "";
+            tiles = document.getElementsByClassName("plyer");
+
+            for (t1 in tiles) {
+                id1 = tiles[t1].id;
+                if (id1) {
+                    tile = document.getElementById(id1);
+                    tile.setAttribute("data-speed", "1");
+                    tile.style.backgroundColor = "white";
+                    num = Math.floor(Math.random() * 10 );
+                    if (Math.random() < 0.5) {
+                        tiles[t1].innerHTML = num;
+                    } else {
+                        tiles[t1].innerHTML = "";
+                    }
+
+                }
+                
+            }
+            animategrid();
+        }
+
+        function toprow() {
+            tiles = document.getElementsByClassName("plyer");
+            for (t1=0; t1<10; t1++) {
+                id1 = tiles[t1].id;
+                if (id1) {
+                    tile = document.getElementById(id1);
+  
+                    num = Math.floor(Math.random() * 10 );
+                    if (Math.random() < 0.5) {
+                        if (tiles[t1].innerHTML=="") {
+                            tiles[t1].innerHTML = num;
+                        } else {
+                            alert("game over!");
+                            return false;
+                        }
+                        
+                    }
+
+                }
+            }
+            animategrid();
+        }
+
+        function settarget() {
+            txt="Target: ";
+            for (i1=0; i1<targetlength; i1++) {
+                num = Math.floor(Math.random() * 10 );
+                txt+=num;
+            }
+            document.getElementById("target").innerHTML = txt;
+        }
+
+        function move(id1) {
+
+            tile = document.getElementById(id1);
+            num = tile.innerHTML;
+            letters = "ABCDEFGHIJ";
+
+            if (tile.getAttribute("data-speed")=="0") {
+                return false;
+            }
+            
+
+            if (id1[2]<"J") {
+                nextid = "P_"+letters.at(letters.indexOf(id1[2])+1)+id1[3];
+                if (document.getElementById(nextid).innerHTML=="") {
+                    tile.innerHTML = "";
+                    document.getElementById(nextid).innerHTML = num;
+                }  
+            } else if (id1[2]=="J") {
+                tile.innerHTML = "";
+            }
+
+        }
+
+        function fix(ev) {
+            
+            id1 = ev.target.id;
+            tile = document.getElementById(id1);
+            num = tile.innerHTML;
+            tile.setAttribute("data-speed", "0");
+            tile.style.backgroundColor = "yellow";
+            clicked+=num;
+            
+            if ("Target: "+clicked==document.getElementById("target").innerHTML) {
+                alert("you won!");
+                targetlength++;
+                setup();
+            }
+        }
+
+        function animategrid() {
+            tiles = document.getElementsByClassName("plyer");
+            
+            interval1 = setInterval(myTimer, 500);
+            i1 = 99;
+
+            function myTimer() {
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                move(tiles[i1].id);
+                i1--;
+                if (i1==-1) {
+                    clearInterval(interval1);
+                    toprow();
+                }
+            }
+        }
+
+    </script>
+  </body>
+
+</html>
