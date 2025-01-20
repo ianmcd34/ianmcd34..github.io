@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+    width: 50%;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 20%;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Tribes</title>
+  </head>
+  <body onload="setup()">
+    <h1>Tribes</h1>
+    <h4 id='date'></h4>
+    
+
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A1" onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_A4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A6" onclick="minmax(event)"></td>
+		<td class="plyer" id="P_A7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_A9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A0"  onclick="minmax(event)" ></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B2" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_B3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_B5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_B8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B0"  onclick="minmax(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_C4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_C7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_C8"  onclick="minmax(event)"></td>
+		<td class="plyer" id="P_C9"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_C0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_D4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_D5"  onclick="minmax(event)"></td>
+    		<td class="plyer"id="P_D6"  onclick="minmax(event)"></td>
+		<td class="plyer" id="P_D7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_D9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D0" onclick="minmax(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E9"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_E0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1" onclick="minmax(event)" ></td>
+    		<td class="plyer"id="P_F2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_F5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_G1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G2"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_G3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G5" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_G6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_H1" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_H2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H9"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_I1" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_I2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_J1"  onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_J2"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J0" onclick="minmax(event)" ></td>
+  	   </tr>
+    </table>
+
+    <ul id="toptribes" class="scoretable">
+
+    </ul>
+
+
+
+    <script >
+        directions = "↑→↓←";
+        letters = "ABCDEFGHIJ";
+        numerals = "1234567890";
+        colours = ["green", "red", "blue", "yellow", "purple", "orange", "darkgray", "lightblue", "lime", "pink",  "coral", "turquoise"];
+        colourindex = -1;
+
+        function setup() {
+            tiles = document.getElementsByClassName("plyer");
+
+            for (t1 in tiles) {
+                if (t1.length<3) {
+                    gooddirn = false;
+                    while(!gooddirn) {
+                        
+                        dirn = directions[Math.floor(Math.random() * 4)];
+                        gooddirn = true;
+                        if (tiles[t1].id[2]=="A" && dirn=="↑") {
+                            gooddirn = false;
+                        }
+                        if (tiles[t1].id[2]=="J" && dirn=="↓") {
+                            gooddirn = false;
+                        } 
+                        if (tiles[t1].id[3]=="1" && dirn=="←") {
+                            gooddirn = false;
+                        }
+                        if (tiles[t1].id[3]=="0" && dirn=="→") {
+                            gooddirn = false;
+                        }
+                    }
+                    
+
+                    move = Math.floor(Math.random() * 3 + 1);
+
+                    if (dirn=="↑" && letters.indexOf(tiles[t1].id[2])-move<0) {
+                        move = letters.indexOf(tiles[t1].id[2]);
+                    }
+                    if (dirn=="↓" && letters.indexOf(tiles[t1].id[2])+move>9) {
+                        move = 9-letters.indexOf(tiles[t1].id[2]);
+                    }
+                    if (dirn=="←" && numerals.indexOf(tiles[t1].id[3])-move<0) {
+                        move = numerals.indexOf(tiles[t1].id[3]);
+                    }
+                    if (dirn=="→" && numerals.indexOf(tiles[t1].id[3])+move>9) {
+                        move = 9-numerals.indexOf(tiles[t1].id[3]);
+                    }
+
+                    tiles[t1].innerHTML = dirn+move;
+                }
+                
+            }
+        }
+
+
+        function minmax(ev) {
+            colourindex = colourindex+1;
+            colour1 = colours[colourindex];
+            id1 = ev.target.id;
+            document.getElementById(id1).style.backgroundColor = colour1;
+
+            tilecoloured = false;
+
+            while(!tilecoloured) {
+                id1 = next(id1);
+                if(document.getElementById(id1).style.backgroundColor==colour1) {
+                    tilecoloured = true;
+                } else {
+                    document.getElementById(id1).style.backgroundColor = colour1;
+                }
+            }
+
+            tiles = document.getElementsByClassName("plyer");
+
+            tribefound = true;
+
+            while(tribefound) {
+                tribefound = false;
+                for (t1 in tiles) {
+                    if (t1.length<3 && document.getElementById(tiles[t1].id).style.backgroundColor!=colour1) {
+                        id1 = tiles[t1].id;
+                        if(document.getElementById(next(id1)).style.backgroundColor==colour1) {
+                            document.getElementById(id1).style.backgroundColor = colour1;
+                            tribefound = true;
+                        }
+                    }                 
+                }
+            }
+            score();
+                
+        }
+
+        function next(id1) {
+            tile = document.getElementById(id1);
+            dirn = tile.innerHTML[0];
+            move = parseInt(tile.innerHTML[1]);
+            newletter = tile.id[2];
+            newnum = tile.id[3];
+
+            if (dirn=="↑") {
+                newletter = letters[letters.indexOf(tile.id[2])-move];
+            }
+            if (dirn=="↓") {
+                newletter = letters[letters.indexOf(tile.id[2])+move];
+            }
+            if (dirn=="←") {
+                newnum = numerals[numerals.indexOf(tile.id[3])-move];
+            }
+            if (dirn=="→") {
+                newnum = numerals[numerals.indexOf(tile.id[3])+move];
+            }
+
+            return "P_"+newletter+newnum;
+
+        }
+
+        function score() {
+
+            score1 = 0;
+            tiles = document.getElementsByClassName("plyer");
+			iscomplete = true;
+            for (t1 in tiles) {
+                if (t1.length<3) {
+                    if (document.getElementById(tiles[t1].id).style.backgroundColor==colour1) {
+                        score1 += parseInt(document.getElementById(tiles[t1].id).innerHTML[1]);
+                    }
+
+					if (document.getElementById(tiles[t1].id).style.backgroundColor=="") {
+						iscomplete = false;
+					}
+                }
+            }
+
+            node1 = document.createTextNode(score1);
+            el = document.createElement("li");
+            el.appendChild(node1);
+            el.style.backgroundColor = colour1;
+            document.getElementById("toptribes").appendChild(el);
+
+
+			if (iscomplete) {
+				summary();
+			}
+
+        }
+
+		function summary() {
+			tribes = document.getElementById("toptribes").children;
+			tribescores = [];
+			for (t1 in tribes) {
+				if (t1.length<3) {
+					tribescores.push(parseInt(tribes[t1].innerHTML));
+				}
+				
+
+			}
+			maxscore = 0;
+			minscore = 0;
+			actualscore = 0;
+			for (s1 in tribescores) {
+				actualscore += tribescores[s1] * (tribescores.length-s1);
+			}
+			tribescores.sort(function(a, b){return b - a});
+			for (s1 in tribescores) {
+				maxscore += tribescores[s1] * (tribescores.length-s1);
+			}
+			tribescores.sort(function(a, b){return a - b});
+			for (s1 in tribescores) {
+				minscore += tribescores[s1] * (tribescores.length-s1);
+			}
+			percentscore = Math.floor((actualscore-minscore)*100/(maxscore-minscore));
+			alert("You scored "+percentscore+"%");
+		}
+        
+
+
+    </script>
+  </body>
+
+</html>
