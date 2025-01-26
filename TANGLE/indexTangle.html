@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 85px;
+	height: 85px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.inter {
+    border-width: 0px;
+    font-size: 150%;
+    width: 44px;
+	height: 44px;
+    background-color: transparent;
+    color: red;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.container {
+    width: 600px;
+    position:relative;
+    margin: auto;
+}
+table {
+	display: inline-block;
+	margin: auto;
+	border-collapse: collapse;
+    width: 600px;
+    position:relative;
+}
+table.tinter {
+    z-index: 2;
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    pointer-events: none;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Tangle Game</title>
+  </head>
+  <body onload="setup()">
+    <h1>Tangle!</h1>
+    <h4 id='date'></h4>
+    
+    <div class="container">
+    <table >
+	<tr>
+    		<td class="plyer" id="P_A1" ></td>
+    		<td class="plyer" id="P_A2"  ></td>
+    		<td class="plyer" id="P_A3"  ></td>
+		<td class="plyer" id="P_A4"  ></td>
+    		<td class="plyer" id="P_A5"  ></td>
+
+
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1"  ></td>
+    		<td class="plyer" id="P_B2"   ></td>
+    		<td class="plyer" id="P_B3"  ></td>
+		<td class="plyer" id="P_B4"  ></td>
+    		<td class="plyer" id="P_B5"  ></td>
+
+
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"   ></td>
+    		<td class="plyer" id="P_C2"  ></td>
+    		<td class="plyer" id="P_C3"  ></td>
+		<td class="plyer" id="P_C4"  ></td>
+    		<td class="plyer" id="P_C5"  ></td>
+
+
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1"  ></td>
+    		<td class="plyer" id="P_D2"  ></td>
+    		<td class="plyer" id="P_D3"  ></td>
+		<td class="plyer" id="P_D4"  ></td>
+    		<td class="plyer" id="P_D5"  ></td>
+
+
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"   ></td>
+    		<td class="plyer" id="P_E2"  ></td>
+    		<td class="plyer" id="P_E3"  ></td>
+		<td class="plyer" id="P_E4"  ></td>
+    		<td class="plyer" id="P_E5"  ></td>
+
+
+  	   </tr>
+
+    </table>
+
+    
+    <table class="tinter">
+        <tr>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_A1"  >=</td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_A2"  >X</td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A3" >=</td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A4"  >X</td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+           </tr>
+            <tr>
+                <td class="inter" id="I_B1"  >X</td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_B2"  ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_B3"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_B4"   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_C1"  ></td>
+                <td class="inter" id="" ></td>
+            <td class="inter" id="I_C2"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_C3"   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_C4" ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+             </tr>
+           <tr>
+                <td class="inter" id="I_D1" >||</td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_D2"  ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_D3"  ></td>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_D4"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_E1"  ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_E2"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_E3"   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_E4"  ></td>
+                <td class="inter" id="I_A4"  ></td>
+            </tr>
+            <tr>
+                <td class="inter" id="I_F1" >X</td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_F2"  ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_F3"  ></td>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_F4"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+           </tr>
+            <tr>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_G1"   ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_G2"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_G3"  ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_G4"  ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id="I_H1"   >||</td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_H2" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_H3"  ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_H4"  ></td>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+             </tr>
+           <tr>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_I1"  >X</td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_I2"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_I3" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_I4"  ></td>
+                <td class="inter" id="I_A4"  ></td>
+    
+    
+            </tr>
+    
+        </table>
+    </div>
+
+    <p id="sequences"></p>
+ 
+    <script >
+
+        function setup() {
+            tiles = document.getElementsByClassName("plyer");
+
+            for (t1 in tiles) {
+                if (t1.length<3) {
+                    num = Math.floor(Math.random() * 10);
+                    tiles[t1].innerHTML = num;
+                    tiles[t1].addEventListener("click", numUp);
+                    tiles[t1].addEventListener("contextmenu", numDown);
+                }
+            }
+
+            intertiles = document.getElementsByClassName("inter");
+
+            for (i1 in intertiles) {
+                if (i1.length<3) {
+                    row1 = Math.floor(i1/9);
+                    col1 = i1%9;
+                    if (row1%2==0 && col1%2==1) {
+                        lefttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        righttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)+1];
+                        leftval = parseInt(lefttile.innerHTML);
+                        rightval = parseInt(righttile.innerHTML);
+                        if (leftval<rightval) {
+                            intertiles[i1].innerHTML = "<";
+                        } else if (leftval>rightval) {
+                            intertiles[i1].innerHTML = ">";
+                        } else if (leftval==rightval) {
+                            intertiles[i1].innerHTML = "=";
+                        }
+                    }
+                    if (row1%2==1 && col1%2==0) {
+                        toptile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        bottomtile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)];
+                        topval = parseInt(toptile.innerHTML);
+                        bottomval = parseInt(bottomtile.innerHTML);
+                        if (topval<bottomval) {
+                            intertiles[i1].innerHTML = "˄";
+                        } else if (topval>bottomval) {
+                            intertiles[i1].innerHTML = "˅";
+                        } else if (topval==bottomval) {
+                            intertiles[i1].innerHTML = "‖";
+                        }
+                    }
+                    if (row1%2==1 && col1%2==1) {
+                        toplefttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        bottomlefttile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)];
+                        toprighttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)+1];
+                        bottomrighttile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)+1];
+                        topleftval = parseInt(toplefttile.innerHTML);
+                        bottomleftval = parseInt(bottomlefttile.innerHTML);
+                        toprightval = parseInt(toprighttile.innerHTML);
+                        bottomrightval = parseInt(bottomrighttile.innerHTML);
+
+                        intertiles[i1].innerHTML = topleftval+bottomleftval+toprightval+bottomrightval;
+                        
+                    }
+                    
+                }
+            }
+
+            for (t1 in tiles) {
+                if (t1.length<3) {
+                    tiles[t1].innerHTML = "";
+                }
+            }
+        }
+
+        function numUp(ev) {
+            num = parseInt(ev.target.innerHTML);
+            if (num>=0 && num<=8) {
+                num+=1;
+            } else if (num==9) {
+                num+=0;
+            } else {
+                num=0;
+            }
+            ev.target.innerHTML = num;
+            check();
+        }
+
+        function numDown(ev) {
+            ev.preventDefault();
+            num = parseInt(ev.target.innerHTML);
+            if (num>=1 && num<=9) {
+                num-=1;
+            } else if (num==0) {
+                num+=0;
+            } else {
+                num=0;
+            }
+            ev.target.innerHTML = num;
+            check();
+        }
+
+
+        function check() {
+            tiles = document.getElementsByClassName("plyer");
+            intertiles = document.getElementsByClassName("inter");
+
+            for (i1 in intertiles) {
+                if (i1.length<3) {
+                    row1 = Math.floor(i1/9);
+                    col1 = i1%9;
+                    if (row1%2==0 && col1%2==1) {
+                        lefttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        righttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)+1];
+                        leftval = parseInt(lefttile.innerHTML);
+                        rightval = parseInt(righttile.innerHTML);
+                        //alert(leftval+","+rightval+","+intertiles[i1].innerHTML);
+                        if (leftval<rightval && intertiles[i1].innerHTML == "&lt;") {
+                            intertiles[i1].style.color="green";
+                        } else if (leftval>rightval && intertiles[i1].innerHTML == "&gt;") {
+                            intertiles[i1].style.color="green";
+                        } else if (leftval==rightval && intertiles[i1].innerHTML == "=") {
+                            intertiles[i1].style.color="green";
+                        } else {
+                            intertiles[i1].style.color="red";
+                        }
+                    }
+                    if (row1%2==1 && col1%2==0) {
+                        toptile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        bottomtile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)];
+                        topval = parseInt(toptile.innerHTML);
+                        bottomval = parseInt(bottomtile.innerHTML);
+                        if (topval<bottomval && intertiles[i1].innerHTML == "˄") {
+                            intertiles[i1].style.color="green";
+                        } else if (topval>bottomval && intertiles[i1].innerHTML == "˅") {
+                            intertiles[i1].style.color="green";
+                        } else if (topval==bottomval && intertiles[i1].innerHTML == "‖") {
+                            intertiles[i1].style.color="green";
+                        } else {
+                            intertiles[i1].style.color="red";
+                        }
+                    }
+                    if (row1%2==1 && col1%2==1) {
+                        toplefttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)];
+                        bottomlefttile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)];
+                        toprighttile = tiles[Math.floor(row1/2)*5+Math.floor(col1/2)+1];
+                        bottomrighttile = tiles[(Math.floor(row1/2)+1)*5+Math.floor(col1/2)+1];
+                        topleftval = parseInt(toplefttile.innerHTML);
+                        bottomleftval = parseInt(bottomlefttile.innerHTML);
+                        toprightval = parseInt(toprighttile.innerHTML);
+                        bottomrightval = parseInt(bottomrighttile.innerHTML);
+
+                        if (parseInt(intertiles[i1].innerHTML) == topleftval+bottomleftval+toprightval+bottomrightval) {
+                            intertiles[i1].style.color="green";
+                        } else {
+                            intertiles[i1].style.color="red";
+                        }
+                        
+                        
+                    }
+                    
+                }
+            }
+
+        }
+
+    </script>
+  </body>
+
+</html>
