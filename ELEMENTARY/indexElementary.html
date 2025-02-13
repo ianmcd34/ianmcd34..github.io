@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    <meta name="description" content="An Apophatic approach to discovering the identity of a 3 digit number">
+
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 85px;
+	height: 85px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.inter {
+    border-width: 0px;
+    font-size: 150%;
+    width: 44px;
+	height: 44px;
+    background-color: transparent;
+    color: red;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.container {
+    width: 600px;
+    position:relative;
+    margin: auto;
+}
+table {
+	display: inline-block;
+	margin: auto;
+	border-collapse: collapse;
+    width: 600px;
+    position:relative;
+}
+table.tinter {
+    z-index: 2;
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    pointer-events: none;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 240%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Elementary</title>
+  </head>
+  <body onload="setup()">
+    <h1>Elementary!</h1>
+    <h4 id='date'></h4>
+
+    
+    
+    <div class="container">
+        <ul id="cluelist">
+
+        </ul>
+    </div>
+    
+    <form>
+        <input id="anum" type="number" min="0" max="9"  value="0" style="font-size: larger;"></input>
+        <input id="bnum" type="number" min="0" max="9" value="0" style="font-size: larger;"></input>
+        <input id="cnum" type="number" min="0" max="9"  value="0" style="font-size: larger;"></input>
+        <p></p>
+        <button type="button" onclick="guess()">Guess!</button>
+    </form>
+
+    <p id="sequences"></p>
+ 
+    <script >
+        const fnStrs = ["sumsum", "sumdiff", "diffsum", "diffdiff", "sumprod", "diffprod", "prodsum", "proddiff", "prodprod", "quotsum", "quotdiff", "quotprod", "sumquot", "diffquot", "prodquot",
+                "remsum", "remdiff", "remprod", "sumrem", "diffrem",  "prodrem"
+            ];
+
+        const fnStrs_d = ["a+b+c", "a+b-c", "a-b+c", "a-b-c", "a+b*c", "a-b*c", "a*b+c", "a*b-c", "a*b*c", "quotient[a/(b+c)]","quotient[a/(b-c)]", "quotient[a/(b*c)]",
+            "quotient[(a+b)/c]", "quotient[(a-b)/c]" , "quotient[(a*b)/c]", "remainder[a/(b+c)]", "remainder[a/(b-c)]", "remainder[a/(b*c)]", "remainder[(a+b)/c]"
+            , "remainder[(a-b)/c]", "remainder[(a*b)/c]"
+         ]
+
+        const alltriples = [];
+        for (i1=0; i1<10; i1++) {
+            for (j1=0; j1<10; j1++) {
+                for (k1=0; k1<10; k1++) {
+                    numstr = ""+i1+j1+k1;
+                    alltriples.push(numstr);
+                }
+            }
+        }
+        const alltriplesSet = new Set(alltriples);
+
+        sumMaps = [];
+        for (f1 in fnStrs) {
+            sumMaps.push(generateSums(fnStrs[f1]));
+        }
+
+        let a=0;
+        let b=0;
+        let c=0;
+
+        let solnSet = new Set();
+        
+
+
+        function setup() {
+            
+            a = Math.floor(Math.random() * 9);
+            b = Math.floor(Math.random() * 9);
+            c = Math.floor(Math.random() * 9);
+
+
+
+            let abckey = ""+a+b+c;
+
+            let sumvalues = [];
+            for (s1 in sumMaps) {
+                sumvalues.push(sumMaps[s1].get(abckey));
+            }
+
+            let equalsumSets = [];
+            for (f1 in fnStrs) {
+                equalsumSets.push(equalSums(fnStrs[f1], sumvalues[f1]));
+            }
+           
+
+            solnSet = equalsumSets[0];
+
+
+            item = document.createElement("li");
+            node = document.createTextNode(fnStrs_d[0]+" = " + sumvalues[0]);
+            item.appendChild(node);
+
+            element = document.getElementById("cluelist");
+            element.appendChild(item);
+
+            // do {
+            //     solnsetSize = solnSet.size;
+                
+            //     clue2num = "";
+            //     for (x of solnSet) {
+            //         if (x!=abckey) {
+            //             clue2num = x;
+            //         }
+            //     }
+            //     for (f1 in fnStrs) {
+            //         if (!equalSums(fnStrs[f1], generateSums(fnStrs[f1]).get(clue2num)).has(abckey) && solnSet.size>1) {
+            //             let clue2set = except(alltriplesSet, equalSums(fnStrs[f1], generateSums(fnStrs[f1]).get(clue2num)));
+            //             solnSet = intersection(solnSet, clue2set);
+
+            //             item = document.createElement("li");
+            //             node = document.createTextNode(fnStrs[f1] + " ≠ " + generateSums(fnStrs[f1]).get(clue2num));
+            //             item.appendChild(node);
+
+            //             element = document.getElementById("cluelist");
+            //             element.appendChild(item);
+            //             if (solnSet.size==1) {
+            //                 break;
+            //             }
+            //         }
+
+            //     }
+                
+                
+            // } while (solnsetSize > solnSet.size && solnSet.size>1)
+
+
+            document.getElementById("sequences").innerHTML=abckey;
+
+            
+
+
+        }
+
+        function guess() {
+   
+
+            litems = document.getElementsByTagName("li");
+            let keyguess = ""+document.getElementById("anum").value+document.getElementById("bnum").value+document.getElementById("cnum").value;
+            let key = ""+a+b+c;
+
+
+            if (key==keyguess) {
+                winner();
+            }
+
+            let sumvalues = [];
+            for (s1 in sumMaps) {
+                sumvalues.push(sumMaps[s1].get(key));
+            }
+
+            let equalsumSets = [];
+            for (f1 in fnStrs) {
+                equalsumSets.push(equalSums(fnStrs[f1], sumvalues[f1]));
+            }
+
+            let keyword = litems[litems.length-1].innerHTML.slice(0,litems[litems.length-1].innerHTML.indexOf(" "));
+            let sumindex = fnStrs_d.indexOf(keyword)+1;
+
+            if (sumindex==fnStrs.length) {
+                sumindex=0;
+            }
+
+            clue2num = keyguess;
+
+            
+            if (!equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)).has(key) && solnSet.size>1) {
+
+                let clue2set = except(alltriplesSet, equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)));
+                solnSet = intersection(solnSet, clue2set);
+                item = document.createElement("li");
+                node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num));
+                item.appendChild(node);
+
+                element = document.getElementById("cluelist");
+                element.appendChild(item);
+                
+            } else {
+                carryon();
+            }
+
+            function carryon() {
+                tries = 0;
+                do {
+                    solnsetSize = solnSet.size;
+
+                    tries+=1;
+                    sumindex+=1;
+
+                    if (sumindex==fnStrs.length) {
+                        sumindex=0;
+                    }
+                    
+                    clue2num = keyguess;
+                    if (!equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)).has(key) && solnSet.size>1) {
+
+                        let clue2set = except(alltriplesSet, equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)));
+                        solnSet = intersection(solnSet, clue2set);
+                        item = document.createElement("li");
+                        node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num));
+                        item.appendChild(node);
+
+                        element = document.getElementById("cluelist");
+                        element.appendChild(item);
+
+                    }
+
+                } while (solnsetSize == solnSet.size && solnSet.size>1 && tries<fnStrs.length)
+            }
+
+
+        }
+
+        function winner() {
+            alert("you won");
+        }
+
+        function loser() {
+            alert("you lost");
+        }
+
+
+
+        function calculate(fnStr, a, b, c) {
+            if (fnStr=="sumsum")  {
+                return a+b+c;
+            } else if (fnStr=="sumdiff")  {
+                return a+b-c;
+            } else if (fnStr=="diffsum")  {
+                return a-b+c;
+            } else if (fnStr=="diffdiff")  {
+                return a-b-c;
+            } else if (fnStr=="sumprod")  {
+                return a+b*c;
+            } else if (fnStr=="diffprod")  {
+                return a-b*c;
+            } else if (fnStr=="prodsum")  {
+                return a*b+c;
+            } else if (fnStr=="proddiff")  {
+                return a*b-c;
+            } else if (fnStr=="prodprod")  {
+                return a*b*c;
+            } else if (fnStr=="quotsum")  {
+                return Math.floor(a/(b+c));
+            } else if (fnStr=="quotdiff")  {
+                return Math.trunc(a/(b-c));
+            } else if (fnStr=="quotprod")  {
+                return Math.floor(a/(b*c));
+            } else if (fnStr=="sumquot")  {
+                return Math.floor((a+b)/c);
+            } else if (fnStr=="diffquot")  {
+                return Math.trunc((a-b)/c);
+            } else if (fnStr=="prodquot")  {
+                return Math.floor((a*b)/c);
+            } else if (fnStr=="remsum")  {
+                return a%(b+c);
+            } else if (fnStr=="remdiff")  {
+                return a%(b-c);
+            } else if (fnStr=="remprod")  {
+                return a%(b*c);
+            } else if (fnStr=="sumrem")  {
+                return (a+b)%c;
+            } else if (fnStr=="diffrem")  {
+                return (a-b)%c;
+            } else if (fnStr=="prodrem")  {
+                return (a*b)%c;
+            }
+        }
+
+        function generateSums(fnStr) {
+            mapArr=[];
+            elArr=[];
+            for (i1=0; i1<10; i1++) {
+                for (j1=0; j1<10; j1++) {
+                    for (k1=0; k1<10; k1++) {
+                        numstr = ""+i1+j1+k1;
+                        sumint = calculate(fnStr, i1, j1, k1);
+                        elArr = [numstr, sumint];
+                        mapArr.push(elArr);
+                    }
+                }
+            }
+            return new Map(mapArr);
+        }
+
+
+
+        function equalSums(fnStr, sumval) {
+            let sumsMap = generateSums(fnStr);
+            let equalSums = new Set();
+            sumsMap.forEach (function(value1, key1) {
+                if (value1==sumval) {
+                    equalSums.add(key1);
+                }
+            })
+            return equalSums;
+        }
+
+        
+        function intersection(setA, setB) {
+            return new Set([...setA].filter(item => setB.has(item)));
+        }
+
+        function union(setA, setB) {
+            for (x of setB) {
+                setA.add(x);
+            }
+            return new Set([...setA]);
+        }
+
+        function except(setA, setB) {
+            for (x of setB) {
+                setA.delete(x);
+            }
+            return new Set([...setA]);
+        }
+        
+
+    </script>
+  </body>
+
+</html>
