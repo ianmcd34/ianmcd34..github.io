@@ -1,0 +1,1328 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 85px;
+	height: 85px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.inter {
+    border-width: 0px;
+    font-size: 150%;
+    width: 44px;
+	height: 44px;
+    background-color: transparent;
+    color: red;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.container {
+    width: 600px;
+    position:relative;
+    margin: auto;
+}
+table {
+    z-index: 2;
+	display: inline-block;
+	margin: auto;
+	border-collapse: collapse;
+    width: 600px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+table.tinter {
+    z-index: 2;
+    position:absolute;
+    left: 25px;
+    top: 25px;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+.inert {
+    z-index: 1;
+    pointer-events: none;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Tango Game</title>
+  </head>
+  <body onload="setup()">
+    <h1>Tango!</h1>
+    <h4 id='date'></h4>
+    
+    <div class="container">
+    <table id="sunmoon">
+	<tr>
+    		<td class="plyer" id="P_A1" onclick="fix(event)"></td>
+    		<td class="plyer" id="P_A2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_A3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_A4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_A5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_A6" onclick="fix(event)"></td>
+
+
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_B2" onclick="fix(event)"  ></td>
+    		<td class="plyer" id="P_B3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_B4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_B5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_B6" onclick="fix(event)" ></td>
+
+
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_C4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_C6" onclick="fix(event)" ></td>
+
+
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_D3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_D4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_D5"  onclick="fix(event)"></td>
+    		<td class="plyer"id="P_D6"  onclick="fix(event)"></td>
+
+
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"  onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_E4" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_E6" onclick="fix(event)" ></td>
+
+
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1" onclick="fix(event)" ></td>
+    		<td class="plyer"id="P_F2" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F3" onclick="fix(event)" ></td>
+		<td class="plyer" id="P_F4"  onclick="fix(event)"></td>
+    		<td class="plyer" id="P_F5" onclick="fix(event)" ></td>
+    		<td class="plyer" id="P_F6" onclick="fix(event)" ></td>
+
+
+  	   </tr>
+
+
+
+    </table>
+
+    
+    <table class="tinter inert" id="tinter" >
+        <tr>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_A1"  onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_A2" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A3" onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A4" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_A5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+           </tr>
+            <tr>
+                <td class="inter" id="I_B1" onclick="fix(event)" ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_B2" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_B3" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_B4" onclick="fix(event)"  ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_B5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_B6" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_C1" onclick="fix(event)" ></td>
+                <td class="inter" id="" ></td>
+            <td class="inter" id="I_C2" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_C3" onclick="fix(event)"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_C4" onclick="fix(event)"></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_C5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+             </tr>
+           <tr>
+                <td class="inter" id="I_D1" onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_D2"  onclick="fix(event)"></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_D3"  onclick="fix(event)"></td>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_D4" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_D5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_D6" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_E1"  onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_E2" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_E3"  onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_E4" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_E5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+            </tr>
+            <tr>
+                <td class="inter" id="I_F1" onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_F2"  onclick="fix(event)"></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_F3" onclick="fix(event)" ></td>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_F4" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_F5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_F6" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+           </tr>
+            <tr>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_G1"   onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_G2" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_G3" onclick="fix(event)" ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_G4" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_G5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id="I_H1" onclick="fix(event)"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_H2" onclick="fix(event)"></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_H3"  onclick="fix(event)"></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_H4"  onclick="fix(event)"></td>
+                <td class="inter" id="" ></td>
+            <td class="inter" id="I_H5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_H6"  onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+    
+    
+             </tr>
+           <tr>
+                <td class="inter" id="" ></td>
+                <td class="inter" id="I_I1"  onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_I2"  onclick="fix(event)"></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_I3" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_I4" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_I5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+    
+    
+            </tr>
+            <tr>
+                <td class="inter" id="I_J1" onclick="fix(event)"  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_J2" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_J3" onclick="fix(event)" ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_J4" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_J5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_J6" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id="I_K1" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id="I_K2" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_K3"   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id="I_K4" onclick="fix(event)" ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id="I_K5" onclick="fix(event)" ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+            </tr>
+            <tr>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""   ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+            <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+                <td class="inter" id=""  ></td>
+            </tr>
+    
+        </table>
+    </div>
+
+    <p id="sequences"></p>
+ 
+    <script >
+      const sun = "☀️";
+      const moon = "🌙";
+      const A = [0,0,1,0,1,1];
+      const interA = [true,false,false,false,true];
+      const B = [0,0,1,1,0,1];
+      const interB = [true,false,true,false,false];
+      const C = [0,1,0,0,1,1];
+      const interC = [false,false,true,false,true];
+      const D = [0,1,0,1,0,1];
+      const interD = [false,false,false,false,false];
+      const E = [0,1,0,1,1,0];
+      const interE = [false,false,false,true,false];
+      const F = [0,1,1,0,0,1];
+      const interF = [false,true,false,true,false];
+      const G = [0,1,1,0,1,0];
+      const interG = [false,true,false,false,false];
+      const H = [1,0,0,1,0,1];
+      const interH = [false,true,false,false,false];
+      const I = [1,0,0,1,1,0];
+      const interI = [false,true,false,true,false];
+      const J = [1,0,1,0,0,1];
+      const interJ = [false,false,false,true,false];
+      const K = [1,0,1,0,1,0];
+      const interK = [false,false,false,false,false];
+      const L = [1,0,1,1,0,0];
+      const interL = [false,false,true,false,true];
+      const M = [1,1,0,0,1,0];
+      const interM = [true,false,true,false,false];
+      const N = [1,1,0,1,0,0];
+      const interN = [true,false,false,false,true];
+
+      const perms = ['AANANN', 'AANBMN', 'AANCLN', 'AANDKN', 'AANEJN', 'AANFIN', 'AANGHN', 'AANHGN', 'AANIFN', 'AANJEN', 'AANKDN', 'AANLCN', 'AANMBN', 
+      'AANNAN', 'ABMANN', 'ABMBMN', 'ABMBNM', 'ABMCLN', 'ABMDKN', 'ABMDLM', 'ABMEJN', 'ABMFIN', 'ABMGHN', 'ABMHGN', 'ABMIFN', 'ABMJEN', 'ABMKDN', 'ABMLCN', 
+      'ABMLDM', 'ABMMBN', 'ABMNAN', 'ABMNBM', 'ABNAMN', 'ABNANM', 'ABNCKN', 'ABNCLM', 'ABNGHM', 'ABNKCN', 'ABNKDM', 'ABNMAN', 'ABNMBM', 'ACLANN', 'ACLBMN', 
+      'ACLCLN', 'ACLCNL', 'ACLDKN', 'ACLDML', 'ACLEJN', 'ACLFIN', 'ACLGHN', 'ACLHGN', 'ACLIFN', 'ACLJEN', 'ACLKDN', 'ACLLCN', 'ACLMBN', 'ACLMDL', 'ACLNAN', 
+      'ACLNCL', 'ACNALN', 'ACNANL', 'ACNBKN', 'ACNBML', 'ACNJEL', 'ACNKBN', 'ACNKDL', 'ACNLAN', 'ACNLCL', 'ADIFKN', 'ADIFLM', 'ADIFML', 'ADIFNK', 'ADIGJN', 
+      'ADIJGN', 'ADIKFN', 'ADKANN', 'ADKBMN', 'ADKBNM', 'ADKCLN', 'ADKCNL', 'ADKDKN', 'ADKDLM', 'ADKDML', 'ADKDNK', 'ADKEJN', 'ADKFIN', 'ADKFNI', 'ADKGHN', 
+      'ADKHGN', 'ADKIFN', 'ADKJEN', 'ADKKDN', 'ADKLCN', 'ADKLDM', 'ADKMBN', 'ADKMDL', 'ADKNAN', 'ADKNBM', 'ADKNCL', 'ADKNDK', 'ADKNFI', 'ADLAMN', 'ADLANM', 
+      'ADLCKN', 'ADLCLM', 'ADLCML', 'ADLCNK', 'ADLGHM', 'ADLKCN', 'ADLKDM', 'ADLMAN', 'ADLMBM', 'ADLMCL', 'ADLMDK', 'ADLMFI', 'ADMALN', 'ADMANL', 'ADMBKN', 
+      'ADMBLM', 'ADMBML', 'ADMBNK', 'ADMJEL', 'ADMKBN', 'ADMKDL', 'ADMLAN', 'ADMLBM', 'ADMLCL', 'ADMLDK', 'ADMLFI', 'ADNAKN', 'ADNALM', 'ADNAML', 'ADNANK', 
+      'ADNKAN', 'ADNKBM', 'ADNKCL', 'ADNKDK', 'ADNKFI', 'AEHFKN', 'AEHFML', 'AEHGJN', 'AEHGNJ', 'AEHJGN', 'AEHKFN', 'AEJANN', 'AEJBMN', 'AEJCLN', 'AEJCNL', 
+      'AEJDKN', 'AEJDML', 'AEJEJN', 'AEJENJ', 'AEJFIN', 'AEJGHN', 'AEJGNH', 'AEJHGN', 'AEJIFN', 'AEJJEN', 'AEJKDN', 'AEJLCN', 'AEJMBN', 'AEJMDL', 'AEJNAN', 
+      'AEJNCL', 'AEJNEJ', 'AEJNGH', 'AELCJN', 'AELCNJ', 'AELFMH', 'AELJCN', 'AENAJN', 'AENANJ', 'AENJAN', 'AENJCL', 'AENJEJ', 'AENJGH', 'AFIANN', 'AFIBMN', 
+      'AFICLN', 'AFIDKN', 'AFIEJN', 'AFIFIN', 'AFIFNI', 'AFIGHN', 'AFIHGN', 'AFIIFN', 'AFIJEN', 'AFIKDN', 'AFILCN', 'AFIMBN', 'AFINAN', 'AFINFI', 'AFNAIN', 
+      'AFNANI', 'AFNIAN', 'AFNIFI', 'AFNKDI', 'AGHANN', 'AGHBMN', 'AGHCLN', 'AGHDKN', 'AGHEJN', 'AGHFIN', 'AGHGHN', 'AGHGNH', 'AGHHGN', 'AGHIFN', 'AGHJEN', 
+      'AGHKDN', 'AGHLCN', 'AGHMBN', 'AGHNAN', 'AGHNGH', 'AGNAHN', 'AGNANH', 'AGNBMH', 'AGNHAN', 'AGNHGH', 'AGNJEH', 'AHEFKN', 'AHEFLM', 'AHEGJN', 'AHEJGN', 
+      'AHEJNG', 'AHEKFN', 'AHGANN', 'AHGBMN', 'AHGBNM', 'AHGCLN', 'AHGDKN', 'AHGDLM', 'AHGEJN', 'AHGFIN', 'AHGGHN', 'AHGHGN', 'AHGHNG', 'AHGIFN', 'AHGJEN', 
+      'AHGJNE', 'AHGKDN', 'AHGLCN', 'AHGLDM', 'AHGMBN', 'AHGNAN', 'AHGNBM', 'AHGNHG', 'AHGNJE', 'AHMBGN', 'AHMBNG', 'AHMFLE', 'AHMGBN', 'AHNAGN', 'AHNANG', 
+      'AHNGAN', 'AHNGBM', 'AHNGHG', 'AHNGJE', 'AIDFKN', 'AIDGJN', 'AIDJGN', 'AIDKFN', 'AIDKNF', 'AIFANN', 'AIFBMN', 'AIFCLN', 'AIFDKN', 'AIFEJN', 'AIFFIN', 
+      'AIFGHN', 'AIFHGN', 'AIFIFN', 'AIFINF', 'AIFJEN', 'AIFKDN', 'AIFKND', 'AIFLCN', 'AIFLMD', 'AIFMBN', 'AIFMLD', 'AIFNAN', 'AIFNIF', 'AIFNKD', 'AINAFN', 
+      'AINANF', 'AINFAN', 'AINFIF', 'AINFKD', 'AJEANN', 'AJEBMN', 'AJECLN', 'AJEDKN', 'AJEEJN', 'AJEFIN', 'AJEGHN', 'AJEHGN', 'AJEIFN', 'AJEJEN', 'AJEJNE', 
+      'AJEKDN', 'AJELCN', 'AJEMBN', 'AJENAN', 'AJENJE', 'AJNAEN', 'AJNANE', 'AJNCLE', 'AJNEAN', 'AJNEJE', 'AJNGHE', 'AKDANN', 'AKDBMN', 'AKDCLN', 'AKDDKN', 
+      'AKDEJN', 'AKDFIN', 'AKDGHN', 'AKDHGN', 'AKDIFN', 'AKDJEN', 'AKDKDN', 'AKDKND', 'AKDLCN', 'AKDLMD', 'AKDMBN', 'AKDMLD', 'AKDNAN', 'AKDNKD', 'AKNADN', 
+      'AKNAND', 'AKNBCN', 'AKNBMD', 'AKNCBN', 'AKNCLD', 'AKNDAN', 'AKNDKD', 'AKNFID', 'ALCANN', 'ALCBMN', 'ALCBNM', 'ALCCLN', 'ALCDKN', 'ALCDLM', 'ALCEJN', 
+      'ALCFIN', 'ALCGHN', 'ALCHGN', 'ALCIFN', 'ALCJEN', 'ALCJNE', 'ALCKDN', 'ALCKND', 'ALCLCN', 'ALCLDM', 'ALCLMD', 'ALCLNC', 'ALCMBN', 'ALCMLD', 'ALCNAN', 
+      'ALCNBM', 'ALCNJE', 'ALCNKD', 'ALCNLC', 'ALDAMN', 'ALDANM', 'ALDCKN', 'ALDCLM', 'ALDGHM', 'ALDKCN', 'ALDKDM', 'ALDKMD', 'ALDKNC', 'ALDMAN', 'ALDMBM', 
+      'ALDMJE', 'ALDMKD', 'ALDMLC', 'ALECJN', 'ALEFHM', 'ALEJCN', 'ALEJDM', 'ALEJMD', 'ALEJNC', 'ALMADN', 'ALMAND', 'ALMBCN', 'ALMBDM', 'ALMBMD', 'ALMBNC', 
+      'ALMCBN', 'ALMCLD', 'ALMDAN', 'ALMDBM', 'ALMDJE', 'ALMDKD', 'ALMDLC', 'ALMFHE', 'ALMFID', 'ALNACN', 'ALNADM', 'ALNAMD', 'ALNANC', 'ALNCAN', 'ALNCBM', 
+      'ALNCJE', 'ALNCKD', 'ALNCLC', 'AMBANN', 'AMBBMN', 'AMBCLN', 'AMBCNL', 'AMBDKN', 'AMBDML', 'AMBEJN', 'AMBFIN', 'AMBGHN', 'AMBGNH', 'AMBHGN', 'AMBIFN', 
+      'AMBJEN', 'AMBKDN', 'AMBKND', 'AMBLCN', 'AMBLMD', 'AMBMBN', 'AMBMDL', 'AMBMLD', 'AMBMNB', 'AMBNAN', 'AMBNCL', 'AMBNGH', 'AMBNKD', 'AMBNMB', 'AMDALN', 
+      'AMDANL', 'AMDBKN', 'AMDBML', 'AMDJEL', 'AMDKBN', 'AMDKDL', 'AMDKLD', 'AMDKNB', 'AMDLAN', 'AMDLCL', 'AMDLGH', 'AMDLKD', 'AMDLMB', 'AMHBGN', 'AMHFEL', 
+      'AMHGBN', 'AMHGDL', 'AMHGLD', 'AMHGNB', 'AMLADN', 'AMLAND', 'AMLBCN', 'AMLBMD', 'AMLCBN', 'AMLCDL', 'AMLCLD', 'AMLCNB', 'AMLDAN', 'AMLDCL', 'AMLDGH', 
+      'AMLDKD', 'AMLDMB', 'AMLFEH', 'AMLFID', 'AMNABN', 'AMNADL', 'AMNALD', 'AMNANB', 'AMNBAN', 'AMNBCL', 'AMNBGH', 'AMNBKD', 'AMNBMB', 'ANAANN', 'ANABMN', 
+      'ANABNM', 'ANACLN', 'ANACNL', 'ANADKN', 'ANADLM', 'ANADML', 'ANADNK', 'ANAEJN', 'ANAENJ', 'ANAFIN', 'ANAFNI', 'ANAGHN', 'ANAGNH', 'ANAHGN', 'ANAHNG', 
+      'ANAIFN', 'ANAINF', 'ANAJEN', 'ANAJNE', 'ANAKDN', 'ANAKND', 'ANALCN', 'ANALDM', 'ANALMD', 'ANALNC', 'ANAMBN', 'ANAMDL', 'ANAMLD', 'ANAMNB', 'ANANAN', 
+      'ANANBM', 'ANANCL', 'ANANDK', 'ANANEJ', 'ANANFI', 'ANANGH', 'ANANHG', 'ANANIF', 'ANANJE', 'ANANKD', 'ANANLC', 'ANANMB', 'ANANNA', 'ANBAMN', 'ANBANM', 
+      'ANBCKN', 'ANBCLM', 'ANBCML', 'ANBCNK', 'ANBGHM', 'ANBGMH', 'ANBKCN', 'ANBKDM', 'ANBKMD', 'ANBKNC', 'ANBMAN', 'ANBMBM', 'ANBMCL', 'ANBMDK', 'ANBMEJ', 
+      'ANBMFI', 'ANBMGH', 'ANBMHG', 'ANBMIF', 'ANBMJE', 'ANBMKD', 'ANBMLC', 'ANBMMB', 'ANBMNA', 'ANCALN', 'ANCANL', 'ANCBKN', 'ANCBLM', 'ANCBML', 'ANCBNK', 
+      'ANCJEL', 'ANCJLE', 'ANCKBN', 'ANCKDL', 'ANCKLD', 'ANCKNB', 'ANCLAN', 'ANCLBM', 'ANCLCL', 'ANCLDK', 'ANCLEJ', 'ANCLFI', 'ANCLGH', 'ANCLHG', 'ANCLIF', 
+      'ANCLJE', 'ANCLKD', 'ANCLLC', 'ANCLMB', 'ANCLNA', 'ANDAKN', 'ANDALM', 'ANDAML', 'ANDANK', 'ANDKAN', 'ANDKBM', 'ANDKCL', 'ANDKDK', 'ANDKEJ', 'ANDKFI', 
+      'ANDKGH', 'ANDKHG', 'ANDKIF', 'ANDKJE', 'ANDKKD', 'ANDKLC', 'ANDKMB', 'ANDKNA', 'ANEAJN', 'ANEANJ', 'ANEJAN', 'ANEJBM', 'ANEJCL', 'ANEJDK', 'ANEJEJ', 
+      'ANEJFI', 'ANEJGH', 'ANEJHG', 'ANEJIF', 'ANEJJE', 'ANEJKD', 'ANEJLC', 'ANEJMB', 'ANEJNA', 'ANFAIN', 'ANFANI', 'ANFIAN', 'ANFIBM', 'ANFICL', 'ANFIDK', 
+      'ANFIEJ', 'ANFIFI', 'ANFIGH', 'ANFIHG', 'ANFIIF', 'ANFIJE', 'ANFIKD', 'ANFILC', 'ANFIMB', 'ANFINA', 'ANFKDI', 'ANFKEH', 'ANFKHE', 'ANFKID', 'ANGAHN', 
+      'ANGANH', 'ANGBHM', 'ANGBMH', 'ANGHAN', 'ANGHBM', 'ANGHCL', 'ANGHDK', 'ANGHEJ', 'ANGHFI', 'ANGHGH', 'ANGHHG', 'ANGHIF', 'ANGHJE', 'ANGHKD', 'ANGHLC', 
+      'ANGHMB', 'ANGHNA', 'ANGJDI', 'ANGJEH', 'ANGJHE', 'ANGJID', 'ANHAGN', 'ANHANG', 'ANHGAN', 'ANHGBM', 'ANHGCL', 'ANHGDK', 'ANHGEJ', 'ANHGFI', 'ANHGGH', 
+      'ANHGHG', 'ANHGIF', 'ANHGJE', 'ANHGKD', 'ANHGLC', 'ANHGMB', 'ANHGNA', 'ANIAFN', 'ANIANF', 'ANIFAN', 'ANIFBM', 'ANIFCL', 'ANIFDK', 'ANIFEJ', 'ANIFFI', 
+      'ANIFGH', 'ANIFHG', 'ANIFIF', 'ANIFJE', 'ANIFKD', 'ANIFLC', 'ANIFMB', 'ANIFNA', 'ANJAEN', 'ANJANE', 'ANJCEL', 'ANJCLE', 'ANJEAN', 'ANJEBM', 'ANJECL', 
+      'ANJEDK', 'ANJEEJ', 'ANJEFI', 'ANJEGH', 'ANJEHG', 'ANJEIF', 'ANJEJE', 'ANJEKD', 'ANJELC', 'ANJEMB', 'ANJENA', 'ANJGDI', 'ANJGEH', 'ANJGHE', 'ANJGID', 
+      'ANKADN', 'ANKAND', 'ANKBCN', 'ANKBDM', 'ANKBMD', 'ANKBNC', 'ANKCBN', 'ANKCDL', 'ANKCLD', 'ANKCNB', 'ANKDAN', 'ANKDBM', 'ANKDCL', 'ANKDDK', 'ANKDEJ', 
+      'ANKDFI', 'ANKDGH', 'ANKDHG', 'ANKDIF', 'ANKDJE', 'ANKDKD', 'ANKDLC', 'ANKDMB', 'ANKDNA', 'ANKFDI', 'ANKFEH', 'ANKFHE', 'ANKFID', 'ANLACN', 'ANLADM', 
+      'ANLAMD', 'ANLANC', 'ANLCAN', 'ANLCBM', 'ANLCCL', 'ANLCDK', 'ANLCEJ', 'ANLCFI', 'ANLCGH', 'ANLCHG', 'ANLCIF', 'ANLCJE', 'ANLCKD', 'ANLCLC', 'ANLCMB', 
+      'ANLCNA', 'ANMABN', 'ANMADL', 'ANMALD', 'ANMANB', 'ANMBAN', 'ANMBBM', 'ANMBCL', 'ANMBDK', 'ANMBEJ', 'ANMBFI', 'ANMBGH', 'ANMBHG', 'ANMBIF', 'ANMBJE', 
+      'ANMBKD', 'ANMBLC', 'ANMBMB', 'ANMBNA', 'ANNAAN', 'ANNABM', 'ANNACL', 'ANNADK', 'ANNAEJ', 'ANNAFI', 'ANNAGH', 'ANNAHG', 'ANNAIF', 'ANNAJE', 'ANNAKD', 
+      'ANNALC', 'ANNAMB', 'ANNANA', 'BAMBMN', 'BAMBNM', 'BAMDKN', 'BAMDLM', 'BAMHGN', 'BAMLCN', 'BAMLDM', 'BAMNAN', 'BAMNBM', 'BANAMN', 'BANANM', 'BANBMM', 
+      'BANCKN', 'BANCLM', 'BANDKM', 'BANEJM', 'BANFIM', 'BANGHM', 'BANHGM', 'BANIFM', 'BANJEM', 'BANKCN', 'BANKDM', 'BANLCM', 'BANMAN', 'BANMBM', 'BANNAM', 
+      'BBMANM', 'BBMBMM', 'BBMCLM', 'BBMDKM', 'BBMEJM', 'BBMFIM', 'BBMGHM', 'BBMHGM', 'BBMIFM', 'BBMJEM', 'BBMKDM', 'BBMLCM', 'BBMMBM', 'BBMNAM', 'BCIFKN', 
+      'BCIFLM', 'BCIFML', 'BCIFNK', 'BCIJGN', 'BCILFM', 'BCKBMN', 'BCKBNM', 'BCKDKN', 'BCKDLM', 'BCKDML', 'BCKDNK', 'BCKHGN', 'BCKLCN', 'BCKLDM', 'BCKNAN', 
+      'BCKNBM', 'BCKNCL', 'BCKNDK', 'BCKNFI', 'BCLAMN', 'BCLANM', 'BCLBMM', 'BCLCKN', 'BCLCLM', 'BCLCML', 'BCLCNK', 'BCLDKM', 'BCLDMK', 'BCLEJM', 'BCLFIM', 
+      'BCLFMI', 'BCLGHM', 'BCLHGM', 'BCLIFM', 'BCLJEM', 'BCLKCN', 'BCLKDM', 'BCLLCM', 'BCLMAN', 'BCLMBM', 'BCLMCL', 'BCLMDK', 'BCLMFI', 'BCLNAM', 'BCLNCK', 
+      'BCMBKN', 'BCMBLM', 'BCMBML', 'BCMBNK', 'BCMLAN', 'BCMLBM', 'BCMLCL', 'BCMLDK', 'BCMLFI', 'BCNAKN', 'BCNALM', 'BCNAML', 'BCNANK', 'BCNBKM', 'BCNBMK', 
+      'BCNJEK', 'BCNJGI', 'BCNKAN', 'BCNKBM', 'BCNKCL', 'BCNKDK', 'BCNKFI', 'BCNLAM', 'BCNLCK', 'BDKANM', 'BDKBMM', 'BDKCLM', 'BDKCNK', 'BDKDKM', 'BDKDMK', 
+      'BDKEJM', 'BDKFIM', 'BDKGHM', 'BDKHGM', 'BDKIFM', 'BDKJEM', 'BDKKDM', 'BDKLCM', 'BDKMBM', 'BDKMDK', 'BDKNAM', 'BDKNCK', 'BDMALM', 'BDMANK', 'BDMBKM', 
+      'BDMBMK', 'BDMJEK', 'BDMKBM', 'BDMKDK', 'BDMLAM', 'BDMLCK', 'BEJANM', 'BEJBMM', 'BEJCLM', 'BEJCNK', 'BEJDKM', 'BEJDMK', 'BEJEJM', 'BEJEMJ', 'BEJFIM', 
+      'BEJGHM', 'BEJHGM', 'BEJIFM', 'BEJJEM', 'BEJKDM', 'BEJLCM', 'BEJMBM', 'BEJMDK', 'BEJMEJ', 'BEJNAM', 'BEJNCK', 'BEKDJM', 'BEKDMJ', 'BEKFHM', 'BEKHFM', 
+      'BEKJDM', 'BEMBJM', 'BEMBMJ', 'BEMJBM', 'BEMJDK', 'BEMJEJ', 'BFIANM', 'BFIBMM', 'BFICLM', 'BFIDKM', 'BFIEJM', 'BFIFIM', 'BFIFMI', 'BFIGHM', 'BFIHGM', 
+      'BFIIFM', 'BFIJEM', 'BFIKDM', 'BFILCM', 'BFIMBM', 'BFIMFI', 'BFINAM', 'BFMBIM', 'BFMBMI', 'BFMHGI', 'BFMIBM', 'BFMIFI', 'BFMLCI', 'BGHAMN', 'BGHANM', 
+      'BGHBMM', 'BGHCKN', 'BGHCLM', 'BGHDKM', 'BGHEJM', 'BGHFIM', 'BGHFMI', 'BGHGHM', 'BGHGMH', 'BGHHGM', 'BGHIFM', 'BGHJEM', 'BGHKCN', 'BGHKDM', 'BGHLCM', 
+      'BGHMAN', 'BGHMBM', 'BGHMFI', 'BGHMGH', 'BGHNAM', 'BGIDJM', 'BGIFHM', 'BGIFMH', 'BGIHFM', 'BGIJCN', 'BGIJDM', 'BGMBHM', 'BGMBMH', 'BGMHAN', 'BGMHBM', 
+      'BGMHFI', 'BGMHGH', 'BGNAHM', 'BGNAMH', 'BGNHAM', 'BGNJCI', 'BHGANM', 'BHGBMM', 'BHGCLM', 'BHGDKM', 'BHGEJM', 'BHGFIM', 'BHGGHM', 'BHGHGM', 'BHGHMG', 
+      'BHGIFM', 'BHGJEM', 'BHGKDM', 'BHGLCM', 'BHGMBM', 'BHGMHG', 'BHGNAM', 'BHMANG', 'BHMBGM', 'BHMBMG', 'BHMFIG', 'BHMGBM', 'BHMGHG', 'BICFLM', 'BICJNG', 
+      'BICLFM', 'BICLMF', 'BIFANM', 'BIFBMM', 'BIFCLM', 'BIFDKM', 'BIFEJM', 'BIFFIM', 'BIFGHM', 'BIFHGM', 'BIFHMG', 'BIFIFM', 'BIFIMF', 'BIFJEM', 'BIFKDM', 
+      'BIFKNC', 'BIFLCM', 'BIFLMC', 'BIFMBM', 'BIFMHG', 'BIFMIF', 'BIFMLC', 'BIFNAM', 'BIFNKC', 'BIGDJM', 'BIGFHM', 'BIGHFM', 'BIGHMF', 'BIGJDM', 'BIGJNC', 
+      'BIMBFM', 'BIMBMF', 'BIMFBM', 'BIMFHG', 'BIMFIF', 'BIMFLC', 'BJEANM', 'BJEBMM', 'BJECLM', 'BJEDKM', 'BJEEJM', 'BJEFIM', 'BJEGHM', 'BJEHGM', 'BJEIFM', 
+      'BJEJEM', 'BJEJME', 'BJEKDM', 'BJELCM', 'BJEMBM', 'BJEMJE', 'BJENAM', 'BJMBEM', 'BJMBME', 'BJMDKE', 'BJMEBM', 'BJMEJE', 'BKCBMN', 'BKCBNM', 'BKCDKN', 
+      'BKCDLM', 'BKCHGN', 'BKCLCN', 'BKCLDM', 'BKCLMD', 'BKCLNC', 'BKCNAN', 'BKCNBM', 'BKCNJE', 'BKCNKD', 'BKCNLC', 'BKDAMN', 'BKDANM', 'BKDBMM', 'BKDCKN', 
+      'BKDCLM', 'BKDDKM', 'BKDEJM', 'BKDFIM', 'BKDGHM', 'BKDHGM', 'BKDIFM', 'BKDJEM', 'BKDJME', 'BKDKCN', 'BKDKDM', 'BKDKMD', 'BKDKNC', 'BKDLCM', 'BKDLMC', 
+      'BKDMAN', 'BKDMBM', 'BKDMJE', 'BKDMKD', 'BKDMLC', 'BKDNAM', 'BKDNKC', 'BKEDJM', 'BKEFHM', 'BKEHFM', 'BKEJCN', 'BKEJDM', 'BKEJMD', 'BKEJNC', 'BKMBCN', 
+      'BKMBDM', 'BKMBMD', 'BKMBNC', 'BKMDAN', 'BKMDBM', 'BKMDJE', 'BKMDKD', 'BKMDLC', 'BKNACN', 'BKNADM', 'BKNAMD', 'BKNANC', 'BKNBCM', 'BKNBMC', 'BKNCAN', 
+      'BKNCBM', 'BKNCJE', 'BKNCKD', 'BKNCLC', 'BKNDAM', 'BKNDKC', 'BKNFIC', 'BLCANM', 'BLCBMM', 'BLCCLM', 'BLCDKM', 'BLCEJM', 'BLCFIM', 'BLCGHM', 'BLCHGM', 
+      'BLCIFM', 'BLCJEM', 'BLCKDM', 'BLCKNC', 'BLCLCM', 'BLCLMC', 'BLCMBM', 'BLCMLC', 'BLCNAM', 'BLCNKC', 'BLMADM', 'BLMANC', 'BLMBCM', 'BLMBMC', 'BLMCBM', 
+      'BLMCLC', 'BLMDAM', 'BLMDKC', 'BLMFIC', 'BMABMN', 'BMABNM', 'BMADKN', 'BMADLM', 'BMADML', 'BMADNK', 'BMAHGN', 'BMAHNG', 'BMALCN', 'BMALDM', 'BMALMD', 
+      'BMALNC', 'BMANAN', 'BMANBM', 'BMANCL', 'BMANDK', 'BMANEJ', 'BMANFI', 'BMANGH', 'BMANHG', 'BMANIF', 'BMANJE', 'BMANKD', 'BMANLC', 'BMANMB', 'BMANNA', 
+      'BMBAMN', 'BMBANM', 'BMBBMM', 'BMBCKN', 'BMBCLM', 'BMBCML', 'BMBCNK', 'BMBDKM', 'BMBDMK', 'BMBEJM', 'BMBEMJ', 'BMBFIM', 'BMBFMI', 'BMBGHM', 'BMBGMH', 
+      'BMBHGM', 'BMBHMG', 'BMBIFM', 'BMBIMF', 'BMBJEM', 'BMBJME', 'BMBKCN', 'BMBKDM', 'BMBKMD', 'BMBKNC', 'BMBLCM', 'BMBLMC', 'BMBMAN', 'BMBMBM', 'BMBMCL', 
+      'BMBMDK', 'BMBMEJ', 'BMBMFI', 'BMBMGH', 'BMBMHG', 'BMBMIF', 'BMBMJE', 'BMBMKD', 'BMBMLC', 'BMBMMB', 'BMBMNA', 'BMBNAM', 'BMBNCK', 'BMBNKC', 'BMBNMA', 
+      'BMCBKN', 'BMCBLM', 'BMCBML', 'BMCBNK', 'BMCLAN', 'BMCLBM', 'BMCLCL', 'BMCLDK', 'BMCLEJ', 'BMCLFI', 'BMCLGH', 'BMCLHG', 'BMCLIF', 'BMCLJE', 'BMCLKD', 
+      'BMCLLC', 'BMCLMB', 'BMCLNA', 'BMDAKN', 'BMDALM', 'BMDAML', 'BMDANK', 'BMDBKM', 'BMDBMK', 'BMDJEK', 'BMDJGI', 'BMDJIG', 'BMDJKE', 'BMDKAN', 'BMDKBM', 
+      'BMDKCL', 'BMDKDK', 'BMDKEJ', 'BMDKFI', 'BMDKGH', 'BMDKHG', 'BMDKIF', 'BMDKJE', 'BMDKKD', 'BMDKLC', 'BMDKMB', 'BMDKNA', 'BMDLAM', 'BMDLCK', 'BMDLKC', 
+      'BMDLMA', 'BMEBJM', 'BMEBMJ', 'BMEJAN', 'BMEJBM', 'BMEJCL', 'BMEJDK', 'BMEJEJ', 'BMEJFI', 'BMEJGH', 'BMEJHG', 'BMEJIF', 'BMEJJE', 'BMEJKD', 'BMEJLC', 
+      'BMEJMB', 'BMEJNA', 'BMFBIM', 'BMFBMI', 'BMFHEK', 'BMFHGI', 'BMFHIG', 'BMFHKE', 'BMFIAN', 'BMFIBM', 'BMFICL', 'BMFIDK', 'BMFIEJ', 'BMFIFI', 'BMFIGH', 
+      'BMFIHG', 'BMFIIF', 'BMFIJE', 'BMFIKD', 'BMFILC', 'BMFIMB', 'BMFINA', 'BMFLCI', 'BMFLIC', 'BMGBHM', 'BMGBMH', 'BMGHAN', 'BMGHBM', 'BMGHCL', 'BMGHDK', 
+      'BMGHEJ', 'BMGHFI', 'BMGHGH', 'BMGHHG', 'BMGHIF', 'BMGHJE', 'BMGHKD', 'BMGHLC', 'BMGHMB', 'BMGHNA', 'BMHAGN', 'BMHANG', 'BMHBGM', 'BMHBMG', 'BMHFEK', 
+      'BMHFGI', 'BMHFIG', 'BMHFKE', 'BMHGAN', 'BMHGBM', 'BMHGCL', 'BMHGDK', 'BMHGEJ', 'BMHGFI', 'BMHGGH', 'BMHGHG', 'BMHGIF', 'BMHGJE', 'BMHGKD', 'BMHGLC', 
+      'BMHGMB', 'BMHGNA', 'BMIBFM', 'BMIBMF', 'BMIFAN', 'BMIFBM', 'BMIFCL', 'BMIFDK', 'BMIFEJ', 'BMIFFI', 'BMIFGH', 'BMIFHG', 'BMIFIF', 'BMIFJE', 'BMIFKD', 
+      'BMIFLC', 'BMIFMB', 'BMIFNA', 'BMJBEM', 'BMJBME', 'BMJDEK', 'BMJDGI', 'BMJDIG', 'BMJDKE', 'BMJEAN', 'BMJEBM', 'BMJECL', 'BMJEDK', 'BMJEEJ', 'BMJEFI', 
+      'BMJEGH', 'BMJEHG', 'BMJEIF', 'BMJEJE', 'BMJEKD', 'BMJELC', 'BMJEMB', 'BMJENA', 'BMKBCN', 'BMKBDM', 'BMKBMD', 'BMKBNC', 'BMKDAN', 'BMKDBM', 'BMKDCL', 
+      'BMKDDK', 'BMKDEJ', 'BMKDFI', 'BMKDGH', 'BMKDHG', 'BMKDIF', 'BMKDJE', 'BMKDKD', 'BMKDLC', 'BMKDMB', 'BMKDNA', 'BMLACN', 'BMLADM', 'BMLAMD', 'BMLANC', 
+      'BMLBCM', 'BMLBMC', 'BMLCAN', 'BMLCBM', 'BMLCCL', 'BMLCDK', 'BMLCEJ', 'BMLCFI', 'BMLCGH', 'BMLCHG', 'BMLCIF', 'BMLCJE', 'BMLCKD', 'BMLCLC', 'BMLCMB', 
+      'BMLCNA', 'BMLDAM', 'BMLDCK', 'BMLDKC', 'BMLDMA', 'BMLFCI', 'BMLFIC', 'BMMBAN', 'BMMBBM', 'BMMBCL', 'BMMBDK', 'BMMBEJ', 'BMMBFI', 'BMMBGH', 'BMMBHG', 
+      'BMMBIF', 'BMMBJE', 'BMMBKD', 'BMMBLC', 'BMMBMB', 'BMMBNA', 'BMNAAN', 'BMNABM', 'BMNACL', 'BMNADK', 'BMNAEJ', 'BMNAFI', 'BMNAGH', 'BMNAHG', 'BMNAIF', 
+      'BMNAJE', 'BMNAKD', 'BMNALC', 'BMNAMB', 'BMNANA', 'BMNBAM', 'BMNBCK', 'BMNBKC', 'BMNBMA', 'BNAANM', 'BNABMM', 'BNACLM', 'BNACNK', 'BNADKM', 'BNADMK', 
+      'BNAEJM', 'BNAFIM', 'BNAGHM', 'BNAHGM', 'BNAHMG', 'BNAIFM', 'BNAJEM', 'BNAKDM', 'BNAKNC', 'BNALCM', 'BNALMC', 'BNAMBM', 'BNAMDK', 'BNAMHG', 'BNAMLC', 
+      'BNAMNA', 'BNANAM', 'BNANCK', 'BNANKC', 'BNANMA', 'BNCALM', 'BNCANK', 'BNCBKM', 'BNCBMK', 'BNCJEK', 'BNCJIG', 'BNCKBM', 'BNCKDK', 'BNCKHG', 'BNCKLC', 
+      'BNCKNA', 'BNCLAM', 'BNCLCK', 'BNCLKC', 'BNCLMA', 'BNGAHM', 'BNGHAM', 'BNGHCK', 'BNGHKC', 'BNGHMA', 'BNGJIC', 'BNKADM', 'BNKANC', 'BNKBCM', 'BNKBMC', 
+      'BNKCBM', 'BNKCDK', 'BNKCHG', 'BNKCLC', 'BNKCNA', 'BNKDAM', 'BNKDCK', 'BNKDKC', 'BNKDMA', 'BNKFIC', 'BNMABM', 'BNMADK', 'BNMAHG', 'BNMALC', 'BNMANA', 
+      'BNMBAM', 'BNMBCK', 'BNMBKC', 'BNMBMA', 'CALCLN', 'CALCNL', 'CALDKN', 'CALDML', 'CALEJN', 'CALMBN', 'CALMDL', 'CALNAN', 'CALNCL', 'CANALN', 'CANANL', 
+      'CANBKN', 'CANBML', 'CANCLL', 'CANDKL', 'CANEJL', 'CANFIL', 'CANGHL', 'CANHGL', 'CANIFL', 'CANJEL', 'CANKBN', 'CANKDL', 'CANLAN', 'CANLCL', 'CANMBL', 
+      'CANNAL', 'CBIFKN', 'CBIFLM', 'CBIFML', 'CBIFNK', 'CBIGJN', 'CBIMFL', 'CBKCLN', 'CBKCNL', 'CBKDKN', 'CBKDLM', 'CBKDML', 'CBKDNK', 'CBKEJN', 'CBKMBN', 
+      'CBKMDL', 'CBKNAN', 'CBKNBM', 'CBKNCL', 'CBKNDK', 'CBKNFI', 'CBLCKN', 'CBLCLM', 'CBLCML', 'CBLCNK', 'CBLMAN', 'CBLMBM', 'CBLMCL', 'CBLMDK', 'CBLMFI', 
+      'CBMALN', 'CBMANL', 'CBMBKN', 'CBMBLM', 'CBMBML', 'CBMBNK', 'CBMCLL', 'CBMDKL', 'CBMDLK', 'CBMEJL', 'CBMFIL', 'CBMFLI', 'CBMGHL', 'CBMHGL', 'CBMIFL', 
+      'CBMJEL', 'CBMKBN', 'CBMKDL', 'CBMLAN', 'CBMLBM', 'CBMLCL', 'CBMLDK', 'CBMLFI', 'CBMMBL', 'CBMNAL', 'CBMNBK', 'CBNAKN', 'CBNALM', 'CBNAML', 'CBNANK', 
+      'CBNCKL', 'CBNCLK', 'CBNGHK', 'CBNGJI', 'CBNKAN', 'CBNKBM', 'CBNKCL', 'CBNKDK', 'CBNKFI', 'CBNMAL', 'CBNMBK', 'CCLANL', 'CCLBML', 'CCLCLL', 'CCLDKL', 
+      'CCLEJL', 'CCLFIL', 'CCLGHL', 'CCLHGL', 'CCLIFL', 'CCLJEL', 'CCLKDL', 'CCLLCL', 'CCLMBL', 'CCLNAL', 'CDKANL', 'CDKBML', 'CDKBNK', 'CDKCLL', 'CDKDKL', 
+      'CDKDLK', 'CDKEJL', 'CDKFIL', 'CDKGHL', 'CDKHGL', 'CDKIFL', 'CDKJEL', 'CDKKDL', 'CDKLCL', 'CDKLDK', 'CDKMBL', 'CDKNAL', 'CDKNBK', 'CDLAML', 'CDLANK', 
+      'CDLCKL', 'CDLCLK', 'CDLGHK', 'CDLKCL', 'CDLKDK', 'CDLMAL', 'CDLMBK', 'CEJANL', 'CEJBML', 'CEJCLL', 'CEJDKL', 'CEJEJL', 'CEJELJ', 'CEJFIL', 'CEJGHL', 
+      'CEJHGL', 'CEJIFL', 'CEJJEL', 'CEJKDL', 'CEJLCL', 'CEJLEJ', 'CEJMBL', 'CEJNAL', 'CELANJ', 'CELCJL', 'CELCLJ', 'CELFIJ', 'CELJCL', 'CELJEJ', 'CFIANL', 
+      'CFIBML', 'CFICLL', 'CFIDKL', 'CFIEJL', 'CFIFIL', 'CFIFLI', 'CFIGHL', 'CFIHGL', 'CFIIFL', 'CFIJEL', 'CFIKDL', 'CFILCL', 'CFILFI', 'CFIMBL', 'CFINAL', 
+      'CFLCIL', 'CFLCLI', 'CFLEJI', 'CFLICL', 'CFLIFI', 'CFLMBI', 'CGHANL', 'CGHBML', 'CGHCLL', 'CGHDKL', 'CGHEJL', 'CGHFIL', 'CGHGHL', 'CGHGLH', 'CGHHGL', 
+      'CGHIFL', 'CGHJEL', 'CGHKDL', 'CGHLCL', 'CGHLGH', 'CGHMBL', 'CGHNAL', 'CGLCHL', 'CGLCLH', 'CGLDKH', 'CGLHCL', 'CGLHGH', 'CHGANL', 'CHGBML', 'CHGBNK', 
+      'CHGCLL', 'CHGDKL', 'CHGDLK', 'CHGEJL', 'CHGFIL', 'CHGGHL', 'CHGHGL', 'CHGHLG', 'CHGIFL', 'CHGJEL', 'CHGKDL', 'CHGLCL', 'CHGLDK', 'CHGLHG', 'CHGMBL', 
+      'CHGNAL', 'CHGNBK', 'CHKDGL', 'CHKDLG', 'CHKEFL', 'CHKFEL', 'CHKGDL', 'CHLCGL', 'CHLCLG', 'CHLGCL', 'CHLGDK', 'CHLGHG', 'CIBFML', 'CIBGNJ', 'CIBMFL', 
+      'CIBMLF', 'CIFANL', 'CIFBML', 'CIFCLL', 'CIFDKL', 'CIFEJL', 'CIFELJ', 'CIFFIL', 'CIFGHL', 'CIFHGL', 'CIFIFL', 'CIFILF', 'CIFJEL', 'CIFKDL', 'CIFKNB', 
+      'CIFLCL', 'CIFLEJ', 'CIFLIF', 'CIFLMB', 'CIFMBL', 'CIFMLB', 'CIFNAL', 'CIFNKB', 'CIJDGL', 'CIJEFL', 'CIJELF', 'CIJFEL', 'CIJGDL', 'CIJGNB', 'CILCFL', 
+      'CILCLF', 'CILFCL', 'CILFEJ', 'CILFIF', 'CILFMB', 'CJEALN', 'CJEANL', 'CJEBKN', 'CJEBML', 'CJECLL', 'CJEDKL', 'CJEEJL', 'CJEFIL', 'CJEFLI', 'CJEGHL', 
+      'CJEHGL', 'CJEIFL', 'CJEJEL', 'CJEJLE', 'CJEKBN', 'CJEKDL', 'CJELAN', 'CJELCL', 'CJELFI', 'CJELJE', 'CJEMBL', 'CJENAL', 'CJIDGL', 'CJIEFL', 'CJIFEL', 
+      'CJIFLE', 'CJIGBN', 'CJIGDL', 'CJLCEL', 'CJLCLE', 'CJLEAN', 'CJLECL', 'CJLEFI', 'CJLEJE', 'CJNAEL', 'CJNALE', 'CJNEAL', 'CJNGBI', 'CKBCLN', 'CKBCNL', 
+      'CKBDKN', 'CKBDML', 'CKBEJN', 'CKBMBN', 'CKBMDL', 'CKBMLD', 'CKBMNB', 'CKBNAN', 'CKBNCL', 'CKBNGH', 'CKBNKD', 'CKBNMB', 'CKDALN', 'CKDANL', 'CKDBKN', 
+      'CKDBML', 'CKDCLL', 'CKDDKL', 'CKDEJL', 'CKDFIL', 'CKDGHL', 'CKDGLH', 'CKDHGL', 'CKDIFL', 'CKDJEL', 'CKDKBN', 'CKDKDL', 'CKDKLD', 'CKDKNB', 'CKDLAN', 
+      'CKDLCL', 'CKDLGH', 'CKDLKD', 'CKDLMB', 'CKDMBL', 'CKDMLB', 'CKDNAL', 'CKDNKB', 'CKHDGL', 'CKHEFL', 'CKHFEL', 'CKHGBN', 'CKHGDL', 'CKHGLD', 'CKHGNB', 
+      'CKLCBN', 'CKLCDL', 'CKLCLD', 'CKLCNB', 'CKLDAN', 'CKLDCL', 'CKLDGH', 'CKLDKD', 'CKLDMB', 'CKNABN', 'CKNADL', 'CKNALD', 'CKNANB', 'CKNBAN', 'CKNBCL', 
+      'CKNBGH', 'CKNBKD', 'CKNBMB', 'CKNCBL', 'CKNCLB', 'CKNDAL', 'CKNDKB', 'CKNFIB', 'CLACLN', 'CLACNL', 'CLADKN', 'CLADLM', 'CLADML', 'CLADNK', 'CLAEJN', 
+      'CLAENJ', 'CLAMBN', 'CLAMDL', 'CLAMLD', 'CLAMNB', 'CLANAN', 'CLANBM', 'CLANCL', 'CLANDK', 'CLANEJ', 'CLANFI', 'CLANGH', 'CLANHG', 'CLANIF', 'CLANJE', 
+      'CLANKD', 'CLANLC', 'CLANMB', 'CLANNA', 'CLBCKN', 'CLBCLM', 'CLBCML', 'CLBCNK', 'CLBMAN', 'CLBMBM', 'CLBMCL', 'CLBMDK', 'CLBMEJ', 'CLBMFI', 'CLBMGH', 
+      'CLBMHG', 'CLBMIF', 'CLBMJE', 'CLBMKD', 'CLBMLC', 'CLBMMB', 'CLBMNA', 'CLCALN', 'CLCANL', 'CLCBKN', 'CLCBLM', 'CLCBML', 'CLCBNK', 'CLCCLL', 'CLCDKL', 
+      'CLCDLK', 'CLCEJL', 'CLCELJ', 'CLCFIL', 'CLCFLI', 'CLCGHL', 'CLCGLH', 'CLCHGL', 'CLCHLG', 'CLCIFL', 'CLCILF', 'CLCJEL', 'CLCJLE', 'CLCKBN', 'CLCKDL', 
+      'CLCKLD', 'CLCKNB', 'CLCLAN', 'CLCLBM', 'CLCLCL', 'CLCLDK', 'CLCLEJ', 'CLCLFI', 'CLCLGH', 'CLCLHG', 'CLCLIF', 'CLCLJE', 'CLCLKD', 'CLCLLC', 'CLCLMB', 
+      'CLCLNA', 'CLCMBL', 'CLCMLB', 'CLCNAL', 'CLCNBK', 'CLCNKB', 'CLCNLA', 'CLDAKN', 'CLDALM', 'CLDAML', 'CLDANK', 'CLDCKL', 'CLDCLK', 'CLDGHK', 'CLDGIJ', 
+      'CLDGJI', 'CLDGKH', 'CLDKAN', 'CLDKBM', 'CLDKCL', 'CLDKDK', 'CLDKEJ', 'CLDKFI', 'CLDKGH', 'CLDKHG', 'CLDKIF', 'CLDKJE', 'CLDKKD', 'CLDKLC', 'CLDKMB', 
+      'CLDKNA', 'CLDMAL', 'CLDMBK', 'CLDMKB', 'CLDMLA', 'CLEAJN', 'CLEANJ', 'CLECJL', 'CLECLJ', 'CLEFHK', 'CLEFIJ', 'CLEFJI', 'CLEFKH', 'CLEJAN', 'CLEJBM', 
+      'CLEJCL', 'CLEJDK', 'CLEJEJ', 'CLEJFI', 'CLEJGH', 'CLEJHG', 'CLEJIF', 'CLEJJE', 'CLEJKD', 'CLEJLC', 'CLEJMB', 'CLEJNA', 'CLFCIL', 'CLFCLI', 'CLFEHK', 
+      'CLFEIJ', 'CLFEJI', 'CLFEKH', 'CLFIAN', 'CLFIBM', 'CLFICL', 'CLFIDK', 'CLFIEJ', 'CLFIFI', 'CLFIGH', 'CLFIHG', 'CLFIIF', 'CLFIJE', 'CLFIKD', 'CLFILC', 
+      'CLFIMB', 'CLFINA', 'CLFMBI', 'CLFMIB', 'CLGCHL', 'CLGCLH', 'CLGDHK', 'CLGDIJ', 'CLGDJI', 'CLGDKH', 'CLGHAN', 'CLGHBM', 'CLGHCL', 'CLGHDK', 'CLGHEJ', 
+      'CLGHFI', 'CLGHGH', 'CLGHHG', 'CLGHIF', 'CLGHJE', 'CLGHKD', 'CLGHLC', 'CLGHMB', 'CLGHNA', 'CLHCGL', 'CLHCLG', 'CLHGAN', 'CLHGBM', 'CLHGCL', 'CLHGDK', 
+      'CLHGEJ', 'CLHGFI', 'CLHGGH', 'CLHGHG', 'CLHGIF', 'CLHGJE', 'CLHGKD', 'CLHGLC', 'CLHGMB', 'CLHGNA', 'CLICFL', 'CLICLF', 'CLIFAN', 'CLIFBM', 'CLIFCL', 
+      'CLIFDK', 'CLIFEJ', 'CLIFFI', 'CLIFGH', 'CLIFHG', 'CLIFIF', 'CLIFJE', 'CLIFKD', 'CLIFLC', 'CLIFMB', 'CLIFNA', 'CLJCEL', 'CLJCLE', 'CLJEAN', 'CLJEBM', 
+      'CLJECL', 'CLJEDK', 'CLJEEJ', 'CLJEFI', 'CLJEGH', 'CLJEHG', 'CLJEIF', 'CLJEJE', 'CLJEKD', 'CLJELC', 'CLJEMB', 'CLJENA', 'CLKCBN', 'CLKCDL', 'CLKCLD', 
+      'CLKCNB', 'CLKDAN', 'CLKDBM', 'CLKDCL', 'CLKDDK', 'CLKDEJ', 'CLKDFI', 'CLKDGH', 'CLKDHG', 'CLKDIF', 'CLKDJE', 'CLKDKD', 'CLKDLC', 'CLKDMB', 'CLKDNA', 
+      'CLLCAN', 'CLLCBM', 'CLLCCL', 'CLLCDK', 'CLLCEJ', 'CLLCFI', 'CLLCGH', 'CLLCHG', 'CLLCIF', 'CLLCJE', 'CLLCKD', 'CLLCLC', 'CLLCMB', 'CLLCNA', 'CLMABN', 
+      'CLMADL', 'CLMALD', 'CLMANB', 'CLMBAN', 'CLMBBM', 'CLMBCL', 'CLMBDK', 'CLMBEJ', 'CLMBFI', 'CLMBGH', 'CLMBHG', 'CLMBIF', 'CLMBJE', 'CLMBKD', 'CLMBLC', 
+      'CLMBMB', 'CLMBNA', 'CLMCBL', 'CLMCLB', 'CLMDAL', 'CLMDBK', 'CLMDKB', 'CLMDLA', 'CLMFBI', 'CLMFIB', 'CLNAAN', 'CLNABM', 'CLNACL', 'CLNADK', 'CLNAEJ', 
+      'CLNAFI', 'CLNAGH', 'CLNAHG', 'CLNAIF', 'CLNAJE', 'CLNAKD', 'CLNALC', 'CLNAMB', 'CLNANA', 'CLNCAL', 'CLNCBK', 'CLNCKB', 'CLNCLA', 'CMBANL', 'CMBBML', 
+      'CMBCLL', 'CMBDKL', 'CMBEJL', 'CMBFIL', 'CMBGHL', 'CMBHGL', 'CMBIFL', 'CMBJEL', 'CMBKDL', 'CMBKNB', 'CMBLCL', 'CMBLMB', 'CMBMBL', 'CMBMLB', 'CMBNAL', 
+      'CMBNKB', 'CMLADL', 'CMLANB', 'CMLBCL', 'CMLBMB', 'CMLCBL', 'CMLCLB', 'CMLDAL', 'CMLDKB', 'CMLFIB', 'CNAANL', 'CNABML', 'CNABNK', 'CNACLL', 'CNADKL', 
+      'CNADLK', 'CNAEJL', 'CNAELJ', 'CNAFIL', 'CNAGHL', 'CNAHGL', 'CNAIFL', 'CNAJEL', 'CNAKDL', 'CNAKNB', 'CNALCL', 'CNALDK', 'CNALEJ', 'CNALMB', 'CNALNA', 
+      'CNAMBL', 'CNAMLB', 'CNANAL', 'CNANBK', 'CNANKB', 'CNANLA', 'CNBAML', 'CNBANK', 'CNBCKL', 'CNBCLK', 'CNBGHK', 'CNBGIJ', 'CNBKCL', 'CNBKDK', 'CNBKEJ', 
+      'CNBKMB', 'CNBKNA', 'CNBMAL', 'CNBMBK', 'CNBMKB', 'CNBMLA', 'CNJAEL', 'CNJEAL', 'CNJEBK', 'CNJEKB', 'CNJELA', 'CNJGIB', 'CNKADL', 'CNKANB', 'CNKBCL', 
+      'CNKBDK', 'CNKBEJ', 'CNKBMB', 'CNKBNA', 'CNKCBL', 'CNKCLB', 'CNKDAL', 'CNKDBK', 'CNKDKB', 'CNKDLA', 'CNKFIB', 'CNLACL', 'CNLADK', 'CNLAEJ', 'CNLAMB', 
+      'CNLANA', 'CNLCAL', 'CNLCBK', 'CNLCKB', 'CNLCLA', 'DAIFKN', 'DAIFLM', 'DAIFML', 'DAIFNK', 'DAINFK', 'DAKDKN', 'DAKDLM', 'DAKDML', 'DAKDNK', 'DAKNAN', 
+      'DAKNBM', 'DAKNCL', 'DAKNDK', 'DAKNFI', 'DALCKN', 'DALCLM', 'DALCML', 'DALCNK', 'DALDKM', 'DALDMK', 'DALEJM', 'DALMAN', 'DALMBM', 'DALMCL', 'DALMDK', 
+      'DALMFI', 'DALNAM', 'DALNCK', 'DAMBKN', 'DAMBLM', 'DAMBML', 'DAMBNK', 'DAMDKL', 'DAMDLK', 'DAMHGL', 'DAMLAN', 'DAMLBM', 'DAMLCL', 'DAMLDK', 'DAMLFI', 
+      'DAMNAL', 'DAMNBK', 'DANAKN', 'DANALM', 'DANAML', 'DANANK', 'DANBKM', 'DANBMK', 'DANCKL', 'DANCLK', 'DANDKK', 'DANEJK', 'DANFIK', 'DANFKI', 'DANGHK', 
+      'DANGJI', 'DANHGK', 'DANIFK', 'DANJEK', 'DANJGI', 'DANKAN', 'DANKBM', 'DANKCL', 'DANKDK', 'DANKFI', 'DANLAM', 'DANLCK', 'DANMAL', 'DANMBK', 'DANNAK', 
+      'DBKCLM', 'DBKCNK', 'DBKDKM', 'DBKDMK', 'DBKEJM', 'DBKMBM', 'DBKMDK', 'DBKNAM', 'DBKNCK', 'DBMALM', 'DBMANK', 'DBMBKM', 'DBMBMK', 'DBMCLK', 'DBMDKK', 
+      'DBMEJK', 'DBMFIK', 'DBMGHK', 'DBMHGK', 'DBMIFK', 'DBMJEK', 'DBMKBM', 'DBMKDK', 'DBMLAM', 'DBMLCK', 'DBMMBK', 'DBMNAK', 'DCKBML', 'DCKBNK', 'DCKDKL', 
+      'DCKDLK', 'DCKHGL', 'DCKLCL', 'DCKLDK', 'DCKNAL', 'DCKNBK', 'DCLAML', 'DCLANK', 'DCLBMK', 'DCLCKL', 'DCLCLK', 'DCLDKK', 'DCLEJK', 'DCLFIK', 'DCLGHK', 
+      'DCLHGK', 'DCLIFK', 'DCLJEK', 'DCLKCL', 'DCLKDK', 'DCLLCK', 'DCLMAL', 'DCLMBK', 'DCLNAK', 'DDKANK', 'DDKBMK', 'DDKCLK', 'DDKDKK', 'DDKEJK', 'DDKFIK', 
+      'DDKGHK', 'DDKHGK', 'DDKIFK', 'DDKJEK', 'DDKKDK', 'DDKLCK', 'DDKMBK', 'DDKNAK', 'DEJANK', 'DEJBMK', 'DEJCLK', 'DEJDKK', 'DEJEJK', 'DEJEKJ', 'DEJFIK', 
+      'DEJGHK', 'DEJGIJ', 'DEJHGK', 'DEJIFK', 'DEJIGJ', 'DEJJEK', 'DEJKDK', 'DEJKEJ', 'DEJLCK', 'DEJMBK', 'DEJNAK', 'DEKBMJ', 'DEKDJK', 'DEKDKJ', 'DEKFHK', 
+      'DEKFIJ', 'DEKHFK', 'DEKHGJ', 'DEKJDK', 'DEKJEJ', 'DFIANK', 'DFIBMK', 'DFICLK', 'DFIDKK', 'DFIEJK', 'DFIFIK', 'DFIFKI', 'DFIGHK', 'DFIGJI', 'DFIHGK', 
+      'DFIIFK', 'DFIJEK', 'DFIJGI', 'DFIKDK', 'DFIKFI', 'DFILCK', 'DFIMBK', 'DFINAK', 'DFKDIK', 'DFKDKI', 'DFKEHK', 'DFKEJI', 'DFKHEK', 'DFKHGI', 'DFKIDK', 
+      'DFKIFI', 'DFKNAI', 'DGHAML', 'DGHANK', 'DGHBMK', 'DGHCKL', 'DGHCLK', 'DGHDKK', 'DGHEJK', 'DGHEKJ', 'DGHFIK', 'DGHFKI', 'DGHGHK', 'DGHGIJ', 'DGHGJI', 
+      'DGHGKH', 'DGHHGK', 'DGHIFK', 'DGHIGJ', 'DGHJEK', 'DGHJGI', 'DGHKCL', 'DGHKDK', 'DGHKEJ', 'DGHKFI', 'DGHKGH', 'DGHLCK', 'DGHMAL', 'DGHMBK', 'DGHNAK', 
+      'DGIBMJ', 'DGIDJK', 'DGIDKJ', 'DGIFHK', 'DGIFIJ', 'DGIFJI', 'DGIFKH', 'DGIHFK', 'DGIHGJ', 'DGIJCL', 'DGIJDK', 'DGIJEJ', 'DGIJFI', 'DGIJGH', 'DGJDIK', 
+      'DGJDKI', 'DGJEHK', 'DGJEIJ', 'DGJEJI', 'DGJEKH', 'DGJHEK', 'DGJHGI', 'DGJICL', 'DGJIDK', 'DGJIEJ', 'DGJIFI', 'DGJIGH', 'DGJNAI', 'DGKDHK', 'DGKDIJ', 
+      'DGKDJI', 'DGKDKH', 'DGKHCL', 'DGKHDK', 'DGKHEJ', 'DGKHFI', 'DGKHGH', 'DGLCHK', 'DGLCIJ', 'DGLCJI', 'DGLCKH', 'DGLHCK', 'DHGANK', 'DHGBMK', 'DHGCLK', 
+      'DHGDKK', 'DHGEJK', 'DHGFIK', 'DHGGHK', 'DHGHGK', 'DHGHKG', 'DHGIFK', 'DHGIJG', 'DHGJEK', 'DHGJIG', 'DHGKDK', 'DHGKHG', 'DHGLCK', 'DHGMBK', 'DHGNAK', 
+      'DHKCLG', 'DHKDGK', 'DHKDKG', 'DHKEFK', 'DHKEJG', 'DHKFEK', 'DHKFIG', 'DHKGDK', 'DHKGHG', 'DIAFNK', 'DIANFK', 'DIANGJ', 'DIANJG', 'DIANKF', 'DIFANK', 
+      'DIFBMK', 'DIFCLK', 'DIFDKK', 'DIFEJK', 'DIFEKJ', 'DIFFIK', 'DIFGHK', 'DIFGIJ', 'DIFHGK', 'DIFHKG', 'DIFIFK', 'DIFIGJ', 'DIFIJG', 'DIFIKF', 'DIFJEK', 
+      'DIFJIG', 'DIFKDK', 'DIFKEJ', 'DIFKHG', 'DIFKIF', 'DIFKNA', 'DIFLCK', 'DIFLMA', 'DIFMBK', 'DIFMLA', 'DIFNAK', 'DIFNKA', 'DIGBMJ', 'DIGDJK', 'DIGDKJ', 
+      'DIGFHK', 'DIGFIJ', 'DIGHFK', 'DIGHGJ', 'DIGHJG', 'DIGHKF', 'DIGJDK', 'DIGJEJ', 'DIGJHG', 'DIGJIF', 'DIGJNA', 'DIJCLG', 'DIJDGK', 'DIJDKG', 'DIJEFK', 
+      'DIJEGJ', 'DIJEJG', 'DIJEKF', 'DIJFEK', 'DIJFIG', 'DIJGDK', 'DIJGEJ', 'DIJGHG', 'DIJGIF', 'DIJGNA', 'DIKDFK', 'DIKDGJ', 'DIKDJG', 'DIKDKF', 'DIKFDK', 
+      'DIKFEJ', 'DIKFHG', 'DIKFIF', 'DIKFNA', 'DJEALM', 'DJEANK', 'DJEBKM', 'DJEBMK', 'DJECLK', 'DJEDKK', 'DJEEJK', 'DJEFIK', 'DJEFKI', 'DJEGHK', 'DJEGJI', 
+      'DJEHGK', 'DJEHKG', 'DJEIFK', 'DJEIJG', 'DJEJEK', 'DJEJGI', 'DJEJIG', 'DJEJKE', 'DJEKBM', 'DJEKDK', 'DJEKFI', 'DJEKHG', 'DJEKJE', 'DJELAM', 'DJELCK', 
+      'DJEMBK', 'DJENAK', 'DJGDIK', 'DJGDKI', 'DJGEHK', 'DJGEJI', 'DJGHEK', 'DJGHGI', 'DJGHIG', 'DJGHKE', 'DJGIBM', 'DJGIDK', 'DJGIFI', 'DJGIHG', 'DJGIJE', 
+      'DJGNAI', 'DJICLG', 'DJIDGK', 'DJIDKG', 'DJIEFK', 'DJIEJG', 'DJIFEK', 'DJIFGI', 'DJIFIG', 'DJIFKE', 'DJIGBM', 'DJIGDK', 'DJIGFI', 'DJIGHG', 'DJIGJE', 
+      'DJKDEK', 'DJKDGI', 'DJKDIG', 'DJKDKE', 'DJKEBM', 'DJKEDK', 'DJKEFI', 'DJKEHG', 'DJKEJE', 'DJMBEK', 'DJMBGI', 'DJMBIG', 'DJMBKE', 'DJMEBK', 'DKADKN', 
+      'DKADLM', 'DKADML', 'DKADNK', 'DKANAN', 'DKANBM', 'DKANCL', 'DKANDK', 'DKANEJ', 'DKANFI', 'DKANGH', 'DKANHG', 'DKANIF', 'DKANJE', 'DKANKD', 'DKANLC', 
+      'DKANMB', 'DKANNA', 'DKBCKN', 'DKBCLM', 'DKBCML', 'DKBCNK', 'DKBDKM', 'DKBDMK', 'DKBEJM', 'DKBEMJ', 'DKBMAN', 'DKBMBM', 'DKBMCL', 'DKBMDK', 'DKBMEJ', 
+      'DKBMFI', 'DKBMGH', 'DKBMHG', 'DKBMIF', 'DKBMJE', 'DKBMKD', 'DKBMLC', 'DKBMMB', 'DKBMNA', 'DKBNAM', 'DKBNCK', 'DKBNKC', 'DKBNMA', 'DKCBKN', 'DKCBLM', 
+      'DKCBML', 'DKCBNK', 'DKCDKL', 'DKCDLK', 'DKCHGL', 'DKCHLG', 'DKCLAN', 'DKCLBM', 'DKCLCL', 'DKCLDK', 'DKCLEJ', 'DKCLFI', 'DKCLGH', 'DKCLHG', 'DKCLIF', 
+      'DKCLJE', 'DKCLKD', 'DKCLLC', 'DKCLMB', 'DKCLNA', 'DKCNAL', 'DKCNBK', 'DKCNKB', 'DKCNLA', 'DKDAKN', 'DKDALM', 'DKDAML', 'DKDANK', 'DKDBKM', 'DKDBMK', 
+      'DKDCKL', 'DKDCLK', 'DKDDKK', 'DKDEJK', 'DKDEKJ', 'DKDFIK', 'DKDFKI', 'DKDGHK', 'DKDGIJ', 'DKDGJI', 'DKDGKH', 'DKDHGK', 'DKDHKG', 'DKDIFK', 'DKDIGJ', 
+      'DKDIJG', 'DKDIKF', 'DKDJEK', 'DKDJGI', 'DKDJIG', 'DKDJKE', 'DKDKAN', 'DKDKBM', 'DKDKCL', 'DKDKDK', 'DKDKEJ', 'DKDKFI', 'DKDKGH', 'DKDKHG', 'DKDKIF', 
+      'DKDKJE', 'DKDKKD', 'DKDKLC', 'DKDKMB', 'DKDKNA', 'DKDLAM', 'DKDLCK', 'DKDLKC', 'DKDLMA', 'DKDMAL', 'DKDMBK', 'DKDMKB', 'DKDMLA', 'DKDNAK', 'DKDNKA', 
+      'DKEBJM', 'DKEBMJ', 'DKEDJK', 'DKEDKJ', 'DKEFHK', 'DKEFIJ', 'DKEFJI', 'DKEFKH', 'DKEHFK', 'DKEHGJ', 'DKEHJG', 'DKEHKF', 'DKEJAN', 'DKEJBM', 'DKEJCL', 
+      'DKEJDK', 'DKEJEJ', 'DKEJFI', 'DKEJGH', 'DKEJHG', 'DKEJIF', 'DKEJJE', 'DKEJKD', 'DKEJLC', 'DKEJMB', 'DKEJNA', 'DKFDIK', 'DKFDKI', 'DKFEHK', 'DKFEIJ', 
+      'DKFEJI', 'DKFEKH', 'DKFHEK', 'DKFHGI', 'DKFHIG', 'DKFHKE', 'DKFIAN', 'DKFIBM', 'DKFICL', 'DKFIDK', 'DKFIEJ', 'DKFIFI', 'DKFIGH', 'DKFIHG', 'DKFIIF', 
+      'DKFIJE', 'DKFIKD', 'DKFILC', 'DKFIMB', 'DKFINA', 'DKFNAI', 'DKFNIA', 'DKGDHK', 'DKGDIJ', 'DKGDJI', 'DKGDKH', 'DKGHAN', 'DKGHBM', 'DKGHCL', 'DKGHDK', 
+      'DKGHEJ', 'DKGHFI', 'DKGHGH', 'DKGHHG', 'DKGHIF', 'DKGHJE', 'DKGHKD', 'DKGHLC', 'DKGHMB', 'DKGHNA', 'DKHCGL', 'DKHCLG', 'DKHDGK', 'DKHDKG', 'DKHEFK', 
+      'DKHEGJ', 'DKHEJG', 'DKHEKF', 'DKHFEK', 'DKHFGI', 'DKHFIG', 'DKHFKE', 'DKHGAN', 'DKHGBM', 'DKHGCL', 'DKHGDK', 'DKHGEJ', 'DKHGFI', 'DKHGGH', 'DKHGHG', 
+      'DKHGIF', 'DKHGJE', 'DKHGKD', 'DKHGLC', 'DKHGMB', 'DKHGNA', 'DKIDFK', 'DKIDGJ', 'DKIDJG', 'DKIDKF', 'DKIFAN', 'DKIFBM', 'DKIFCL', 'DKIFDK', 'DKIFEJ', 
+      'DKIFFI', 'DKIFGH', 'DKIFHG', 'DKIFIF', 'DKIFJE', 'DKIFKD', 'DKIFLC', 'DKIFMB', 'DKIFNA', 'DKJDEK', 'DKJDGI', 'DKJDIG', 'DKJDKE', 'DKJEAN', 'DKJEBM', 
+      'DKJECL', 'DKJEDK', 'DKJEEJ', 'DKJEFI', 'DKJEGH', 'DKJEHG', 'DKJEIF', 'DKJEJE', 'DKJEKD', 'DKJELC', 'DKJEMB', 'DKJENA', 'DKKDAN', 'DKKDBM', 'DKKDCL', 
+      'DKKDDK', 'DKKDEJ', 'DKKDFI', 'DKKDGH', 'DKKDHG', 'DKKDIF', 'DKKDJE', 'DKKDKD', 'DKKDLC', 'DKKDMB', 'DKKDNA', 'DKLCAN', 'DKLCBM', 'DKLCCL', 'DKLCDK', 
+      'DKLCEJ', 'DKLCFI', 'DKLCGH', 'DKLCHG', 'DKLCIF', 'DKLCJE', 'DKLCKD', 'DKLCLC', 'DKLCMB', 'DKLCNA', 'DKLDAM', 'DKLDCK', 'DKLDKC', 'DKLDMA', 'DKMBAN', 
+      'DKMBBM', 'DKMBCL', 'DKMBDK', 'DKMBEJ', 'DKMBFI', 'DKMBGH', 'DKMBHG', 'DKMBIF', 'DKMBJE', 'DKMBKD', 'DKMBLC', 'DKMBMB', 'DKMBNA', 'DKMDAL', 'DKMDBK', 
+      'DKMDKB', 'DKMDLA', 'DKNAAN', 'DKNABM', 'DKNACL', 'DKNADK', 'DKNAEJ', 'DKNAFI', 'DKNAGH', 'DKNAHG', 'DKNAIF', 'DKNAJE', 'DKNAKD', 'DKNALC', 'DKNAMB', 
+      'DKNANA', 'DKNBAM', 'DKNBCK', 'DKNBKC', 'DKNBMA', 'DKNCAL', 'DKNCBK', 'DKNCKB', 'DKNCLA', 'DKNDAK', 'DKNDKA', 'DKNFAI', 'DKNFIA', 'DLACLM', 'DLACNK', 
+      'DLADKM', 'DLADMK', 'DLAEJM', 'DLAMBM', 'DLAMDK', 'DLAMHG', 'DLAMLC', 'DLAMNA', 'DLANAM', 'DLANCK', 'DLANKC', 'DLANMA', 'DLCALM', 'DLCANK', 'DLCBKM', 
+      'DLCBMK', 'DLCCLK', 'DLCDKK', 'DLCEJK', 'DLCFIK', 'DLCGHK', 'DLCHGK', 'DLCHKG', 'DLCIFK', 'DLCIJG', 'DLCJEK', 'DLCJIG', 'DLCKBM', 'DLCKDK', 'DLCKHG', 
+      'DLCKLC', 'DLCKNA', 'DLCLAM', 'DLCLCK', 'DLCLKC', 'DLCLMA', 'DLCMBK', 'DLCMLA', 'DLCNAK', 'DLCNKA', 'DLGCHK', 'DLGHAM', 'DLGHCK', 'DLGHKC', 'DLGHMA', 
+      'DLKCBM', 'DLKCDK', 'DLKCHG', 'DLKCLC', 'DLKCNA', 'DLKDAM', 'DLKDCK', 'DLKDKC', 'DLKDMA', 'DLMABM', 'DLMADK', 'DLMAHG', 'DLMALC', 'DLMANA', 'DLMBAM', 
+      'DLMBCK', 'DLMBKC', 'DLMBMA', 'DLMCBK', 'DLMCLA', 'DLMDAK', 'DLMDKA', 'DLMFIA', 'DMABML', 'DMABNK', 'DMADKL', 'DMADLK', 'DMAHGL', 'DMALCL', 'DMALDK', 
+      'DMALEJ', 'DMALMB', 'DMALNA', 'DMANAL', 'DMANBK', 'DMANKB', 'DMANLA', 'DMBAML', 'DMBANK', 'DMBBMK', 'DMBCKL', 'DMBCLK', 'DMBDKK', 'DMBEJK', 'DMBEKJ', 
+      'DMBFIK', 'DMBGHK', 'DMBGIJ', 'DMBHGK', 'DMBIFK', 'DMBIGJ', 'DMBJEK', 'DMBKCL', 'DMBKDK', 'DMBKEJ', 'DMBKMB', 'DMBKNA', 'DMBLCK', 'DMBLMA', 'DMBMAL', 
+      'DMBMBK', 'DMBMKB', 'DMBMLA', 'DMBNAK', 'DMBNKA', 'DMJBEK', 'DMJEAL', 'DMJEBK', 'DMJEKB', 'DMJELA', 'DMKBCL', 'DMKBDK', 'DMKBEJ', 'DMKBMB', 'DMKBNA', 
+      'DMKDAL', 'DMKDBK', 'DMKDKB', 'DMKDLA', 'DMLACL', 'DMLADK', 'DMLAEJ', 'DMLAMB', 'DMLANA', 'DMLBCK', 'DMLBMA', 'DMLCAL', 'DMLCBK', 'DMLCKB', 'DMLCLA', 
+      'DMLDAK', 'DMLDKA', 'DMLFIA', 'DNAANK', 'DNABMK', 'DNACLK', 'DNADKK', 'DNAEJK', 'DNAFIK', 'DNAGHK', 'DNAHGK', 'DNAIFK', 'DNAJEK', 'DNAKDK', 'DNAKNA', 
+      'DNALCK', 'DNALMA', 'DNAMBK', 'DNAMLA', 'DNANAK', 'DNANKA', 'DNKADK', 'DNKANA', 'DNKBCK', 'DNKBMA', 'DNKCBK', 'DNKCLA', 'DNKDAK', 'DNKDKA', 'DNKFIA', 
+      'EAHGJN', 'EAHGNJ', 'EAHMFL', 'EAHNGJ', 'EAJEJN', 'EAJENJ', 'EAJNAN', 'EAJNCL', 'EAJNEJ', 'EAJNGH', 'EALCJN', 'EALCNJ', 'EALDMJ', 'EALMDJ', 'EALMFH', 
+      'EALNCJ', 'EANAJN', 'EANANJ', 'EANBMJ', 'EANCJL', 'EANCLJ', 'EANDKJ', 'EANEJJ', 'EANFIJ', 'EANFKH', 'EANGHJ', 'EANGJH', 'EANHGJ', 'EANIFJ', 'EANJAN', 
+      'EANJCL', 'EANJEJ', 'EANJGH', 'EANKDJ', 'EANKFH', 'EANLCJ', 'EANMBJ', 'EANNAJ', 'EBJEJM', 'EBJEMJ', 'EBJMBM', 'EBJMDK', 'EBJMEJ', 'EBKCNJ', 'EBKDJM', 
+      'EBKDMJ', 'EBKMDJ', 'EBKNCJ', 'EBMANJ', 'EBMBJM', 'EBMBMJ', 'EBMCLJ', 'EBMDJK', 'EBMDKJ', 'EBMEJJ', 'EBMFHK', 'EBMFIJ', 'EBMGHJ', 'EBMHFK', 'EBMHGJ', 
+      'EBMIFJ', 'EBMJBM', 'EBMJDK', 'EBMJEJ', 'EBMKDJ', 'EBMLCJ', 'EBMMBJ', 'EBMNAJ', 'ECJEJL', 'ECJELJ', 'ECJIFL', 'ECJLCL', 'ECJLEJ', 'ECJNAL', 'ECLANJ', 
+      'ECLBMJ', 'ECLCJL', 'ECLCLJ', 'ECLDKJ', 'ECLEJJ', 'ECLFIJ', 'ECLGHJ', 'ECLHGJ', 'ECLIFJ', 'ECLJCL', 'ECLJEJ', 'ECLKDJ', 'ECLLCJ', 'ECLMBJ', 'ECLNAJ', 
+      'EDJEJK', 'EDJEKJ', 'EDJGHK', 'EDJGIJ', 'EDJIFK', 'EDJIGJ', 'EDJKDK', 'EDJKEJ', 'EDJMBK', 'EDKANJ', 'EDKBMJ', 'EDKCLJ', 'EDKDJK', 'EDKDKJ', 'EDKEJJ', 
+      'EDKFHK', 'EDKFIJ', 'EDKGHJ', 'EDKHFK', 'EDKHGJ', 'EDKIFJ', 'EDKJDK', 'EDKJEJ', 'EDKKDJ', 'EDKLCJ', 'EDKMBJ', 'EDKNAJ', 'EEJANJ', 'EEJBMJ', 'EEJCLJ', 
+      'EEJDKJ', 'EEJEJJ', 'EEJFIJ', 'EEJGHJ', 'EEJHGJ', 'EEJIFJ', 'EEJJEJ', 'EEJKDJ', 'EEJLCJ', 'EEJMBJ', 'EEJNAJ', 'EFHEJK', 'EFHEKJ', 'EFHGHK', 'EFHGIJ', 
+      'EFHGJI', 'EFHGKH', 'EFHIFK', 'EFHIGJ', 'EFHKCL', 'EFHKDK', 'EFHKEJ', 'EFHKFI', 'EFHKGH', 'EFHMAL', 'EFHMBK', 'EFIANJ', 'EFIBMJ', 'EFICJL', 'EFICLJ', 
+      'EFIDJK', 'EFIDKJ', 'EFIEJJ', 'EFIFHK', 'EFIFIJ', 'EFIFJI', 'EFIFKH', 'EFIGHJ', 'EFIGJH', 'EFIHFK', 'EFIHGJ', 'EFIIFJ', 'EFIJCL', 'EFIJDK', 'EFIJEJ', 
+      'EFIJFI', 'EFIJGH', 'EFIKDJ', 'EFIKFH', 'EFILCJ', 'EFIMBJ', 'EFINAJ', 'EFJEHK', 'EFJEIJ', 'EFJEJI', 'EFJEKH', 'EFJICL', 'EFJIDK', 'EFJIEJ', 'EFJIFI', 
+      'EFJIGH', 'EFKDHK', 'EFKDIJ', 'EFKDJI', 'EFKDKH', 'EFKEHJ', 'EFKEJH', 'EFKHCL', 'EFKHDK', 'EFKHEJ', 'EFKHFI', 'EFKHGH', 'EFKIDJ', 'EFKIFH', 'EFKNAH', 
+      'EFLCHK', 'EFLCIJ', 'EFLCJI', 'EFLCKH', 'EFLICJ', 'EFLMAH', 'EGHANJ', 'EGHBMJ', 'EGHCLJ', 'EGHDKJ', 'EGHEJJ', 'EGHFIJ', 'EGHFKH', 'EGHGHJ', 'EGHGJH', 
+      'EGHHGJ', 'EGHIFJ', 'EGHJEJ', 'EGHJGH', 'EGHKDJ', 'EGHKFH', 'EGHLCJ', 'EGHMBJ', 'EGHNAJ', 'EGJDIJ', 'EGJDKH', 'EGJEHJ', 'EGJEJH', 'EGJHEJ', 'EGJHGH', 
+      'EGJIDJ', 'EGJIFH', 'EGJNAH', 'EHAGNJ', 'EHAMLF', 'EHANFK', 'EHANGJ', 'EHANJG', 'EHANKF', 'EHFEJK', 'EHFEKJ', 'EHFGHK', 'EHFGIJ', 'EHFIFK', 'EHFIGJ', 
+      'EHFIJG', 'EHFIKF', 'EHFKDK', 'EHFKEJ', 'EHFKHG', 'EHFKIF', 'EHFKNA', 'EHFMBK', 'EHFMLA', 'EHGANJ', 'EHGBMJ', 'EHGCLJ', 'EHGDJK', 'EHGDKJ', 'EHGEJJ', 
+      'EHGFHK', 'EHGFIJ', 'EHGGHJ', 'EHGHFK', 'EHGHGJ', 'EHGHJG', 'EHGHKF', 'EHGIFJ', 'EHGIJF', 'EHGJDK', 'EHGJEJ', 'EHGJHG', 'EHGJIF', 'EHGJNA', 'EHGKDJ', 
+      'EHGKHF', 'EHGLCJ', 'EHGMBJ', 'EHGNAJ', 'EHGNJA', 'EHJEFK', 'EHJEGJ', 'EHJEJG', 'EHJEKF', 'EHJGDK', 'EHJGEJ', 'EHJGHG', 'EHJGIF', 'EHJGNA', 'EHKCLF', 
+      'EHKDFK', 'EHKDGJ', 'EHKDJG', 'EHKDKF', 'EHKEFJ', 'EHKEJF', 'EHKFDK', 'EHKFEJ', 'EHKFHG', 'EHKFIF', 'EHKFNA', 'EHKGDJ', 'EHKGHF', 'EIFANJ', 'EIFBMJ', 
+      'EIFCLJ', 'EIFDKJ', 'EIFEJJ', 'EIFFIJ', 'EIFGHJ', 'EIFHGJ', 'EIFHKF', 'EIFIFJ', 'EIFIJF', 'EIFJEJ', 'EIFJIF', 'EIFKDJ', 'EIFKHF', 'EIFLCJ', 'EIFMBJ', 
+      'EIFNAJ', 'EIJCLF', 'EIJDGJ', 'EIJDKF', 'EIJEFJ', 'EIJEJF', 'EIJFEJ', 'EIJFIF', 'EIJGDJ', 'EIJGHF', 'EJAEJN', 'EJAENJ', 'EJANAN', 'EJANBM', 'EJANCL', 
+      'EJANDK', 'EJANEJ', 'EJANFI', 'EJANGH', 'EJANHG', 'EJANIF', 'EJANJE', 'EJANKD', 'EJANLC', 'EJANMB', 'EJANNA', 'EJBEJM', 'EJBEMJ', 'EJBMAN', 'EJBMBM', 
+      'EJBMCL', 'EJBMDK', 'EJBMEJ', 'EJBMFI', 'EJBMGH', 'EJBMHG', 'EJBMIF', 'EJBMJE', 'EJBMKD', 'EJBMLC', 'EJBMMB', 'EJBMNA', 'EJCEJL', 'EJCELJ', 'EJCIFL', 
+      'EJCILF', 'EJCLAN', 'EJCLBM', 'EJCLCL', 'EJCLDK', 'EJCLEJ', 'EJCLFI', 'EJCLGH', 'EJCLHG', 'EJCLIF', 'EJCLJE', 'EJCLKD', 'EJCLLC', 'EJCLMB', 'EJCLNA', 
+      'EJCNAL', 'EJCNBK', 'EJCNKB', 'EJCNLA', 'EJDEJK', 'EJDEKJ', 'EJDGHK', 'EJDGIJ', 'EJDGJI', 'EJDGKH', 'EJDIFK', 'EJDIGJ', 'EJDIJG', 'EJDIKF', 'EJDKAN', 
+      'EJDKBM', 'EJDKCL', 'EJDKDK', 'EJDKEJ', 'EJDKFI', 'EJDKGH', 'EJDKHG', 'EJDKIF', 'EJDKJE', 'EJDKKD', 'EJDKLC', 'EJDKMB', 'EJDKNA', 'EJDMAL', 'EJDMBK', 
+      'EJDMKB', 'EJDMLA', 'EJEAJN', 'EJEANJ', 'EJEBJM', 'EJEBMJ', 'EJECJL', 'EJECLJ', 'EJEDJK', 'EJEDKJ', 'EJEEJJ', 'EJEFHK', 'EJEFIJ', 'EJEFJI', 'EJEFKH', 
+      'EJEGHJ', 'EJEGJH', 'EJEHFK', 'EJEHGJ', 'EJEHJG', 'EJEHKF', 'EJEIFJ', 'EJEIJF', 'EJEJAN', 'EJEJBM', 'EJEJCL', 'EJEJDK', 'EJEJEJ', 'EJEJFI', 'EJEJGH', 
+      'EJEJHG', 'EJEJIF', 'EJEJJE', 'EJEJKD', 'EJEJLC', 'EJEJMB', 'EJEJNA', 'EJEKDJ', 'EJEKFH', 'EJEKHF', 'EJEKJD', 'EJELCJ', 'EJELJC', 'EJEMBJ', 'EJEMJB', 
+      'EJENAJ', 'EJENJA', 'EJFEHK', 'EJFEIJ', 'EJFEJI', 'EJFEKH', 'EJFIAN', 'EJFIBM', 'EJFICL', 'EJFIDK', 'EJFIEJ', 'EJFIFI', 'EJFIGH', 'EJFIHG', 'EJFIIF', 
+      'EJFIJE', 'EJFIKD', 'EJFILC', 'EJFIMB', 'EJFINA', 'EJGDHK', 'EJGDIJ', 'EJGDJI', 'EJGDKH', 'EJGEHJ', 'EJGEJH', 'EJGHAN', 'EJGHBM', 'EJGHCL', 'EJGHDK', 
+      'EJGHEJ', 'EJGHFI', 'EJGHGH', 'EJGHHG', 'EJGHIF', 'EJGHJE', 'EJGHKD', 'EJGHLC', 'EJGHMB', 'EJGHNA', 'EJGIDJ', 'EJGIFH', 'EJGIHF', 'EJGIJD', 'EJGNAH', 
+      'EJGNHA', 'EJHEFK', 'EJHEGJ', 'EJHEJG', 'EJHEKF', 'EJHGAN', 'EJHGBM', 'EJHGCL', 'EJHGDK', 'EJHGEJ', 'EJHGFI', 'EJHGGH', 'EJHGHG', 'EJHGIF', 'EJHGJE', 
+      'EJHGKD', 'EJHGLC', 'EJHGMB', 'EJHGNA', 'EJICFL', 'EJICLF', 'EJIDFK', 'EJIDGJ', 'EJIDJG', 'EJIDKF', 'EJIEFJ', 'EJIEJF', 'EJIFAN', 'EJIFBM', 'EJIFCL', 
+      'EJIFDK', 'EJIFEJ', 'EJIFFI', 'EJIFGH', 'EJIFHG', 'EJIFIF', 'EJIFJE', 'EJIFKD', 'EJIFLC', 'EJIFMB', 'EJIFNA', 'EJIGDJ', 'EJIGFH', 'EJIGHF', 'EJIGJD', 
+      'EJJEAN', 'EJJEBM', 'EJJECL', 'EJJEDK', 'EJJEEJ', 'EJJEFI', 'EJJEGH', 'EJJEHG', 'EJJEIF', 'EJJEJE', 'EJJEKD', 'EJJELC', 'EJJEMB', 'EJJENA', 'EJKDAN', 
+      'EJKDBM', 'EJKDCL', 'EJKDDK', 'EJKDEJ', 'EJKDFI', 'EJKDGH', 'EJKDHG', 'EJKDIF', 'EJKDJE', 'EJKDKD', 'EJKDLC', 'EJKDMB', 'EJKDNA', 'EJKEDJ', 'EJKEFH', 
+      'EJKEHF', 'EJKEJD', 'EJLCAN', 'EJLCBM', 'EJLCCL', 'EJLCDK', 'EJLCEJ', 'EJLCFI', 'EJLCGH', 'EJLCHG', 'EJLCIF', 'EJLCJE', 'EJLCKD', 'EJLCLC', 'EJLCMB', 
+      'EJLCNA', 'EJLECJ', 'EJLEJC', 'EJMBAN', 'EJMBBM', 'EJMBCL', 'EJMBDK', 'EJMBEJ', 'EJMBFI', 'EJMBGH', 'EJMBHG', 'EJMBIF', 'EJMBJE', 'EJMBKD', 'EJMBLC', 
+      'EJMBMB', 'EJMBNA', 'EJMDAL', 'EJMDBK', 'EJMDKB', 'EJMDLA', 'EJMEBJ', 'EJMEJB', 'EJNAAN', 'EJNABM', 'EJNACL', 'EJNADK', 'EJNAEJ', 'EJNAFI', 'EJNAGH', 
+      'EJNAHG', 'EJNAIF', 'EJNAJE', 'EJNAKD', 'EJNALC', 'EJNAMB', 'EJNANA', 'EJNCAL', 'EJNCBK', 'EJNCKB', 'EJNCLA', 'EJNEAJ', 'EJNEJA', 'EJNGAH', 'EJNGHA', 
+      'EKBCNJ', 'EKBDMJ', 'EKBMDJ', 'EKBMFH', 'EKBMHF', 'EKBMJD', 'EKBNCJ', 'EKDANJ', 'EKDBMJ', 'EKDCLJ', 'EKDDKJ', 'EKDEJJ', 'EKDFIJ', 'EKDFKH', 'EKDGHJ', 
+      'EKDGJH', 'EKDHGJ', 'EKDHKF', 'EKDIFJ', 'EKDIJF', 'EKDJEJ', 'EKDJGH', 'EKDJIF', 'EKDJKD', 'EKDJMB', 'EKDKDJ', 'EKDKFH', 'EKDKHF', 'EKDKJD', 'EKDLCJ', 
+      'EKDMBJ', 'EKDMJB', 'EKDNAJ', 'EKFDIJ', 'EKFDKH', 'EKFEHJ', 'EKFEJH', 'EKFHEJ', 'EKFHGH', 'EKFHIF', 'EKFHKD', 'EKFHMB', 'EKFIDJ', 'EKFIFH', 'EKFIHF', 
+      'EKFIJD', 'EKFNAH', 'EKHCLF', 'EKHDGJ', 'EKHDKF', 'EKHEFJ', 'EKHEJF', 'EKHFEJ', 'EKHFGH', 'EKHFIF', 'EKHFKD', 'EKHFMB', 'EKHGDJ', 'EKHGFH', 'EKHGHF', 
+      'EKHGJD', 'EKJDEJ', 'EKJDGH', 'EKJDIF', 'EKJDKD', 'EKJDMB', 'EKJEDJ', 'EKJEFH', 'EKJEHF', 'EKJEJD', 'ELACNJ', 'ELADMJ', 'ELAMDJ', 'ELAMHF', 'ELANCJ', 
+      'ELANJC', 'ELCANJ', 'ELCBMJ', 'ELCCLJ', 'ELCDKJ', 'ELCEJJ', 'ELCFIJ', 'ELCGHJ', 'ELCHGJ', 'ELCHKF', 'ELCIFJ', 'ELCIJF', 'ELCJEJ', 'ELCJIF', 'ELCJLC', 
+      'ELCJNA', 'ELCKDJ', 'ELCKHF', 'ELCLCJ', 'ELCLJC', 'ELCMBJ', 'ELCNAJ', 'ELCNJA', 'ELFCIJ', 'ELFICJ', 'ELFIJC', 'ELFMHA', 'ELJCEJ', 'ELJCIF', 'ELJCLC', 
+      'ELJCNA', 'ELJECJ', 'ELJEJC', 'EMBANJ', 'EMBBMJ', 'EMBCLJ', 'EMBDKJ', 'EMBEJJ', 'EMBFIJ', 'EMBGHJ', 'EMBHGJ', 'EMBIFJ', 'EMBJEJ', 'EMBJMB', 'EMBKDJ', 
+      'EMBLCJ', 'EMBMBJ', 'EMBMJB', 'EMBNAJ', 'EMJBEJ', 'EMJBMB', 'EMJDKB', 'EMJEBJ', 'EMJEJB', 'ENAANJ', 'ENABMJ', 'ENACLJ', 'ENADKJ', 'ENAEJJ', 'ENAFIJ', 
+      'ENAGHJ', 'ENAHGJ', 'ENAIFJ', 'ENAJEJ', 'ENAJNA', 'ENAKDJ', 'ENALCJ', 'ENAMBJ', 'ENANAJ', 'ENANJA', 'ENJAEJ', 'ENJANA', 'ENJCLA', 'ENJEAJ', 'ENJEJA', 
+      'ENJGHA', 'FAIDKN', 'FAIFIN', 'FAIFNI', 'FAINAN', 'FAINFI', 'FANAIN', 'FANANI', 'FANBMI', 'FANCLI', 'FANDKI', 'FANEJI', 'FANFII', 'FANGHI', 'FANHGI', 
+      'FANIAN', 'FANIFI', 'FANJEI', 'FANKDI', 'FANLCI', 'FANMBI', 'FANNAI', 'FBICLM', 'FBIFIM', 'FBIFMI', 'FBIGHM', 'FBIMBM', 'FBIMFI', 'FBMANI', 'FBMBIM', 
+      'FBMBMI', 'FBMCLI', 'FBMDKI', 'FBMEJI', 'FBMFII', 'FBMGHI', 'FBMHGI', 'FBMIBM', 'FBMIFI', 'FBMJEI', 'FBMKDI', 'FBMLCI', 'FBMMBI', 'FBMNAI', 'FCIBML', 
+      'FCIFIL', 'FCIFLI', 'FCIJEL', 'FCILCL', 'FCILFI', 'FCLANI', 'FCLBMI', 'FCLCIL', 'FCLCLI', 'FCLDKI', 'FCLEJI', 'FCLFII', 'FCLGHI', 'FCLHGI', 'FCLICL', 
+      'FCLIFI', 'FCLJEI', 'FCLKDI', 'FCLLCI', 'FCLMBI', 'FCLNAI', 'FDIANK', 'FDIFIK', 'FDIFKI', 'FDIGHK', 'FDIGJI', 'FDIJEK', 'FDIJGI', 'FDIKDK', 'FDIKFI', 
+      'FDKANI', 'FDKBMI', 'FDKCLI', 'FDKDIK', 'FDKDKI', 'FDKEHK', 'FDKEJI', 'FDKFII', 'FDKGHI', 'FDKHEK', 'FDKHGI', 'FDKIDK', 'FDKIFI', 'FDKJEI', 'FDKKDI', 
+      'FDKLCI', 'FDKMBI', 'FDKNAI', 'FEHAML', 'FEHANK', 'FEHFIK', 'FEHFKI', 'FEHGHK', 'FEHGIJ', 'FEHGJI', 'FEHGKH', 'FEHJEK', 'FEHJGI', 'FEHKCL', 'FEHKDK', 
+      'FEHKEJ', 'FEHKFI', 'FEHKGH', 'FEIFHK', 'FEIFIJ', 'FEIFJI', 'FEIFKH', 'FEIJCL', 'FEIJDK', 'FEIJEJ', 'FEIJFI', 'FEIJGH', 'FEJANI', 'FEJBMI', 'FEJCIL', 
+      'FEJCLI', 'FEJDIK', 'FEJDKI', 'FEJEHK', 'FEJEIJ', 'FEJEJI', 'FEJEKH', 'FEJFII', 'FEJGHI', 'FEJGIH', 'FEJHEK', 'FEJHGI', 'FEJICL', 'FEJIDK', 'FEJIEJ', 
+      'FEJIFI', 'FEJIGH', 'FEJJEI', 'FEJKDI', 'FEJKEH', 'FEJLCI', 'FEJMBI', 'FEJNAI', 'FEKBMH', 'FEKDHK', 'FEKDIJ', 'FEKDJI', 'FEKDKH', 'FEKFHI', 'FEKFIH', 
+      'FEKHCL', 'FEKHDK', 'FEKHEJ', 'FEKHFI', 'FEKHGH', 'FEKJDI', 'FEKJEH', 'FELAMH', 'FELCHK', 'FELCIJ', 'FELCJI', 'FELCKH', 'FELJCI', 'FFIANI', 'FFIBMI', 
+      'FFICLI', 'FFIDKI', 'FFIEJI', 'FFIFII', 'FFIGHI', 'FFIHGI', 'FFIIFI', 'FFIJEI', 'FFIKDI', 'FFILCI', 'FFIMBI', 'FFINAI', 'FGHANI', 'FGHBMI', 'FGHCLI', 
+      'FGHDKI', 'FGHEJI', 'FGHEKH', 'FGHFII', 'FGHGHI', 'FGHGIH', 'FGHHGI', 'FGHIFI', 'FGHIGH', 'FGHJEI', 'FGHKDI', 'FGHKEH', 'FGHLCI', 'FGHMBI', 'FGHNAI', 
+      'FGIBMH', 'FGIDJI', 'FGIDKH', 'FGIFHI', 'FGIFIH', 'FGIHFI', 'FGIHGH', 'FGIJDI', 'FGIJEH', 'FHEALM', 'FHEANK', 'FHEFIK', 'FHEFKI', 'FHEGHK', 'FHEGJI', 
+      'FHEJEK', 'FHEJGI', 'FHEJIG', 'FHEJKE', 'FHEKBM', 'FHEKDK', 'FHEKFI', 'FHEKHG', 'FHEKJE', 'FHGANI', 'FHGBIM', 'FHGBMI', 'FHGCLI', 'FHGDIK', 'FHGDKI', 
+      'FHGEHK', 'FHGEJI', 'FHGFII', 'FHGGHI', 'FHGHEK', 'FHGHGI', 'FHGHIG', 'FHGHKE', 'FHGIBM', 'FHGIDK', 'FHGIFI', 'FHGIHG', 'FHGIJE', 'FHGJEI', 'FHGJIE', 
+      'FHGKDI', 'FHGKHE', 'FHGLCI', 'FHGMBI', 'FHGNAI', 'FHIFEK', 'FHIFGI', 'FHIFIG', 'FHIFKE', 'FHIGBM', 'FHIGDK', 'FHIGFI', 'FHIGHG', 'FHIGJE', 'FHKCLE', 
+      'FHKDEK', 'FHKDGI', 'FHKDIG', 'FHKDKE', 'FHKEBM', 'FHKEDK', 'FHKEFI', 'FHKEHG', 'FHKEJE', 'FHKFEI', 'FHKFIE', 'FHKGDI', 'FHKGHE', 'FHMALE', 'FHMBEK', 
+      'FHMBGI', 'FHMBIG', 'FHMBKE', 'FHMGBI', 'FIADKN', 'FIADLM', 'FIADML', 'FIADNK', 'FIAFIN', 'FIAFNI', 'FIANAN', 'FIANBM', 'FIANCL', 'FIANDK', 'FIANEJ', 
+      'FIANFI', 'FIANGH', 'FIANHG', 'FIANIF', 'FIANJE', 'FIANKD', 'FIANLC', 'FIANMB', 'FIANNA', 'FIBCKN', 'FIBCLM', 'FIBCML', 'FIBCNK', 'FIBFIM', 'FIBFMI', 
+      'FIBGHM', 'FIBGMH', 'FIBMAN', 'FIBMBM', 'FIBMCL', 'FIBMDK', 'FIBMEJ', 'FIBMFI', 'FIBMGH', 'FIBMHG', 'FIBMIF', 'FIBMJE', 'FIBMKD', 'FIBMLC', 'FIBMMB', 
+      'FIBMNA', 'FICBKN', 'FICBLM', 'FICBML', 'FICBNK', 'FICFIL', 'FICFLI', 'FICJEL', 'FICJLE', 'FICLAN', 'FICLBM', 'FICLCL', 'FICLDK', 'FICLEJ', 'FICLFI', 
+      'FICLGH', 'FICLHG', 'FICLIF', 'FICLJE', 'FICLKD', 'FICLLC', 'FICLMB', 'FICLNA', 'FIDAKN', 'FIDALM', 'FIDAML', 'FIDANK', 'FIDFIK', 'FIDFKI', 'FIDGHK', 
+      'FIDGIJ', 'FIDGJI', 'FIDGKH', 'FIDJEK', 'FIDJGI', 'FIDJIG', 'FIDJKE', 'FIDKAN', 'FIDKBM', 'FIDKCL', 'FIDKDK', 'FIDKEJ', 'FIDKFI', 'FIDKGH', 'FIDKHG', 
+      'FIDKIF', 'FIDKJE', 'FIDKKD', 'FIDKLC', 'FIDKMB', 'FIDKNA', 'FIEFHK', 'FIEFIJ', 'FIEFJI', 'FIEFKH', 'FIEJAN', 'FIEJBM', 'FIEJCL', 'FIEJDK', 'FIEJEJ', 
+      'FIEJFI', 'FIEJGH', 'FIEJHG', 'FIEJIF', 'FIEJJE', 'FIEJKD', 'FIEJLC', 'FIEJMB', 'FIEJNA', 'FIFAIN', 'FIFANI', 'FIFBIM', 'FIFBMI', 'FIFCIL', 'FIFCLI', 
+      'FIFDIK', 'FIFDKI', 'FIFEHK', 'FIFEIJ', 'FIFEJI', 'FIFEKH', 'FIFFII', 'FIFGHI', 'FIFGIH', 'FIFHEK', 'FIFHGI', 'FIFHIG', 'FIFHKE', 'FIFIAN', 'FIFIBM', 
+      'FIFICL', 'FIFIDK', 'FIFIEJ', 'FIFIFI', 'FIFIGH', 'FIFIHG', 'FIFIIF', 'FIFIJE', 'FIFIKD', 'FIFILC', 'FIFIMB', 'FIFINA', 'FIFJEI', 'FIFJIE', 'FIFKDI', 
+      'FIFKEH', 'FIFKHE', 'FIFKID', 'FIFLCI', 'FIFLIC', 'FIFMBI', 'FIFMIB', 'FIFNAI', 'FIFNIA', 'FIGBHM', 'FIGBMH', 'FIGDHK', 'FIGDIJ', 'FIGDJI', 'FIGDKH', 
+      'FIGFHI', 'FIGFIH', 'FIGHAN', 'FIGHBM', 'FIGHCL', 'FIGHDK', 'FIGHEJ', 'FIGHFI', 'FIGHGH', 'FIGHHG', 'FIGHIF', 'FIGHJE', 'FIGHKD', 'FIGHLC', 'FIGHMB', 
+      'FIGHNA', 'FIGJDI', 'FIGJEH', 'FIGJHE', 'FIGJID', 'FIHFEK', 'FIHFGI', 'FIHFIG', 'FIHFKE', 'FIHGAN', 'FIHGBM', 'FIHGCL', 'FIHGDK', 'FIHGEJ', 'FIHGFI', 
+      'FIHGGH', 'FIHGHG', 'FIHGIF', 'FIHGJE', 'FIHGKD', 'FIHGLC', 'FIHGMB', 'FIHGNA', 'FIIFAN', 'FIIFBM', 'FIIFCL', 'FIIFDK', 'FIIFEJ', 'FIIFFI', 'FIIFGH', 
+      'FIIFHG', 'FIIFIF', 'FIIFJE', 'FIIFKD', 'FIIFLC', 'FIIFMB', 'FIIFNA', 'FIJCEL', 'FIJCLE', 'FIJDEK', 'FIJDGI', 'FIJDIG', 'FIJDKE', 'FIJEAN', 'FIJEBM', 
+      'FIJECL', 'FIJEDK', 'FIJEEJ', 'FIJEFI', 'FIJEGH', 'FIJEHG', 'FIJEIF', 'FIJEJE', 'FIJEKD', 'FIJELC', 'FIJEMB', 'FIJENA', 'FIJFEI', 'FIJFIE', 'FIJGDI', 
+      'FIJGEH', 'FIJGHE', 'FIJGID', 'FIKDAN', 'FIKDBM', 'FIKDCL', 'FIKDDK', 'FIKDEJ', 'FIKDFI', 'FIKDGH', 'FIKDHG', 'FIKDIF', 'FIKDJE', 'FIKDKD', 'FIKDLC', 
+      'FIKDMB', 'FIKDNA', 'FIKFDI', 'FIKFEH', 'FIKFHE', 'FIKFID', 'FILCAN', 'FILCBM', 'FILCCL', 'FILCDK', 'FILCEJ', 'FILCFI', 'FILCGH', 'FILCHG', 'FILCIF', 
+      'FILCJE', 'FILCKD', 'FILCLC', 'FILCMB', 'FILCNA', 'FILFCI', 'FILFIC', 'FIMBAN', 'FIMBBM', 'FIMBCL', 'FIMBDK', 'FIMBEJ', 'FIMBFI', 'FIMBGH', 'FIMBHG', 
+      'FIMBIF', 'FIMBJE', 'FIMBKD', 'FIMBLC', 'FIMBMB', 'FIMBNA', 'FIMFBI', 'FIMFIB', 'FINAAN', 'FINABM', 'FINACL', 'FINADK', 'FINAEJ', 'FINAFI', 'FINAGH', 
+      'FINAHG', 'FINAIF', 'FINAJE', 'FINAKD', 'FINALC', 'FINAMB', 'FINANA', 'FINFAI', 'FINFIA', 'FJEANI', 'FJEBMI', 'FJECLI', 'FJEDKI', 'FJEEJI', 'FJEFII', 
+      'FJEGHI', 'FJEHGI', 'FJEHKE', 'FJEIFI', 'FJEIJE', 'FJEJEI', 'FJEJIE', 'FJEKDI', 'FJEKHE', 'FJELCI', 'FJEMBI', 'FJENAI', 'FJICLE', 'FJIDGI', 'FJIDKE', 
+      'FJIEFI', 'FJIEJE', 'FJIFEI', 'FJIFIE', 'FJIGDI', 'FJIGHE', 'FKDAIN', 'FKDANI', 'FKDBMI', 'FKDCLI', 'FKDDKI', 'FKDEJI', 'FKDEKH', 'FKDFII', 'FKDGHI', 
+      'FKDGIH', 'FKDHGI', 'FKDHKE', 'FKDIAN', 'FKDIFI', 'FKDIGH', 'FKDIJE', 'FKDIKD', 'FKDJEI', 'FKDJIE', 'FKDKDI', 'FKDKEH', 'FKDKHE', 'FKDKID', 'FKDLCI', 
+      'FKDMBI', 'FKDNAI', 'FKEBMH', 'FKEDJI', 'FKEDKH', 'FKEFHI', 'FKEFIH', 'FKEHAN', 'FKEHFI', 'FKEHGH', 'FKEHJE', 'FKEHKD', 'FKEJDI', 'FKEJEH', 'FKEJHE', 
+      'FKEJID', 'FKHCLE', 'FKHDGI', 'FKHDKE', 'FKHEAN', 'FKHEFI', 'FKHEGH', 'FKHEJE', 'FKHEKD', 'FKHFEI', 'FKHFIE', 'FKHGDI', 'FKHGEH', 'FKHGHE', 'FKHGID', 
+      'FKIDAN', 'FKIDFI', 'FKIDGH', 'FKIDJE', 'FKIDKD', 'FKIFDI', 'FKIFEH', 'FKIFHE', 'FKIFID', 'FKNADI', 'FKNAEH', 'FKNAHE', 'FKNAID', 'FKNBCI', 'FKNCBI', 
+      'FKNDAI', 'FLCANI', 'FLCBIM', 'FLCBMI', 'FLCCLI', 'FLCDKI', 'FLCEJI', 'FLCFII', 'FLCGHI', 'FLCHGI', 'FLCHKE', 'FLCIBM', 'FLCIFI', 'FLCIJE', 'FLCILC', 
+      'FLCJEI', 'FLCJIE', 'FLCKDI', 'FLCKHE', 'FLCLCI', 'FLCLIC', 'FLCMBI', 'FLCNAI', 'FLEAHM', 'FLECJI', 'FLEJCI', 'FLEJIC', 'FLICBM', 'FLICFI', 'FLICJE', 
+      'FLICLC', 'FLIFCI', 'FLIFIC', 'FLMADI', 'FLMAHE', 'FLMBCI', 'FLMBIC', 'FLMCBI', 'FLMDAI', 'FMBANI', 'FMBBMI', 'FMBCIL', 'FMBCLI', 'FMBDKI', 'FMBEJI', 
+      'FMBEKH', 'FMBFII', 'FMBGHI', 'FMBGIH', 'FMBHGI', 'FMBICL', 'FMBIFI', 'FMBIGH', 'FMBIMB', 'FMBJEI', 'FMBKDI', 'FMBKEH', 'FMBLCI', 'FMBMBI', 'FMBMIB', 
+      'FMBNAI', 'FMHAEL', 'FMHBGI', 'FMHGBI', 'FMHGIB', 'FMIBCL', 'FMIBFI', 'FMIBGH', 'FMIBMB', 'FMIFBI', 'FMIFIB', 'FMLADI', 'FMLAEH', 'FMLBCI', 'FMLCBI', 
+      'FMLCIB', 'FMLDAI', 'FNAANI', 'FNABMI', 'FNACLI', 'FNADIK', 'FNADKI', 'FNAEHK', 'FNAEJI', 'FNAFII', 'FNAGHI', 'FNAHEK', 'FNAHGI', 'FNAIDK', 'FNAIFI', 
+      'FNAINA', 'FNAJEI', 'FNAKDI', 'FNALCI', 'FNAMBI', 'FNANAI', 'FNANIA', 'FNIADK', 'FNIAFI', 'FNIANA', 'FNIFAI', 'FNIFIA', 'FNKADI', 'FNKBCI', 'FNKCBI', 
+      'FNKDAI', 'FNKDIA', 'GAHEJN', 'GAHGHN', 'GAHGNH', 'GAHMBN', 'GAHNAN', 'GAHNGH', 'GANAHN', 'GANANH', 'GANBMH', 'GANCLH', 'GANDKH', 'GANEJH', 'GANFIH', 
+      'GANGHH', 'GANHAN', 'GANHGH', 'GANIFH', 'GANJEH', 'GANKDH', 'GANLCH', 'GANMBH', 'GANNAH', 'GBHGHM', 'GBHGMH', 'GBHMAN', 'GBHMBM', 'GBHMFI', 'GBHMGH', 
+      'GBICJN', 'GBIFHM', 'GBIFMH', 'GBIMFH', 'GBMAHN', 'GBMANH', 'GBMBHM', 'GBMBMH', 'GBMCLH', 'GBMDJI', 'GBMDKH', 'GBMEJH', 'GBMFHI', 'GBMFIH', 'GBMGHH', 
+      'GBMHAN', 'GBMHBM', 'GBMHFI', 'GBMHGH', 'GBMIFH', 'GBMJDI', 'GBMJEH', 'GBMKDH', 'GBMLCH', 'GBMMBH', 'GBMNAH', 'GBNAHM', 'GBNAMH', 'GBNCJI', 'GBNCKH', 
+      'GBNKCH', 'GBNMAH', 'GCHGHL', 'GCHGLH', 'GCHKDL', 'GCHLCL', 'GCHLGH', 'GCLANH', 'GCLBMH', 'GCLCHL', 'GCLCLH', 'GCLDKH', 'GCLEJH', 'GCLFIH', 'GCLGHH', 
+      'GCLHCL', 'GCLHGH', 'GCLIFH', 'GCLJEH', 'GCLKDH', 'GCLLCH', 'GCLMBH', 'GCLNAH', 'GDHGHK', 'GDHGIJ', 'GDHGJI', 'GDHGKH', 'GDHKCL', 'GDHKDK', 'GDHKEJ', 
+      'GDHKFI', 'GDHKGH', 'GDIANJ', 'GDIFHK', 'GDIFIJ', 'GDIFJI', 'GDIFKH', 'GDIGHJ', 'GDIGJH', 'GDIJCL', 'GDIJDK', 'GDIJEJ', 'GDIJFI', 'GDIJGH', 'GDIKDJ', 
+      'GDIKFH', 'GDJEHK', 'GDJEIJ', 'GDJEJI', 'GDJEKH', 'GDJGHI', 'GDJGIH', 'GDJICL', 'GDJIDK', 'GDJIEJ', 'GDJIFI', 'GDJIGH', 'GDJKDI', 'GDJKEH', 'GDJMBI', 
+      'GDKANH', 'GDKBMH', 'GDKCHL', 'GDKCLH', 'GDKDHK', 'GDKDIJ', 'GDKDJI', 'GDKDKH', 'GDKEHJ', 'GDKEJH', 'GDKFHI', 'GDKFIH', 'GDKGHH', 'GDKHCL', 'GDKHDK', 
+      'GDKHEJ', 'GDKHFI', 'GDKHGH', 'GDKIDJ', 'GDKIFH', 'GDKJDI', 'GDKJEH', 'GDKKDH', 'GDKLCH', 'GDKMBH', 'GDKNAH', 'GDLAMH', 'GDLCHK', 'GDLCIJ', 'GDLCJI', 
+      'GDLCKH', 'GDLKCH', 'GDLMAH', 'GEHANJ', 'GEHFIJ', 'GEHFKH', 'GEHGHJ', 'GEHGJH', 'GEHJEJ', 'GEHJGH', 'GEHKDJ', 'GEHKFH', 'GEJANH', 'GEJBMH', 'GEJCLH', 
+      'GEJDIJ', 'GEJDKH', 'GEJEHJ', 'GEJEJH', 'GEJFIH', 'GEJGHH', 'GEJHEJ', 'GEJHGH', 'GEJIDJ', 'GEJIFH', 'GEJJEH', 'GEJKDH', 'GEJLCH', 'GEJMBH', 'GEJNAH', 
+      'GFHEJI', 'GFHEKH', 'GFHGHI', 'GFHGIH', 'GFHIFI', 'GFHIGH', 'GFHKDI', 'GFHKEH', 'GFHMBI', 'GFIANH', 'GFIBMH', 'GFICLH', 'GFIDJI', 'GFIDKH', 'GFIEJH', 
+      'GFIFHI', 'GFIFIH', 'GFIGHH', 'GFIHFI', 'GFIHGH', 'GFIIFH', 'GFIJDI', 'GFIJEH', 'GFIKDH', 'GFILCH', 'GFIMBH', 'GFINAH', 'GGHANH', 'GGHBMH', 'GGHCLH', 
+      'GGHDKH', 'GGHEJH', 'GGHFIH', 'GGHGHH', 'GGHHGH', 'GGHIFH', 'GGHJEH', 'GGHKDH', 'GGHLCH', 'GGHMBH', 'GGHNAH', 'GHAEJN', 'GHAENJ', 'GHAGHN', 'GHAGNH', 
+      'GHAMBN', 'GHAMDL', 'GHAMLD', 'GHAMNB', 'GHANAN', 'GHANBM', 'GHANCL', 'GHANDK', 'GHANEJ', 'GHANFI', 'GHANGH', 'GHANHG', 'GHANIF', 'GHANJE', 'GHANKD', 
+      'GHANLC', 'GHANMB', 'GHANNA', 'GHBGHM', 'GHBGMH', 'GHBMAN', 'GHBMBM', 'GHBMCL', 'GHBMDK', 'GHBMEJ', 'GHBMFI', 'GHBMGH', 'GHBMHG', 'GHBMIF', 'GHBMJE', 
+      'GHBMKD', 'GHBMLC', 'GHBMMB', 'GHBMNA', 'GHCGHL', 'GHCGLH', 'GHCKBN', 'GHCKDL', 'GHCKLD', 'GHCKNB', 'GHCLAN', 'GHCLBM', 'GHCLCL', 'GHCLDK', 'GHCLEJ', 
+      'GHCLFI', 'GHCLGH', 'GHCLHG', 'GHCLIF', 'GHCLJE', 'GHCLKD', 'GHCLLC', 'GHCLMB', 'GHCLNA', 'GHDGHK', 'GHDGIJ', 'GHDGJI', 'GHDGKH', 'GHDKAN', 'GHDKBM', 
+      'GHDKCL', 'GHDKDK', 'GHDKEJ', 'GHDKFI', 'GHDKGH', 'GHDKHG', 'GHDKIF', 'GHDKJE', 'GHDKKD', 'GHDKLC', 'GHDKMB', 'GHDKNA', 'GHEAJN', 'GHEANJ', 'GHEFHK', 
+      'GHEFIJ', 'GHEFJI', 'GHEFKH', 'GHEGHJ', 'GHEGJH', 'GHEJAN', 'GHEJBM', 'GHEJCL', 'GHEJDK', 'GHEJEJ', 'GHEJFI', 'GHEJGH', 'GHEJHG', 'GHEJIF', 'GHEJJE', 
+      'GHEJKD', 'GHEJLC', 'GHEJMB', 'GHEJNA', 'GHEKDJ', 'GHEKFH', 'GHEKHF', 'GHEKJD', 'GHFEHK', 'GHFEIJ', 'GHFEJI', 'GHFEKH', 'GHFGHI', 'GHFGIH', 'GHFIAN', 
+      'GHFIBM', 'GHFICL', 'GHFIDK', 'GHFIEJ', 'GHFIFI', 'GHFIGH', 'GHFIHG', 'GHFIIF', 'GHFIJE', 'GHFIKD', 'GHFILC', 'GHFIMB', 'GHFINA', 'GHFKDI', 'GHFKEH', 
+      'GHFKHE', 'GHFKID', 'GHFMBI', 'GHFMIB', 'GHGAHN', 'GHGANH', 'GHGBHM', 'GHGBMH', 'GHGCHL', 'GHGCLH', 'GHGDHK', 'GHGDIJ', 'GHGDJI', 'GHGDKH', 'GHGEHJ', 
+      'GHGEJH', 'GHGFHI', 'GHGFIH', 'GHGGHH', 'GHGHAN', 'GHGHBM', 'GHGHCL', 'GHGHDK', 'GHGHEJ', 'GHGHFI', 'GHGHGH', 'GHGHHG', 'GHGHIF', 'GHGHJE', 'GHGHKD', 
+      'GHGHLC', 'GHGHMB', 'GHGHNA', 'GHGIDJ', 'GHGIFH', 'GHGIHF', 'GHGIJD', 'GHGJDI', 'GHGJEH', 'GHGJHE', 'GHGJID', 'GHGKDH', 'GHGKHD', 'GHGLCH', 'GHGLHC', 
+      'GHGMBH', 'GHGMHB', 'GHGNAH', 'GHGNHA', 'GHHGAN', 'GHHGBM', 'GHHGCL', 'GHHGDK', 'GHHGEJ', 'GHHGFI', 'GHHGGH', 'GHHGHG', 'GHHGIF', 'GHHGJE', 'GHHGKD', 
+      'GHHGLC', 'GHHGMB', 'GHHGNA', 'GHIFAN', 'GHIFBM', 'GHIFCL', 'GHIFDK', 'GHIFEJ', 'GHIFFI', 'GHIFGH', 'GHIFHG', 'GHIFIF', 'GHIFJE', 'GHIFKD', 'GHIFLC', 
+      'GHIFMB', 'GHIFNA', 'GHIGDJ', 'GHIGFH', 'GHIGHF', 'GHIGJD', 'GHJEAN', 'GHJEBM', 'GHJECL', 'GHJEDK', 'GHJEEJ', 'GHJEFI', 'GHJEGH', 'GHJEHG', 'GHJEIF', 
+      'GHJEJE', 'GHJEKD', 'GHJELC', 'GHJEMB', 'GHJENA', 'GHJGDI', 'GHJGEH', 'GHJGHE', 'GHJGID', 'GHKCBN', 'GHKCDL', 'GHKCLD', 'GHKCNB', 'GHKDAN', 'GHKDBM', 
+      'GHKDCL', 'GHKDDK', 'GHKDEJ', 'GHKDFI', 'GHKDGH', 'GHKDHG', 'GHKDIF', 'GHKDJE', 'GHKDKD', 'GHKDLC', 'GHKDMB', 'GHKDNA', 'GHKEDJ', 'GHKEFH', 'GHKEHF', 
+      'GHKEJD', 'GHKFDI', 'GHKFEH', 'GHKFHE', 'GHKFID', 'GHKGDH', 'GHKGHD', 'GHLCAN', 'GHLCBM', 'GHLCCL', 'GHLCDK', 'GHLCEJ', 'GHLCFI', 'GHLCGH', 'GHLCHG', 
+      'GHLCIF', 'GHLCJE', 'GHLCKD', 'GHLCLC', 'GHLCMB', 'GHLCNA', 'GHLGCH', 'GHLGHC', 'GHMABN', 'GHMADL', 'GHMALD', 'GHMANB', 'GHMBAN', 'GHMBBM', 'GHMBCL', 
+      'GHMBDK', 'GHMBEJ', 'GHMBFI', 'GHMBGH', 'GHMBHG', 'GHMBIF', 'GHMBJE', 'GHMBKD', 'GHMBLC', 'GHMBMB', 'GHMBNA', 'GHMFBI', 'GHMFIB', 'GHMGBH', 'GHMGHB', 
+      'GHNAAN', 'GHNABM', 'GHNACL', 'GHNADK', 'GHNAEJ', 'GHNAFI', 'GHNAGH', 'GHNAHG', 'GHNAIF', 'GHNAJE', 'GHNAKD', 'GHNALC', 'GHNAMB', 'GHNANA', 'GHNGAH', 
+      'GHNGHA', 'GIBCNJ', 'GIBFMH', 'GIBMDJ', 'GIBMFH', 'GIBMHF', 'GIBMJD', 'GIDANJ', 'GIDFIJ', 'GIDFKH', 'GIDGHJ', 'GIDGJH', 'GIDJEJ', 'GIDJGH', 'GIDJIF', 
+      'GIDJKD', 'GIDJMB', 'GIDKDJ', 'GIDKFH', 'GIDKHF', 'GIDKJD', 'GIFANH', 'GIFBMH', 'GIFCLH', 'GIFDIJ', 'GIFDKH', 'GIFEHJ', 'GIFEJH', 'GIFFIH', 'GIFGHH', 
+      'GIFHEJ', 'GIFHGH', 'GIFHIF', 'GIFHKD', 'GIFHMB', 'GIFIDJ', 'GIFIFH', 'GIFIHF', 'GIFIJD', 'GIFJEH', 'GIFJID', 'GIFKDH', 'GIFKHD', 'GIFLCH', 'GIFMBH', 
+      'GIFMHB', 'GIFNAH', 'GIHFEJ', 'GIHFGH', 'GIHFIF', 'GIHFKD', 'GIHFMB', 'GIHGDJ', 'GIHGFH', 'GIHGHF', 'GIHGJD', 'GIJCLD', 'GIJCNB', 'GIJDEJ', 'GIJDGH', 
+      'GIJDIF', 'GIJDKD', 'GIJDMB', 'GIJEDJ', 'GIJEFH', 'GIJEHF', 'GIJEJD', 'GIJFEH', 'GIJFID', 'GIJGDH', 'GIJGHD', 'GJDEJI', 'GJDEKH', 'GJDGHI', 'GJDGIH', 
+      'GJDIAN', 'GJDIFI', 'GJDIGH', 'GJDIJE', 'GJDIKD', 'GJDKDI', 'GJDKEH', 'GJDKHE', 'GJDKID', 'GJDMBI', 'GJEAHN', 'GJEANH', 'GJEBMH', 'GJECLH', 'GJEDJI', 
+      'GJEDKH', 'GJEEJH', 'GJEFHI', 'GJEFIH', 'GJEGHH', 'GJEHAN', 'GJEHFI', 'GJEHGH', 'GJEHJE', 'GJEHKD', 'GJEIFH', 'GJEIJD', 'GJEJDI', 'GJEJEH', 'GJEJHE', 
+      'GJEJID', 'GJEKDH', 'GJEKHD', 'GJELCH', 'GJEMBH', 'GJENAH', 'GJHEAN', 'GJHEFI', 'GJHEGH', 'GJHEJE', 'GJHEKD', 'GJHGDI', 'GJHGEH', 'GJHGHE', 'GJHGID', 
+      'GJICBN', 'GJICLD', 'GJIDAN', 'GJIDFI', 'GJIDGH', 'GJIDJE', 'GJIDKD', 'GJIEFH', 'GJIEJD', 'GJIFDI', 'GJIFEH', 'GJIFHE', 'GJIFID', 'GJIGDH', 'GJIGHD', 
+      'GJNADI', 'GJNAEH', 'GJNAHE', 'GJNAID', 'GJNCBI', 'GJNEAH', 'GKDANH', 'GKDBMH', 'GKDCLH', 'GKDDKH', 'GKDEJH', 'GKDFIH', 'GKDGHH', 'GKDHGH', 'GKDHKD', 
+      'GKDIFH', 'GKDIJD', 'GKDJEH', 'GKDJID', 'GKDKDH', 'GKDKHD', 'GKDLCH', 'GKDMBH', 'GKDNAH', 'GKHCLD', 'GKHDGH', 'GKHDKD', 'GKHEFH', 'GKHEJD', 'GKHFEH', 
+      'GKHFID', 'GKHGDH', 'GKHGHD', 'GLCANH', 'GLCBMH', 'GLCCLH', 'GLCDKH', 'GLCEJH', 'GLCFIH', 'GLCGHH', 'GLCHGH', 'GLCHKD', 'GLCHLC', 'GLCIFH', 'GLCIJD', 
+      'GLCJEH', 'GLCJID', 'GLCKDH', 'GLCKHD', 'GLCLCH', 'GLCLHC', 'GLCMBH', 'GLCNAH', 'GLDAMH', 'GLDCKH', 'GLDKCH', 'GLDKHC', 'GLDMAH', 'GLHCGH', 'GLHCKD', 
+      'GLHCLC', 'GLHGCH', 'GLHGHC', 'GMBANH', 'GMBBMH', 'GMBCLH', 'GMBDKH', 'GMBEJH', 'GMBFIH', 'GMBGHH', 'GMBHGH', 'GMBHMB', 'GMBIFH', 'GMBJEH', 'GMBKDH', 
+      'GMBLCH', 'GMBMBH', 'GMBMHB', 'GMBNAH', 'GMHANB', 'GMHBGH', 'GMHBMB', 'GMHFIB', 'GMHGBH', 'GMHGHB', 'GNAANH', 'GNABMH', 'GNACLH', 'GNADIJ', 'GNADKH', 
+      'GNAEHJ', 'GNAEJH', 'GNAFIH', 'GNAGHH', 'GNAHEJ', 'GNAHGH', 'GNAHMB', 'GNAHNA', 'GNAIDJ', 'GNAIFH', 'GNAJEH', 'GNAKDH', 'GNALCH', 'GNAMBH', 'GNAMHB', 
+      'GNANAH', 'GNANHA', 'GNBAMH', 'GNBCIJ', 'GNBCKH', 'GNBKCH', 'GNBMAH', 'GNBMHA', 'GNHAEJ', 'GNHAGH', 'GNHAMB', 'GNHANA', 'GNHGAH', 'GNHGHA', 'GNJAEH', 
+      'GNJCIB', 'GNJEAH', 'GNJEHA', 'HAEJGN', 'HAEJNG', 'HAELFM', 'HAENJG', 'HAGHGN', 'HAGHNG', 'HAGNAN', 'HAGNBM', 'HAGNHG', 'HAGNJE', 'HAMBGN', 'HAMBNG', 
+      'HAMDLG', 'HAMLDG', 'HAMLFE', 'HAMNBG', 'HANAGN', 'HANANG', 'HANBGM', 'HANBMG', 'HANCLG', 'HANDKG', 'HANEJG', 'HANFIG', 'HANFKE', 'HANGAN', 'HANGBM', 
+      'HANGHG', 'HANGJE', 'HANHGG', 'HANIFG', 'HANJEG', 'HANJGE', 'HANKDG', 'HANKFE', 'HANLCG', 'HANMBG', 'HANNAG', 'HBGHGM', 'HBGHMG', 'HBGIFM', 'HBGMBM', 
+      'HBGMHG', 'HBGNAM', 'HBMANG', 'HBMBGM', 'HBMBMG', 'HBMCLG', 'HBMDKG', 'HBMEJG', 'HBMFIG', 'HBMGBM', 'HBMGHG', 'HBMHGG', 'HBMIFG', 'HBMJEG', 'HBMKDG', 
+      'HBMLCG', 'HBMMBG', 'HBMNAG', 'HCGHGL', 'HCGHLG', 'HCGLCL', 'HCGLDK', 'HCGLHG', 'HCKBNG', 'HCKDGL', 'HCKDLG', 'HCKLDG', 'HCKNBG', 'HCLANG', 'HCLBMG', 
+      'HCLCGL', 'HCLCLG', 'HCLDGK', 'HCLDKG', 'HCLEFK', 'HCLEJG', 'HCLFEK', 'HCLFIG', 'HCLGCL', 'HCLGDK', 'HCLGHG', 'HCLHGG', 'HCLIFG', 'HCLJEG', 'HCLKDG', 
+      'HCLLCG', 'HCLMBG', 'HCLNAG', 'HDGHGK', 'HDGHKG', 'HDGIFK', 'HDGIJG', 'HDGJEK', 'HDGJIG', 'HDGKDK', 'HDGKHG', 'HDGLCK', 'HDKANG', 'HDKBMG', 'HDKCLG', 
+      'HDKDGK', 'HDKDKG', 'HDKEFK', 'HDKEJG', 'HDKFEK', 'HDKFIG', 'HDKGDK', 'HDKGHG', 'HDKHGG', 'HDKIFG', 'HDKJEG', 'HDKKDG', 'HDKLCG', 'HDKMBG', 'HDKNAG', 
+      'HEAJNG', 'HEALMF', 'HEANFK', 'HEANGJ', 'HEANJG', 'HEANKF', 'HEFHGK', 'HEFHKG', 'HEFIFK', 'HEFIGJ', 'HEFIJG', 'HEFIKF', 'HEFJEK', 'HEFJIG', 'HEFKDK', 
+      'HEFKEJ', 'HEFKHG', 'HEFKIF', 'HEFKNA', 'HEFLCK', 'HEFLMA', 'HEGHFK', 'HEGHGJ', 'HEGHJG', 'HEGHKF', 'HEGJDK', 'HEGJEJ', 'HEGJHG', 'HEGJIF', 'HEGJNA', 
+      'HEJANG', 'HEJBMG', 'HEJCLG', 'HEJDGK', 'HEJDKG', 'HEJEFK', 'HEJEGJ', 'HEJEJG', 'HEJEKF', 'HEJFEK', 'HEJFIG', 'HEJGDK', 'HEJGEJ', 'HEJGHG', 'HEJGIF', 
+      'HEJGNA', 'HEJHGG', 'HEJIFG', 'HEJIGF', 'HEJJEG', 'HEJKDG', 'HEJKEF', 'HEJLCG', 'HEJMBG', 'HEJNAG', 'HEJNGA', 'HEKBMF', 'HEKDFK', 'HEKDGJ', 'HEKDJG', 
+      'HEKDKF', 'HEKFDK', 'HEKFEJ', 'HEKFHG', 'HEKFIF', 'HEKFNA', 'HEKHFG', 'HEKHGF', 'HEKJDG', 'HEKJEF', 'HFEHGK', 'HFEHKG', 'HFEIFK', 'HFEIJG', 'HFEJEK', 
+      'HFEJGI', 'HFEJIG', 'HFEJKE', 'HFEKBM', 'HFEKDK', 'HFEKFI', 'HFEKHG', 'HFEKJE', 'HFELAM', 'HFELCK', 'HFGHEK', 'HFGHGI', 'HFGHIG', 'HFGHKE', 'HFGIBM', 
+      'HFGIDK', 'HFGIFI', 'HFGIHG', 'HFGIJE', 'HFIANG', 'HFIBGM', 'HFIBMG', 'HFICLG', 'HFIDGK', 'HFIDKG', 'HFIEFK', 'HFIEJG', 'HFIFEK', 'HFIFGI', 'HFIFIG', 
+      'HFIFKE', 'HFIGBM', 'HFIGDK', 'HFIGFI', 'HFIGHG', 'HFIGJE', 'HFIHGG', 'HFIIFG', 'HFIJEG', 'HFIJGE', 'HFIKDG', 'HFIKFE', 'HFILCG', 'HFIMBG', 'HFINAG', 
+      'HFKDEK', 'HFKDGI', 'HFKDIG', 'HFKDKE', 'HFKEBM', 'HFKEDK', 'HFKEFI', 'HFKEHG', 'HFKEJE', 'HFKHEG', 'HFKHGE', 'HFKIDG', 'HFKIFE', 'HFKNAE', 'HFMBEK', 
+      'HFMBGI', 'HFMBIG', 'HFMBKE', 'HFMIBG', 'HFMLAE', 'HGAHGN', 'HGAHNG', 'HGANAN', 'HGANBM', 'HGANCL', 'HGANDK', 'HGANEJ', 'HGANFI', 'HGANGH', 'HGANHG', 
+      'HGANIF', 'HGANJE', 'HGANKD', 'HGANLC', 'HGANMB', 'HGANNA', 'HGBHGM', 'HGBHMG', 'HGBIFM', 'HGBIMF', 'HGBMAN', 'HGBMBM', 'HGBMCL', 'HGBMDK', 'HGBMEJ', 
+      'HGBMFI', 'HGBMGH', 'HGBMHG', 'HGBMIF', 'HGBMJE', 'HGBMKD', 'HGBMLC', 'HGBMMB', 'HGBMNA', 'HGBNAM', 'HGBNCK', 'HGBNKC', 'HGBNMA', 'HGCHGL', 'HGCHLG', 
+      'HGCLAN', 'HGCLBM', 'HGCLCL', 'HGCLDK', 'HGCLEJ', 'HGCLFI', 'HGCLGH', 'HGCLHG', 'HGCLIF', 'HGCLJE', 'HGCLKD', 'HGCLLC', 'HGCLMB', 'HGCLNA', 'HGDHGK', 
+      'HGDHKG', 'HGDIFK', 'HGDIGJ', 'HGDIJG', 'HGDIKF', 'HGDJEK', 'HGDJGI', 'HGDJIG', 'HGDJKE', 'HGDKAN', 'HGDKBM', 'HGDKCL', 'HGDKDK', 'HGDKEJ', 'HGDKFI', 
+      'HGDKGH', 'HGDKHG', 'HGDKIF', 'HGDKJE', 'HGDKKD', 'HGDKLC', 'HGDKMB', 'HGDKNA', 'HGDLAM', 'HGDLCK', 'HGDLKC', 'HGDLMA', 'HGEHFK', 'HGEHGJ', 'HGEHJG', 
+      'HGEHKF', 'HGEJAN', 'HGEJBM', 'HGEJCL', 'HGEJDK', 'HGEJEJ', 'HGEJFI', 'HGEJGH', 'HGEJHG', 'HGEJIF', 'HGEJJE', 'HGEJKD', 'HGEJLC', 'HGEJMB', 'HGEJNA', 
+      'HGFHEK', 'HGFHGI', 'HGFHIG', 'HGFHKE', 'HGFIAN', 'HGFIBM', 'HGFICL', 'HGFIDK', 'HGFIEJ', 'HGFIFI', 'HGFIGH', 'HGFIHG', 'HGFIIF', 'HGFIJE', 'HGFIKD', 
+      'HGFILC', 'HGFIMB', 'HGFINA', 'HGGHAN', 'HGGHBM', 'HGGHCL', 'HGGHDK', 'HGGHEJ', 'HGGHFI', 'HGGHGH', 'HGGHHG', 'HGGHIF', 'HGGHJE', 'HGGHKD', 'HGGHLC', 
+      'HGGHMB', 'HGGHNA', 'HGHAGN', 'HGHANG', 'HGHBGM', 'HGHBMG', 'HGHCGL', 'HGHCLG', 'HGHDGK', 'HGHDKG', 'HGHEFK', 'HGHEGJ', 'HGHEJG', 'HGHEKF', 'HGHFEK', 
+      'HGHFGI', 'HGHFIG', 'HGHFKE', 'HGHGAN', 'HGHGBM', 'HGHGCL', 'HGHGDK', 'HGHGEJ', 'HGHGFI', 'HGHGGH', 'HGHGHG', 'HGHGIF', 'HGHGJE', 'HGHGKD', 'HGHGLC', 
+      'HGHGMB', 'HGHGNA', 'HGHHGG', 'HGHIFG', 'HGHIGF', 'HGHJEG', 'HGHJGE', 'HGHKDG', 'HGHKEF', 'HGHKFE', 'HGHKGD', 'HGHLCG', 'HGHLGC', 'HGHMBG', 'HGHMGB', 
+      'HGHNAG', 'HGHNGA', 'HGIBFM', 'HGIBMF', 'HGIDFK', 'HGIDGJ', 'HGIDJG', 'HGIDKF', 'HGIFAN', 'HGIFBM', 'HGIFCL', 'HGIFDK', 'HGIFEJ', 'HGIFFI', 'HGIFGH', 
+      'HGIFHG', 'HGIFIF', 'HGIFJE', 'HGIFKD', 'HGIFLC', 'HGIFMB', 'HGIFNA', 'HGIHFG', 'HGIHGF', 'HGIJDG', 'HGIJEF', 'HGIJFE', 'HGIJGD', 'HGJDEK', 'HGJDGI', 
+      'HGJDIG', 'HGJDKE', 'HGJEAN', 'HGJEBM', 'HGJECL', 'HGJEDK', 'HGJEEJ', 'HGJEFI', 'HGJEGH', 'HGJEHG', 'HGJEIF', 'HGJEJE', 'HGJEKD', 'HGJELC', 'HGJEMB', 
+      'HGJENA', 'HGJHEG', 'HGJHGE', 'HGJIDG', 'HGJIEF', 'HGJIFE', 'HGJIGD', 'HGJNAE', 'HGJNEA', 'HGKDAN', 'HGKDBM', 'HGKDCL', 'HGKDDK', 'HGKDEJ', 'HGKDFI', 
+      'HGKDGH', 'HGKDHG', 'HGKDIF', 'HGKDJE', 'HGKDKD', 'HGKDLC', 'HGKDMB', 'HGKDNA', 'HGKHDG', 'HGKHEF', 'HGKHFE', 'HGKHGD', 'HGLCAN', 'HGLCBM', 'HGLCCL', 
+      'HGLCDK', 'HGLCEJ', 'HGLCFI', 'HGLCGH', 'HGLCHG', 'HGLCIF', 'HGLCJE', 'HGLCKD', 'HGLCLC', 'HGLCMB', 'HGLCNA', 'HGLDAM', 'HGLDCK', 'HGLDKC', 'HGLDMA', 
+      'HGLHCG', 'HGLHGC', 'HGMBAN', 'HGMBBM', 'HGMBCL', 'HGMBDK', 'HGMBEJ', 'HGMBFI', 'HGMBGH', 'HGMBHG', 'HGMBIF', 'HGMBJE', 'HGMBKD', 'HGMBLC', 'HGMBMB', 
+      'HGMBNA', 'HGMHBG', 'HGMHGB', 'HGNAAN', 'HGNABM', 'HGNACL', 'HGNADK', 'HGNAEJ', 'HGNAFI', 'HGNAGH', 'HGNAHG', 'HGNAIF', 'HGNAJE', 'HGNAKD', 'HGNALC', 
+      'HGNAMB', 'HGNANA', 'HGNBAM', 'HGNBCK', 'HGNBKC', 'HGNBMA', 'HGNHAG', 'HGNHGA', 'HGNJAE', 'HGNJEA', 'HHGANG', 'HHGBMG', 'HHGCLG', 'HHGDKG', 'HHGEJG', 
+      'HHGFIG', 'HHGGHG', 'HHGHGG', 'HHGIFG', 'HHGJEG', 'HHGKDG', 'HHGLCG', 'HHGMBG', 'HHGNAG', 'HIFANG', 'HIFBMG', 'HIFCLG', 'HIFDKG', 'HIFEJG', 'HIFEKF', 
+      'HIFFIG', 'HIFGHG', 'HIFGIF', 'HIFHGG', 'HIFIFG', 'HIFIGF', 'HIFJEG', 'HIFKDG', 'HIFKEF', 'HIFLCG', 'HIFMBG', 'HIFNAG', 'HIGBMF', 'HIGDJG', 'HIGDKF', 
+      'HIGFHG', 'HIGFIF', 'HIGHFG', 'HIGHGF', 'HIGJDG', 'HIGJEF', 'HJEANG', 'HJEBMG', 'HJECLG', 'HJEDKG', 'HJEEJG', 'HJEFIG', 'HJEFKE', 'HJEGHG', 'HJEGJE', 
+      'HJEHGG', 'HJEIFG', 'HJEJEG', 'HJEJGE', 'HJEKDG', 'HJEKFE', 'HJELCG', 'HJEMBG', 'HJENAG', 'HJGDIG', 'HJGDKE', 'HJGEHG', 'HJGEJE', 'HJGHEG', 'HJGHGE', 
+      'HJGIDG', 'HJGIFE', 'HJGNAE', 'HKCBNG', 'HKCDLG', 'HKCLDG', 'HKCLEF', 'HKCLFE', 'HKCLGD', 'HKCNBG', 'HKDANG', 'HKDBMG', 'HKDCLG', 'HKDDKG', 'HKDEJG', 
+      'HKDEKF', 'HKDFIG', 'HKDFKE', 'HKDGHG', 'HKDGIF', 'HKDGJE', 'HKDGKD', 'HKDGLC', 'HKDHGG', 'HKDIFG', 'HKDIGF', 'HKDJEG', 'HKDJGE', 'HKDKDG', 'HKDKEF', 
+      'HKDKFE', 'HKDKGD', 'HKDLCG', 'HKDLGC', 'HKDMBG', 'HKDNAG', 'HKEBMF', 'HKEDJG', 'HKEDKF', 'HKEFHG', 'HKEFIF', 'HKEFJE', 'HKEFKD', 'HKEFLC', 'HKEHFG', 
+      'HKEHGF', 'HKEJDG', 'HKEJEF', 'HKEJFE', 'HKEJGD', 'HKFDIG', 'HKFDKE', 'HKFEHG', 'HKFEIF', 'HKFEJE', 'HKFEKD', 'HKFELC', 'HKFHEG', 'HKFHGE', 'HKFIDG', 
+      'HKFIEF', 'HKFIFE', 'HKFIGD', 'HKFNAE', 'HKGDHG', 'HKGDIF', 'HKGDJE', 'HKGDKD', 'HKGDLC', 'HKGHDG', 'HKGHEF', 'HKGHFE', 'HKGHGD', 'HLCANG', 'HLCBMG', 
+      'HLCCLG', 'HLCDKG', 'HLCEJG', 'HLCFIG', 'HLCGHG', 'HLCGLC', 'HLCHGG', 'HLCIFG', 'HLCJEG', 'HLCKDG', 'HLCLCG', 'HLCLGC', 'HLCMBG', 'HLCNAG', 'HLGCHG', 
+      'HLGCLC', 'HLGDKC', 'HLGHCG', 'HLGHGC', 'HMABNG', 'HMADLG', 'HMALDG', 'HMALEF', 'HMANBG', 'HMANGB', 'HMBANG', 'HMBBMG', 'HMBCLG', 'HMBDKG', 'HMBEJG', 
+      'HMBEKF', 'HMBFIG', 'HMBGHG', 'HMBGIF', 'HMBGMB', 'HMBGNA', 'HMBHGG', 'HMBIFG', 'HMBIGF', 'HMBJEG', 'HMBKDG', 'HMBKEF', 'HMBLCG', 'HMBMBG', 'HMBMGB', 
+      'HMBNAG', 'HMBNGA', 'HMFBIG', 'HMFIBG', 'HMFIGB', 'HMFLEA', 'HMGBHG', 'HMGBIF', 'HMGBMB', 'HMGBNA', 'HMGHBG', 'HMGHGB', 'HNAANG', 'HNABMG', 'HNACLG', 
+      'HNADKG', 'HNAEJG', 'HNAFIG', 'HNAGHG', 'HNAGNA', 'HNAHGG', 'HNAIFG', 'HNAJEG', 'HNAKDG', 'HNALCG', 'HNAMBG', 'HNANAG', 'HNANGA', 'HNGAHG', 'HNGANA', 
+      'HNGBMA', 'HNGHAG', 'HNGHGA', 'HNGJEA', 'IADKFN', 'IADKNF', 'IADLMF', 'IADMLF', 'IADNKF', 'IAFIFN', 'IAFINF', 'IAFNAN', 'IAFNIF', 'IAFNKD', 'IANAFN', 
+      'IANANF', 'IANBMF', 'IANCLF', 'IANDKF', 'IANEJF', 'IANFAN', 'IANFIF', 'IANFKD', 'IANGHF', 'IANGJD', 'IANHGF', 'IANIFF', 'IANJEF', 'IANJGD', 'IANKDF', 
+      'IANKFD', 'IANLCF', 'IANMBF', 'IANNAF', 'IBCKNF', 'IBCLFM', 'IBCLMF', 'IBCMLF', 'IBCNJG', 'IBCNKF', 'IBFIFM', 'IBFIMF', 'IBFMBM', 'IBFMHG', 'IBFMIF', 
+      'IBFMLC', 'IBGHFM', 'IBGHMF', 'IBGMHF', 'IBGNJC', 'IBMANF', 'IBMBFM', 'IBMBMF', 'IBMCLF', 'IBMDJG', 'IBMDKF', 'IBMEJF', 'IBMFBM', 'IBMFHG', 'IBMFIF', 
+      'IBMFLC', 'IBMGHF', 'IBMHFG', 'IBMHGF', 'IBMIFF', 'IBMJDG', 'IBMJEF', 'IBMKDF', 'IBMLCF', 'IBMLFC', 'IBMMBF', 'IBMNAF', 'ICBKNF', 'ICBLMF', 'ICBMFL', 
+      'ICBMLF', 'ICBNGJ', 'ICBNKF', 'ICFIFL', 'ICFILF', 'ICFLCL', 'ICFLEJ', 'ICFLIF', 'ICFLMB', 'ICJEFL', 'ICJELF', 'ICJLEF', 'ICJNGB', 'ICLANF', 'ICLBMF', 
+      'ICLCFL', 'ICLCLF', 'ICLDGJ', 'ICLDKF', 'ICLEFJ', 'ICLEJF', 'ICLFCL', 'ICLFEJ', 'ICLFIF', 'ICLFMB', 'ICLGDJ', 'ICLGHF', 'ICLHGF', 'ICLIFF', 'ICLJEF', 
+      'ICLKDF', 'ICLLCF', 'ICLMBF', 'ICLMFB', 'ICLNAF', 'IDAKNF', 'IDALMF', 'IDAMLF', 'IDANFK', 'IDANGJ', 'IDANJG', 'IDANKF', 'IDFIFK', 'IDFIGJ', 'IDFIJG', 
+      'IDFIKF', 'IDFKDK', 'IDFKEJ', 'IDFKHG', 'IDFKIF', 'IDFKNA', 'IDGHFK', 'IDGHGJ', 'IDGHJG', 'IDGHKF', 'IDGIFJ', 'IDGIJF', 'IDGJDK', 'IDGJEJ', 'IDGJHG', 
+      'IDGJIF', 'IDGJNA', 'IDGKDJ', 'IDGKHF', 'IDGLCJ', 'IDJEFK', 'IDJEGJ', 'IDJEJG', 'IDJEKF', 'IDJGDK', 'IDJGEJ', 'IDJGHG', 'IDJGIF', 'IDJGNA', 'IDJIFG', 
+      'IDJIGF', 'IDJKDG', 'IDJKEF', 'IDJMBG', 'IDKANF', 'IDKBMF', 'IDKCLF', 'IDKDFK', 'IDKDGJ', 'IDKDJG', 'IDKDKF', 'IDKEFJ', 'IDKEJF', 'IDKFDK', 'IDKFEJ', 
+      'IDKFHG', 'IDKFIF', 'IDKFNA', 'IDKGDJ', 'IDKGHF', 'IDKHFG', 'IDKHGF', 'IDKIFF', 'IDKJDG', 'IDKJEF', 'IDKKDF', 'IDKLCF', 'IDKMBF', 'IDKNAF', 'IDKNFA', 
+      'IEFHGJ', 'IEFHKF', 'IEFIFJ', 'IEFIJF', 'IEFJEJ', 'IEFJIF', 'IEFKDJ', 'IEFKHF', 'IEFLCJ', 'IEJANF', 'IEJBMF', 'IEJCLF', 'IEJDGJ', 'IEJDKF', 'IEJEFJ', 
+      'IEJEJF', 'IEJFEJ', 'IEJFIF', 'IEJGDJ', 'IEJGHF', 'IEJHGF', 'IEJIFF', 'IEJJEF', 'IEJKDF', 'IEJLCF', 'IEJMBF', 'IEJNAF', 'IFAIFN', 'IFAINF', 'IFANAN', 
+      'IFANBM', 'IFANCL', 'IFANDK', 'IFANEJ', 'IFANFI', 'IFANGH', 'IFANHG', 'IFANIF', 'IFANJE', 'IFANKD', 'IFANLC', 'IFANMB', 'IFANNA', 'IFBIFM', 'IFBIMF', 
+      'IFBMAN', 'IFBMBM', 'IFBMCL', 'IFBMDK', 'IFBMEJ', 'IFBMFI', 'IFBMGH', 'IFBMHG', 'IFBMIF', 'IFBMJE', 'IFBMKD', 'IFBMLC', 'IFBMMB', 'IFBMNA', 'IFCIFL', 
+      'IFCILF', 'IFCLAN', 'IFCLBM', 'IFCLCL', 'IFCLDK', 'IFCLEJ', 'IFCLFI', 'IFCLGH', 'IFCLHG', 'IFCLIF', 'IFCLJE', 'IFCLKD', 'IFCLLC', 'IFCLMB', 'IFCLNA', 
+      'IFDIFK', 'IFDIGJ', 'IFDIJG', 'IFDIKF', 'IFDKAN', 'IFDKBM', 'IFDKCL', 'IFDKDK', 'IFDKEJ', 'IFDKFI', 'IFDKGH', 'IFDKHG', 'IFDKIF', 'IFDKJE', 'IFDKKD', 
+      'IFDKLC', 'IFDKMB', 'IFDKNA', 'IFEHFK', 'IFEHGJ', 'IFEHJG', 'IFEHKF', 'IFEIFJ', 'IFEIJF', 'IFEJAN', 'IFEJBM', 'IFEJCL', 'IFEJDK', 'IFEJEJ', 'IFEJFI', 
+      'IFEJGH', 'IFEJHG', 'IFEJIF', 'IFEJJE', 'IFEJKD', 'IFEJLC', 'IFEJMB', 'IFEJNA', 'IFEKDJ', 'IFEKFH', 'IFEKHF', 'IFEKJD', 'IFELCJ', 'IFELJC', 'IFFIAN', 
+      'IFFIBM', 'IFFICL', 'IFFIDK', 'IFFIEJ', 'IFFIFI', 'IFFIGH', 'IFFIHG', 'IFFIIF', 'IFFIJE', 'IFFIKD', 'IFFILC', 'IFFIMB', 'IFFINA', 'IFGHAN', 'IFGHBM', 
+      'IFGHCL', 'IFGHDK', 'IFGHEJ', 'IFGHFI', 'IFGHGH', 'IFGHHG', 'IFGHIF', 'IFGHJE', 'IFGHKD', 'IFGHLC', 'IFGHMB', 'IFGHNA', 'IFGIDJ', 'IFGIFH', 'IFGIHF', 
+      'IFGIJD', 'IFHEFK', 'IFHEGJ', 'IFHEJG', 'IFHEKF', 'IFHGAN', 'IFHGBM', 'IFHGCL', 'IFHGDK', 'IFHGEJ', 'IFHGFI', 'IFHGGH', 'IFHGHG', 'IFHGIF', 'IFHGJE',
+       'IFHGKD', 'IFHGLC', 'IFHGMB', 'IFHGNA', 'IFHIFG', 'IFHIGF', 'IFHKDG', 'IFHKEF', 'IFHKFE', 'IFHKGD', 'IFHMBG', 'IFHMGB', 'IFIAFN', 'IFIANF', 'IFIBFM', 
+       'IFIBMF', 'IFICFL', 'IFICLF', 'IFIDFK', 'IFIDGJ', 'IFIDJG', 'IFIDKF', 'IFIEFJ', 'IFIEJF', 'IFIFAN', 'IFIFBM', 'IFIFCL', 'IFIFDK', 'IFIFEJ', 'IFIFFI', 
+       'IFIFGH', 'IFIFHG', 'IFIFIF', 'IFIFJE', 'IFIFKD', 'IFIFLC', 'IFIFMB', 'IFIFNA', 'IFIGDJ', 'IFIGFH', 'IFIGHF', 'IFIGJD', 'IFIHFG', 'IFIHGF', 'IFIIFF', 
+       'IFIJDG', 'IFIJEF', 'IFIJFE', 'IFIJGD', 'IFIKDF', 'IFIKFD', 'IFILCF', 'IFILFC', 'IFIMBF', 'IFIMFB', 'IFINAF', 'IFINFA', 'IFJEAN', 'IFJEBM', 'IFJECL', 
+       'IFJEDK', 'IFJEEJ', 'IFJEFI', 'IFJEGH', 'IFJEHG', 'IFJEIF', 'IFJEJE', 'IFJEKD', 'IFJELC', 'IFJEMB', 'IFJENA', 'IFJIDG', 'IFJIEF', 'IFJIFE', 'IFJIGD', 
+       'IFKDAN', 'IFKDBM', 'IFKDCL', 'IFKDDK', 'IFKDEJ', 'IFKDFI', 'IFKDGH', 'IFKDHG', 'IFKDIF', 'IFKDJE', 'IFKDKD', 'IFKDLC', 'IFKDMB', 'IFKDNA', 'IFKEDJ', 
+       'IFKEFH', 'IFKEHF', 'IFKEJD', 'IFKHDG', 'IFKHEF', 'IFKHFE', 'IFKHGD', 'IFKIDF', 'IFKIFD', 'IFKNAD', 'IFKNBC', 'IFKNCB', 'IFKNDA', 'IFLCAN', 'IFLCBM', 
+       'IFLCCL', 'IFLCDK', 'IFLCEJ', 'IFLCFI', 'IFLCGH', 'IFLCHG', 'IFLCIF', 'IFLCJE', 'IFLCKD', 'IFLCLC', 'IFLCMB', 'IFLCNA', 'IFLECJ', 'IFLEJC', 'IFLICF', 
+       'IFLIFC', 'IFLMAD', 'IFLMBC', 'IFLMCB', 'IFLMDA', 'IFMBAN', 'IFMBBM', 'IFMBCL', 'IFMBDK', 'IFMBEJ', 'IFMBFI', 'IFMBGH', 'IFMBHG', 'IFMBIF', 'IFMBJE', 
+       'IFMBKD', 'IFMBLC', 'IFMBMB', 'IFMBNA', 'IFMHBG', 'IFMHGB', 'IFMIBF', 'IFMIFB', 'IFMLAD', 'IFMLBC', 'IFMLCB', 'IFMLDA', 'IFNAAN', 'IFNABM', 'IFNACL', 
+       'IFNADK', 'IFNAEJ', 'IFNAFI', 'IFNAGH', 'IFNAHG', 'IFNAIF', 'IFNAJE', 'IFNAKD', 'IFNALC', 'IFNAMB', 'IFNANA', 'IFNIAF', 'IFNIFA', 'IFNKAD', 'IFNKBC', 
+       'IFNKCB', 'IFNKDA', 'IGBHMF', 'IGBMDJ', 'IGBMFH', 'IGBMHF', 'IGBMJD', 'IGBNCJ', 'IGDHGJ', 'IGDHKF', 'IGDIFJ', 'IGDIJF', 'IGDJEJ', 'IGDJGH', 'IGDJIF', 
+       'IGDJKD', 'IGDJMB', 'IGDKDJ', 'IGDKFH', 'IGDKHF', 'IGDKJD', 'IGDLCJ', 'IGFHEJ', 'IGFHGH', 'IGFHIF', 'IGFHKD', 'IGFHMB', 'IGFIDJ', 'IGFIFH', 'IGFIHF', 
+       'IGFIJD', 'IGHANF', 'IGHBMF', 'IGHCLF', 'IGHDGJ', 'IGHDKF', 'IGHEFJ', 'IGHEJF', 'IGHFEJ', 'IGHFGH', 'IGHFIF', 'IGHFKD', 'IGHFMB', 'IGHGDJ', 'IGHGFH', 
+       'IGHGHF', 'IGHGJD', 'IGHHGF', 'IGHIFF', 'IGHJEF', 'IGHJGD', 'IGHKDF', 'IGHKFD', 'IGHLCF', 'IGHMBF', 'IGHMFB', 'IGHNAF', 'IGJDEJ', 'IGJDGH', 'IGJDIF', 
+       'IGJDKD', 'IGJDMB', 'IGJEDJ', 'IGJEFH', 'IGJEHF', 'IGJEJD', 'IGJHEF', 'IGJHGD', 'IGJIDF', 'IGJIFD', 'IGJNAD', 'IGJNCB', 'IHFEJG', 'IHFEKF', 'IHFGHG', 
+       'IHFGIF', 'IHFIFG', 'IHFIGF', 'IHFKDG', 'IHFKEF', 'IHFMBG', 'IHGANF', 'IHGBMF', 'IHGCLF', 'IHGDJG', 'IHGDKF', 'IHGEJF', 'IHGFHG', 'IHGFIF', 'IHGGHF', 
+       'IHGHFG', 'IHGHGF', 'IHGIFF', 'IHGJDG', 'IHGJEF', 'IHGKDF', 'IHGLCF', 'IHGMBF', 'IHGNAF', 'IIFANF', 'IIFBMF', 'IIFCLF', 'IIFDKF', 'IIFEJF', 'IIFFIF', 
+       'IIFGHF', 'IIFHGF', 'IIFIFF', 'IIFJEF', 'IIFKDF', 'IIFLCF', 'IIFMBF', 'IIFNAF', 'IJCELF', 'IJCLDG', 'IJCLEF', 'IJCLFE', 'IJCLGD', 'IJCNBG', 'IJDEJG', 
+       'IJDEKF', 'IJDGHG', 'IJDGIF', 'IJDGJE', 'IJDGKD', 'IJDGLC', 'IJDIFG', 'IJDIGF', 'IJDKDG', 'IJDKEF', 'IJDKFE', 'IJDKGD', 'IJDMBG', 'IJEANF', 'IJEBMF',
+        'IJECLF', 'IJEDJG', 'IJEDKF', 'IJEEJF', 'IJEFHG', 'IJEFIF', 'IJEFJE', 'IJEFKD', 'IJEFLC', 'IJEGHF', 'IJEGJD', 'IJEHFG', 'IJEHGF', 'IJEIFF', 'IJEJDG',
+         'IJEJEF', 'IJEJFE', 'IJEJGD', 'IJEKDF', 'IJEKFD', 'IJELCF', 'IJELFC', 'IJEMBF', 'IJENAF', 'IJFEHG', 'IJFEIF', 'IJFEJE', 'IJFEKD', 'IJFELC', 'IJFIDG', 
+         'IJFIEF', 'IJFIFE', 'IJFIGD', 'IJGDHG', 'IJGDIF', 'IJGDJE', 'IJGDKD', 'IJGDLC', 'IJGEHF', 'IJGEJD', 'IJGHDG', 'IJGHEF', 'IJGHFE', 'IJGHGD', 'IJGIDF', 
+         'IJGIFD', 'IJGNAD', 'IJGNBC', 'IKDANF', 'IKDBMF', 'IKDCLF', 'IKDDKF', 'IKDEJF', 'IKDFIF', 'IKDFKD', 'IKDGHF', 'IKDGJD', 'IKDHGF', 'IKDIFF', 'IKDJEF', 
+         'IKDJGD', 'IKDKDF', 'IKDKFD', 'IKDLCF', 'IKDMBF', 'IKDNAF', 'IKFDIF', 'IKFDKD', 'IKFEHF', 'IKFEJD', 'IKFHEF', 'IKFHGD', 'IKFIDF', 'IKFIFD', 'IKFNAD', 
+         'ILCANF', 'ILCBMF', 'ILCCLF', 'ILCDKF', 'ILCEJF', 'ILCFIF', 'ILCFLC', 'ILCGHF', 'ILCHGF', 'ILCIFF', 'ILCJEF', 'ILCKDF', 'ILCLCF', 'ILCLFC', 'ILCMBF', 
+         'ILCNAF', 'ILFCIF', 'ILFCLC', 'ILFEJC', 'ILFICF', 'ILFIFC', 'ILFMBC', 'IMBANF', 'IMBBMF', 'IMBCLF', 'IMBDKF', 'IMBEJF', 'IMBFIF', 'IMBFMB', 'IMBGHF', 
+         'IMBHGF', 'IMBIFF', 'IMBJEF', 'IMBKDF', 'IMBLCF', 'IMBMBF', 'IMBMFB', 'IMBNAF', 'IMFBIF', 'IMFBMB', 'IMFHGB', 'IMFIBF', 'IMFIFB', 'IMFLCB', 'INAANF', 
+         'INABMF', 'INACLF', 'INADKF', 'INAEJF', 'INAFIF', 'INAFNA', 'INAGHF', 'INAHGF', 'INAIFF', 'INAJEF', 'INAKDF', 'INALCF', 'INAMBF', 'INANAF', 'INANFA', 
+         'INFAIF', 'INFANA', 'INFIAF', 'INFIFA', 'INFKDA', 'JAEHGN', 'JAEJEN', 'JAEJNE', 'JAELCN', 'JAENAN', 'JAENJE', 'JANAEN', 'JANANE', 'JANBME', 'JANCLE', 
+         'JANDKE', 'JANEAN', 'JANEJE', 'JANFIE', 'JANGHE', 'JANHGE', 'JANIFE', 'JANJEE', 'JANKDE', 'JANLCE', 'JANMBE', 'JANNAE', 'JBEJEM', 'JBEJME', 'JBEKDM', 
+         'JBEMBM', 'JBEMJE', 'JBMANE', 'JBMBEM', 'JBMBME', 'JBMCLE', 'JBMDKE', 'JBMEBM', 'JBMEJE', 'JBMFIE', 'JBMGHE', 'JBMHGE', 'JBMIFE', 'JBMJEE', 'JBMKDE', 
+         'JBMLCE', 'JBMMBE', 'JBMNAE', 'JCEJEL', 'JCEJLE', 'JCELAN', 'JCELCL', 'JCELFI', 'JCELJE', 'JCIBGN', 'JCIFEL', 'JCIFLE', 'JCILFE', 'JCLAEN', 'JCLANE', 
+         'JCLBME', 'JCLCEL', 'JCLCLE', 'JCLDGI', 'JCLDKE', 'JCLEAN', 'JCLECL', 'JCLEFI', 'JCLEJE', 'JCLFEI', 'JCLFIE', 'JCLGDI', 'JCLGHE', 'JCLHGE', 'JCLIFE', 
+         'JCLJEE', 'JCLKDE', 'JCLLCE', 'JCLMBE', 'JCLNAE', 'JCNAEL', 'JCNALE', 'JCNBGI', 'JCNBKE', 'JCNKBE', 'JCNLAE', 'JDEJEK', 'JDEJGI', 'JDEJIG', 'JDEJKE', 
+         'JDEKBM', 'JDEKDK', 'JDEKFI', 'JDEKHG', 'JDEKJE', 'JDGHEK', 'JDGHGI', 'JDGHIG', 'JDGHKE', 'JDGIBM', 'JDGIDK', 'JDGIFI', 'JDGIHG', 'JDGIJE', 'JDGJEI', 
+         'JDGJIE', 'JDGKDI', 'JDGKHE', 'JDGLCI', 'JDIANG', 'JDIFEK', 'JDIFGI', 'JDIFIG', 'JDIFKE', 'JDIGBM', 'JDIGDK', 'JDIGFI', 'JDIGHG', 'JDIGJE', 'JDIJEG', 
+         'JDIJGE', 'JDIKDG', 'JDIKFE', 'JDKANE', 'JDKBEM', 'JDKBME', 'JDKCLE', 'JDKDEK', 'JDKDGI', 'JDKDIG', 'JDKDKE', 'JDKEBM', 'JDKEDK', 'JDKEFI', 'JDKEHG', 
+         'JDKEJE', 'JDKFEI', 'JDKFIE', 'JDKGDI', 'JDKGHE', 'JDKHEG', 'JDKHGE', 'JDKIDG', 'JDKIFE', 'JDKJEE', 'JDKKDE', 'JDKLCE', 'JDKMBE', 'JDKNAE', 'JDMALE', 
+         'JDMBEK', 'JDMBGI', 'JDMBIG', 'JDMBKE', 'JDMKBE', 'JDMLAE', 'JEAHGN', 'JEAHNG', 'JEAJEN', 'JEAJNE', 'JEALCN', 'JEALDM', 'JEALMD', 'JEALNC', 'JEANAN', 'JEANBM', 'JEANCL', 'JEANDK', 'JEANEJ', 'JEANFI', 'JEANGH', 'JEANHG', 'JEANIF', 'JEANJE', 'JEANKD', 'JEANLC', 'JEANMB', 'JEANNA', 'JEBJEM', 'JEBJME', 'JEBKCN', 'JEBKDM', 'JEBKMD', 'JEBKNC', 'JEBMAN', 'JEBMBM', 'JEBMCL', 'JEBMDK', 'JEBMEJ', 'JEBMFI', 'JEBMGH', 'JEBMHG', 'JEBMIF', 'JEBMJE', 'JEBMKD', 'JEBMLC', 'JEBMMB', 'JEBMNA', 'JECJEL', 'JECJLE', 'JECLAN', 'JECLBM', 'JECLCL', 'JECLDK', 'JECLEJ', 'JECLFI', 'JECLGH', 'JECLHG', 'JECLIF', 'JECLJE', 'JECLKD', 'JECLLC', 'JECLMB', 'JECLNA', 'JEDJEK', 'JEDJGI', 'JEDJIG', 'JEDJKE', 'JEDKAN', 'JEDKBM', 'JEDKCL', 'JEDKDK', 'JEDKEJ', 'JEDKFI', 'JEDKGH', 'JEDKHG', 'JEDKIF', 'JEDKJE', 'JEDKKD', 'JEDKLC', 'JEDKMB', 'JEDKNA', 'JEEJAN', 'JEEJBM', 'JEEJCL', 'JEEJDK', 'JEEJEJ', 'JEEJFI', 'JEEJGH', 'JEEJHG', 'JEEJIF', 'JEEJJE', 'JEEJKD', 'JEEJLC', 'JEEJMB', 'JEEJNA', 'JEFHEK', 'JEFHGI', 'JEFHIG', 'JEFHKE', 'JEFIAN', 'JEFIBM', 'JEFICL', 'JEFIDK', 'JEFIEJ', 'JEFIFI', 'JEFIGH', 'JEFIHG', 'JEFIIF', 'JEFIJE', 'JEFIKD', 'JEFILC', 'JEFIMB', 'JEFINA', 'JEFJEI', 'JEFJIE', 'JEFKDI', 'JEFKEH', 'JEFKHE', 'JEFKID', 'JEFLCI', 'JEFLIC', 'JEGHAN', 'JEGHBM', 'JEGHCL', 'JEGHDK', 'JEGHEJ', 'JEGHFI', 'JEGHGH', 'JEGHHG', 'JEGHIF', 'JEGHJE', 'JEGHKD', 'JEGHLC', 'JEGHMB', 'JEGHNA', 'JEGJDI', 'JEGJEH', 'JEGJHE', 'JEGJID', 'JEHAGN', 'JEHANG', 'JEHFEK', 'JEHFGI', 'JEHFIG', 'JEHFKE', 'JEHGAN', 'JEHGBM', 'JEHGCL', 'JEHGDK', 'JEHGEJ', 'JEHGFI', 'JEHGGH', 'JEHGHG', 'JEHGIF', 'JEHGJE', 'JEHGKD', 'JEHGLC', 'JEHGMB', 'JEHGNA', 'JEHJEG', 'JEHJGE', 'JEHKDG', 'JEHKEF', 'JEHKFE', 'JEHKGD', 'JEIFAN', 'JEIFBM', 'JEIFCL', 'JEIFDK', 'JEIFEJ', 'JEIFFI', 'JEIFGH', 'JEIFHG', 'JEIFIF', 'JEIFJE', 'JEIFKD', 'JEIFLC', 'JEIFMB', 'JEIFNA', 'JEIJDG', 'JEIJEF', 'JEIJFE', 'JEIJGD', 'JEJAEN', 'JEJANE', 'JEJBEM', 'JEJBME', 'JEJCEL', 'JEJCLE', 'JEJDEK', 'JEJDGI', 'JEJDIG', 'JEJDKE', 'JEJEAN', 'JEJEBM', 'JEJECL', 'JEJEDK', 'JEJEEJ', 'JEJEFI', 'JEJEGH', 'JEJEHG', 'JEJEIF', 'JEJEJE', 'JEJEKD', 'JEJELC', 'JEJEMB', 'JEJENA', 'JEJFEI', 'JEJFIE', 'JEJGDI', 'JEJGEH', 'JEJGHE', 'JEJGID', 'JEJHEG', 'JEJHGE', 'JEJIDG', 'JEJIEF', 'JEJIFE', 'JEJIGD', 'JEJJEE', 'JEJKDE', 'JEJKED', 'JEJLCE', 'JEJLEC', 'JEJMBE', 'JEJMEB', 'JEJNAE', 'JEJNEA', 'JEKBCN', 'JEKBDM', 'JEKBMD', 'JEKBNC', 'JEKDAN', 'JEKDBM', 'JEKDCL', 'JEKDDK', 'JEKDEJ', 'JEKDFI', 'JEKDGH', 'JEKDHG', 'JEKDIF', 'JEKDJE', 'JEKDKD', 'JEKDLC', 'JEKDMB', 'JEKDNA', 'JEKFDI', 'JEKFEH', 'JEKFHE', 'JEKFID', 'JEKHDG', 'JEKHEF', 'JEKHFE', 'JEKHGD', 'JEKJDE', 'JEKJED', 'JELACN', 'JELADM', 'JELAMD', 'JELANC', 'JELCAN', 'JELCBM', 'JELCCL', 'JELCDK', 'JELCEJ', 'JELCFI', 'JELCGH', 'JELCHG', 'JELCIF', 'JELCJE', 'JELCKD', 'JELCLC', 'JELCMB', 'JELCNA', 'JELFCI', 'JELFIC', 'JELJCE', 'JELJEC', 'JEMBAN', 'JEMBBM', 'JEMBCL', 'JEMBDK', 'JEMBEJ', 'JEMBFI', 'JEMBGH', 'JEMBHG', 'JEMBIF', 'JEMBJE', 'JEMBKD', 'JEMBLC', 'JEMBMB', 'JEMBNA', 'JEMJBE', 'JEMJEB', 'JENAAN', 'JENABM', 'JENACL', 'JENADK', 'JENAEJ', 'JENAFI', 'JENAGH', 'JENAHG', 'JENAIF', 'JENAJE', 'JENAKD', 'JENALC', 'JENAMB', 'JENANA', 'JENJAE', 'JENJEA', 'JFEHGI', 'JFEHKE', 'JFEIFI', 'JFEIJE', 'JFEJEI', 'JFEJIE', 'JFEKDI', 'JFEKHE', 'JFELCI', 'JFIANE', 'JFIBME', 'JFICLE', 'JFIDGI', 'JFIDKE', 'JFIEFI', 'JFIEJE', 'JFIFEI', 'JFIFIE', 'JFIGDI', 'JFIGHE', 'JFIHGE', 'JFIIFE', 'JFIJEE', 'JFIKDE', 'JFILCE', 'JFIMBE', 'JFINAE', 'JGDHGI', 'JGDHKE', 'JGDIAN', 'JGDIFI', 'JGDIGH', 'JGDIJE', 'JGDIKD', 'JGDJEI', 'JGDJIE', 'JGDKDI', 'JGDKEH', 'JGDKHE', 'JGDKID', 'JGDLCI', 'JGEHAN', 'JGEHFI', 'JGEHGH', 'JGEHJE', 'JGEHKD', 'JGEJDI', 'JGEJEH', 'JGEJHE', 'JGEJID', 'JGHAEN', 'JGHANE', 'JGHBME', 'JGHCLE', 'JGHDGI', 'JGHDKE', 'JGHEAN', 'JGHEFI', 'JGHEGH', 'JGHEJE', 'JGHEKD', 'JGHFEI', 'JGHFIE', 'JGHGDI', 'JGHGEH', 'JGHGHE', 'JGHGID', 'JGHHGE', 'JGHIFE', 'JGHIGD', 'JGHJEE', 'JGHKDE', 'JGHKED', 'JGHLCE', 'JGHMBE', 'JGHNAE', 'JGIBCN', 'JGIBMD', 'JGIDAN', 'JGIDFI', 'JGIDGH', 'JGIDJE', 'JGIDKD', 'JGIFDI', 'JGIFEH', 'JGIFHE', 'JGIFID', 'JGIHFE', 'JGIHGD', 'JGIJDE', 'JGIJED', 'JGNADI', 'JGNAEH', 'JGNAHE', 'JGNAID', 'JGNBCI', 'JGNHAE', 'JHEANG', 'JHEFIG', 'JHEFKE', 'JHEGHG', 'JHEGJE', 'JHEJEG', 'JHEJGE', 'JHEKDG', 'JHEKFE', 'JHGANE', 'JHGBME', 'JHGCLE', 'JHGDIG', 'JHGDKE', 'JHGEHG', 'JHGEJE', 'JHGFIE', 'JHGGHE', 'JHGHEG', 'JHGHGE', 'JHGIDG', 'JHGIFE', 'JHGJEE', 'JHGKDE', 'JHGLCE', 'JHGMBE', 'JHGNAE', 'JICBNG', 'JICFLE', 'JICLDG', 'JICLEF', 'JICLFE', 'JICLGD', 'JIDANG', 'JIDFIG', 'JIDFKE', 'JIDGHG', 'JIDGIF', 'JIDGJE', 'JIDGKD', 'JIDGLC', 'JIDJEG', 'JIDJGE', 'JIDKDG', 'JIDKEF', 'JIDKFE', 'JIDKGD', 'JIEFHG', 'JIEFIF', 'JIEFJE', 'JIEFKD', 'JIEFLC', 'JIEJDG', 'JIEJEF', 'JIEJFE', 'JIEJGD', 'JIFANE', 'JIFBME', 'JIFCLE', 'JIFDIG', 'JIFDKE', 'JIFEHG', 'JIFEIF', 'JIFEJE', 'JIFEKD', 'JIFELC', 'JIFFIE', 'JIFGHE', 'JIFGID', 'JIFHEG', 'JIFHGE', 'JIFIDG', 'JIFIEF', 'JIFIFE', 'JIFIGD', 'JIFJEE', 'JIFKDE', 'JIFKED', 'JIFLCE', 'JIFLEC', 'JIFMBE', 'JIFNAE', 'JIGBMD', 'JIGBNC', 'JIGDHG', 'JIGDIF', 'JIGDJE', 'JIGDKD', 'JIGDLC', 'JIGFHE', 'JIGFID', 'JIGHDG', 'JIGHEF', 'JIGHFE', 'JIGHGD', 'JIGJDE', 'JIGJED', 'JJEANE', 'JJEBME', 'JJECLE', 'JJEDKE', 'JJEEJE', 'JJEFIE', 'JJEGHE', 'JJEHGE', 'JJEIFE', 'JJEJEE', 'JJEKDE', 'JJELCE', 'JJEMBE', 'JJENAE', 'JKDANE', 'JKDBME', 'JKDCLE', 'JKDDKE', 'JKDEJE', 'JKDEKD', 'JKDFIE', 'JKDGHE', 'JKDGID', 'JKDHGE', 'JKDIFE', 'JKDIGD', 'JKDJEE', 'JKDKDE', 'JKDKED', 'JKDLCE', 'JKDMBE', 'JKDNAE', 'JKEBMD', 'JKEDJE', 'JKEDKD', 'JKEFHE', 'JKEFID', 'JKEHFE', 'JKEHGD', 'JKEJDE', 'JKEJED', 'JLCANE', 'JLCBME', 'JLCCLE', 'JLCDKE', 'JLCEJE', 'JLCELC', 'JLCFIE', 'JLCGHE', 'JLCHGE', 'JLCIFE', 'JLCJEE', 'JLCKDE', 'JLCLCE', 'JLCLEC', 'JLCMBE', 'JLCNAE', 'JLEANC', 'JLECJE', 'JLECLC', 'JLEFIC', 'JLEJCE', 'JLEJEC', 'JMBANE', 'JMBBME', 'JMBCLE', 'JMBDKE', 'JMBEJE', 'JMBEKD', 'JMBEMB', 'JMBFIE', 'JMBGHE', 'JMBGID', 'JMBHGE', 'JMBIFE', 'JMBIGD', 'JMBJEE', 'JMBKDE', 'JMBKED', 'JMBLCE', 'JMBMBE', 'JMBMEB', 'JMBNAE', 'JMDALE', 'JMDBKE', 'JMDKBE', 'JMDKEB', 'JMDLAE', 'JMEBJE', 'JMEBKD', 'JMEBMB', 'JMEJBE', 'JMEJEB', 'JNAANE', 'JNABME', 'JNACLE', 'JNADIG', 'JNADKE', 'JNAEHG', 'JNAEJE', 'JNAELC', 'JNAENA', 'JNAFIE', 'JNAGHE', 'JNAHEG', 'JNAHGE', 'JNAIDG', 'JNAIFE', 'JNAJEE', 'JNAKDE', 'JNALCE', 'JNALEC', 'JNAMBE', 'JNANAE', 'JNANEA', 'JNCALE', 'JNCBIG', 'JNCBKE', 'JNCKBE', 'JNCLAE', 'JNCLEA', 'JNEAHG', 'JNEAJE', 'JNEALC', 'JNEANA', 'JNEJAE', 'JNEJEA', 'JNGAHE', 'JNGBIC', 'JNGHAE', 'JNGHEA', 'KADIFN', 'KADKDN', 'KADKND', 'KADLCN', 'KADLMD', 'KADMBN', 'KADMLD', 'KADNAN', 'KADNKD', 'KANADN', 'KANAND', 'KANBCN', 'KANBMD', 'KANCBN', 'KANCLD', 'KANDAN', 'KANDKD', 'KANEJD', 'KANFID', 'KANGHD', 'KANHGD', 'KANIFD', 'KANJED', 'KANKDD', 'KANLCD', 'KANMBD', 'KANNAD', 'KBCIFN', 'KBCKDN', 'KBCKND', 'KBCLCN', 'KBCLDM', 'KBCLMD', 'KBCLNC', 'KBCMBN', 'KBCMLD', 'KBCNAN', 'KBCNBM', 'KBCNJE', 'KBCNKD', 'KBCNLC', 'KBDKCN', 'KBDKDM', 'KBDKMD', 'KBDKNC', 'KBDMAN', 'KBDMBM', 'KBDMJE', 'KBDMKD', 'KBDMLC', 'KBEJCN', 'KBEJDM', 'KBEJMD', 'KBEJNC', 'KBEMJD', 'KBMADN', 'KBMAND', 'KBMBCN', 'KBMBDM', 'KBMBMD', 'KBMBNC', 'KBMCBN', 'KBMCLD', 'KBMDAN', 'KBMDBM', 'KBMDJE', 'KBMDKD', 'KBMDLC', 'KBMEJD', 'KBMFHE', 'KBMFID', 'KBMGHD', 'KBMHFE', 'KBMHGD', 'KBMIFD', 'KBMJDE', 'KBMJED', 'KBMKDD', 'KBMLCD', 'KBMLDC', 'KBMMBD', 'KBMNAD', 'KBMNBC', 'KBNACN', 'KBNADM', 'KBNAMD', 'KBNANC', 'KBNCAN', 'KBNCBM', 'KBNCJE', 'KBNCKD', 'KBNCLC', 'KBNGHC', 'KBNKCD', 'KBNKDC', 'KBNMAD', 'KBNMBC', 'KCBIFN', 'KCBKDN', 'KCBKND', 'KCBLCN', 'KCBLMD', 'KCBMBN', 'KCBMDL', 'KCBMLD', 'KCBMNB', 'KCBNAN', 'KCBNCL', 'KCBNGH', 'KCBNKD', 'KCBNMB', 'KCDKBN', 'KCDKDL', 'KCDKLD', 'KCDKNB', 'KCDLAN', 'KCDLCL', 'KCDLGH', 'KCDLKD', 'KCDLMB', 'KCHGBN', 'KCHGDL', 'KCHGLD', 'KCHGNB', 'KCHLGD', 'KCLADN', 'KCLAND', 'KCLBCN', 'KCLBMD', 'KCLCBN', 'KCLCDL', 'KCLCLD', 'KCLCNB', 'KCLDAN', 'KCLDCL', 'KCLDGH', 'KCLDKD', 'KCLDMB', 'KCLEFH', 'KCLEJD', 'KCLFEH', 'KCLFID', 'KCLGDH', 'KCLGHD', 'KCLHGD', 'KCLIFD', 'KCLJED', 'KCLKDD', 'KCLLCD', 'KCLMBD', 'KCLMDB', 'KCLNAD', 'KCLNCB', 'KCNABN', 'KCNADL', 'KCNALD', 'KCNANB', 'KCNBAN', 'KCNBCL', 'KCNBGH', 'KCNBKD', 'KCNBMB', 'KCNJEB', 'KCNKBD', 'KCNKDB', 'KCNLAD', 'KCNLCB', 'KDAIFN', 'KDAINF', 'KDAKDN', 'KDAKND', 'KDALCN', 'KDALDM', 'KDALMD', 'KDALNC', 'KDAMBN', 'KDAMDL', 'KDAMLD', 'KDAMNB', 'KDANAN', 'KDANBM', 'KDANCL', 'KDANDK', 'KDANEJ', 'KDANFI', 'KDANGH', 'KDANHG', 'KDANIF', 'KDANJE', 'KDANKD', 'KDANLC', 'KDANMB', 'KDANNA', 'KDBKCN', 'KDBKDM', 'KDBKMD', 'KDBKNC', 'KDBMAN', 'KDBMBM', 'KDBMCL', 'KDBMDK', 'KDBMEJ', 'KDBMFI', 'KDBMGH', 'KDBMHG', 'KDBMIF', 'KDBMJE', 'KDBMKD', 'KDBMLC', 'KDBMMB', 'KDBMNA', 'KDCKBN', 'KDCKDL', 'KDCKLD', 'KDCKNB', 'KDCLAN', 'KDCLBM', 'KDCLCL', 'KDCLDK', 'KDCLEJ', 'KDCLFI', 'KDCLGH', 'KDCLHG', 'KDCLIF', 'KDCLJE', 'KDCLKD', 'KDCLLC', 'KDCLMB', 'KDCLNA', 'KDDKAN', 'KDDKBM', 'KDDKCL', 'KDDKDK', 'KDDKEJ', 'KDDKFI', 'KDDKGH', 'KDDKHG', 'KDDKIF', 'KDDKJE', 'KDDKKD', 'KDDKLC', 'KDDKMB', 'KDDKNA', 'KDEJAN', 'KDEJBM', 'KDEJCL', 'KDEJDK', 'KDEJEJ', 'KDEJFI', 'KDEJGH', 'KDEJHG', 'KDEJIF', 'KDEJJE', 'KDEJKD', 'KDEJLC', 'KDEJMB', 'KDEJNA', 'KDEKDJ', 'KDEKFH', 'KDEKHF', 'KDEKJD', 'KDFIAN', 'KDFIBM', 'KDFICL', 'KDFIDK', 'KDFIEJ', 'KDFIFI', 'KDFIGH', 'KDFIHG', 'KDFIIF', 'KDFIJE', 'KDFIKD', 'KDFILC', 'KDFIMB', 'KDFINA', 'KDFKDI', 'KDFKEH', 'KDFKHE', 'KDFKID', 'KDGHAN', 'KDGHBM', 'KDGHCL', 'KDGHDK', 'KDGHEJ', 'KDGHFI', 'KDGHGH', 'KDGHHG', 'KDGHIF', 'KDGHJE', 'KDGHKD', 'KDGHLC', 'KDGHMB', 'KDGHNA', 'KDGIDJ', 'KDGIFH', 'KDGIHF', 'KDGIJD', 'KDGJDI', 'KDGJEH', 'KDGJHE', 'KDGJID', 'KDGKDH', 'KDGKHD', 'KDGLCH', 'KDGLHC', 'KDHGAN', 'KDHGBM', 'KDHGCL', 'KDHGDK', 'KDHGEJ', 'KDHGFI', 'KDHGGH', 'KDHGHG', 'KDHGIF', 'KDHGJE', 'KDHGKD', 'KDHGLC', 'KDHGMB', 'KDHGNA', 'KDHKDG', 'KDHKEF', 'KDHKFE', 'KDHKGD', 'KDIAFN', 'KDIANF', 'KDIFAN', 'KDIFBM', 'KDIFCL', 'KDIFDK', 'KDIFEJ', 'KDIFFI', 'KDIFGH', 'KDIFHG', 'KDIFIF', 'KDIFJE', 'KDIFKD', 'KDIFLC', 'KDIFMB', 'KDIFNA', 'KDIGDJ', 'KDIGFH', 'KDIGHF', 'KDIGJD', 'KDIJDG', 'KDIJEF', 'KDIJFE', 'KDIJGD', 'KDIKDF', 'KDIKFD', 'KDJEAN', 'KDJEBM', 'KDJECL', 'KDJEDK', 'KDJEEJ', 'KDJEFI', 'KDJEGH', 'KDJEHG', 'KDJEIF', 'KDJEJE', 'KDJEKD', 'KDJELC', 'KDJEMB', 'KDJENA', 'KDJGDI', 'KDJGEH', 'KDJGHE', 'KDJGID', 'KDJIDG', 'KDJIEF', 'KDJIFE', 'KDJIGD', 'KDJKDE', 'KDJKED', 'KDJMBE', 'KDJMEB', 'KDKADN', 'KDKAND', 'KDKBCN', 'KDKBDM', 'KDKBMD', 'KDKBNC', 'KDKCBN', 'KDKCDL', 'KDKCLD', 'KDKCNB', 'KDKDAN', 'KDKDBM', 'KDKDCL', 'KDKDDK', 'KDKDEJ', 'KDKDFI', 'KDKDGH', 'KDKDHG', 'KDKDIF', 'KDKDJE', 'KDKDKD', 'KDKDLC', 'KDKDMB', 'KDKDNA', 'KDKEDJ', 'KDKEFH', 'KDKEHF', 'KDKEJD', 'KDKFDI', 'KDKFEH', 'KDKFHE', 'KDKFID', 'KDKGDH', 'KDKGHD', 'KDKHDG', 'KDKHEF', 'KDKHFE', 'KDKHGD', 'KDKIDF', 'KDKIFD', 'KDKJDE', 'KDKJED', 'KDKKDD', 'KDKLCD', 'KDKLDC', 'KDKMBD', 'KDKMDB', 'KDKNAD', 'KDKNBC', 'KDKNCB', 'KDKNDA', 'KDLACN', 'KDLADM', 'KDLAMD', 'KDLANC', 'KDLCAN', 'KDLCBM', 'KDLCCL', 'KDLCDK', 'KDLCEJ', 'KDLCFI', 'KDLCGH', 'KDLCHG', 'KDLCIF', 'KDLCJE', 'KDLCKD', 'KDLCLC', 'KDLCMB', 'KDLCNA', 'KDLGCH', 'KDLGHC', 'KDLKCD', 'KDLKDC', 'KDLMAD', 'KDLMBC', 'KDLMCB', 'KDLMDA', 'KDMABN', 'KDMADL', 'KDMALD', 'KDMANB', 'KDMBAN', 'KDMBBM', 'KDMBCL', 'KDMBDK', 'KDMBEJ', 'KDMBFI', 'KDMBGH', 'KDMBHG', 'KDMBIF', 'KDMBJE', 'KDMBKD', 'KDMBLC', 'KDMBMB', 'KDMBNA', 'KDMJBE', 'KDMJEB', 'KDMKBD', 'KDMKDB', 'KDMLAD', 'KDMLBC', 'KDMLCB', 'KDMLDA', 'KDNAAN', 'KDNABM', 'KDNACL', 'KDNADK', 'KDNAEJ', 'KDNAFI', 'KDNAGH', 'KDNAHG', 'KDNAIF', 'KDNAJE', 'KDNAKD', 'KDNALC', 'KDNAMB', 'KDNANA', 'KDNKAD', 'KDNKBC', 'KDNKCB', 'KDNKDA', 'KEBJMD', 'KEBMDJ', 'KEBMFH', 'KEBMHF', 'KEBMJD', 'KEDJEJ', 'KEDJGH', 'KEDJIF', 'KEDJKD', 'KEDJMB', 'KEDKDJ', 'KEDKFH', 'KEDKHF', 'KEDKJD', 'KEFHEJ', 'KEFHGH', 'KEFHIF', 'KEFHKD', 'KEFHMB', 'KEFIDJ', 'KEFIFH', 'KEFIHF', 'KEFIJD', 'KEFJEH', 'KEFJID', 'KEFKDH', 'KEFKHD', 'KEFLCH', 'KEHANF', 'KEHFEJ', 'KEHFGH', 'KEHFIF', 'KEHFKD', 'KEHFMB', 'KEHGDJ', 'KEHGFH', 'KEHGHF', 'KEHGJD', 'KEHJEF', 'KEHJGD', 'KEHKDF', 'KEHKFD', 'KEJAND', 'KEJBMD', 'KEJCLD', 'KEJCNB', 'KEJDEJ', 'KEJDGH', 'KEJDIF', 'KEJDKD', 'KEJDMB', 'KEJEDJ', 'KEJEFH', 'KEJEHF', 'KEJEJD', 'KEJFEH', 'KEJFID', 'KEJGDH', 'KEJGHD', 'KEJHEF', 'KEJHGD', 'KEJIDF', 'KEJIFD', 'KEJJED', 'KEJKDD', 'KEJLCD', 'KEJMBD', 'KEJMDB', 'KEJNAD', 'KEJNCB', 'KFDIAN', 'KFDIFI', 'KFDIGH', 'KFDIJE', 'KFDIKD', 'KFDKDI', 'KFDKEH', 'KFDKHE', 'KFDKID', 'KFEHAN', 'KFEHFI', 'KFEHGH', 'KFEHJE', 'KFEHKD', 'KFEIFH', 'KFEIJD', 'KFEJDI', 'KFEJEH', 'KFEJHE', 'KFEJID', 'KFEKDH', 'KFEKHD', 'KFELCH', 'KFHEAN', 'KFHEFI', 'KFHEGH', 'KFHEJE', 'KFHEKD', 'KFHGDI', 'KFHGEH', 'KFHGHE', 'KFHGID', 'KFHIFE', 'KFHIGD', 'KFHKDE', 'KFHKED', 'KFHMBE', 'KFIADN', 'KFIAND', 'KFIBCN', 'KFIBMD', 'KFICBN', 'KFICLD', 'KFIDAN', 'KFIDFI', 'KFIDGH', 'KFIDJE', 'KFIDKD', 'KFIEFH', 'KFIEJD', 'KFIFDI', 'KFIFEH', 'KFIFHE', 'KFIFID', 'KFIGDH', 'KFIGHD', 'KFIHFE', 'KFIHGD', 'KFIIFD', 'KFIJDE', 'KFIJED', 'KFIKDD', 'KFILCD', 'KFIMBD', 'KFINAD', 'KFNADI', 'KFNAEH', 'KFNAHE', 'KFNAID', 'KFNIAD', 'KGDHGH', 'KGDHKD', 'KGDIFH', 'KGDIJD', 'KGDJEH', 'KGDJID', 'KGDKDH', 'KGDKHD', 'KGDLCH', 'KGHAND', 'KGHBMD', 'KGHCLD', 'KGHDGH', 'KGHDKD', 'KGHEFH', 'KGHEJD', 'KGHFEH', 'KGHFID', 'KGHGDH', 'KGHGHD', 'KGHHGD', 'KGHIFD', 'KGHJED', 'KGHKDD', 'KGHLCD', 'KGHMBD', 'KGHNAD', 'KHCGLD', 'KHCLDG', 'KHCLEF', 'KHCLFE', 'KHCLGD', 'KHDGHG', 'KHDGIF', 'KHDGJE', 'KHDGKD', 'KHDGLC', 'KHDKDG', 'KHDKEF', 'KHDKFE', 'KHDKGD', 'KHEANF', 'KHEFHG', 'KHEFIF', 'KHEFJE', 'KHEFKD', 'KHEFLC', 'KHEGHF', 'KHEGJD', 'KHEJDG', 'KHEJEF', 'KHEJFE', 'KHEJGD', 'KHEKDF', 'KHEKFD', 'KHFEHG', 'KHFEIF', 'KHFEJE', 'KHFEKD', 'KHFELC', 'KHFGHE', 'KHFGID', 'KHFIDG', 'KHFIEF', 'KHFIFE', 'KHFIGD', 'KHFKDE', 'KHFKED', 'KHFMBE', 'KHGAND', 'KHGBMD', 'KHGBNC', 'KHGCLD', 'KHGDHG', 'KHGDIF', 'KHGDJE', 'KHGDKD', 'KHGDLC', 'KHGEHF', 'KHGEJD', 'KHGFHE', 'KHGFID', 'KHGGHD', 'KHGHDG', 'KHGHEF', 'KHGHFE', 'KHGHGD', 'KHGIDF', 'KHGIFD', 'KHGJDE', 'KHGJED', 'KHGKDD', 'KHGLCD', 'KHGLDC', 'KHGMBD', 'KHGNAD', 'KHGNBC', 'KIDANF', 'KIDFIF', 'KIDFKD', 'KIDGHF', 'KIDGJD', 'KIDJEF', 'KIDJGD', 'KIDKDF', 'KIDKFD', 'KIFAND', 'KIFBMD', 'KIFCLD', 'KIFDIF', 'KIFDKD', 'KIFEHF', 'KIFEJD', 'KIFFID', 'KIFGHD', 'KIFHEF', 'KIFHGD', 'KIFIDF', 'KIFIFD', 'KIFJED', 'KIFKDD', 'KIFLCD', 'KIFMBD', 'KIFNAD', 'KJDEJE', 'KJDEKD', 'KJDGHE', 'KJDGID', 'KJDIFE', 'KJDIGD', 'KJDKDE', 'KJDKED', 'KJDMBE', 'KJEAND', 'KJEBMD', 'KJECLD', 'KJEDJE', 'KJEDKD', 'KJEEJD', 'KJEFHE', 'KJEFID', 'KJEGHD', 'KJEHFE', 'KJEHGD', 'KJEIFD', 'KJEJDE', 'KJEJED', 'KJEKDD', 'KJELCD', 'KJEMBD', 'KJENAD', 'KKDAND', 'KKDBMD', 'KKDCLD', 'KKDDKD', 'KKDEJD', 'KKDFID', 'KKDGHD', 'KKDHGD', 'KKDIFD', 'KKDJED', 'KKDKDD', 'KKDLCD', 'KKDMBD', 'KKDNAD', 'KLCAND', 'KLCBMD', 'KLCBNC', 'KLCCLD', 'KLCDKD', 'KLCDLC', 'KLCEJD', 'KLCFID', 'KLCGHD', 'KLCHGD', 'KLCIFD', 'KLCJED', 'KLCKDD', 'KLCLCD', 'KLCLDC', 'KLCMBD', 'KLCNAD', 'KLCNBC', 'KLDAMD', 'KLDANC', 'KLDCKD', 'KLDCLC', 'KLDGHC', 'KLDKCD', 'KLDKDC', 'KLDMAD', 'KLDMBC', 'KMBAND', 'KMBBMD', 'KMBCLD', 'KMBCNB', 'KMBDKD', 'KMBDMB', 'KMBEJD', 'KMBFID', 'KMBGHD', 'KMBHGD', 'KMBIFD', 'KMBJED', 'KMBKDD', 'KMBLCD', 'KMBMBD', 'KMBMDB', 'KMBNAD', 'KMBNCB', 'KMDALD', 'KMDANB', 'KMDBKD', 'KMDBMB', 'KMDJEB', 'KMDKBD', 'KMDKDB', 'KMDLAD', 'KMDLCB', 'KNAAND', 'KNABMD', 'KNABNC', 'KNACLD', 'KNACNB', 'KNADIF', 'KNADKD', 'KNADLC', 'KNADMB', 'KNADNA', 'KNAEHF', 'KNAEJD', 'KNAFID', 'KNAGHD', 'KNAHEF', 'KNAHGD', 'KNAIDF', 'KNAIFD', 'KNAJED', 'KNAKDD', 'KNALCD', 'KNALDC', 'KNAMBD', 'KNAMDB', 'KNANAD', 'KNANBC', 'KNANCB', 'KNANDA', 'KNBAMD', 'KNBANC', 'KNBCIF', 'KNBCKD', 'KNBCLC', 'KNBCMB', 'KNBCNA', 'KNBGHC', 'KNBKCD', 'KNBKDC', 'KNBMAD', 'KNBMBC', 'KNBMCB', 'KNBMDA', 'KNCALD', 'KNCANB', 'KNCBIF', 'KNCBKD', 'KNCBLC', 'KNCBMB', 'KNCBNA', 'KNCJEB', 'KNCKBD', 'KNCKDB', 'KNCLAD', 'KNCLBC', 'KNCLCB', 'KNCLDA', 'KNDAIF', 'KNDAKD', 'KNDALC', 'KNDAMB', 'KNDANA', 'KNDKAD', 'KNDKBC', 'KNDKCB', 'KNDKDA', 'KNFAID', 'KNFIAD', 'KNFIBC', 'KNFICB', 'KNFIDA', 'LACLCN', 'LACLDM', 'LACLMD', 'LACLNC', 'LACNAN', 'LACNBM', 'LACNJE', 'LACNKD', 'LACNLC', 'LADIFM', 'LADKCN', 'LADKDM', 'LADKMD', 'LADKNC', 'LADLCM', 'LADLMC', 'LADMAN', 'LADMBM', 'LADMJE', 'LADMKD', 'LADMLC', 'LADNAM', 'LADNKC', 'LAEHFM', 'LAEJCN', 'LAEJDM', 'LAEJMD', 'LAEJNC', 'LAENJC', 'LAMBCN', 'LAMBDM', 'LAMBMD', 'LAMBNC', 'LAMDAN', 'LAMDBM', 'LAMDJE', 'LAMDKD', 'LAMDLC', 'LAMHFE', 'LAMHGD', 'LAMLCD', 'LAMLDC', 'LAMNAD', 'LAMNBC', 'LANACN', 'LANADM', 'LANAMD', 'LANANC', 'LANBCM', 'LANBMC', 'LANCAN', 'LANCBM', 'LANCJE', 'LANCKD', 'LANCLC', 'LANDAM', 'LANDKC', 'LANEJC', 'LANFIC', 'LANGHC', 'LANHGC', 'LANIFC', 'LANJCE', 'LANJEC', 'LANKCD', 'LANKDC', 'LANLCC', 'LANMAD', 'LANMBC', 'LANNAC', 'LBCIFM', 'LBCKDM', 'LBCKNC', 'LBCLCM', 'LBCLMC', 'LBCMBM', 'LBCMLC', 'LBCNAM', 'LBCNKC', 'LBMADM', 'LBMANC', 'LBMBCM', 'LBMBMC', 'LBMCBM', 'LBMCLC', 'LBMDAM', 'LBMDKC', 'LBMEJC', 'LBMFIC', 'LBMGHC', 'LBMHGC', 'LBMIFC', 'LBMJEC', 'LBMKDC', 'LBMLCC', 'LBMMBC', 'LBMNAC', 'LCALCN', 'LCALDM', 'LCALMD', 'LCALNC', 'LCANAN', 'LCANBM', 'LCANCL', 'LCANDK', 'LCANEJ', 'LCANFI', 'LCANGH', 'LCANHG', 'LCANIF', 'LCANJE', 'LCANKD', 'LCANLC', 'LCANMB', 'LCANNA', 'LCBIFM', 'LCBIMF', 'LCBKCN', 'LCBKDM', 'LCBKMD', 'LCBKNC', 'LCBLCM', 'LCBLMC', 'LCBMAN', 'LCBMBM', 'LCBMCL', 'LCBMDK', 'LCBMEJ', 'LCBMFI', 'LCBMGH', 'LCBMHG', 'LCBMIF', 'LCBMJE', 'LCBMKD', 'LCBMLC', 'LCBMMB', 'LCBMNA', 'LCBNAM', 'LCBNCK', 'LCBNKC', 'LCBNMA', 'LCCLAN', 'LCCLBM', 'LCCLCL', 'LCCLDK', 'LCCLEJ', 'LCCLFI', 'LCCLGH', 'LCCLHG', 'LCCLIF', 'LCCLJE', 'LCCLKD', 'LCCLLC', 'LCCLMB', 'LCCLNA', 'LCDKAN', 'LCDKBM', 'LCDKCL', 'LCDKDK', 'LCDKEJ', 'LCDKFI', 'LCDKGH', 'LCDKHG', 'LCDKIF', 'LCDKJE', 'LCDKKD', 'LCDKLC', 'LCDKMB', 'LCDKNA', 'LCDLAM', 'LCDLCK', 'LCDLKC', 'LCDLMA', 'LCEJAN', 'LCEJBM', 'LCEJCL', 'LCEJDK', 'LCEJEJ', 'LCEJFI', 'LCEJGH', 'LCEJHG', 'LCEJIF', 'LCEJJE', 'LCEJKD', 'LCEJLC', 'LCEJMB', 'LCEJNA', 'LCELCJ', 'LCELJC', 'LCFIAN', 'LCFIBM', 'LCFICL', 'LCFIDK', 'LCFIEJ', 'LCFIFI', 'LCFIGH', 'LCFIHG', 'LCFIIF', 'LCFIJE', 'LCFIKD', 'LCFILC', 'LCFIMB', 'LCFINA', 'LCFLCI', 'LCFLIC', 'LCGHAN', 'LCGHBM', 'LCGHCL', 'LCGHDK', 'LCGHEJ', 'LCGHFI', 'LCGHGH', 'LCGHHG', 'LCGHIF', 'LCGHJE', 'LCGHKD', 'LCGHLC', 'LCGHMB', 'LCGHNA', 'LCGLCH', 'LCGLHC', 'LCHGAN', 'LCHGBM', 'LCHGCL', 'LCHGDK', 'LCHGEJ', 'LCHGFI', 'LCHGGH', 'LCHGHG', 'LCHGIF', 'LCHGJE', 'LCHGKD', 'LCHGLC', 'LCHGMB', 'LCHGNA', 'LCHKDG', 'LCHKEF', 'LCHKFE', 'LCHKGD', 'LCHLCG', 'LCHLGC', 'LCIBFM', 'LCIBMF', 'LCIFAN', 'LCIFBM', 'LCIFCL', 'LCIFDK', 'LCIFEJ', 'LCIFFI', 'LCIFGH', 'LCIFHG', 'LCIFIF', 'LCIFJE', 'LCIFKD', 'LCIFLC', 'LCIFMB', 'LCIFNA', 'LCIJDG', 'LCIJEF', 'LCIJFE', 'LCIJGD', 'LCILCF', 'LCILFC', 'LCJEAN', 'LCJEBM', 'LCJECL', 'LCJEDK', 'LCJEEJ', 'LCJEFI', 'LCJEGH', 'LCJEHG', 'LCJEIF', 'LCJEJE', 'LCJEKD', 'LCJELC', 'LCJEMB', 'LCJENA', 'LCJIDG', 'LCJIEF', 'LCJIFE', 'LCJIGD', 'LCJLCE', 'LCJLEC', 'LCJNAE', 'LCJNEA', 'LCKBCN', 'LCKBDM', 'LCKBMD', 'LCKBNC', 'LCKDAN', 'LCKDBM', 'LCKDCL', 'LCKDDK', 'LCKDEJ', 'LCKDFI', 'LCKDGH', 'LCKDHG', 'LCKDIF', 'LCKDJE', 'LCKDKD', 'LCKDLC', 'LCKDMB', 'LCKDNA', 'LCKHDG', 'LCKHEF', 'LCKHFE', 'LCKHGD', 'LCKLCD', 'LCKLDC', 'LCKNAD', 'LCKNBC', 'LCKNCB', 'LCKNDA', 'LCLACN', 'LCLADM', 'LCLAMD', 'LCLANC', 'LCLBCM', 'LCLBMC', 'LCLCAN', 'LCLCBM', 'LCLCCL', 'LCLCDK', 'LCLCEJ', 'LCLCFI', 'LCLCGH', 'LCLCHG', 'LCLCIF', 'LCLCJE', 'LCLCKD', 'LCLCLC', 'LCLCMB', 'LCLCNA', 'LCLDAM', 'LCLDCK', 'LCLDKC', 'LCLDMA', 'LCLECJ', 'LCLEJC', 'LCLFCI', 'LCLFIC', 'LCLGCH', 'LCLGHC', 'LCLHCG', 'LCLHGC', 'LCLICF', 'LCLIFC', 'LCLJCE', 'LCLJEC', 'LCLKCD', 'LCLKDC', 'LCLLCC', 'LCLMAD', 'LCLMBC', 'LCLMCB', 'LCLMDA', 'LCLNAC', 'LCLNCA', 'LCMBAN', 'LCMBBM', 'LCMBCL', 'LCMBDK', 'LCMBEJ', 'LCMBFI', 'LCMBGH', 'LCMBHG', 'LCMBIF', 'LCMBJE', 'LCMBKD', 'LCMBLC', 'LCMBMB', 'LCMBNA', 'LCMLAD', 'LCMLBC', 'LCMLCB', 'LCMLDA', 'LCNAAN', 'LCNABM', 'LCNACL', 'LCNADK', 'LCNAEJ', 'LCNAFI', 'LCNAGH', 'LCNAHG', 'LCNAIF', 'LCNAJE', 'LCNAKD', 'LCNALC', 'LCNAMB', 'LCNANA', 'LCNBAM', 'LCNBCK', 'LCNBKC', 'LCNBMA', 'LCNJAE', 'LCNJEA', 'LCNKAD', 'LCNKBC', 'LCNKCB', 'LCNKDA', 'LCNLAC', 'LCNLCA', 'LDAIFM', 'LDAKDM', 'LDAKNC', 'LDALCM', 'LDALMC', 'LDAMBM', 'LDAMDK', 'LDAMHG', 'LDAMLC', 'LDAMNA', 'LDANAM', 'LDANCK', 'LDANKC', 'LDANMA', 'LDCKBM', 'LDCKDK', 'LDCKHG', 'LDCKLC', 'LDCKNA', 'LDCLAM', 'LDCLCK', 'LDCLKC', 'LDCLMA', 'LDGHAM', 'LDGHCK', 'LDGHKC', 'LDGHMA', 'LDGIJC', 'LDGJIC', 'LDGKHC', 'LDKADM', 'LDKANC', 'LDKBCM', 'LDKBMC', 'LDKCBM', 'LDKCDK', 'LDKCHG', 'LDKCLC', 'LDKCNA', 'LDKDAM', 'LDKDCK', 'LDKDKC', 'LDKDMA', 'LDKEJC', 'LDKFIC', 'LDKGHC', 'LDKHCG', 'LDKHGC', 'LDKIFC', 'LDKJEC', 'LDKKDC', 'LDKLCC', 'LDKMBC', 'LDKMDA', 'LDKNAC', 'LDKNCA', 'LDMABM', 'LDMADK', 'LDMAHG', 'LDMALC', 'LDMANA', 'LDMBAM', 'LDMBCK', 'LDMBKC', 'LDMBMA', 'LDMJEA', 'LDMKBC', 'LDMKDA', 'LDMLAC', 'LDMLCA', 'LEAHMF', 'LEAJNC', 'LEANCJ', 'LEANJC', 'LECJEJ', 'LECJIF', 'LECJLC', 'LECJNA', 'LECLCJ', 'LECLJC', 'LEFHKC', 'LEFHMA', 'LEFICJ', 'LEFIJC', 'LEFJIC', 'LEFKHC', 'LEJANC', 'LEJBMC', 'LEJCEJ', 'LEJCIF', 'LEJCLC', 'LEJCNA', 'LEJDKC', 'LEJDMA', 'LEJECJ', 'LEJEJC', 'LEJFIC', 'LEJGHC', 'LEJHGC', 'LEJICF', 'LEJIFC', 'LEJJEC', 'LEJKDC', 'LEJLCC', 'LEJMBC', 'LEJMDA', 'LEJNAC', 'LEJNCA', 'LFCIBM', 'LFCIFI', 'LFCIJE', 'LFCILC', 'LFCLCI', 'LFCLIC', 'LFEHAM', 'LFEHKC', 'LFEIJC', 'LFEJCI', 'LFEJIC', 'LFEKHC', 'LFIADM', 'LFIANC', 'LFIBCM', 'LFIBMC', 'LFICBM', 'LFICFI', 'LFICJE', 'LFICLC', 'LFIDAM', 'LFIDKC', 'LFIEJC', 'LFIFCI', 'LFIFIC', 'LFIGHC', 'LFIHGC', 'LFIIFC', 'LFIJCE', 'LFIJEC', 'LFIKDC', 'LFILCC', 'LFIMBC', 'LFINAC', 'LFMBCI', 'LFMBIC', 'LFMHAE', 'LFMIBC', 'LGCHGH', 'LGCHKD', 'LGCHLC', 'LGCLCH', 'LGCLHC', 'LGDHKC', 'LGDIJC', 'LGDJIC', 'LGDKCH', 'LGDKHC', 'LGHAMD', 'LGHANC', 'LGHBMC', 'LGHCGH', 'LGHCKD', 'LGHCLC', 'LGHDKC', 'LGHEJC', 'LGHFIC', 'LGHGCH', 'LGHGHC', 'LGHHGC', 'LGHIFC', 'LGHJEC', 'LGHKCD', 'LGHKDC', 'LGHLCC', 'LGHMAD', 'LGHMBC', 'LGHNAC', 'LHCGHG', 'LHCGLC', 'LHCKDG', 'LHCLCG', 'LHCLGC', 'LHGANC', 'LHGBMC', 'LHGCHG', 'LHGCLC', 'LHGDKC', 'LHGEJC', 'LHGFIC', 'LHGGHC', 'LHGHCG', 'LHGHGC', 'LHGIFC', 'LHGJEC', 'LHGKDC', 'LHGLCC', 'LHGMBC', 'LHGNAC', 'LICBMF', 'LICFIF', 'LICFLC', 'LICJEF', 'LICLCF', 'LICLFC', 'LIFANC', 'LIFBMC', 'LIFCIF', 'LIFCLC', 'LIFDKC', 'LIFEJC', 'LIFFIC', 'LIFGHC', 'LIFHGC', 'LIFICF', 'LIFIFC', 'LIFJEC', 'LIFKDC', 'LIFLCC', 'LIFMBC', 'LIFNAC', 'LJCEJE', 'LJCELC', 'LJCIFE', 'LJCLCE', 'LJCLEC', 'LJCNAE', 'LJEANC', 'LJEBMC', 'LJECJE', 'LJECLC', 'LJEDKC', 'LJEEJC', 'LJEFIC', 'LJEGHC', 'LJEHGC', 'LJEIFC', 'LJEJCE', 'LJEJEC', 'LJEKDC', 'LJELCC', 'LJEMBC', 'LJENAC', 'LKCBMD', 'LKCBNC', 'LKCDKD', 'LKCDLC', 'LKCHGD', 'LKCLCD', 'LKCLDC', 'LKCNAD', 'LKCNBC', 'LKDAMD', 'LKDANC', 'LKDBMC', 'LKDCKD', 'LKDCLC', 'LKDDKC', 'LKDEJC', 'LKDFIC', 'LKDGHC', 'LKDHGC', 'LKDIFC', 'LKDJEC', 'LKDKCD', 'LKDKDC', 'LKDLCC', 'LKDMAD', 'LKDMBC', 'LKDNAC', 'LLCANC', 'LLCBMC', 'LLCCLC', 'LLCDKC', 'LLCEJC', 'LLCFIC', 'LLCGHC', 'LLCHGC', 'LLCIFC', 'LLCJEC', 'LLCKDC', 'LLCLCC', 'LLCMBC', 'LLCNAC', 'LMABMD', 'LMABNC', 'LMADIF', 'LMADKD', 'LMADLC', 'LMADMB', 'LMADNA', 'LMAHEF', 'LMAHGD', 'LMALCD', 'LMALDC', 'LMANAD', 'LMANBC', 'LMANCB', 'LMANDA', 'LMBAMD', 'LMBANC', 'LMBBMC', 'LMBCIF', 'LMBCKD', 'LMBCLC', 'LMBCMB', 'LMBCNA', 'LMBDKC', 'LMBDMA', 'LMBEJC', 'LMBFIC', 'LMBGHC', 'LMBHGC', 'LMBICF', 'LMBIFC', 'LMBJEC', 'LMBKCD', 'LMBKDC', 'LMBLCC', 'LMBMAD', 'LMBMBC', 'LMBMCB', 'LMBMDA', 'LMBNAC', 'LMBNCA', 'LMCBIF', 'LMCBKD', 'LMCBLC', 'LMCBMB', 'LMCBNA', 'LMCLAD', 'LMCLBC', 'LMCLCB', 'LMCLDA', 'LMDAIF', 'LMDAKD', 'LMDALC', 'LMDAMB', 'LMDANA', 'LMDBKC', 'LMDBMA', 'LMDJEA', 'LMDKAD', 'LMDKBC', 'LMDKCB', 'LMDKDA', 'LMDLAC', 'LMDLCA', 'LMFBIC', 'LMFHEA', 'LMFIAD', 'LMFIBC', 'LMFICB', 'LMFIDA', 'LNAANC', 'LNABMC', 'LNACLC', 'LNACNA', 'LNADKC', 'LNADMA', 'LNAEJC', 'LNAFIC', 'LNAGHC', 'LNAHGC', 'LNAIFC', 'LNAJEC', 'LNAKDC', 'LNALCC', 'LNAMBC', 'LNAMDA', 'LNANAC', 'LNANCA', 'LNCALC', 'LNCANA', 'LNCBKC', 'LNCBMA', 'LNCJEA', 'LNCKBC', 'LNCKDA', 'LNCLAC', 'LNCLCA', 'MABMBN', 'MABMDL', 'MABMLD', 'MABMNB', 'MABNAN', 'MABNCL', 'MABNGH', 'MABNKD', 'MABNMB', 'MADIFL', 'MADKBN', 'MADKDL', 'MADKLD', 'MADKNB', 'MADLAN', 'MADLCL', 'MADLGH', 'MADLKD', 'MADLMB', 'MADMBL', 'MADMLB', 'MADNAL', 'MADNKB', 'MAHEFL', 'MAHGBN', 'MAHGDL', 'MAHGLD', 'MAHGNB', 'MAHNGB', 'MALCBN', 'MALCDL', 'MALCLD', 'MALCNB', 'MALDAN', 'MALDCL', 'MALDGH', 'MALDKD', 'MALDMB', 'MALEFH', 'MALEJD', 'MALMBD', 'MALMDB', 'MALNAD', 'MALNCB', 'MANABN', 'MANADL', 'MANALD', 'MANANB', 'MANBAN', 'MANBCL', 'MANBGH', 'MANBKD', 'MANBMB', 'MANCBL', 'MANCLB', 'MANDAL', 'MANDKB', 'MANEJB', 'MANFIB', 'MANGBH', 'MANGHB', 'MANHGB', 'MANIFB', 'MANJEB', 'MANKBD', 'MANKDB', 'MANLAD', 'MANLCB', 'MANMBB', 'MANNAB', 'MBAMBN', 'MBAMDL', 'MBAMLD', 'MBAMNB', 'MBANAN', 'MBANBM', 'MBANCL', 'MBANDK', 'MBANEJ', 'MBANFI', 'MBANGH', 'MBANHG', 'MBANIF', 'MBANJE', 'MBANKD', 'MBANLC', 'MBANMB', 'MBANNA', 'MBBMAN', 'MBBMBM', 'MBBMCL', 'MBBMDK', 'MBBMEJ', 'MBBMFI', 'MBBMGH', 'MBBMHG', 'MBBMIF', 'MBBMJE', 'MBBMKD', 'MBBMLC', 'MBBMMB', 'MBBMNA', 'MBCIFL', 'MBCILF', 'MBCKBN', 'MBCKDL', 'MBCKLD', 'MBCKNB', 'MBCLAN', 'MBCLBM', 'MBCLCL', 'MBCLDK', 'MBCLEJ', 'MBCLFI', 'MBCLGH', 'MBCLHG', 'MBCLIF', 'MBCLJE', 'MBCLKD', 'MBCLLC', 'MBCLMB', 'MBCLNA', 'MBCMBL', 'MBCMLB', 'MBCNAL', 'MBCNBK', 'MBCNKB', 'MBCNLA', 'MBDKAN', 'MBDKBM', 'MBDKCL', 'MBDKDK', 'MBDKEJ', 'MBDKFI', 'MBDKGH', 'MBDKHG', 'MBDKIF', 'MBDKJE', 'MBDKKD', 'MBDKLC', 'MBDKMB', 'MBDKNA', 'MBDMAL', 'MBDMBK', 'MBDMKB', 'MBDMLA', 'MBEJAN', 'MBEJBM', 'MBEJCL', 'MBEJDK', 'MBEJEJ', 'MBEJFI', 'MBEJGH', 'MBEJHG', 'MBEJIF', 'MBEJJE', 'MBEJKD', 'MBEJLC', 'MBEJMB', 'MBEJNA', 'MBEKDJ', 'MBEKFH', 'MBEKHF', 'MBEKJD', 'MBEMBJ', 'MBEMJB', 'MBFIAN', 'MBFIBM', 'MBFICL', 'MBFIDK', 'MBFIEJ', 'MBFIFI', 'MBFIGH', 'MBFIHG', 'MBFIIF', 'MBFIJE', 'MBFIKD', 'MBFILC', 'MBFIMB', 'MBFINA', 'MBFMBI', 'MBFMIB', 'MBGHAN', 'MBGHBM', 'MBGHCL', 'MBGHDK', 'MBGHEJ', 'MBGHFI', 'MBGHGH', 'MBGHHG', 'MBGHIF', 'MBGHJE', 'MBGHKD', 'MBGHLC', 'MBGHMB', 'MBGHNA', 'MBGIDJ', 'MBGIFH', 'MBGIHF', 'MBGIJD', 'MBGMBH', 'MBGMHB', 'MBGNAH', 'MBGNHA', 'MBHGAN', 'MBHGBM', 'MBHGCL', 'MBHGDK', 'MBHGEJ', 'MBHGFI', 'MBHGGH', 'MBHGHG', 'MBHGIF', 'MBHGJE', 'MBHGKD', 'MBHGLC', 'MBHGMB', 'MBHGNA', 'MBHMBG', 'MBHMGB', 'MBICFL', 'MBICLF', 'MBIFAN', 'MBIFBM', 'MBIFCL', 'MBIFDK', 'MBIFEJ', 'MBIFFI', 'MBIFGH', 'MBIFHG', 'MBIFIF', 'MBIFJE', 'MBIFKD', 'MBIFLC', 'MBIFMB', 'MBIFNA', 'MBIGDJ', 'MBIGFH', 'MBIGHF', 'MBIGJD', 'MBIMBF', 'MBIMFB', 'MBJEAN', 'MBJEBM', 'MBJECL', 'MBJEDK', 'MBJEEJ', 'MBJEFI', 'MBJEGH', 'MBJEHG', 'MBJEIF', 'MBJEJE', 'MBJEKD', 'MBJELC', 'MBJEMB', 'MBJENA', 'MBJMBE', 'MBJMEB', 'MBKCBN', 'MBKCDL', 'MBKCLD', 'MBKCNB', 'MBKDAN', 'MBKDBM', 'MBKDCL', 'MBKDDK', 'MBKDEJ', 'MBKDFI', 'MBKDGH', 'MBKDHG', 'MBKDIF', 'MBKDJE', 'MBKDKD', 'MBKDLC', 'MBKDMB', 'MBKDNA', 'MBKEDJ', 'MBKEFH', 'MBKEHF', 'MBKEJD', 'MBKMBD', 'MBKMDB', 'MBKNAD', 'MBKNBC', 'MBKNCB', 'MBKNDA', 'MBLCAN', 'MBLCBM', 'MBLCCL', 'MBLCDK', 'MBLCEJ', 'MBLCFI', 'MBLCGH', 'MBLCHG', 'MBLCIF', 'MBLCJE', 'MBLCKD', 'MBLCLC', 'MBLCMB', 'MBLCNA', 'MBLMAD', 'MBLMBC', 'MBLMCB', 'MBLMDA', 'MBMABN', 'MBMADL', 'MBMALD', 'MBMANB', 'MBMBAN', 'MBMBBM', 'MBMBCL', 'MBMBDK', 'MBMBEJ', 'MBMBFI', 'MBMBGH', 'MBMBHG', 'MBMBIF', 'MBMBJE', 'MBMBKD', 'MBMBLC', 'MBMBMB', 'MBMBNA', 'MBMCBL', 'MBMCLB', 'MBMDAL', 'MBMDBK', 'MBMDKB', 'MBMDLA', 'MBMEBJ', 'MBMEJB', 'MBMFBI', 'MBMFIB', 'MBMGBH', 'MBMGHB', 'MBMHBG', 'MBMHGB', 'MBMIBF', 'MBMIFB', 'MBMJBE', 'MBMJEB', 'MBMKBD', 'MBMKDB', 'MBMLAD', 'MBMLBC', 'MBMLCB', 'MBMLDA', 'MBMMBB', 'MBMNAB', 'MBMNBA', 'MBNAAN', 'MBNABM', 'MBNACL', 'MBNADK', 'MBNAEJ', 'MBNAFI', 'MBNAGH', 'MBNAHG', 'MBNAIF', 'MBNAJE', 'MBNAKD', 'MBNALC', 'MBNAMB', 'MBNANA', 'MBNCAL', 'MBNCBK', 'MBNCKB', 'MBNCLA', 'MBNGAH', 'MBNGHA', 'MBNKAD', 'MBNKBC', 'MBNKCB', 'MBNKDA', 'MBNMAB', 'MBNMBA', 'MCBIFL', 'MCBKDL', 'MCBKNB', 'MCBLCL', 'MCBLMB', 'MCBMBL', 'MCBMLB', 'MCBNAL', 'MCBNKB', 'MCLADL', 'MCLANB', 'MCLBCL', 'MCLBMB', 'MCLCBL', 'MCLCLB', 'MCLDAL', 'MCLDKB', 'MCLEJB', 'MCLFIB', 'MCLGHB', 'MCLHGB', 'MCLIFB', 'MCLJEB', 'MCLKDB', 'MCLLCB', 'MCLMBB', 'MCLNAB', 'MDAIFL', 'MDAKDL', 'MDAKNB', 'MDALCL', 'MDALDK', 'MDALEJ', 'MDALMB', 'MDALNA', 'MDAMBL', 'MDAMLB', 'MDANAL', 'MDANBK', 'MDANKB', 'MDANLA', 'MDBKCL', 'MDBKDK', 'MDBKEJ', 'MDBKMB', 'MDBKNA', 'MDBMAL', 'MDBMBK', 'MDBMKB', 'MDBMLA', 'MDJEAL', 'MDJEBK', 'MDJEKB', 'MDJELA', 'MDJGIB', 'MDJIGB', 'MDJKEB', 'MDKADL', 'MDKANB', 'MDKBCL', 'MDKBDK', 'MDKBEJ', 'MDKBMB', 'MDKBNA', 'MDKCBL', 'MDKCLB', 'MDKDAL', 'MDKDBK', 'MDKDKB', 'MDKDLA', 'MDKEBJ', 'MDKEJB', 'MDKFIB', 'MDKGHB', 'MDKHGB', 'MDKIFB', 'MDKJEB', 'MDKKDB', 'MDKLCB', 'MDKLDA', 'MDKMBB', 'MDKNAB', 'MDKNBA', 'MDLACL', 'MDLADK', 'MDLAEJ', 'MDLAMB', 'MDLANA', 'MDLCAL', 'MDLCBK', 'MDLCKB', 'MDLCLA', 'MDLGHA', 'MDLKCB', 'MDLKDA', 'MDLMAB', 'MDLMBA', 'MEBJEJ', 'MEBJMB', 'MEBKDJ', 'MEBMBJ', 'MEBMJB', 'MEJANB', 'MEJBEJ', 'MEJBMB', 'MEJCLB', 'MEJDKB', 'MEJEBJ', 'MEJEJB', 'MEJFIB', 'MEJGHB', 'MEJHGB', 'MEJIFB', 'MEJJEB', 'MEJKDB', 'MEJLCB', 'MEJMBB', 'MEJNAB', 'MFBICL', 'MFBIFI', 'MFBIGH', 'MFBIMB', 'MFBMBI', 'MFBMIB', 'MFHEAL', 'MFHEKB', 'MFHGBI', 'MFHGIB', 'MFHIGB', 'MFHKEB', 'MFIADL', 'MFIANB', 'MFIBCL', 'MFIBFI', 'MFIBGH', 'MFIBMB', 'MFICBL', 'MFICLB', 'MFIDAL', 'MFIDKB', 'MFIEJB', 'MFIFBI', 'MFIFIB', 'MFIGBH', 'MFIGHB', 'MFIHGB', 'MFIIFB', 'MFIJEB', 'MFIKDB', 'MFILCB', 'MFIMBB', 'MFINAB', 'MFLCBI', 'MFLCIB', 'MFLEAH', 'MFLICB', 'MGBHGH', 'MGBHMB', 'MGBIFH', 'MGBMBH', 'MGBMHB', 'MGBNAH', 'MGHANB', 'MGHBGH', 'MGHBMB', 'MGHCLB', 'MGHDKB', 'MGHEJB', 'MGHFIB', 'MGHGBH', 'MGHGHB', 'MGHHGB', 'MGHIFB', 'MGHJEB', 'MGHKDB', 'MGHLCB', 'MGHMBB', 'MGHNAB', 'MHAELF', 'MHAGNB', 'MHANBG', 'MHANGB', 'MHBGHG', 'MHBGIF', 'MHBGMB', 'MHBGNA', 'MHBMBG', 'MHBMGB', 'MHFEKB', 'MHFELA', 'MHFGIB', 'MHFIBG', 'MHFIGB', 'MHFKEB', 'MHGANB', 'MHGBHG', 'MHGBIF', 'MHGBMB', 'MHGBNA', 'MHGCLB', 'MHGDKB', 'MHGDLA', 'MHGEJB', 'MHGFIB', 'MHGGHB', 'MHGHBG', 'MHGHGB', 'MHGIBF', 'MHGIFB', 'MHGJEB', 'MHGKDB', 'MHGLCB', 'MHGLDA', 'MHGMBB', 'MHGNAB', 'MHGNBA', 'MIBCLF', 'MIBFIF', 'MIBFMB', 'MIBGHF', 'MIBMBF', 'MIBMFB', 'MIFANB', 'MIFBIF', 'MIFBMB', 'MIFCLB', 'MIFDKB', 'MIFEJB', 'MIFFIB', 'MIFGHB', 'MIFHGB', 'MIFIBF', 'MIFIFB', 'MIFJEB', 'MIFKDB', 'MIFLCB', 'MIFMBB', 'MIFNAB', 'MJBEJE', 'MJBEKD', 'MJBEMB', 'MJBMBE', 'MJBMEB', 'MJDEKB', 'MJDGIB', 'MJDIGB', 'MJDKBE', 'MJDKEB', 'MJEALD', 'MJEANB', 'MJEBJE', 'MJEBKD', 'MJEBMB', 'MJECLB', 'MJEDKB', 'MJEEJB', 'MJEFIB', 'MJEGHB', 'MJEHGB', 'MJEIFB', 'MJEJBE', 'MJEJEB', 'MJEKBD', 'MJEKDB', 'MJELAD', 'MJELCB', 'MJEMBB', 'MJENAB', 'MKBCLD', 'MKBCNB', 'MKBDKD', 'MKBDMB', 'MKBEJD', 'MKBMBD', 'MKBMDB', 'MKBNAD', 'MKBNCB', 'MKDALD', 'MKDANB', 'MKDBKD', 'MKDBMB', 'MKDCLB', 'MKDDKB', 'MKDEJB', 'MKDFIB', 'MKDGHB', 'MKDHGB', 'MKDIFB', 'MKDJEB', 'MKDKBD', 'MKDKDB', 'MKDLAD', 'MKDLCB', 'MKDMBB', 'MKDNAB', 'MLACLD', 'MLACNB', 'MLADIF', 'MLADKD', 'MLADLC', 'MLADMB', 'MLADNA', 'MLAEHF', 'MLAEJD', 'MLAMBD', 'MLAMDB', 'MLANAD', 'MLANBC', 'MLANCB', 'MLANDA', 'MLBCIF', 'MLBCKD', 'MLBCLC', 'MLBCMB', 'MLBCNA', 'MLBMAD', 'MLBMBC', 'MLBMCB', 'MLBMDA', 'MLCALD', 'MLCANB', 'MLCBIF', 'MLCBKD', 'MLCBLC', 'MLCBMB', 'MLCBNA', 'MLCCLB', 'MLCDKB', 'MLCDLA', 'MLCEJB', 'MLCFIB', 'MLCGHB', 'MLCHGB', 'MLCIBF', 'MLCIFB', 'MLCJEB', 'MLCKBD', 'MLCKDB', 'MLCLAD', 'MLCLBC', 'MLCLCB', 'MLCLDA', 'MLCMBB', 'MLCNAB', 'MLCNBA', 'MLDAIF', 'MLDAKD', 'MLDALC', 'MLDAMB', 'MLDANA', 'MLDCKB', 'MLDCLA', 'MLDGHA', 'MLDKAD', 'MLDKBC', 'MLDKCB', 'MLDKDA', 'MLDMAB', 'MLDMBA', 'MLFCIB', 'MLFEHA', 'MLFIAD', 'MLFIBC', 'MLFICB', 'MLFIDA', 'MMBANB', 'MMBBMB', 'MMBCLB', 'MMBDKB', 'MMBEJB', 'MMBFIB', 'MMBGHB', 'MMBHGB', 'MMBIFB', 'MMBJEB', 'MMBKDB', 'MMBLCB', 'MMBMBB', 'MMBNAB', 'MNAANB', 'MNABMB', 'MNABNA', 'MNACLB', 'MNADKB', 'MNADLA', 'MNAEJB', 'MNAFIB', 'MNAGHB', 'MNAHGB', 'MNAIFB', 'MNAJEB', 'MNAKDB', 'MNALCB', 'MNALDA', 'MNAMBB', 'MNANAB', 'MNANBA', 'MNBAMB', 'MNBANA', 'MNBCKB', 'MNBCLA', 'MNBGHA', 'MNBKCB', 'MNBKDA', 'MNBMAB', 'MNBMBA', 'NAANAN', 'NAANBM', 'NAANCL', 'NAANDK', 'NAANEJ', 'NAANFI', 'NAANGH', 'NAANHG', 'NAANIF', 'NAANJE', 'NAANKD', 'NAANLC', 'NAANMB', 'NAANNA', 'NABMAN', 'NABMBM', 'NABMCL', 'NABMDK', 'NABMEJ', 'NABMFI', 'NABMGH', 'NABMHG', 'NABMIF', 'NABMJE', 'NABMKD', 'NABMLC', 'NABMMB', 'NABMNA', 'NABNAM', 'NABNCK', 'NABNKC', 'NABNMA', 'NACLAN', 'NACLBM', 'NACLCL', 'NACLDK', 'NACLEJ', 'NACLFI', 'NACLGH', 'NACLHG', 'NACLIF', 'NACLJE', 'NACLKD', 'NACLLC', 'NACLMB', 'NACLNA', 'NACNAL', 'NACNBK', 'NACNKB', 'NACNLA', 'NADIFK', 'NADIGJ', 'NADIJG', 'NADIKF', 'NADKAN', 'NADKBM', 'NADKCL', 'NADKDK', 'NADKEJ', 'NADKFI', 'NADKGH', 'NADKHG', 'NADKIF', 'NADKJE', 'NADKKD', 'NADKLC', 'NADKMB', 'NADKNA', 'NADLAM', 'NADLCK', 'NADLKC', 'NADLMA', 'NADMAL', 'NADMBK', 'NADMKB', 'NADMLA', 'NADNAK', 'NADNKA', 'NAEHFK', 'NAEHGJ', 'NAEHJG', 'NAEHKF', 'NAEJAN', 'NAEJBM', 'NAEJCL', 'NAEJDK', 'NAEJEJ', 'NAEJFI', 'NAEJGH', 'NAEJHG', 'NAEJIF', 'NAEJJE', 'NAEJKD', 'NAEJLC', 'NAEJMB', 'NAEJNA', 'NAELCJ', 'NAELJC', 'NAENAJ', 'NAENJA', 'NAFIAN', 'NAFIBM', 'NAFICL', 'NAFIDK', 'NAFIEJ', 'NAFIFI', 'NAFIGH', 'NAFIHG', 'NAFIIF', 'NAFIJE', 'NAFIKD', 'NAFILC', 'NAFIMB', 'NAFINA', 'NAFNAI', 'NAFNIA', 'NAGHAN', 'NAGHBM', 'NAGHCL', 'NAGHDK', 'NAGHEJ', 'NAGHFI', 'NAGHGH', 'NAGHHG', 'NAGHIF', 'NAGHJE', 'NAGHKD', 'NAGHLC', 'NAGHMB', 'NAGHNA', 'NAGNAH', 'NAGNHA', 'NAHEFK', 'NAHEGJ', 'NAHEJG', 'NAHEKF', 'NAHGAN', 'NAHGBM', 'NAHGCL', 'NAHGDK', 'NAHGEJ', 'NAHGFI', 'NAHGGH', 'NAHGHG', 'NAHGIF', 'NAHGJE', 'NAHGKD', 'NAHGLC', 'NAHGMB', 'NAHGNA', 'NAHMBG', 'NAHMGB', 'NAHNAG', 'NAHNGA', 'NAIDFK', 'NAIDGJ', 'NAIDJG', 'NAIDKF', 'NAIFAN', 'NAIFBM', 'NAIFCL', 'NAIFDK', 'NAIFEJ', 'NAIFFI', 'NAIFGH', 'NAIFHG', 'NAIFIF', 'NAIFJE', 'NAIFKD', 'NAIFLC', 'NAIFMB', 'NAIFNA', 'NAINAF', 'NAINFA', 'NAJEAN', 'NAJEBM', 'NAJECL', 'NAJEDK', 'NAJEEJ', 'NAJEFI', 'NAJEGH', 'NAJEHG', 'NAJEIF', 'NAJEJE', 'NAJEKD', 'NAJELC', 'NAJEMB', 'NAJENA', 'NAJNAE', 'NAJNEA', 'NAKDAN', 'NAKDBM', 'NAKDCL', 'NAKDDK', 'NAKDEJ', 'NAKDFI', 'NAKDGH', 'NAKDHG', 'NAKDIF', 'NAKDJE', 'NAKDKD', 'NAKDLC', 'NAKDMB', 'NAKDNA', 'NAKNAD', 'NAKNBC', 'NAKNCB', 'NAKNDA', 'NALCAN', 'NALCBM', 'NALCCL', 'NALCDK', 'NALCEJ', 'NALCFI', 'NALCGH', 'NALCHG', 'NALCIF', 'NALCJE', 'NALCKD', 'NALCLC', 'NALCMB', 'NALCNA', 'NALDAM', 'NALDCK', 'NALDKC', 'NALDMA', 'NALECJ', 'NALEJC', 'NALMAD', 'NALMBC', 'NALMCB', 'NALMDA', 'NALNAC', 'NALNCA', 'NAMBAN', 'NAMBBM', 'NAMBCL', 'NAMBDK', 'NAMBEJ', 'NAMBFI', 'NAMBGH', 'NAMBHG', 'NAMBIF', 'NAMBJE', 'NAMBKD', 'NAMBLC', 'NAMBMB', 'NAMBNA', 'NAMDAL', 'NAMDBK', 'NAMDKB', 'NAMDLA', 'NAMHBG', 'NAMHGB', 'NAMLAD', 'NAMLBC', 'NAMLCB', 'NAMLDA', 'NAMNAB', 'NAMNBA', 'NANAAN', 'NANABM', 'NANACL', 'NANADK', 'NANAEJ', 'NANAFI', 'NANAGH', 'NANAHG', 'NANAIF', 'NANAJE', 'NANAKD', 'NANALC', 'NANAMB', 'NANANA', 'NANBAM', 'NANBCK', 'NANBKC', 'NANBMA', 'NANCAL', 'NANCBK', 'NANCKB', 'NANCLA', 'NANDAK', 'NANDKA', 'NANEAJ', 'NANEJA', 'NANFAI', 'NANFIA', 'NANGAH', 'NANGHA', 'NANHAG', 'NANHGA', 'NANIAF', 'NANIFA', 'NANJAE', 'NANJEA', 'NANKAD', 'NANKBC', 'NANKCB', 'NANKDA', 'NANLAC', 'NANLCA', 'NANMAB', 'NANMBA', 'NANNAA', 'NBAMBM', 'NBAMDK', 'NBAMHG', 'NBAMLC', 'NBAMNA', 'NBANAM', 'NBANCK', 'NBANKC', 'NBANMA', 'NBCIFK', 'NBCIJG', 'NBCKBM', 'NBCKDK', 'NBCKHG', 'NBCKLC', 'NBCKNA', 'NBCLAM', 'NBCLCK', 'NBCLKC', 'NBCLMA', 'NBCMBK', 'NBCMLA', 'NBCNAK', 'NBCNKA', 'NBGHAM', 'NBGHCK', 'NBGHKC', 'NBGHMA', 'NBGIJC', 'NBGMHA', 'NBKCBM', 'NBKCDK', 'NBKCHG', 'NBKCLC', 'NBKCNA', 'NBKDAM', 'NBKDCK', 'NBKDKC', 'NBKDMA', 'NBKEJC', 'NBKMBC', 'NBKMDA', 'NBKNAC', 'NBKNCA', 'NBMABM', 'NBMADK', 'NBMAHG', 'NBMALC', 'NBMANA', 'NBMBAM', 'NBMBCK', 'NBMBKC', 'NBMBMA', 'NBMCBK', 'NBMCLA', 'NBMDAK', 'NBMDKA', 'NBMEJA', 'NBMFIA', 'NBMGHA', 'NBMHAG', 'NBMHGA', 'NBMIFA', 'NBMJEA', 'NBMKBC', 'NBMKDA', 'NBMLAC', 'NBMLCA', 'NBMMBA', 'NBMNAA', 'NCALCL', 'NCALDK', 'NCALEJ', 'NCALMB', 'NCALNA', 'NCANAL', 'NCANBK', 'NCANKB', 'NCANLA', 'NCBIFK', 'NCBIGJ', 'NCBKCL', 'NCBKDK', 'NCBKEJ', 'NCBKMB', 'NCBKNA', 'NCBLCK', 'NCBLMA', 'NCBMAL', 'NCBMBK', 'NCBMKB', 'NCBMLA', 'NCBNAK', 'NCBNKA', 'NCJEAL', 'NCJEBK', 'NCJEKB', 'NCJELA', 'NCJIGB', 'NCJLEA', 'NCKBCL', 'NCKBDK', 'NCKBEJ', 'NCKBMB', 'NCKBNA', 'NCKDAL', 'NCKDBK', 'NCKDKB', 'NCKDLA', 'NCKHGB', 'NCKLCB', 'NCKLDA', 'NCKNAB', 'NCKNBA', 'NCLACL', 'NCLADK', 'NCLAEJ', 'NCLAMB', 'NCLANA', 'NCLBCK', 'NCLBMA', 'NCLCAL', 'NCLCBK', 'NCLCKB', 'NCLCLA', 'NCLDAK', 'NCLDKA', 'NCLEAJ', 'NCLEJA', 'NCLFIA', 'NCLGHA', 'NCLHGA', 'NCLIFA', 'NCLJEA', 'NCLKCB', 'NCLKDA', 'NCLLCA', 'NCLMAB', 'NCLMBA', 'NCLNAA', 'NDAIFK', 'NDAKDK', 'NDAKNA', 'NDALCK', 'NDALMA', 'NDAMBK', 'NDAMLA', 'NDANAK', 'NDANKA', 'NDKADK', 'NDKANA', 'NDKBCK', 'NDKBMA', 'NDKCBK', 'NDKCLA', 'NDKDAK', 'NDKDKA', 'NDKEJA', 'NDKFIA', 'NDKGHA', 'NDKHGA', 'NDKIFA', 'NDKJEA', 'NDKKDA', 'NDKLCA', 'NDKMBA', 'NDKNAA', 'NEAHGJ', 'NEAJEJ', 'NEAJNA', 'NEALCJ', 'NEANAJ', 'NEANJA', 'NEJAEJ', 'NEJANA', 'NEJBMA', 'NEJCLA', 'NEJDKA', 'NEJEAJ', 'NEJEJA', 'NEJFIA', 'NEJGHA', 'NEJHGA', 'NEJIFA', 'NEJJEA', 'NEJKDA', 'NEJLCA', 'NEJMBA', 'NEJNAA', 'NFAIDK', 'NFAIFI', 'NFAINA', 'NFANAI', 'NFANIA', 'NFIADK', 'NFIAFI', 'NFIANA', 'NFIBCK', 'NFIBMA', 'NFICBK', 'NFICLA', 'NFIDAK', 'NFIDKA', 'NFIEJA', 'NFIFAI', 'NFIFIA', 'NFIGHA', 'NFIHGA', 'NFIIFA', 'NFIJEA', 'NFIKDA', 'NFILCA', 'NFIMBA', 'NFINAA', 'NFKDAI', 'NFKDIA', 'NFKEHA', 'NFKHEA', 'NFKIDA', 'NGAHEJ', 'NGAHGH', 'NGAHMB', 'NGAHNA', 'NGANAH', 'NGANHA', 'NGBHMA', 'NGBICJ', 'NGBMAH', 'NGBMHA', 'NGHAEJ', 'NGHAGH', 'NGHAMB', 'NGHANA', 'NGHBMA', 'NGHCKB', 'NGHCLA', 'NGHDKA', 'NGHEAJ', 'NGHEJA', 'NGHFIA', 'NGHGAH', 'NGHGHA', 'NGHHGA', 'NGHIFA', 'NGHJEA', 'NGHKCB', 'NGHKDA', 'NGHLCA', 'NGHMAB', 'NGHMBA', 'NGHNAA', 'NGJDIA', 'NGJEAH', 'NGJEHA', 'NGJHEA', 'NGJICB', 'NGJIDA', 'NHAEJG', 'NHAGHG', 'NHAGNA', 'NHAMBG', 'NHANAG', 'NHANGA', 'NHGAHG', 'NHGANA', 'NHGBMA', 'NHGCLA', 'NHGDKA', 'NHGEJA', 'NHGFIA', 'NHGGHA', 'NHGHAG', 'NHGHGA', 'NHGIFA', 'NHGJEA', 'NHGKDA', 'NHGLCA', 'NHGMBA', 'NHGNAA', 'NIADKF', 'NIAFIF', 'NIAFNA', 'NIANAF', 'NIANFA', 'NIFAIF', 'NIFANA', 'NIFBMA', 'NIFCLA', 'NIFDKA', 'NIFEJA', 'NIFFIA', 'NIFGHA', 'NIFHGA', 'NIFIAF', 'NIFIFA', 'NIFJEA', 'NIFKDA', 'NIFLCA', 'NIFMBA', 'NIFNAA', 'NJAEHG', 'NJAEJE', 'NJAELC', 'NJAENA', 'NJANAE', 'NJANEA', 'NJCELA', 'NJCIBG', 'NJCLAE', 'NJCLEA', 'NJEAHG', 'NJEAJE', 'NJEALC', 'NJEANA', 'NJEBKC', 'NJEBMA', 'NJECLA', 'NJEDKA', 'NJEEJA', 'NJEFIA', 'NJEGHA', 'NJEHAG', 'NJEHGA', 'NJEIFA', 'NJEJAE', 'NJEJEA', 'NJEKBC', 'NJEKDA', 'NJELAC', 'NJELCA', 'NJEMBA', 'NJENAA', 'NJGDIA', 'NJGEHA', 'NJGHAE', 'NJGHEA', 'NJGIBC', 'NJGIDA', 'NKADIF', 'NKADKD', 'NKADLC', 'NKADMB', 'NKADNA', 'NKANAD', 'NKANBC', 'NKANCB', 'NKANDA', 'NKBCIF', 'NKBCKD', 'NKBCLC', 'NKBCMB', 'NKBCNA', 'NKBDKC', 'NKBDMA', 'NKBEJC', 'NKBMAD', 'NKBMBC', 'NKBMCB', 'NKBMDA', 'NKBNAC', 'NKBNCA', 'NKCBIF', 'NKCBKD', 'NKCBLC', 'NKCBMB', 'NKCBNA', 'NKCDKB', 'NKCDLA', 'NKCHGB', 'NKCLAD', 'NKCLBC', 'NKCLCB', 'NKCLDA', 'NKCNAB', 'NKCNBA', 'NKDAIF', 'NKDAKD', 'NKDALC', 'NKDAMB', 'NKDANA', 'NKDBKC', 'NKDBMA', 'NKDCKB', 'NKDCLA', 'NKDDKA', 'NKDEJA', 'NKDFIA', 'NKDGHA', 'NKDHGA', 'NKDIAF', 'NKDIFA', 'NKDJEA', 'NKDKAD', 'NKDKBC', 'NKDKCB', 'NKDKDA', 'NKDLAC', 'NKDLCA', 'NKDMAB', 'NKDMBA', 'NKDNAA', 'NKFDIA', 'NKFEHA', 'NKFHEA', 'NKFIAD', 'NKFIBC', 'NKFICB', 'NKFIDA', 'NLACLC', 'NLACNA', 'NLADKC', 'NLADMA', 'NLAEJC', 'NLAMBC', 'NLAMDA', 'NLANAC', 'NLANCA', 'NLCALC', 'NLCANA', 'NLCBKC', 'NLCBMA', 'NLCCLA', 'NLCDKA', 'NLCEJA', 'NLCFIA', 'NLCGHA', 'NLCHGA', 'NLCIFA', 'NLCJEA', 'NLCKBC', 'NLCKDA', 'NLCLAC', 'NLCLCA', 'NLCMBA', 'NLCNAA', 'NMABMB', 'NMABNA', 'NMADKB', 'NMADLA', 'NMAHGB', 'NMALCB', 'NMALDA', 'NMANAB', 'NMANBA', 'NMBAMB', 'NMBANA', 'NMBBMA', 'NMBCKB', 'NMBCLA', 'NMBDKA', 'NMBEJA', 'NMBFIA', 'NMBGHA', 'NMBHGA', 'NMBIFA', 'NMBJEA', 'NMBKCB', 'NMBKDA', 'NMBLCA', 'NMBMAB', 'NMBMBA', 'NMBNAA', 'NNAANA', 'NNABMA', 'NNACLA', 'NNADKA'
+];
+    var permSet = new Set();
+
+    
+
+    function allsets() {
+        allpermsetsArr = [];
+        for (p1 in perms) {
+            perm = perms[p1];
+            vertperm = verticalperm(perm);
+            newpermSet = new Set();
+
+            row1 = getrow(perm[0]);
+            row2 = getrow(perm[1]);
+            row3 = getrow(perm[2]);
+            row4 = getrow(perm[3]);
+            row5 = getrow(perm[4]);
+            row6 = getrow(perm[5]);
+            interrow1 = getinterrow(perm[0]);
+            interrow3 = getinterrow(perm[1]);
+            interrow5 = getinterrow(perm[2]);
+            interrow7 = getinterrow(perm[3]);
+            interrow9 = getinterrow(perm[4]);
+            interrow11 = getinterrow(perm[5]);
+            intercol1 = getinterrow(vertperm[0]);
+            intercol2 = getinterrow(vertperm[1]);
+            intercol3 = getinterrow(vertperm[2]);
+            intercol4 = getinterrow(vertperm[3]);
+            intercol5 = getinterrow(vertperm[4]);
+            intercol6 = getinterrow(vertperm[5]);
+            interrow2 = [intercol1[0],intercol2[0],intercol3[0],intercol4[0],intercol5[0],intercol6[0]];
+            interrow4 = [intercol1[1],intercol2[1],intercol3[1],intercol4[1],intercol5[1],intercol6[1]];
+            interrow6 = [intercol1[2],intercol2[2],intercol3[2],intercol4[2],intercol5[2],intercol6[2]];
+            interrow8 = [intercol1[3],intercol2[3],intercol3[3],intercol4[3],intercol5[3],intercol6[3]];
+            interrow10 = [intercol1[4],intercol2[4],intercol3[4],intercol4[4],intercol5[4],intercol6[4]];
+
+
+            board = [row1,row2,row3,row4,row5,row6];
+
+            tiles = document.getElementsByClassName("plyer");
+
+            for (r1=0; r1<6; r1++) {
+                for (c1=0; c1<6; c1++) {
+
+                    nodetxt = ""+board[r1][c1];	
+                    nodecoord = tiles[r1*6+c1].id;
+
+                    newpermSet.add([nodecoord, nodetxt]);
+                    
+                }           
+            }
+
+            tiles = document.getElementsByClassName("inter");
+
+            count=0;
+            band=0;
+            interrows = [interrow1, interrow2, interrow3, interrow4, interrow5, interrow6, interrow7, interrow8, interrow9, interrow10, interrow11] ;
+            interrow = interrows[band];
+
+            for (t1 in tiles)  {
+                if (t1.length<4 && tiles[t1].id!="") {
+                   
+                    if (band%2==0) {
+                        if(interrow[count]) {
+                            nodetxt = "=";
+                        }
+                        else {
+                            nodetxt = "X";
+                        }
+                    } else {
+                        if(interrow[count]) {
+                            nodetxt = "||";
+                        }
+                        else {
+                            nodetxt = "X";
+                        }
+                    }
+
+                    nodecoord = tiles[t1].id;
+                    newpermSet.add([nodecoord, nodetxt]);
+                    
+                    count++;
+                    
+                    if (count==5 && band%2==0  && band<10) {
+                        band++;
+                        interrow = interrows[band];
+                        count = 0;
+                    } else if (count==6 && band%2==1 && band<10) {
+                        band++;
+                        interrow = interrows[band];
+                        count = 0;
+                    }
+                    
+                }
+            }
+
+            allpermsetsArr.push(newpermSet);
+
+
+        }
+        return allpermsetsArr;
+
+
+    }
+    
+
+    function setup() {
+        
+        allpermsetsArr = allsets();
+        solnsetsArr = allpermsetsArr;
+        num = Math.floor(Math.random() * allpermsetsArr.length );
+
+
+        permSet = allpermsetsArr[num];
+
+        permsetIter = permSet.values();
+        nodes = [];
+        for (i1 of permsetIter)  {
+            nodes.push(i1);
+        }
+
+        nodes.sort(function(){return 0.5 - Math.random()});
+        pointer=0;
+        visiblenodes = [];
+        
+        do {
+            node1 = nodes[pointer];
+            solnsetsarrLength = solnsetsArr.length;
+
+            newsolnsetsArr = [];
+            for (s1 in solnsetsArr) {
+                possiblesoln = false;
+                for (n1 of solnsetsArr[s1]) {
+                    
+                    if (node1[0]==n1[0] && node1[1]==n1[1]) {
+                        possiblesoln = true;
+                    }
+
+                }
+                if (possiblesoln) {
+                    newsolnsetsArr.push(solnsetsArr[s1])
+                }
+            }
+
+            solnsetsArr = newsolnsetsArr;
+            if (solnsetsArr.length<solnsetsarrLength) {
+                visiblenodes.push(node1);
+            }
+
+            pointer++;
+
+        } while(solnsetsArr.length>1)
+
+        
+        solution(visiblenodes);
+
+
+    }
+
+    function solution(permSet) {
+        for (n1 of permSet) {
+            para = document.createElement("span");
+
+            if (n1[1]=="1") {
+                node = document.createTextNode(sun);
+            } else if (n1[1]=="0") {
+                node = document.createTextNode(moon);
+            } else {
+                node = document.createTextNode(n1[1]);
+            }
+            	
+            para.appendChild(node);
+
+            document.getElementById(n1[0]).appendChild(para);
+
+            document.getElementById(n1[0]).style.color = "red";
+        }
+
+    }
+
+    function checkwon() {
+        tiles = document.getElementsByClassName("plyer");
+        won = true;
+        for (t1 in tiles) {
+            if (t1.length<4) {
+                if (tiles[t1].innerHTML.includes(moon)) {
+                    testArr = [tiles[t1].id, 0];
+                } else if (tiles[t1].innerHTML.includes(sun)) {
+                    testArr = [tiles[t1].id, 1];
+                } else {
+                    won = false;
+                }
+
+                if (won) {
+                    found = false;
+                    for (p1 of permSet) {
+                        if (p1[0]==testArr[0] && p1[1]==testArr[1]) {
+                            found=true;
+                        }
+                    }
+                    if (!found) {
+                        won = false;
+                    }
+                }
+
+                
+            }
+        }
+        if (won) {
+            setTimeout(myTimeout, 1500);
+            function myTimeout() {
+                alert("you won!");
+            }
+        }
+    }
+
+    function fix(ev) {
+        if (ev.target.id!="") {
+            if(document.getElementById(ev.target.id).innerHTML=="")  {
+                document.getElementById(ev.target.id).innerHTML=sun; 
+            } else if(document.getElementById(ev.target.id).innerHTML==sun) {
+                document.getElementById(ev.target.id).innerHTML=moon;                 
+            } else if(document.getElementById(ev.target.id).innerHTML==moon) {
+                document.getElementById(ev.target.id).innerHTML=""; 
+            }
+        } 
+        checkwon();
+    }
+
+    function getrow(X)  {
+        switch(X) {
+            case "A":
+                result=A;
+                break;
+            case "B":
+                result=B;
+                break; 
+            case "C":
+                result=C;
+                break;
+            case "D":
+                result=D;
+                break;
+            case "E":
+                result=E;
+                break;
+            case "F":
+                result=F;
+                break;
+            case "G":
+                result=G;
+                break;
+            case "H":
+                result=H;
+                break;
+            case "I":
+                result=I;
+                break;
+            case "J":
+                result=J;
+                break;
+            case "K":
+                result=K;
+                break;
+            case "L":
+                result=L;
+                break;
+            case "M":
+                result=M;
+                break;
+            case "N":
+                result=N;
+                break;
+        }
+        return result;
+    }
+
+    function getinterrow(X)  {
+        switch(X) {
+            case "A":
+                result=interA;
+                break;
+            case "B":
+                result=interB;
+                break; 
+            case "C":
+                result=interC;
+                break;
+            case "D":
+                result=interD;
+                break;
+            case "E":
+                result=interE;
+                break;
+            case "F":
+                result=interF;
+                break;
+            case "G":
+                result=interG;
+                break;
+            case "H":
+                result=interH;
+                break;
+            case "I":
+                result=interI;
+                break;
+            case "J":
+                result=interJ;
+                break;
+            case "K":
+                result=interK;
+                break;
+            case "L":
+                result=interL;
+                break;
+            case "M":
+                result=interM;
+                break;
+            case "N":
+                result=interN;
+                break;
+        }
+        return result;
+    }
+
+    function getcol(arrX) {
+        if (arrX.toString()==A.toString()) {
+            return "A";
+        } else if (arrX.toString()==B.toString()) {
+            return "B";
+        } else if (arrX.toString()==C.toString()) {
+            return "C";
+        } else if (arrX.toString()==D.toString()) {
+            return "D";
+        } else if (arrX.toString()==E.toString()) {
+            return "E";
+        } else if (arrX.toString()==F.toString()) {
+            return "F";
+        } else if (arrX.toString()==G.toString()) {
+            return "G";
+        } else if (arrX.toString()==H.toString()) {
+            return "H";
+        } else if (arrX.toString()==I.toString()) {
+            return "I";
+        } else if (arrX.toString()==J.toString()) {
+            return "J";
+        } else if (arrX.toString()==K.toString()) {
+            return "K";
+        } else if (arrX.toString()==L.toString()) {
+            return "L";
+        } else if (arrX.toString()==M.toString()) {
+            return "M";
+        } else if (arrX.toString()==N.toString()) {
+            return "N";
+        } else {
+            return false;
+        }
+    }
+
+
+    
+
+    function verticalperm(perm) {
+        row1 = getrow(perm[0]);
+        row2 = getrow(perm[1]);
+        row3 = getrow(perm[2]);
+        row4 = getrow(perm[3]);
+        row5 = getrow(perm[4]);
+        row6 = getrow(perm[5]);
+
+        board = [row1,row2,row3,row4,row5,row6];
+
+        col1 = [board[0][0],board[1][0],board[2][0],board[3][0],board[4][0],board[5][0] ];
+        col2 = [board[0][1],board[1][1],board[2][1],board[3][1],board[4][1],board[5][1] ];
+        col3 = [board[0][2],board[1][2],board[2][2],board[3][2],board[4][2],board[5][2] ];
+        col4 = [board[0][3],board[1][3],board[2][3],board[3][3],board[4][3],board[5][3] ];
+        col5 = [board[0][4],board[1][4],board[2][4],board[3][4],board[4][4],board[5][4] ];
+        col6 = [board[0][5],board[1][5],board[2][5],board[3][5],board[4][5],board[5][5] ];
+
+        result = "";
+        if (getcol(col1)) {
+            result+=getcol(col1);
+        } else {
+            return false;
+        }
+        if (getcol(col2)) {
+            result+=getcol(col2);
+        } else {
+            return false;
+        }
+        if (getcol(col3)) {
+            result+=getcol(col3);
+        } else {
+            return false;
+        }
+        if (getcol(col4)) {
+            result+=getcol(col4);
+        } else {
+            return false;
+        }
+        if (getcol(col5)) {
+            result+=getcol(col5);
+        } else {
+            return false;
+        }
+        if (getcol(col6)) {
+            result+=getcol(col6);
+        } else {
+            return false;
+        }
+
+        return result;
+    }
+
+   
+
+    function intersection(setA, setB) {
+        return new Set([...setA].filter(item => setB.has(item)));
+    }
+       
+
+        
+
+
+    
+
+    </script>
+  </body>
+
+</html>
