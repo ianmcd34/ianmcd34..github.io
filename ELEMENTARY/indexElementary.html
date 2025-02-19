@@ -271,11 +271,16 @@ li.active {
                 let clue2set = except(alltriplesSet, equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)));
                 solnSet = intersection(solnSet, clue2set);
                 item = document.createElement("li");
-                node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num));
+                node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num) + "  (" + clue2num + ")");
                 item.appendChild(node);
 
                 element = document.getElementById("cluelist");
                 element.appendChild(item);
+		if (parseInt(clue2num)<parseInt(key)) {
+		    item.style.color = "blue";
+		} else if (parseInt(clue2num)>parseInt(key)) {
+		    item.style.color = "red";
+		}
                 
             } else {
                 carryon();
@@ -299,11 +304,16 @@ li.active {
                         let clue2set = except(alltriplesSet, equalSums(fnStrs[sumindex], sumMaps[sumindex].get(clue2num)));
                         solnSet = intersection(solnSet, clue2set);
                         item = document.createElement("li");
-                        node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num));
+                        node = document.createTextNode(fnStrs_d[sumindex]+" ≠ " + sumMaps[sumindex].get(clue2num) + "  (" + clue2num + ")");
                         item.appendChild(node);
 
                         element = document.getElementById("cluelist");
                         element.appendChild(item);
+			if (parseInt(clue2num)<parseInt(key)) {
+                            item.style.color = "blue";
+                        } else if (parseInt(clue2num)>parseInt(key)) {
+                            item.style.color = "red";
+                        }
 
                     }
 
