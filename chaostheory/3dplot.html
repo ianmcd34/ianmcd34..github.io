@@ -22,6 +22,7 @@
   </style>
 </head>
 <body>
+  <script> await pyodide.loadPackage("matplotlib"); </script>
   <py-script>print("Hello, World!")</py-script>
   <py-script>
     import sys; print(f"Python {sys.version}")
