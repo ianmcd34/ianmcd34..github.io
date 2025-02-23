@@ -22,7 +22,18 @@
   </style>
 </head>
 <body>
-  <script> await pyodide.loadPackage("matplotlib"); </script>
+  <script>
+    async function loadMatplotlib() {
+      let myPromise = new Promise(function(resolve) {
+        pyodide.loadPackage("matplotlib");
+      });
+      result = await  myPromise;
+    }
+
+    loadMatplotlib();
+    
+    
+  </script>
   <py-script>print("Hello, World!")</py-script>
   <py-script>
     import sys; print(f"Python {sys.version}")
