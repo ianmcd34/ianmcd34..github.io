@@ -1,0 +1,192 @@
+
+
+
+
+
+<html lang="en">
+    <head>
+      
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Metamorphose</title>
+      <meta name="description" content="WordHurdle is a game of metamorphosis, slowly changing the source word until the target word is reached.">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="styles/styles.css" />
+
+
+      <style>
+          h1 {
+              text-align: center;
+              font-size: 275%;
+          }
+          h2 {
+              text-align: center;
+              font-size: 150%;
+          }
+          table {
+              margin-left: auto;
+              margin-right: auto;
+          }
+          .letterbox {
+              text-align: center;
+              font-size: 150%;
+              width: 50px;
+              height: 50px;
+              border: 1px black solid;
+              float: left;
+              margin: 2px;
+          }
+          .centered-letter {
+              transform: translate(0px, 5px);
+          }
+          .clear-float {
+              clear:both;
+          }
+      </style>
+    </head>
+    <body onload="onLoad()">
+      <header>
+          <h1>Metamorphose</h1>
+      </header>
+      
+
+      <table id="maintable">
+          <tr id="firstrow">
+          </tr>
+
+          <tr id="secondrow">
+        </tr>
+      </table>
+
+      <h2 style="color: red; visibility: hidden" id="badWordAlert">Sorry, that word is not a legal entry.</h1>
+
+
+    <script>
+        document.addEventListener("keypress", nextLetter);
+        window.addEventListener('beforeunload', function (e) {
+            if (localStorage.getItem("wrd").length<3) {
+                localStorage.setItem("wrd", "**");
+            }
+            
+        });
+
+        var guesses = 0;
+        var maxguesses = 0;
+  
+
+
+        function onLoad() {
+
+            startword=localStorage.getItem("word");
+
+            firstrow=document.getElementById("firstrow");
+
+
+            for (x in startword) {
+                td1=document.createElement("td");
+                td1_att=document.createAttribute("class");
+                td1_att.value="letterbox";
+                td1.setAttributeNode(td1_att);
+                td1.style.backgroundColor="#52ff52";
+                div1=document.createElement("div");
+                div1_att=document.createAttribute("class");
+                div1_att.value="centered-letter";
+                div1.setAttributeNode(div1_att);
+                div1.innerHTML=startword[x].toUpperCase();
+                td1.appendChild(div1);
+                firstrow.appendChild(td1);
+            }
+
+            
+
+
+        }
+
+        function diff(word1,word2) {
+            if (word1.length < word2.length) {
+                shortword=word1
+                longword=word2
+            } else {
+                shortword=word2
+                longword=word1
+            }
+
+            result=0
+            if (shortword.length==longword.length) {
+                for (i in longword) {
+                    if (shortword[i]!=longword[i]) {
+                        result=result+1
+                    }
+                }
+                return result
+            } else {
+                i=0
+                while (i < shortword.length && shortword[i]==longword[i]) {
+                    i=i+1
+                }
+                if (i < shortword.length) {
+                    result=1+diff(shortword.slice(i),longword.slice(i+1))
+                } else {
+                    result = longword.length - shortword.length;
+                }
+                return result
+            }
+        }
+
+        
+        function nextLetter(event) {
+            key1=event.key;
+            shifted=event.ctrlKey || event.shiftKey;
+            isalpha = (key1>='a' && key1<='z') || (key1>='A' && key1<='Z');
+
+            secondrow=document.getElementById("secondrow");
+            firstrow=document.getElementById("firstrow");
+
+
+            if (isalpha && key1.length==1 && !shifted) {
+                 td1=document.createElement("td");
+                 td1_att=document.createAttribute("class");
+                 td1_att.value="letterbox";
+                 td1.setAttributeNode(td1_att);
+                 div1=document.createElement("div");
+                 div1_att=document.createAttribute("class");
+                 div1_att.value="centered-letter";
+                 div1.setAttributeNode(div1_att);
+                 div1.innerHTML=key1.toUpperCase();
+                 td1.appendChild(div1);
+                 secondrow.appendChild(td1);
+             } else {
+                 if (shifted.toString()+key1=="trueEnter") {
+                    while (secondrow.hasChildNodes()) {
+                      secondrow.removeChild(secondrow.firstChild)
+                    }
+                 }
+                 if (shifted.toString()+key1=="falseEnter") {
+                    secondstring="";
+                    for (i=0;  i<secondrow.children.length; i++) {
+                        secondstring=secondstring+secondrow.children[i].firstChild.innerHTML;
+                    }
+                    firststring=""
+                    for (i=0;  i<firstrow.children.length; i++) {
+                      firststring=firststring+firstrow.children[i].firstChild.innerHTML;
+                    }
+                    match=diff(firststring, secondstring);
+                    if (match!=1) {
+                      alert("The word must be exactly 1 letter different.");
+                    } else {
+                      localStorage.setItem("wrd", secondstring);
+                      window.close();
+                    }
+                    
+                  }
+                 }
+             }
+
+      </script>
+
+    </body>
+  </html>
