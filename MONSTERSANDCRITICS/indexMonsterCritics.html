@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+    width: 50%;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 20%;
+}
+ul {
+	font-size: 140%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+span.redcounter {
+    width: 100%;
+    height: 50%;
+    color: black;
+    background-color: red; 
+    border-radius: 50%;
+}
+span.bluecounter {
+    width: 100%;
+    height: 50%;
+    color: black;
+    background-color: blue; 
+    border-radius: 50%;
+}
+
+  </style>
+    
+    <title>Monsters and Critics</title>
+  </head>
+  <body onload="setup()">
+    <h1>Monsters and Critics</h1>
+    <h4 id='date'></h4>
+    
+	<ul class="scoretable">
+		<li id="redscore"></li>
+		<li id="bluescore"></li>
+	</ul>
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A1" onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_A4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A6" onclick="minmax(event)"></td>
+		<td class="plyer" id="P_A7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_A8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_A9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_A0"  onclick="minmax(event)" ></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B2" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_B3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_B5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_B8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_B9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_B0"  onclick="minmax(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_C4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_C6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_C7"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_C8"  onclick="minmax(event)"></td>
+		<td class="plyer" id="P_C9"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_C0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_D4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_D5"  onclick="minmax(event)"></td>
+    		<td class="plyer"id="P_D6"  onclick="minmax(event)"></td>
+		<td class="plyer" id="P_D7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_D9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_D0" onclick="minmax(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_E8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_E9"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_E0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1" onclick="minmax(event)" ></td>
+    		<td class="plyer"id="P_F2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F4"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_F5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_F9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_F0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_G1"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G2"  onclick="minmax(event)"></td>
+    		<td class="plyer" id="P_G3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G5" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_G6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_G9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_G0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_H1" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_H2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_H9"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_H0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_I1" onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_I2" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_I9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_I0" onclick="minmax(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_J1"  onclick="minmax(event)"  ></td>
+    		<td class="plyer" id="P_J2"  onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J3" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J4" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J5" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J6" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J7" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J8" onclick="minmax(event)" ></td>
+		<td class="plyer" id="P_J9" onclick="minmax(event)" ></td>
+    		<td class="plyer" id="P_J0" onclick="minmax(event)" ></td>
+  	   </tr>
+    </table>
+
+    <button type="button" onclick="move()">Move</button>
+	<button type="button" onclick="checkformonsters()">Monsters</button>
+
+    </ul>
+
+
+
+    <script >
+
+		let rscorecount = 0;
+		let rscore = 0;
+		let bscorecount = 0;
+		let bscore = 0;
+		const board =[ "P_C2", "P_D2", "P_E2", "P_F2", "P_G2", "P_H2", "P_I2", "P_I3", "P_I4", "P_I5", "P_I6", "P_I7", "P_I8",
+			"P_I9", "P_H9", "P_G9", "P_F9", "P_E9", "P_D9", "P_C9", "P_B9", "P_B8", "P_B7", "P_B6", "P_B5", "P_B4", "P_B3", "P_B2"];
+		
+
+		function setup() {
+            document.getElementById("P_B1").classList.add("plyer2");
+            document.getElementById("P_A2").classList.add("plyer3");
+            document.getElementById("P_A3").classList.add("plyer3");
+            document.getElementById("P_A4").classList.add("plyer3");
+            document.getElementById("P_A5").classList.add("plyer3");
+            document.getElementById("P_A6").classList.add("plyer3");
+            document.getElementById("P_A7").classList.add("plyer3");
+            document.getElementById("P_A8").classList.add("plyer3");
+            document.getElementById("P_A9").classList.add("plyer3");
+            document.getElementById("P_B9").classList.add("plyer2");
+            document.getElementById("P_C1").classList.add("plyer2");
+            document.getElementById("P_C2").classList.add("plyer2");
+            document.getElementById("P_B3").classList.add("plyer3");
+            document.getElementById("P_B4").classList.add("plyer3");
+            document.getElementById("P_B5").classList.add("plyer3");
+            document.getElementById("P_B6").classList.add("plyer3");
+            document.getElementById("P_B7").classList.add("plyer3");
+            document.getElementById("P_B8").classList.add("plyer3");
+            document.getElementById("P_C8").classList.add("plyer2");
+            document.getElementById("P_C9").classList.add("plyer2");
+            document.getElementById("P_D1").classList.add("plyer2");
+            document.getElementById("P_D2").classList.add("plyer2");
+            document.getElementById("P_D8").classList.add("plyer2");
+            document.getElementById("P_D9").classList.add("plyer2");
+            document.getElementById("P_E1").classList.add("plyer2");
+            document.getElementById("P_E2").classList.add("plyer2");
+            document.getElementById("P_E8").classList.add("plyer2");
+            document.getElementById("P_E9").classList.add("plyer2");
+            document.getElementById("P_F1").classList.add("plyer2");
+            document.getElementById("P_F2").classList.add("plyer2");
+            document.getElementById("P_F8").classList.add("plyer2");
+            document.getElementById("P_F9").classList.add("plyer2");
+            document.getElementById("P_G1").classList.add("plyer2");
+            document.getElementById("P_G2").classList.add("plyer2");
+            document.getElementById("P_G8").classList.add("plyer2");
+            document.getElementById("P_G9").classList.add("plyer2");
+            document.getElementById("P_H1").classList.add("plyer2");
+            document.getElementById("P_H2").classList.add("plyer2");
+            document.getElementById("P_H8").classList.add("plyer2");
+            document.getElementById("P_H9").classList.add("plyer2");
+            document.getElementById("P_I1").classList.add("plyer2");
+            document.getElementById("P_I9").classList.add("plyer2");
+            document.getElementById("P_H3").classList.add("plyer3");
+            document.getElementById("P_H4").classList.add("plyer3");
+            document.getElementById("P_H5").classList.add("plyer3");
+            document.getElementById("P_H6").classList.add("plyer3");
+            document.getElementById("P_H7").classList.add("plyer3");
+            document.getElementById("P_H8").classList.add("plyer3");
+            document.getElementById("P_I2").classList.add("plyer3");
+            document.getElementById("P_I3").classList.add("plyer3");
+            document.getElementById("P_I4").classList.add("plyer3");
+            document.getElementById("P_I5").classList.add("plyer3");
+            document.getElementById("P_I6").classList.add("plyer3");
+            document.getElementById("P_I7").classList.add("plyer3");
+            document.getElementById("P_I8").classList.add("plyer3");
+            document.getElementById("P_I9").classList.add("plyer3");
+            document.getElementById("P_C3").style.backgroundColor="red";
+            document.getElementById("P_H8").style.backgroundColor="blue";
+			document.getElementById("P_B2").style.borderColor="red";
+			document.getElementById("P_A2").style.borderBottomColor="red";
+			document.getElementById("P_B1").style.borderRightColor="red";
+			document.getElementById("P_I9").style.borderColor="blue";
+			document.getElementById("P_H9").style.borderBottomColor="blue";
+			document.getElementById("P_I8").style.borderRightColor="blue";
+
+
+
+        }
+        
+        function minmax(ev) {
+
+            if (ev.target.id=="P_C3" && document.getElementById("P_B2").innerHTML=="") {
+                newred = document.createElement("span");
+                newred.classList.add("redcounter");
+                newred.innerHTML="1";
+                document.getElementById("P_B2").appendChild(newred);
+            }
+
+            else if (ev.target.id=="P_H8" && document.getElementById("P_I9").innerHTML=="") {
+                newblue = document.createElement("span");
+                newblue.classList.add("bluecounter");
+                newblue.innerHTML="1";
+                document.getElementById("P_I9").appendChild(newblue);
+            }
+
+			else {
+				alert(ev.target.innerHTML);
+			}
+        }
+
+        function move() {
+            redcountersiter = document.getElementsByClassName("redcounter");
+            bluecountersiter = document.getElementsByClassName("bluecounter");
+			redcounters = [];
+			for (i1 in redcountersiter) {
+				if (i1.length<3) {
+					redcounters.push(redcountersiter[i1]);
+				}			
+			}
+			for (i1 in bluecountersiter) {
+				if (i1.length<3) {
+					redcounters.push(bluecountersiter[i1]);
+				}	
+			}
+			currentboard=[];
+			for (b1 in board) {
+				counterfound=false;
+				for (r1 in redcounters) {
+					if (board[b1].includes(redcounters[r1].parentNode.id)) {
+						crit = "("+redcounters[r1].innerHTML+")";
+						currentboard.push(board[b1]+redcounters[r1].classList[0]+r1+crit);
+						counterfound=true;
+					} 
+				} 
+				if (!counterfound) {
+					currentboard.push(board[b1]);
+				}
+			}
+			nextboard = [];
+			for (c1 in currentboard) {
+				nextboard.push(currentboard[c1]);
+			}
+
+
+			index1=board.length-1;
+			index2=13;
+			movecolour="red";
+			snapshot = [currentboard];
+			rmonsters = [];
+			bmonsters = [];
+
+			
+
+			for (i1=0; i1<28; i1++) {
+				
+				
+				currentboard = snapshot[snapshot.length-1];
+				nextboard = [];
+				for (c1 in currentboard) {
+					nextboard.push(currentboard[c1]);
+				}
+				
+				if (movecolour=="red") {
+					posn = Math.floor(i1/2);
+				} else {
+					posn = 14+Math.floor(i1/2);
+				}
+
+				if (currentboard[posn].includes("counter")) {
+					
+					id1 = currentboard[posn].slice(0,4);
+					counter1 = document.getElementById(id1).children[0];
+					
+					moven = Math.ceil(Math.random()*6);
+					while (moven>0) {
+						
+
+						if (posn<=currentboard.length-2) {
+							nextposn=posn+1;
+						} else if (posn==currentboard.length-1) {
+							nextposn=0;
+						} else {
+							posn=0;
+							nextposn=1;
+						}
+						crit1 = parseInt(currentboard[posn].slice(currentboard[posn].indexOf("(")+1,currentboard[posn].indexOf(")") ));
+
+						if (currentboard[nextposn].includes("counter") || currentboard[nextposn].includes("cnter")) {
+							crit2 = parseInt(currentboard[nextposn].slice(currentboard[nextposn].indexOf("(")+1,currentboard[nextposn].indexOf(")") ));
+							crit1_1 = crit1-moven;
+							crit1_str = "("+crit1+")";
+							crit1_1_str = "("+crit1_1+")";
+							crit2_1 = crit2-moven;
+							crit2_str = "("+crit2+")";
+							crit2_1_str = "("+crit2_1+")";
+							nextboard[posn] = currentboard[posn].replace(crit1_str, crit1_1_str);
+							nextboard[nextposn] = currentboard[nextposn].replace(crit2_str, crit2_1_str);
+							moven=0;
+							snapshot.push(nextboard);
+							currentboard = snapshot[snapshot.length-1];
+							nextboard = [];
+							for (c1 in currentboard) {
+								nextboard.push(currentboard[c1]);
+							}
+						} else {
+							moven--;
+							id1=currentboard[posn].slice(0,4);
+							if (!checkmonster(id1)) {
+								crit1_1 = crit1+1;
+							} else {
+								crit1_1 = crit1;
+							}
+							
+							crit1_str = "("+crit1+")";
+							crit1_1_str = "("+crit1_1+")";
+							
+
+							counter1=currentboard[posn].slice(4).replace("counter","cnter").replace(crit1_str, crit1_1_str);
+							nextboard[posn]=id1;
+							nextboard[nextposn]+=counter1;
+							posn++;
+							snapshot.push(nextboard);
+							currentboard = snapshot[snapshot.length-1];
+							nextboard = [];
+							for (c1 in currentboard) {
+								nextboard.push(currentboard[c1]);
+							}
+
+							if (nextposn==index1 && (currentboard[index1].includes("counter") || currentboard[index1].includes("cnter")) && currentboard[index1].includes("red")) {
+								id1 = currentboard[index1].slice(0,4);
+		
+								r1=currentboard[index1].slice(currentboard[index1].indexOf("ter")+3, currentboard[index1].indexOf("("));
+
+								counter1 = redcounters[r1];
+
+								crit1 = parseInt(currentboard[index1].slice(currentboard[index1].indexOf("(")+1,currentboard[index1].indexOf(")") ));
+
+								if (crit1<=0) {
+
+									nextboard[index1] = id1;
+									rmonsters.push(counter1);
+
+		
+									snapshot.push(nextboard);
+									currentboard = snapshot[snapshot.length-1];
+									nextboard = [];
+									for (c1 in currentboard) {
+										nextboard.push(currentboard[c1]);
+									}
+
+								}
+							
+							}
+							if (nextposn==index2 && (currentboard[index2].includes("counter") || currentboard[index2].includes("cnter")) && currentboard[index2].includes("blue")) {
+								id1 = currentboard[index2].slice(0,4);
+		
+								r1=currentboard[index2].slice(currentboard[index2].indexOf("ter")+3, currentboard[index2].indexOf("("));
+
+								counter1 = redcounters[r1];
+
+								crit1 = parseInt(currentboard[index2].slice(currentboard[index2].indexOf("(")+1,currentboard[index2].indexOf(")") ));
+
+								if (crit1<=0) {
+			
+									nextboard[index2] = id1;
+									bmonsters.push(counter1);
+
+
+									snapshot.push(nextboard);
+									currentboard = snapshot[snapshot.length-1];
+									nextboard = [];
+									for (c1 in currentboard) {
+										nextboard.push(currentboard[c1]);
+									}
+
+								}
+								
+							}
+
+						}
+
+						
+						
+
+					}
+				} 
+				if (movecolour=="red") {
+					movecolour="blue";
+				} else {
+					movecolour="red";
+				}
+
+
+
+			}
+
+			for (s1 in snapshot) {
+				setTimeout(drawboard, 1000*s1, snapshot[s1]);
+			}
+			
+
+			for (m1 in rmonsters) {
+				setTimeout(addmonster, 1000*s1+1000, rmonsters[m1]);
+			}
+			
+			for (m1 in bmonsters) {
+				setTimeout(addmonster, 1000*s1+1000, bmonsters[m1]);
+			}
+
+			function drawboard(boardArr) {
+				//alert(boardArr);
+				for (c1 in boardArr) {
+					
+					id1=boardArr[c1].slice(0,4);
+					r1=-1;
+					if (boardArr[c1].includes("c")) {
+						r1=boardArr[c1].slice(boardArr[c1].indexOf("ter")+3, boardArr[c1].indexOf("("));
+						crit1 = parseInt(boardArr[c1].slice(boardArr[c1].indexOf("(")+1,boardArr[c1].indexOf(")") ));
+						if (crit1=="NaN") {
+							alert(boardArr[c1]);
+							throw "NaN";
+						}
+					}
+					if (r1!=-1) {
+						document.getElementById(id1).appendChild(redcounters[r1]);
+						if (crit1=="NaN") {
+							alert(boardArr[c1]);
+							throw "NaN";
+						}
+						redcounters[r1].innerHTML = crit1;
+						if (redcounters[r1].classList.contains("redcounter")) {
+							updatescore("r");
+						} else {
+							updatescore("b");
+						}
+					} else {
+						document.getElementById(id1).innerHTML="";
+					}
+					
+				}
+				
+			}
+
+			function addmonster(counter1) {
+				if (counter1.classList.contains("redcounter")) {
+					outerpids = ["P_A3", "P_A4", "P_A5", "P_A6", "P_A7", "P_A8", "P_A9", "P_C0", "P_D0", "P_E0", "P_F0", "P_G0", "P_H0","P_I0" ,
+						"P_J8", "P_J7", "P_J6", "P_J5", "P_J4", "P_J3", "P_J2", "P_H1", "P_G1", "P_F1", "P_E1", "P_D1",
+						"P_C1", "P_B1"];
+				} else {
+					outerpids = ["P_J8", "P_J7", "P_J6", "P_J5", "P_J4", "P_J3", "P_J2", "P_H1", "P_G1", "P_F1", "P_E1", "P_D1",
+						"P_C1", "P_B1", "P_A3", "P_A4", "P_A5", "P_A6", "P_A7", "P_A8", "P_A9", "P_C0", "P_D0", "P_E0", "P_F0", "P_G0", "P_H0","P_I0" ];
+				}
+				for (p1 in outerpids) {
+					if (document.getElementById(outerpids[p1]).innerHTML!="🔥") {
+						document.getElementById(outerpids[p1]).innerHTML="🔥";
+						break;
+					}
+				}
+				counter1.remove();
+	
+			}
+
+			function updatescore(r_b) {
+				if (r_b=="r") {
+					rscorecount++;
+					rscore += redscore();
+					avscore = parseInt(rscore/rscorecount);
+					document.getElementById("redscore").innerHTML="Red Score : "+redscore()+" Average : "+avscore;
+				} else {
+					bscorecount++;
+					bscore += bluescore();
+					avscore = parseInt(bscore/bscorecount);
+					document.getElementById("bluescore").innerHTML="Blue Score : "+bluescore()+" Average : "+avscore;
+				}
+				
+				
+			}
+
+		
+
+            // rows = "ABCDEFGHIJ";
+            // cols = "1234567890";
+            // timestart = 0;
+			// r1 = 0;
+
+            // while (r1<redcounters.length) {
+            //     counterexists = true;
+			// 	try {
+			// 		pid1 = redcounters[r1].parentNode.id;
+			// 	}
+			// 	catch {
+			// 		counterexists = false;
+			// 	}
+			// 	if (counterexists) {
+			// 		moven = Math.floor(Math.random()*6);
+			// 		newpids = [move1(redcounters[r1].parentNode.id)];
+			// 		for (n1=0; n1<moven; n1++) {
+			// 			newpids.push(move1(newpids[newpids.length-1]));       
+			// 		}
+
+			// 		for (n2 in newpids) {
+			// 			if (newpids[n2]=="P_B2" && redcounters[r1].classList.contains("redcounter") && parseInt(redcounters[r1].innerHTML<=0)) {
+			// 				redcounters[r1].remove();
+			// 				redcounters[r1]="";
+			// 				document.getElementById("P_B2").innerHTML="";
+			// 				break;
+			// 			} else if (newpids[n2]=="P_I9" && redcounters[r1].classList.contains("bluecounter") && parseInt(redcounters[r1].innerHTML<=0)) {
+			// 				redcounters[r1].remove();
+			// 				redcounters[r1]="";
+			// 				document.getElementById("P_I9").innerHTML="";
+			// 				break;
+			// 			} else if (document.getElementById(newpids[n2]).innerHTML=="") {
+			// 				setTimeout(moveappend, timestart + 1000*parseInt(n2), newpids[n2], redcounters[r1]);
+			// 			} else {
+			// 				setTimeout(collide, timestart + 1000*parseInt(n2), newpids[n2], redcounters[r1], moven-parseInt(n2));
+			// 				break;
+			// 			}
+			// 		}
+			// 	}
+            //     timestart += 500 + 1000*parseInt(n2);
+			// 	r1++;
+			// 	if (r1==redcounters.length) {
+			// 		setTimeout(endmove, timestart + 1000*parseInt(n2));
+			// 	}
+			// }
+            
+
+			function endmove() {
+				if (document.getElementById("P_B2").innerHTML!="") {
+					counter = document.getElementById("P_B2").children[0];
+					if (parseInt(counter.innerHTML)<=0  && counter.classList.contains("redcounter") ) {
+						counter.remove();
+						counter.innerHTML="kill me";
+						document.getElementById("P_B2").innerHTML="";
+					}
+				}
+				if (document.getElementById("P_I9").innerHTML!="") {
+					counter = document.getElementById("P_I9").children[0];
+					if (parseInt(counter.innerHTML)<=0  && counter.classList.contains("bluecounter") ) {
+						counter.remove();
+						counter.innerHTML="kill me";
+						document.getElementById("P_I9").innerHTML="";
+					}
+				}
+			}
+
+            function moveappend(pid, counter) {
+                if (counter.innerHTML!="kill me") {
+					document.getElementById(pid).appendChild(counter);
+					if (pid.charAt(3)=="2" && pid.charAt(2)!="I") {
+						newpid = "P_"+pid.charAt(2)+"1";
+					} else if (pid.charAt(3)=="2" && pid.charAt(2)=="I") {
+						newpid = "P_J2";
+					} else if (pid.charAt(2)=="I" && pid.charAt(3)!="9") {
+						newpid = "P_J"+pid.charAt(3);
+					} else if (pid.charAt(3)=="9" && pid.charAt(2)!="B") {
+						newpid = "P_"+pid.charAt(2)+"0";
+					} else if (pid.charAt(3)=="9" && pid.charAt(2)=="B") {
+						newpid = "P_A9";
+					} else if (pid.charAt(2)=="B" && pid.charAt(3)!="2") {
+						newpid = "P_A"+pid.charAt(3);
+					}
+					if (document.getElementById(newpid).innerHTML!="🔥") {
+						counter.innerHTML = parseInt(counter.innerHTML)+1;
+					}
+					if (pid=="P_B3") {
+						passgo();
+					}
+					if (pid=="P_I9") {
+						passgo();
+					}
+					rscorecount++;
+					rscore += redscore();
+					avscore = parseInt(rscore/rscorecount);
+					document.getElementById("redscore").innerHTML="Red Score : "+redscore()+" Average : "+avscore;
+					bscorecount++;
+					bscore += bluescore();
+					avscore = parseInt(bscore/bscorecount);
+					document.getElementById("bluescore").innerHTML="Blue Score : "+bluescore()+" Average : "+avscore;
+				}
+				endmove();
+
+				
+                
+
+            }
+
+			function collide(frontpid, counter, lostmoves) {
+				frontcrit = parseInt(document.getElementById(frontpid).children[0].innerHTML) ;
+				rearcrit = parseInt(counter.innerHTML);
+				frontcrit-=lostmoves;
+				rearcrit-=lostmoves;
+				document.getElementById(frontpid).children[0].innerHTML = frontcrit;
+				counter.innerHTML = rearcrit;
+			}
+
+            
+
+            function move1(pid) {
+                if (pid.charAt(3)=="2" && pid.charAt(2)!="I") {
+                    newpid = "P_"+rows[rows.indexOf(pid.charAt(2))+1]+"2";
+                } else if (pid.charAt(3)=="2" && pid.charAt(2)=="I") {
+                    newpid = "P_I3";
+                } else if (pid.charAt(2)=="I" && pid.charAt(3)!="9") {
+                    newpid = "P_I"+cols[cols.indexOf(pid.charAt(3))+1];
+                } else if (pid.charAt(3)=="9" && pid.charAt(2)!="B") {
+                    newpid = "P_"+rows[rows.indexOf(pid.charAt(2))-1]+"9";
+                } else if (pid.charAt(3)=="9" && pid.charAt(2)=="B") {
+                    newpid = "P_B8";
+                } else if (pid.charAt(2)=="B" && pid.charAt(3)!="2") {
+                    newpid = "P_B"+cols[cols.indexOf(pid.charAt(3))-1];
+                }
+                return newpid;
+            }
+        }
+
+		function checkformonsters() {
+					
+			
+			redcounters = document.getElementsByClassName("redcounter");
+            bluecounters = document.getElementsByClassName("bluecounter");
+
+
+            for (r1 in redcounters) {
+                counterexists = true;
+				try {
+					pid1 = redcounters[r1].parentNode.id;
+				}
+				catch {
+					counterexists = false;
+				}
+				if (counterexists) {
+					if (parseInt(redcounters[r1].innerHTML)<=0) {
+						makemonster(pid1);
+					}
+				}
+			}
+
+		}
+
+		function redscore() {
+			redcounters1 = document.getElementsByClassName("redcounter");
+			score = 0;
+			for (c1 in redcounters1) {
+				if (c1.length<3) {
+					if (redcounters1[c1].innerHTML=="kill me") {
+						redcounters1[c1].remove();
+					} else {
+						score+=parseInt(redcounters1[c1].innerHTML);
+					}
+					
+				}
+				
+
+			}
+			return score;
+		}
+		function bluescore() {
+			bluecounters1 = document.getElementsByClassName("bluecounter");
+			score = 0;
+			for (c1 in bluecounters1) {
+				if (c1.length<3) {
+					if (bluecounters1[c1].innerHTML=="kill me") {
+						bluecounters1[c1].remove();
+					} else {
+						score+=parseInt(bluecounters1[c1].innerHTML);
+					}
+					
+				}
+				
+
+			}
+			return score;
+		}
+
+		function checkmonster(pid) {
+			//document.getElementById(pid).innerHTML="";
+			if (pid.charAt(3)=="2" && pid.charAt(2)!="I") {
+				newpid = "P_"+pid.charAt(2)+"1";
+			} else if (pid.charAt(3)=="2" && pid.charAt(2)=="I") {
+				newpid = "P_J2";
+			} else if (pid.charAt(2)=="I" && pid.charAt(3)!="9") {
+				newpid = "P_J"+pid.charAt(3);
+			} else if (pid.charAt(3)=="9" && pid.charAt(2)!="B") {
+				newpid = "P_"+pid.charAt(2)+"0";
+			} else if (pid.charAt(3)=="9" && pid.charAt(2)=="B") {
+				newpid = "P_A9";
+			} else if (pid.charAt(2)=="B" && pid.charAt(3)!="2") {
+				newpid = "P_A"+pid.charAt(3);
+			}
+			if (document.getElementById(newpid).innerHTML=="🔥") {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+
+		function passgo() {
+			if(document.getElementById("P_B3").innerHTML!="") {
+				if (parseInt(counter.innerHTML)<=0  && counter.classList.contains("redcounter") ) {
+					elmnt = document.getElementById("P_B3").children[0];
+					elmnt.remove();
+					document.getElementById("P_B3").innerHTML="";
+					outerpids = ["P_A3", "P_A4", "P_A5", "P_A6", "P_A7", "P_A8", "P_A9", "P_C0", "P_D0", "P_E0", "P_F0", "P_G0", "P_H0","P_I0" ,
+						"P_J8", "P_J7", "P_J6", "P_J5", "P_J4", "P_J3", "P_J2", "P_H1", "P_G1", "P_F1", "P_E1", "P_D1",
+						"P_C1", "P_B1"];
+					for (p1 in outerpids) {
+						if (document.getElementById(outerpids[p1]).innerHTML!="🔥") {
+							document.getElementById(outerpids[p1]).innerHTML="🔥";
+							break;
+						}
+					}
+				}
+			}
+			if (document.getElementById("P_I9").innerHTML!="") {
+				if (parseInt(counter.innerHTML)<=0  && counter.classList.contains("bluecounter") ) {
+					elmnt = document.getElementById("P_I9").children[0];
+					elmnt.remove();
+					document.getElementById("P_I9").innerHTML="";
+					outerpids = ["P_J8", "P_J7", "P_J6", "P_J5", "P_J4", "P_J3", "P_J2", "P_H1", "P_G1", "P_F1", "P_E1", "P_D1",
+						"P_C1", "P_B1", "P_A3", "P_A4", "P_A5", "P_A6", "P_A7", "P_A8", "P_A9", "P_C0", "P_D0", "P_E0", "P_F0", "P_G0", "P_H0","P_I0" ];
+					for (p1 in outerpids) {
+						if (document.getElementById(outerpids[p1]).innerHTML!="🔥") {
+							document.getElementById(outerpids[p1]).innerHTML="🔥";
+							break;
+						}
+					}
+				}
+			}
+
+		}
+        
+    </script>
+  </body>
+
+</html>
