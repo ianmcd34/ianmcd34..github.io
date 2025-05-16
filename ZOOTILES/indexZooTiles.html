@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 85px;
+	height: 85px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.inter {
+    border-width: 0px;
+    font-size: 150%;
+    width: 44px;
+	height: 44px;
+    background-color: transparent;
+    color: red;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.container {
+    width: 600px;
+    position:relative;
+    margin: auto;
+}
+table {
+	display: inline-block;
+	margin: auto;
+	border-collapse: collapse;
+    width: 600px;
+    position:relative;
+}
+table.tinter {
+    z-index: 2;
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    pointer-events: none;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul {
+	font-size: 240%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Zoo Tiles</title>
+  </head>
+  <body onload="generate()">
+
+    <div style="display:none;">
+        <img id="monkey"  src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\swampmonkey.jpg">
+        <img id="ostrich" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\ostrich.jpg">
+        <img id="porcupine" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\The-Porcupine.png">
+        <img id="alligator" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\alligator.jpg">
+        <img id="elephant" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\elephant.jpg">
+        <img id="mamba" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\mamba.jpg">
+        <img id="ferret" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\A-Ferret.png">
+        <img id="buffalo" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\The-African-Buffalo.png">
+        <img id="painteddog" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\painteddog.jpg">
+        <img id="lion" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\lion.jpg">
+        <img id="rhinoceros" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\rhinoceros.jpg">
+        <img id="caracal" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\caracal_EXXQhKh.jpg">
+        <img id="zebra" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\zebra.jpg">
+        <img id="tiger" src="C:\Users\ianmc\OneDrive\Pictures\Saved pictures\tiger.jpg">
+    </div>
+    
+    <h1 style="margin: 50px">Zoo Tiles</h1>
+    <h4 id='date'></h4>
+
+    <ul style="float:left;">
+        <li id="player1" class="active">Monkey Player</li>
+        <li id="player2">Ostrich Player</li>
+    </ul>
+
+    <div>
+        <canvas id="directedCanvas" width="900" height="600" onclick="alter(event)"
+        style="border:1px solid #000000; margin-top: 10px; background-color: white;">
+        </canvas>
+    </div>
+
+    <button type="button" onclick="generate()">New Words</button>
+  
+
+ 
+    <script >
+        const canvas = document.getElementById("directedCanvas");
+        const ctx = canvas.getContext("2d");
+        const animalids = ["monkey","ostrich", "porcupine", "alligator", "elephant", "mamba", "ferret", "buffalo", "painteddog" ,
+            "lion", "rhinoceros", "caracal", "zebra", "tiger" ];
+        let id1 = parseInt(Math.random()*animalids.length);
+        let id2 = id1;
+        while(id1==id2) {
+            id2 = parseInt(Math.random()*animalids.length);
+        }
+        
+        document.getElementById("player1").innerHTML = animalids[id1] + " player";
+        document.getElementById("player2").innerHTML = animalids[id2] + " player";
+        
+        const monkeyImage = document.getElementById(animalids[id1]);
+        const ostrichImage = document.getElementById(animalids[id2]);
+        const slice = 5;
+
+        var picmap = [];
+        for (i1=0; i1<slice; i1++) {
+            rowArr=[];
+            for (j1=0; j1<slice; j1++) { 
+                if (Math.random()<0.5) {
+                    animal="monkey";
+                } else {
+                    animal="ostrich";
+                }
+                rowArr.push([animal,false,0,0]);
+            }
+            picmap.push(rowArr);
+        }
+        var playerturn = "monkey";
+        var playerclick = 0;
+        var showntile = "none";
+        var shownrow = 0;
+        var showncol = 0;
+
+        function drawgrid() {
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = "darkgray";
+            ctx.clearRect(0, 0, 900, 600)
+
+            for (i1=1; i1<slice; i1++) {
+                ctx.beginPath();
+                ctx.moveTo(0, i1*600/slice);
+                ctx.lineTo(900, i1*600/slice);
+                ctx.stroke();
+            }
+            for (i1=1; i1<slice; i1++) {
+                ctx.beginPath();
+                ctx.moveTo(i1*900/slice, 0);
+                ctx.lineTo(i1*900/slice, 600);
+                ctx.stroke();
+            }
+
+        }
+        generate();
+
+        
+
+
+        function generate() {
+            drawgrid();
+            image1 = "";
+            for (row1=0; row1<slice; row1++) {
+                for (col1=0; col1<slice; col1++) {
+                    if (picmap[row1][col1][0]=="monkey" && picmap[row1][col1][1]) {
+                        image1 = monkeyImage;
+                    } else if (picmap[row1][col1][0]=="ostrich" && picmap[row1][col1][1]) {
+                        image1 = ostrichImage;
+                    }
+                    if (image1!="") {
+                        ctx.drawImage(image1, col1*image1.width/slice, row1*image1.height/slice, image1.width/slice, image1.height/slice, col1*canvas.width/slice, row1*canvas.height/slice, canvas.width/slice, canvas.height/slice);
+                    }
+                    image1 = "";
+                }
+                image1 = "";
+            }
+        }
+
+
+        function alter(ev) {
+
+            row = Math.floor(ev.offsetY/(600/slice));
+            col = Math.floor(ev.offsetX/(900/slice));;
+
+            playerclick++;
+
+            if (playerclick==1) {
+                if (picmap[row][col][0]!="none" && picmap[row][col][1]) {
+                    pollanimal = pollAnimal();
+                    if (pollanimal!="none") {
+                        picmap[row][col][0]=pollanimal;
+                    } else {
+                        picmap[row][col][1]=false;
+                    }
+                    
+                    playerclick=0;
+                    document.getElementById("player1").classList.toggle("active");
+                    document.getElementById("player2").classList.toggle("active");
+                    generate();
+                    return;
+                } else {
+                    showntile = picmap[row][col][0];
+                    picmap[row][col][1]=true;
+                    shownrow = row;
+                    showncol = col;
+                    generate();
+                    return;
+                }
+            } else {
+                newtile = picmap[row][col][0];
+                if (!picmap[row][col][1]) {
+                    newtile = picmap[row][col][0];
+                    picmap[row][col][1]=true;
+                    playerclick=0;
+                    document.getElementById("player1").classList.toggle("active");
+                    document.getElementById("player2").classList.toggle("active");
+                    generate();
+                    if (newtile!=showntile) {
+                        setTimeout(returnTiles, 1000);
+                    }
+                    return;
+                } else if (row==shownrow && col==showncol) {
+                    pollanimal = pollAnimal();
+ 
+                    if (pollanimal!="none") {
+                        picmap[row][col][0]=pollanimal;
+                    } else {
+                        picmap[row][col][1]=false;
+                    }
+                    playerclick=0;
+                    document.getElementById("player1").classList.toggle("active");
+                    document.getElementById("player2").classList.toggle("active");
+                    generate();
+                    return;
+                } else {
+                    playerclick=0;
+                    document.getElementById("player1").classList.toggle("active");
+                    document.getElementById("player2").classList.toggle("active");
+                    generate();
+                    returnTiles();
+                    return;
+
+                }
+                
+
+            }
+
+            function returnTiles() {
+                picmap[row][col][1]=false;
+                picmap[shownrow][showncol][1]=false;
+                generate();
+            }
+
+            function pollAnimal() {
+                animal=picmap[row][col][0];
+                monkeycount=0;
+                ostrichcount=0;
+                toprow = row-1;
+                bottomrow = row+1;
+                leftcol = col-1;
+                rightcol = col+1;
+                if (toprow>=0 && leftcol>=0) {
+                    if (picmap[toprow][leftcol][1]) {
+                        if (picmap[toprow][leftcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (toprow>=0) {
+                    if (picmap[toprow][col][1]) {
+                        if (picmap[toprow][col][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (toprow>=0 && rightcol<=slice-1) {
+                    if (picmap[toprow][rightcol][1]) {
+                        if (picmap[toprow][rightcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (rightcol<=slice-1) {
+                    if (picmap[row][rightcol][1]) {
+                        if (picmap[row][rightcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (bottomrow<=slice-1 && rightcol<=slice-1) {
+                    if (picmap[bottomrow][rightcol][1]) {
+                        if (picmap[bottomrow][rightcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (bottomrow<=slice-1) {
+                    if (picmap[bottomrow][col][1]) {
+                        if (picmap[bottomrow][col][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (bottomrow<=slice-1 && leftcol>=0) {
+                    if (picmap[bottomrow][leftcol][1]) {
+                        if (picmap[bottomrow][leftcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (leftcol>=0) {
+                    if (picmap[row][leftcol][1]) {
+                        if (picmap[row][leftcol][0]=="monkey") {
+                            monkeycount++;
+                        } else {
+                            ostrichcount++;
+                        }
+                    }
+                }
+                if (monkeycount>ostrichcount) {
+                    if (animal=="monkey") {
+                        return "monkey";
+                    } else if (picmap[row][col][2]>=picmap[row][col][3]) {
+                        picmap[row][col][2]=0;
+                        picmap[row][col][3]++;
+                        return "monkey";
+                    } else {
+                        picmap[row][col][2]++;
+                        return animal;
+                    }
+                    
+                } else if (monkeycount<ostrichcount) {
+                    if (animal=="ostrich") {
+                        return "ostrich";
+                    } else if (picmap[row][col][2]>=picmap[row][col][3]) {
+                        picmap[row][col][2]=0;
+                        picmap[row][col][3]++;
+                        return "ostrich";
+                    } else {
+                        picmap[row][col][2]++;
+                        return animal;
+                    }
+                } else if (monkeycount==0 &&  ostrichcount==0) {
+                    return "none";
+                } else {
+                    if (document.getElementById("player1").classList.contains("active")) {
+                        if (animal=="monkey") {
+                            return "monkey";
+                        } else if (picmap[row][col][2]>=picmap[row][col][3]) {
+                            picmap[row][col][2]=0;
+                            picmap[row][col][3]++;
+                            return "monkey";
+                        } else {
+                            picmap[row][col][2]++;
+                            return animal;
+                        }
+                    } else {
+                        if (animal=="ostrich") {
+                            return "ostrich";
+                        } else if (picmap[row][col][2]>=picmap[row][col][3]) {
+                            picmap[row][col][2]=0;
+                            picmap[row][col][3]++;
+                            return "ostrich";
+                        } else {
+                            picmap[row][col][2]++;
+                            return animal;
+                        }
+                    }
+                }
+                
+
+            }
+        }
+
+
+    
+    
+    </script>
+  </body>
+
+</html>
