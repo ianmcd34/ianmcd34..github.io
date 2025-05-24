@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	float: right;
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 250px;
+	margin-bottom: 0%;
+}
+td {
+	width: 5px;
+	height: 5px;
+	font-size: 0%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 1px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+    width: 50%;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 20%;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Weathering</title>
+  </head>
+  <body onload="setup()">
+    <h1>Weathering</h1>
+    <h4 id='date'></h4>
+    
+
+    <table id="table1">
+
+    </table>
+
+    <button type="button" onclick="winter()">Winter</button>
+
+    </ul>
+
+
+
+    <script >
+
+		const colours = ["red", "green", "yellow", "blue", "cyan"];
+		var colourindex = -1;
+
+		function minmax(ev) {
+            rows = "ABCDEFGHIJ";
+            tileval = parseFloat(ev.target.innerHTML);
+
+			//row = ev.target.id.charAt(2);
+			//col = parseInt(ev.target.id.charAt(3));
+			
+
+			if (ev.target.style.backgroundColor!="") {
+				colourindex = colours.indexOf(ev.target.style.backgroundColor);
+                tiles = document.getElementsByClassName("plyer");
+                colouredin = true;
+                do {
+                    
+                    colouredin = false;
+
+                    for (t1 in tiles) {
+                        t1 = parseInt(t1);
+
+						if (t1!=NaN) {
+
+						
+								if (tiles[t1].style.backgroundColor=="") {
+									if (t1-100>=0 && tiles[t1-100].style.backgroundColor==colours[colourindex]) {
+										if (parseFloat(tiles[t1].innerHTML)<parseFloat(tiles[t1-100].innerHTML)) {
+											tiles[t1].style.backgroundColor=colours[colourindex];
+											colouredin = true;
+										}
+									}
+									if (t1>0 && t1%100!=0 && tiles[t1-1].style.backgroundColor==colours[colourindex]) {
+										if (parseFloat(tiles[t1].innerHTML)<parseFloat(tiles[t1-1].innerHTML)) {
+											tiles[t1].style.backgroundColor=colours[colourindex];
+											colouredin = true;
+										}
+									}
+									if (t1<999 && t1%100!=99 && tiles[t1+1].style.backgroundColor==colours[colourindex]) {
+										if (parseFloat(tiles[t1].innerHTML)<parseFloat(tiles[t1+1].innerHTML)) {
+											tiles[t1].style.backgroundColor=colours[colourindex];
+											colouredin = true;
+										}
+									}
+								}
+							}
+
+					}
+                } while (colouredin);
+                return true;
+                
+
+			} else {
+                return false;
+            }
+            
+			
+
+
+            
+        }
+
+        function setup() {
+
+			table1 = document.getElementById("table1");
+			for (j1=0; j1<100; j1++) {
+
+				row1 = document.createElement("tr");
+				for (i1=0; i1<100; i1++) {
+					td1 = document.createElement("td");
+					td1.classList.add("plyer");
+					td1.addEventListener("click", function(){ minmax(event); });
+					row1.appendChild(td1);
+				}
+				table1.appendChild(row1);
+			}
+
+
+            tiles = document.getElementsByClassName("plyer");
+
+            for (t1 in tiles) {
+                tiles[t1].innerHTML = Math.trunc(Math.random()*1000)/1000;
+            }
+
+			foundhightile = true;
+			while(foundhightile && colourindex<5) {
+
+				
+				maxval = 0;
+				hightileindex = -1;
+				colourindex++;
+
+				for (t1 in tiles) {
+					if (t1<100 && tiles[t1].style.backgroundColor=="") {
+						maxvalnew = Math.max(maxval, parseFloat(tiles[t1].innerHTML));
+						if (maxvalnew>maxval) {
+							hightileindex=t1;
+							maxval=maxvalnew;
+						}
+					}
+				}
+				if (hightileindex>-1) {
+					currentval = maxval;
+					tiles[hightileindex].style.backgroundColor = colours[colourindex];
+					diff = -1;
+
+					while (parseInt(hightileindex)+diff>=0 && parseFloat(tiles[parseInt(hightileindex)+diff].innerHTML)<currentval && tiles[parseInt(hightileindex)+diff].style.backgroundColor=="") {
+						tiles[parseInt(hightileindex)+diff].style.backgroundColor = colours[colourindex];
+						currentval = parseFloat(tiles[parseInt(hightileindex)+diff].innerHTML);
+						diff--;
+					}
+					diff  = 1;
+					currentval = maxval;
+					while (parseInt(hightileindex)+diff<=99  && parseFloat(tiles[parseInt(hightileindex)+diff].innerHTML)<currentval && tiles[parseInt(hightileindex)+diff].style.backgroundColor=="") {
+						tiles[parseInt(hightileindex)+diff].style.backgroundColor = colours[colourindex];
+						currentval = parseFloat(tiles[parseInt(hightileindex)+diff].innerHTML);
+						diff++;
+					}
+				} else {
+					foundhightile = false;
+				}
+				//foundhightile = false;
+				//alert(foundhightile);
+			}
+
+        }
+
+
+		function winter() {
+			document.body.style.backgroundColor = "lightSkyBlue";
+			tiles = document.getElementsByClassName("plyer");
+
+            for (t1 in tiles) {
+                tiles[t1].innerHTML = Math.trunc(Math.random()*1000-Math.floor(t1/100)*370)/1000;
+            }
+
+			setTimeout(myTimer, 1000);
+
+			function myTimer() {
+				document.body.style.backgroundColor = "";
+			}
+
+		}
+
+        
+        
+    </script>
+  </body>
+
+</html>
