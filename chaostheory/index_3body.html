@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+
+
+    </style>
+    <title>Kepler's Orbit</title>
+  </head>
+  <body onload="onLoad()">
+
+    <h1>KEPLER'S ORBIT</h1>
+    <h4 id='date'></h4>
+    <img id="planet" src="planet.jpg" alt="The Planet" style="display:none">
+    <img id="sun" src="sun.jpg" alt="The Sun" style="display:none">
+    
+    <img id="moon" src="moon.jpg" alt="The Moon" style="display:none">
+    <form>
+        <label for="vel">Intial Speed:</label>
+        <input type="range" id="vel" name="vel" min="-1" max="1" step="0.1">
+        <label for="kval">Strength of Gravity:</label>
+        <input type="range" id="kval" name="kval" min="-1" max="1" step="0.1">
+        <button type="button" onclick="animateorbit()">Click Me!</button>
+    </form>
+    <div>
+        <canvas id="myCanvas" width="1200" height="700" style="border:1px solid #000000; background-color: white;">
+        </canvas>
+    </div>
+    
+    
+    <script >
+    
+    var xpos=[900,500,200];
+    var ypos=[330,270,330];
+    var xvel=[0,0,0];
+    var yvel=[1,0,-1];
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var planet = document.getElementById("planet");
+    var sun = document.getElementById("sun");
+    var moon = document.getElementById("moon");
+
+    var body = planet;
+    var dist=300;
+    var k=[700, 100, 700];
+    var sumk = k[0]+k[1]+k[2];
+    var centre_of_gravity = [(xpos[0]*(sumk-k[0])/sumk)/3+(xpos[1]*(sumk-k[1])/sumk)/3+(xpos[2]*(sumk-k[2])/sumk)/3,(ypos[0]*(sumk-k[0])/sumk)/3+(ypos[1]*(sumk-k[1])/sumk)/3+(ypos[2]*(sumk-k[2])/sumk)/3];
+ 
+    function onLoad() {
+        
+        ctx.drawImage(planet, xpos[0], ypos[0]);
+        ctx.drawImage(sun, xpos[1], ypos[1]);
+        ctx.drawImage(moon, xpos[2], ypos[2]);
+
+    }
+    function move() {
+
+        if (body==planet) {
+            thisbody = 0;
+            otherbodies = [1,2];
+        } else if (body==sun) {
+            thisbody = 1;
+            otherbodies = [0,2];
+        } else if (body==moon) {
+            thisbody = 2;
+            otherbodies = [0,1];
+        }
+        
+
+        for (b1 in otherbodies) {
+            // alert(xvel[thisbody]);
+            // alert(yvel[thisbody]);
+            dist=Math.sqrt((xpos[thisbody]-xpos[otherbodies[b1]])**2+(ypos[thisbody]-ypos[otherbodies[b1]])**2);
+            direction = [(xpos[otherbodies[b1]]-xpos[thisbody])/dist, (ypos[otherbodies[b1]]-ypos[thisbody])/dist];
+            force=k[thisbody]/(dist**2);
+
+            xvel[thisbody] = xvel[thisbody]+force*direction[0];
+            yvel[thisbody] = yvel[thisbody]+force*direction[1];
+
+
+            xpos[thisbody]+=xvel[thisbody];
+            ypos[thisbody]+=yvel[thisbody];
+        }
+        COG = [(xpos[0]*(sumk-k[0])/sumk)/3+(xpos[1]*(sumk-k[1])/sumk)/3+(xpos[2]*(sumk-k[2])/sumk)/3,(ypos[0]*(sumk-k[0])/sumk)/3+(ypos[1]*(sumk-k[1])/sumk)/3+(ypos[2]*(sumk-k[2])/sumk)/3];
+        DCOG = [centre_of_gravity[0]-COG[0], centre_of_gravity[1]-COG[1]];
+        ctx.translate(DCOG[0], DCOG[1]);
+
+        centre_of_gravity = [COG[0],COG[1]];
+
+        
+
+        
+
+        ctx.drawImage(body, xpos[thisbody], ypos[thisbody]);
+
+        
+
+        if (body==planet) {
+            body = sun;
+        } else if (body==sun) {
+            body = moon;
+        } else if (body==moon) {
+            body = planet;
+        }
+
+    }
+
+    function animateorbit() {
+        //yvel[0]=parseFloat(document.getElementById("vel").value)*2;
+        dk=parseFloat(document.getElementById("kval").value)*10;
+        k[0]-=dk;
+        k[2]+=dk;
+
+        let id = null;
+        clearInterval(id);
+        id = setInterval(move, 20);
+    }
+
+    </script>
+  </body>
+
+</html>
