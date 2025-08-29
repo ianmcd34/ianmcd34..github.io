@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+    
+    <style>
+body {
+	background-color: CornflowerBlue;
+}
+.box {
+	display: inline-block;
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 20px;
+	padding: 20px;
+	border-width: 2px;
+}
+.nobox {
+    line-height: 200%;
+    font-size: 80px;
+    font-weight: 900;
+}
+.center {
+  display: inline-block;
+  margin: auto;
+  width: 10%;
+  padding: 10px;
+  vertical-align: middle;
+}
+.fline {
+  display: inline-block;
+  height: 10px;
+  width: 110px;
+  color: Lime;
+  background-color: Black;
+
+}
+    </style>
+    <title>Fractions</title>
+  </head>
+  <body onload="setup()">
+    <h1>Practice Fractions</h1>
+    <h4 id='date'></h4>
+<h2 style="text-align: right; margin: 40px;" id="timer">80:00</h2>
+<table class="center">
+    <tr>
+
+        <td><span id="a" class="box" >0</span></td>
+
+    </tr>
+
+    <tr>
+        <td> <span class="fline"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><span id="b" class="box" >0</span></td>
+    </tr>
+
+</table >
+
+
+<p class="center"><span id="a" class="box" >+</span></p>
+
+
+
+<table  class="center">
+    <tr>
+
+        <td><span id="c" class="box" >0</span></td>
+
+    </tr>
+
+    <tr>
+        <td> <span class="fline"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><span id="d" class="box" >0</span></td>
+    </tr>
+
+</table>
+
+<p class="center"><span class="box" >=</span></p>
+
+<table  class="center">
+    <tr>
+
+        <td><span id="w" class="box" ></span></td>
+        <td><span class="box" >+</span></td>
+        <td><span id="x" class="box" ></span></td>
+    </tr>
+
+    <tr>
+
+        <td colspan="3"> <span class="fline"  style="width: 400px;"></span></td>
+
+
+    </tr>
+
+    <tr>
+        <td></td>
+        <td><span id="y" class="box" ><input type="text" size=1 style="font-size: 25px;" id="iny" onchange="answer(event)"  ></input></span></td>
+        <td></td>
+    </tr>
+
+</table>
+
+<p></p>
+
+<p class="center" ><span class="box" >=</span></p>
+
+<table  class="center" >
+    <tr>
+
+        <td><span id="e" class="box" ></span></td>
+
+    </tr>
+
+    <tr>
+        <td> <span class="fline"></span></td>
+
+    </tr>
+
+    <tr>
+        <td><span id="f" class="box" ></span></td>
+    </tr>
+
+</table>
+
+
+
+    <script >
+
+window.setInterval(timerTick, 1000);
+
+function answer(e) {
+    a = parseInt(document.getElementById("a").innerHTML);
+    b = parseInt(document.getElementById("b").innerHTML);
+    c = parseInt(document.getElementById("c").innerHTML);
+    d = parseInt(document.getElementById("d").innerHTML);
+    y = parseInt(document.getElementById("y").innerHTML);
+    w = parseInt(document.getElementById("w").innerHTML);
+    x = parseInt(document.getElementById("x").innerHTML);
+
+    if (e.target.id=="iny") {
+        if (document.getElementById("iny").value == lcm(b,d)) {
+            e.target.style.visibility="hidden";
+            document.getElementById("y").innerHTML=e.target.value;
+            newin=document.createElement("input");
+			newbox=document.getElementById("w");
+			newin.type="text";
+			newin.style="font-size: 25px;"
+			newin.id="inw";
+			newin.size=1;
+			newin.addEventListener("change", function() {answer(event);});
+			newbox.appendChild(newin);
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("iny").value = "";
+        }
+    }
+    if (e.target.id=="inw") {
+        if (y>0 && document.getElementById("inw").value==a*y/b){
+            e.target.style.visibility="hidden";
+            document.getElementById("w").innerHTML=e.target.value;
+            newin=document.createElement("input");
+			newbox=document.getElementById("x");
+			newin.type="text";
+			newin.style="font-size: 25px;"
+			newin.id="inx";
+			newin.size=1;
+			newin.addEventListener("change", function() {answer(event);});
+			newbox.appendChild(newin);
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("inw").value = "";
+        }
+    }
+    if (e.target.id=="inx") {
+        if (y>0 && document.getElementById("inx").value==c*y/d){
+            e.target.style.visibility="hidden";
+            document.getElementById("x").innerHTML=e.target.value;
+            document.getElementById("f").innerHTML=y;
+            newin=document.createElement("input");
+			newbox=document.getElementById("e");
+			newin.type="text";
+			newin.style="font-size: 25px;"
+			newin.id="ine";
+			newin.size=1;
+			newin.addEventListener("change", function() {answer(event);});
+			newbox.appendChild(newin);
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("inx").value = "";
+        }
+
+    }
+    if (e.target.id=="ine") {
+        if (document.getElementById("ine").value==w+x) {
+            e.target.style.visibility="hidden";
+            document.getElementById("e").innerHTML=e.target.value;
+
+            if (gcd(parseInt(document.getElementById("e").innerHTML),parseInt(document.getElementById("f").innerHTML))>1) {
+                newp=document.createElement("p");
+                document.body.appendChild(newp);
+                newp=document.createElement("p");
+                newp.classList.add("center");
+                newbox=document.createElement("span");
+
+			    newbox.classList.add("box");
+                newbox.innerHTML="=";
+                newp.appendChild(newbox);
+                document.body.appendChild(newp);
+                newt=document.createElement("table");
+                newt.classList.add("center");
+                newtr=document.createElement("tr");
+                newtd=document.createElement("td");
+                newbox=document.createElement("span");
+                
+                newbox.classList.add("box");
+                newbox.id="l";
+                
+                newtd.appendChild(newbox);
+                newtr.appendChild(newtd);
+                newt.appendChild(newtr);
+                document.body.appendChild(newt);
+                newtr=document.createElement("tr");
+                newtd=document.createElement("td");
+                newbox=document.createElement("span");
+
+                newbox.classList.add("fline");
+                newtd.appendChild(newbox);
+                newtr.appendChild(newtd);
+                newt.appendChild(newtr);
+
+                newtr=document.createElement("tr");
+                newtd=document.createElement("td");
+                newbox=document.createElement("span");
+                
+                newbox.classList.add("box");
+                newbox.id="m";
+                
+                newtd.appendChild(newbox);
+                newtr.appendChild(newtd);
+                newt.appendChild(newtr);
+
+                newin=document.createElement("input");
+                newin.type="text";
+                newin.style="font-size: 25px;"
+                newin.id="inm";
+                newin.size=1;
+                newin.addEventListener("change", function() {answer(event);});
+                newbox.appendChild(newin);
+
+            } else {
+                alert("Well done!");
+            }
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("ine").value = "";
+        }
+
+    }
+    if (e.target.id=="inm") {
+        eno = parseInt(document.getElementById("e").innerHTML);
+        f = parseInt(document.getElementById("f").innerHTML);
+        if (document.getElementById("inm").value==f/gcd(eno,f)){
+            e.target.style.visibility="hidden";
+            document.getElementById("m").innerHTML=f/gcd(eno,f);
+
+            newin=document.createElement("input");
+			newbox=document.getElementById("l");
+			newin.type="text";
+			newin.style="font-size: 25px;"
+			newin.id="inl";
+			newin.size=1;
+			newin.addEventListener("change", function() {answer(event);});
+			newbox.appendChild(newin);
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("inm").value = "";
+        }
+
+    }
+
+    if (e.target.id=="inl") {
+        eno = parseInt(document.getElementById("e").innerHTML);
+        f = parseInt(document.getElementById("f").innerHTML);
+
+        if (document.getElementById("inl").value==eno/gcd(eno,f)){
+            e.target.style.visibility="hidden";
+            document.getElementById("l").innerHTML=eno/gcd(eno,f);
+            alert("Well done!");
+        } else {
+            alert("Sorry, try again.");
+            document.getElementById("inl").value = "";
+        }
+
+    }
+    
+	
+}
+
+function lcm(x,y) {
+    
+    return x*y/gcd(x,y);
+}
+
+function gcd(x,y) {
+    if (x>y) {
+        bigno=x;
+        smallno=y;
+    } else {
+        bigno=y;
+        smallno=x;
+    }
+    result=1;
+    for (n=2; n<=smallno; n++) {
+        if (bigno%n==0 && smallno%n==0) {
+            result=n;
+        }
+    }
+    return result;
+}
+
+
+function setup() {
+    denominators = [2,3,4,5,6,7,8,9,10,12,14,15,16];
+
+    numerators = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+
+    b =  denominators[Math.floor(Math.random()*denominators.length)];
+
+    a=b+1;
+    while (a>=b) {
+        a =  numerators[Math.floor(Math.random()*numerators.length)];
+    }
+
+    while(gcd(a,b)!=1) {
+        tempa=a/gcd(a,b);
+        tempb=b/gcd(a,b);
+        a=tempa;
+        b=tempb;
+    }
+
+    document.getElementById("b").innerHTML = b;
+    document.getElementById("a").innerHTML = a;
+
+
+    d =  denominators[Math.floor(Math.random()*denominators.length)];
+
+    c=d+1;
+    while (c>=d) {
+        c =  numerators[Math.floor(Math.random()*numerators.length)];
+    }
+
+    while(gcd(c,d)!=1) {
+        tempc=c/gcd(c,d);
+        tempd=d/gcd(c,d);
+        c=tempc;
+        d=tempd;
+    }
+
+    document.getElementById("d").innerHTML = d;
+    document.getElementById("c").innerHTML = c;
+
+
+}
+
+function timerTick() {
+	timer=document.getElementById("timer");
+	
+	count=parseInt(timer.innerHTML.substr(0,2))-1;
+	if (count==0) {
+		lose();
+	}
+	if (count<10) {
+		count="0"+count;
+	}
+	
+	timer.innerHTML=count+":00";
+
+}
+
+    </script>
+  </body>
+
+</html>
