@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+    position: relative;
+    /* z-index: -1; */
+	width: 55px;
+	height: 55px;
+	font-size: 240%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: limegreen;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+    position: absolute;
+    left: 10%;
+    /* z-index: -1; */
+	display: inline-block;
+	margin: 100px;
+	border-collapse: collapse;
+    width: 65%;
+    height: 35%;
+}
+div.tableback {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    border: 10px;
+    width: 60%;
+    height: 800px;
+}
+img {
+    position: relative;
+    width: 100%;
+    height:  100%;
+    z-index: 2;
+    pointer-events: none;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 20%;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+
+  </style>
+    
+    <title>Swamp</title>
+  </head>
+  <body onload="setup()">
+    <h1>Swamp</h1>
+    <h4 id='date'></h4>
+    
+    <div class="tableback">
+        <img src="result.png" alt="monkey border">
+        <table>
+        <tr>
+                <td class="plyer" id="P_A1" onclick="minmax(event)"></td>
+                <td class="plyer" id="P_A2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_A3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_A4"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_A5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_A6" onclick="minmax(event)"></td>
+            <td class="plyer" id="P_A7"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_A8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_A9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_A0"  onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_B1" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_B2" onclick="minmax(event)"  ></td>
+                <td class="plyer" id="P_B3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_B4"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_B5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_B6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_B7"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_B8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_B9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_B0"  onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_C1"  onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_C2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_C3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_C4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_C5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_C6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_C7"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_C8"  onclick="minmax(event)"></td>
+            <td class="plyer" id="P_C9"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_C0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_D1" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_D2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_D3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_D4"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_D5"  onclick="minmax(event)"></td>
+                <td class="plyer"id="P_D6"  onclick="minmax(event)"></td>
+            <td class="plyer" id="P_D7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_D8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_D9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_D0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_E1"  onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_E2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_E3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_E4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_E5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_E6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_E7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_E8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_E9"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_E0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_F1" onclick="minmax(event)" ></td>
+                <td class="plyer"id="P_F2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_F3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_F4"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_F5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_F6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_F7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_F8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_F9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_F0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_G1"  onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_G2"  onclick="minmax(event)"></td>
+                <td class="plyer" id="P_G3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_G4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_G5" onclick="minmax(event)"  ></td>
+                <td class="plyer" id="P_G6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_G7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_G8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_G9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_G0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_H1" onclick="minmax(event)"  ></td>
+                <td class="plyer" id="P_H2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_H3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_H4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_H5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_H6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_H7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_H8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_H9"  onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_H0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_I1" onclick="minmax(event)"  ></td>
+                <td class="plyer" id="P_I2" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_I3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_I4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_I5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_I6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_I7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_I8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_I9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_I0" onclick="minmax(event)" ></td>
+        </tr>
+        <tr>
+                <td class="plyer" id="P_J1"  onclick="minmax(event)"  ></td>
+                <td class="plyer" id="P_J2"  onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_J3" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_J4" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_J5" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_J6" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_J7" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_J8" onclick="minmax(event)" ></td>
+            <td class="plyer" id="P_J9" onclick="minmax(event)" ></td>
+                <td class="plyer" id="P_J0" onclick="minmax(event)" ></td>
+        </tr>
+        </table>    
+    </div>
+
+
+
+    </ul>
+
+
+
+    <script >
+        const letters = ["A","B","C","D","E","F","G","H","I","J"];
+        const digits = ["1","2","3","4","5","6","7","8","9","0"];
+        const directions = ["right","up","down","left"];
+
+		croc1 = [];
+        croc2 = [];
+        frog = "P_J1";
+        var tick1 , tick2 , tick3;
+
+        document.getElementById("P_A0").style.backgroundColor="green";
+        document.getElementById("P_J1").style.backgroundColor="green";
+        document.getElementById("P_J1").innerHTML="🐸";
+
+        function newcroc() {
+            croc1 = [];
+            x1 = Math.floor(Math.random() * 10);
+            y1 = Math.floor(Math.random() * 10);
+            d1 = Math.floor(Math.random() * 4);
+
+            tailid = "P_"+letters[x1]+digits[y1];
+            direction1 = directions[d1];
+            croc1.push(direction1);
+
+            croc1.push(tailid);
+
+            for (n1=1;n1<5;n1++) {
+                nextid = nextId(tailid, direction1);
+                croc1.push(nextid[0]);
+                tailid = nextid[0];
+                direction1 = nextid[1];
+                croc1[0]=direction1;
+            }
+
+        }
+
+        function newcroc2() {
+            croc2 = [];
+            x1 = Math.floor(Math.random() * 10);
+            y1 = Math.floor(Math.random() * 10);
+            d1 = Math.floor(Math.random() * 4);
+
+            tailid = "P_"+letters[x1]+digits[y1];
+            direction1 = directions[d1];
+            croc2.push(direction1);
+
+            croc2.push(tailid);
+
+            for (n1=1;n1<5;n1++) {
+                nextid = nextId(tailid, direction1);
+                croc2.push(nextid[0]);
+                tailid = nextid[0];
+                direction1 = nextid[1];
+                croc2[0]=direction1;
+            }
+
+        }
+
+        function setup() {
+
+            x1 = Math.floor(Math.random() * 10);
+            y1 = Math.floor(Math.random() * 10);
+            d1 = Math.floor(Math.random() * 4);
+
+            tailid = "P_"+letters[x1]+digits[y1];
+            direction1 = directions[d1];
+            croc1.push(direction1);
+
+            if (direction1=="right") {
+                direction2="left";
+                if (y1>2) {
+                    tailid2="P_"+letters[x1]+digits[y1-2];
+                } else {
+                    tailid2="P_"+letters[x1]+"0";
+                }
+            } else if (direction1=="left") {
+                direction2="right";
+                if (y1<8) {
+                    tailid2="P_"+letters[x1]+digits[y1+2];
+                } else {
+                    tailid2="P_"+letters[x1]+"1";
+                }
+            } else if (direction1=="up") {
+                direction2="down";
+                if (x1<8) {
+                    tailid2="P_"+letters[x1+2]+digits[y1];
+                } else {
+                    tailid2="P_"+"A"+digits[y1];
+                }
+            } else if (direction1=="down") {
+                direction2="up";
+                if (x1>2) {
+                    tailid2="P_"+letters[x1-2]+digits[y1];
+                } else {
+                    tailid2="P_"+"J"+digits[y1];
+                }
+            }
+
+            croc2.push(direction2);
+
+            document.getElementById(tailid).style.backgroundColor = "Brown";
+            croc1.push(tailid);
+            document.getElementById(tailid2).style.backgroundColor = "Brown";
+            croc2.push(tailid2);
+
+            for (n1=1;n1<5;n1++) {
+                nextid = nextId(tailid, direction1);
+                croc1.push(nextid[0]);
+                tailid = nextid[0];
+                direction1 = nextid[1];
+                croc2[0]=direction2;
+                nextid = nextId(tailid2, direction2);
+                croc2.push(nextid[0]);
+                tailid2 = nextid[0];
+                direction2 = nextid[1];
+                croc2[0]=direction2;
+            }
+
+            drawcroc();
+
+            tick1=setInterval(nextstep, 1000);
+            tick2=setInterval(nextstep2, 1300);
+
+            tick3=setInterval(hasDied, 3000);
+
+
+        }
+
+        function hasDied() {
+
+            finis=false;
+            if (frog=="P_A0") {
+                alert("you won!");
+                finis= true;
+            } else if (document.getElementById(frog).style.backgroundColor!="brown"  && document.getElementById(frog).style.backgroundColor!="green") {
+                alert("you lost...");
+                finis= true;
+            } 
+            if (finis) {
+                clearTimeout(tick1);
+                clearTimeout(tick2);
+                clearTimeout(tick3);
+            }
+        }
+
+        function drawcroc() {
+            document.getElementById("P_A0").style.backgroundColor="green";
+            document.getElementById("P_J1").style.backgroundColor="green";
+            subcount=0;
+            subcount2=0;
+            for (c1 in croc1) {
+                if (c1>0) {
+                    if (croc1[c1]!="sub")  {
+                        document.getElementById(croc1[c1]).style.backgroundColor = "Brown";
+                        if (c1==5) {
+                            document.getElementById(croc1[c1]).innerHTML="👀";
+                        } else {
+                            document.getElementById(croc1[c1]).innerHTML="";
+                        }
+                        
+                    }  else {
+                        subcount++;
+                    }
+                    if (croc2[c1]!="sub")  {
+                        document.getElementById(croc2[c1]).style.backgroundColor = "Brown";
+                        if (c1==5) {
+                            document.getElementById(croc2[c1]).innerHTML="👀";
+                        } else {
+                            document.getElementById(croc2[c1]).innerHTML="";
+                        }
+                    }  else {
+                        subcount2++;
+                    }
+                }
+            }
+            document.getElementById(frog).innerHTML="🐸";
+            if (subcount==croc1.length-1) {
+                newcroc();
+            }
+            if (subcount2==croc2.length-1) {
+                newcroc2();
+            }
+        }
+
+
+
+
+
+        function nextstep() {
+
+            frogonboard = croc1.indexOf(frog);
+            direction1=croc1[0];
+
+            if (Math.random()<0.1) {
+                if (direction1=="right") {
+                    direction1 = "up";
+                } else if (direction1=="up") {
+                    direction1 = "left";
+                } else if (direction1=="left") {
+                    direction1 = "down";
+                } else if (direction1=="down") {
+                    direction1 = "right";
+                }
+            }
+            headid=croc1[croc1.length-1];
+
+            if (headid!="sub")  {
+                nextid = nextId(headid, direction1);
+                
+                if (document.getElementById(nextid[0]).style.backgroundColor=="brown") {
+                    nextid = ["sub", direction1];
+                }
+            } else {
+                nextid = ["sub", direction1];
+            }
+
+
+
+            if (croc1[1]!="sub") {
+                try {
+                    document.getElementById(croc1[1]).style.backgroundColor = "Limegreen";
+                    document.getElementById(croc1[1]).innerHTML="";
+                }
+                catch(err) {
+                    alert(croc1[1]);
+                }
+                
+            }
+            
+
+            croc1.splice(1,1);
+
+            croc1.push(nextid[0]);
+            croc1[0]=nextid[1];
+
+            if (frogonboard>-1 && croc1[frogonboard]!="sub") {
+                frog = croc1[frogonboard];
+            }
+
+            drawcroc();
+            
+        }
+
+        function nextstep2() {
+            frogonboard = croc2.indexOf(frog);
+            
+            direction1=croc2[0];
+            if (Math.random()<0.1) {
+                if (direction1=="right") {
+                    direction1 = "up";
+                } else if (direction1=="up") {
+                    direction1 = "left";
+                } else if (direction1=="left") {
+                    direction1 = "down";
+                } else if (direction1=="down") {
+                    direction1 = "right";
+                }
+            }
+            headid=croc2[croc2.length-1];
+
+            if (headid!="sub")  {
+                nextid = nextId(headid, direction1);
+                
+                if (document.getElementById(nextid[0]).style.backgroundColor=="brown") {
+                    nextid = ["sub", direction1];
+                }
+            } else {
+                nextid = ["sub", direction1];
+            }
+
+
+
+            if (croc2[1]!="sub") {
+                try {
+                    document.getElementById(croc2[1]).style.backgroundColor = "Limegreen";
+                    document.getElementById(croc2[1]).innerHTML="";
+                }
+                catch(err) {
+                    alert(croc2[1]);
+                }
+                
+            }
+            
+
+            croc2.splice(1,1);
+
+            croc2.push(nextid[0]);
+            croc2[0]=nextid[1];
+
+            if (frogonboard>-1 && croc2[frogonboard]!="sub") {
+                frog = croc2[frogonboard];
+            }
+
+            drawcroc();
+            
+        }
+
+        function nextId(id1, direction1) {
+            x1 = id1.charAt(2);
+            y1 = id1.charAt(3);
+            direction2=direction1;
+
+            if (direction1=="right") {
+                if (y1=="0") {
+                    if (Math.random()<0.5 && x1!="A") {
+                        direction2="up";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)-1];
+                    } else if (x1!="J") {
+                        direction2="down";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)+1];
+                    } else {
+                        direction2="up";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)-1];
+                    }
+                } else {
+                    y2 = digits[digits.indexOf(y1)+1];
+                    x2 = x1;
+                }
+            }
+            if (direction1=="left") {
+                if (y1=="1") {
+                    if (Math.random()<0.5 && x1!="A") {
+                        direction2="up";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)-1];
+                    } else if (x1!="J") {
+                        direction2="down";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)+1];
+                    } else {
+                        direction2="up";
+                        y2 = y1;
+                        x2 = letters[letters.indexOf(x1)-1];
+                    }
+                } else {
+                    y2 = digits[digits.indexOf(y1)-1];
+                    x2 = x1;
+                }
+            }
+            if (direction1=="up") {
+                if (x1=="A") {
+                    if (Math.random()<0.5 && y1!="1") {
+                        direction2="left";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)-1];
+                    } else if (y1!="0") {
+                        direction2="right";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)+1];
+                    } else {
+                        direction2="left";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)-1];
+                    }
+                } else {
+                    x2 = letters[letters.indexOf(x1)-1];
+                    y2 = y1;
+                }
+            }
+            if (direction1=="down") {
+                if (x1=="J") {
+                    if (Math.random()<0.5 && y1!="1") {
+                        direction2="left";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)-1];
+                    } else if (y1!="0") {
+                        direction2="right";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)+1];
+                    } else {
+                        direction2="left";
+                        x2 = x1;
+                        y2 = digits[digits.indexOf(y1)-1];
+                    }
+                } else {
+                    x2 = letters[letters.indexOf(x1)+1];
+                    y2 = y1;
+                }
+            }
+            id = "P_"+x2+y2;
+
+            return [id,direction2];
+        } 
+
+
+        function minmax(ev) {
+
+            targetid = ev.target.id;
+            rowt = targetid.charAt(2);
+            colt = targetid.charAt(3);
+            rowf = frog.charAt(2);
+            colf = frog.charAt(3);
+
+            if (rowt==rowf) {
+                if (Math.abs(digits.indexOf(colt)-digits.indexOf(colf))==1) {
+                    document.getElementById(frog).innerHTML="";
+                    frog = targetid;
+                }
+            } else if (colt==colf) {
+                if (Math.abs(letters.indexOf(rowt)-letters.indexOf(rowf))==1) {
+                    document.getElementById(frog).innerHTML="";
+                    frog = targetid;
+                }
+            }
+        }
+        
+        
+    </script>
+  </body>
+
+</html>
