@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<HEAD>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Without Words</title>
+
+  <style>
+  .page {
+    position: absolute;
+    width: 750px;
+    height: 750px;
+    margin-left: 30%;
+    margin-right: auto;
+    margin-top: 100px;
+    border-style: solid;
+    border-width: 2px;
+    opacity: 1;
+    background-color: white;
+  }
+  
+  </style>
+</HEAD>
+<BODY onload="scatter()">
+<DIV class="page" id="page" onclick="insidious()">
+    <canvas id="canvas"></canvas>
+
+</DIV>
+<p id="loop"></p>
+
+<script>
+    pagecolours = ["white", "black", "red", "white", "gold", "green"];
+    pagenumber = 0;
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    var imgData=ctx.createImageData(750, 750);
+
+    canvas.width="750";
+    canvas.height="750";
+
+    
+
+    function scatter() {
+        imgData = ctx.getImageData(0,0, 750, 750);
+        nextcolourArr=[];
+        if (pagenumber==0) {
+            currcolourArr=[255,255,255];
+            nextcolourArr=[0,0,0];
+        }
+        if (pagenumber==1) {
+            currcolourArr=[0,0,0];
+            nextcolourArr=[255,0,0];
+        }
+        if (pagenumber==2) {
+            currcolourArr=[255,0,0];
+            nextcolourArr=[255,255,255];
+        }
+        if (pagenumber==3) {
+            currcolourArr=[255,255,255];
+            nextcolourArr=[255,215,0];
+        }
+        if (pagenumber==4) {
+            currcolourArr=[255,215,0];
+            nextcolourArr=[0,128,0];
+        }
+
+        for (i1=0; i1< imgData.data.length; i1=i1+4) {
+            if (Math.random()<0.001 && pagenumber!=1) {
+                imgData.data[i1+0]=nextcolourArr[0];
+                imgData.data[i1+1]=nextcolourArr[1];
+                imgData.data[i1+2]=nextcolourArr[2];
+                imgData.data[i1+3]=255;
+            } else if (pagenumber==1 && Math.random()<0.001 && Math.floor(i1/4)%imgData.width>300 && Math.floor(i1/4)%imgData.width<450)   {
+                imgData.data[i1+0]=nextcolourArr[0];
+                imgData.data[i1+1]=nextcolourArr[1];
+                imgData.data[i1+2]=nextcolourArr[2];
+                imgData.data[i1+3]=255;
+            } else if (pagenumber==1 && Math.random()<0.001 && Math.floor(i1/4)/imgData.width>200 && Math.floor(i1/4)/imgData.width<350)   {
+                imgData.data[i1+0]=nextcolourArr[0];
+                imgData.data[i1+1]=nextcolourArr[1];
+                imgData.data[i1+2]=nextcolourArr[2];
+                imgData.data[i1+3]=255;
+            }
+            else {
+                imgData.data[i1+0]=currcolourArr[0];
+                imgData.data[i1+1]=currcolourArr[1];
+                imgData.data[i1+2]=currcolourArr[2];
+                imgData.data[i1+3]=255;
+            }          
+        }
+        ctx.putImageData(imgData, 0, 0);
+
+    }
+
+    function insidious() {
+        imgData = ctx.getImageData(0,0, 750, 750);
+        newImgData=ctx.createImageData(750, 750);
+        for (i1=0; i1< imgData.data.length; i1=i1+1) {
+            newImgData.data[i1]=imgData.data[i1];
+        }
+
+        nextcolourArr=[];
+        if (pagenumber==0) {
+            nextcolourArr=[0,0,0];
+        }
+        if (pagenumber==1) {
+            nextcolourArr=[255,0,0];
+        }
+        if (pagenumber==2) {
+            nextcolourArr=[255,255,255];
+        }
+        if (pagenumber==3) {
+            nextcolourArr=[255,215,0];
+        }
+        if (pagenumber==4) {
+            nextcolourArr=[0,128,0];
+        }
+        	
+        //alert(nextcolourArr);
+        tot_changed=true;
+        for (i1=0; i1< imgData.data.length; i1=i1+4) {
+ 
+            if (imgData.data[i1]==nextcolourArr[0] && imgData.data[i1+1]==nextcolourArr[1] && imgData.data[i1+2]==nextcolourArr[2]) {
+
+
+                if (i1%(4*imgData.width)>3 && Math.random()<0.02) {
+                    newImgData.data[i1-4]=imgData.data[i1];
+                    newImgData.data[i1-3]=imgData.data[i1+1];
+                    newImgData.data[i1-2]=imgData.data[i1+2];
+                    tot_changed=true;
+                }
+
+                if (i1>=(4*imgData.width) && Math.random()<0.02)  {
+                    newImgData.data[i1-4*imgData.width]=imgData.data[i1];
+                    newImgData.data[i1-4*imgData.width+1]=imgData.data[i1+1];
+                    newImgData.data[i1-4*imgData.width+2]=imgData.data[i1+2];
+                }
+                if (i1%(4*imgData.width)<(imgData.width*4)-4 && Math.random()<0.02) {
+                    newImgData.data[i1+4]=imgData.data[i1];
+                    newImgData.data[i1+5]=imgData.data[i1+1];
+                    newImgData.data[i1+6]=imgData.data[i1+2];
+                }
+                if (i1<(4*imgData.height*(imgData.width-1)) && Math.random()<0.02)  {
+                    newImgData.data[i1+4*imgData.width]=imgData.data[i1];
+                    newImgData.data[i1+4*imgData.width+1]=imgData.data[i1+1];
+                    newImgData.data[i1+4*imgData.width+2]=imgData.data[i1+2];
+                }
+            }
+            
+        }
+        ctx.putImageData(newImgData, 0, 0);
+        for (i1=0; i1< newImgData.data.length; i1=i1+4) {
+            if (newImgData.data[i1+0]!=nextcolourArr[0] || newImgData.data[i1+1]!=nextcolourArr[1] || newImgData.data[i1+2]!=nextcolourArr[2]) {
+                tot_changed=false;
+            }
+        }
+
+        return tot_changed;
+    }
+
+    // Animation loop
+function animate() {
+    loop=0;
+    sid = insidious();
+    
+
+    if (!sid) {
+        loop++;
+    }
+
+    document.getElementById("loop").innerHTML=pagenumber;
+    if (loop==0 && pagenumber<4) {
+        pagenumber++;
+        scatter();
+    }
+
+    requestAnimationFrame(animate);
+
+}
+
+// Start animation
+window.setTimeout(animate, 100);
+
+
+
+</script>
+</BODY>
+</HTML>
