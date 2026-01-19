@@ -723,19 +723,19 @@ function animate() {
 
     drawBall(ball1);
     updateBall(ball1, pathArrR);
-    if (ball2.x==null) {
-        ball2.pathindx = parseInt(Math.random()*pathArr.length*0.5);
-        ball3.pathindx = parseInt(pathArr.length*0.25+Math.random()*pathArr.length*0.5);
-        ball4.pathindx = parseInt(pathArr.length*0.5+Math.random()*pathArr.length*0.5);
-    }
+    // if (ball2.x==null) {
+    //     ball2.pathindx = parseInt(Math.random()*pathArr.length*0.5);
+    //     ball3.pathindx = parseInt(pathArr.length*0.25+Math.random()*pathArr.length*0.5);
+    //     ball4.pathindx = parseInt(pathArr.length*0.5+Math.random()*pathArr.length*0.5);
+    // }
     
-    drawBall(ball2);
-    updateBall(ball2, pathArrG);
+    // drawBall(ball2);
+    // updateBall(ball2, pathArrG);
     
-    drawBall(ball3);
-    updateBall(ball3, pathArrB);
-    drawBall(ball4);
-    updateBall(ball4, pathArrY);
+    // drawBall(ball3);
+    // updateBall(ball3, pathArrB);
+    // drawBall(ball4);
+    // updateBall(ball4, pathArrY);
 
     requestAnimationFrame(animate);
 
@@ -748,4 +748,5 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
