@@ -549,7 +549,7 @@ function getSolomonArr(quartersize, trackwidth) {
     }
     pathArrR=pathArrR.filter(sieveR);
     pathArrR.shift();
-    // pathArrG=pathArrG.filter(sieveG);
+    pathArrG=pathArrG.filter(sieveG);
     pathArrB=pathArrB.filter(sieveB);
     pathArrB.shift();
     pathArrY=pathArrY.filter(sieveY);
@@ -751,6 +751,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
