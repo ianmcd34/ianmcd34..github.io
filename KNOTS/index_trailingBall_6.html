@@ -525,7 +525,7 @@ function getSolomonArr(quartersize, trackwidth) {
     }
 
     function sieveB(currentValue, index, arr) {
-        if (index%1==0) {
+        if (index%4==0) {
             if (index>=15*arr.length/160  && index<=29*arr.length/80) {
                 return currentValue;
             }   
@@ -744,8 +744,8 @@ function animate() {
     
     drawBall(ball3);
     updateBall(ball3, pathArrB);
-    // drawBall(ball4);
-    // updateBall(ball4, pathArrY);
+    drawBall(ball4);
+    updateBall(ball4, pathArrY);
 
     requestAnimationFrame(animate);
 
@@ -758,6 +758,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
