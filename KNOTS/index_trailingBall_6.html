@@ -512,7 +512,11 @@ function getSolomonArr(quartersize, trackwidth) {
                 return currentValue;
             } 
             else 
-            if (index>=arr.length/2 && index<=22*arr.length/32) {
+            if (index>=arr.length/2 && index<=21*arr.length/32) {
+                return currentValue;
+            } 
+            else 
+            if (index>=3*arr.length/4 && index<=arr.length) {
                 return currentValue;
             } 
             
@@ -752,6 +756,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
