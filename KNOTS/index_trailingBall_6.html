@@ -488,7 +488,7 @@ function getSolomonArr(quartersize, trackwidth) {
 
     function sieveR(currentValue, index, arr) {
         if (index%1==0) {
-            if (index<=3*arr.length/10) {
+            if (index<=5*arr.length/14) {
                 return currentValue;
             }
             // if (index>=6*arr.length/14 && index<=8*arr.length/14) {
@@ -748,6 +748,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
