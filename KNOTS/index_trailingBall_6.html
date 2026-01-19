@@ -487,16 +487,16 @@ function getSolomonArr(quartersize, trackwidth) {
 
 
     function sieveR(currentValue, index, arr) {
-        if (index%4==0) {
-            if (index<=5*arr.length/14) {
+        if (index%1==0) {
+            if (index<=3*arr.length/10) {
                 return currentValue;
             }
-            if (index>=6*arr.length/14 && index<=8*arr.length/14) {
-                return currentValue;
-            }
-            if (index>=9*arr.length/14) {
-                return currentValue;
-            }
+            // if (index>=6*arr.length/14 && index<=8*arr.length/14) {
+            //     return currentValue;
+            // }
+            // if (index>=9*arr.length/14) {
+            //     return currentValue;
+            // }
         }
     }
     function sieveG(currentValue, index, arr) {
@@ -544,7 +544,7 @@ function getSolomonArr(quartersize, trackwidth) {
         }
 
     }
-    // pathArrR=pathArrR.filter(sieveR);
+    pathArrR=pathArrR.filter(sieveR);
     // pathArrR.shift();
     pathArrG=pathArrG.filter(sieveG);
     pathArrB=pathArrB.filter(sieveB);
@@ -748,6 +748,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
