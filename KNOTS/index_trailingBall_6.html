@@ -551,12 +551,12 @@ function getSolomonArr(quartersize, trackwidth) {
             if (index<=13*arr.length/64) {
                 return currentValue;
             }   
-            if (index>=31*arr.length/128  && index<7*arr.length/16 )  {
+            if (index>=61*arr.length/256  && index<6*arr.length/16 )  {
                 return currentValue;
             }  
-            // if (index>=7*arr.length/10  && index<8.93*arr.length/10 )  {
-            //     return currentValue;
-            // }         
+            if (index>=8*arr.length/10  && index<9*arr.length/16)  {
+                return currentValue;
+            }         
         }
 
     }
@@ -766,6 +766,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
