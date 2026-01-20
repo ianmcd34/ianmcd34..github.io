@@ -547,7 +547,7 @@ function getSolomonArr(quartersize, trackwidth) {
 
     }
     function sieveY(currentValue, index, arr) {
-        if (index%1==0) {
+        if (index%2==0) {
             if (index<=13*arr.length/64) {
                 return currentValue;
             }   
@@ -557,7 +557,7 @@ function getSolomonArr(quartersize, trackwidth) {
             if (index>=8*arr.length/16  && index<183*arr.length/256)  {
                 return currentValue;
             }   
-            if (index>=401*arr.length/512  )  {
+            if (index>=402*arr.length/512  )  {
                 return currentValue;
             }   
         }
@@ -573,7 +573,7 @@ function getSolomonArr(quartersize, trackwidth) {
     pathArrY=pathArrY.filter(sieveY);
     pathArrY.pop();
     pathArrY.pop();
-
+    pathArrY.pop();
 
 
 }
@@ -771,6 +771,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
