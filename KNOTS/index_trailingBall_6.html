@@ -481,11 +481,11 @@ function getSolomonArr(quartersize, trackwidth) {
 
     pathArrG = Array.from(pathArrG_2.concat(pathArrG_1).concat(pathArrG_4).concat(pathArrG_3));
 
-    pathArrY.sort(function(a){if (a[0]>center[0] && a[1]>center[1]) {return 1} else if (a[0]>center[0] && a[1]<center[1]) {return -1} else {return 0}});
+    // pathArrY.sort(function(a){if (a[0]>center[0] && a[1]>center[1]) {return 1} else if (a[0]>center[0] && a[1]<center[1]) {return -1} else {return 0}});
 
-    pathArrY.sort(function(a, b){if(a[0]!=b[0] && a[1]<center[1]) {return b[0] - a[0]} 
-    else if(a[0]!=b[0] && a[1]>center[1]) {return a[0] - b[0]} else if(a[0]==b[0] && a[0]<center[0]) {return a[1] - b[1]}
-    else if(a[0]==b[0] && a[0]>center[0]) {return b[1] - a[1]} });
+    // pathArrY.sort(function(a, b){if(a[0]!=b[0] && a[1]<center[1]) {return b[0] - a[0]} 
+    // else if(a[0]!=b[0] && a[1]>center[1]) {return a[0] - b[0]} else if(a[0]==b[0] && a[0]<center[0]) {return a[1] - b[1]}
+    // else if(a[0]==b[0] && a[0]>center[0]) {return b[1] - a[1]} });
 
 
 
@@ -559,7 +559,7 @@ function getSolomonArr(quartersize, trackwidth) {
     pathArrG.pop();
     pathArrB=pathArrB.filter(sieveB);
     pathArrB.pop();
-    pathArrY=pathArrY.filter(sieveY);
+    //pathArrY=pathArrY.filter(sieveY);
 
 
 
@@ -732,20 +732,20 @@ function animate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     drawBall(ball1);
-    updateBall(ball1, pathArrR);
-    if (ball2.x==null) {
-        ball2.pathindx = parseInt(Math.random()*pathArr.length*0.5);
-        ball3.pathindx = parseInt(pathArr.length*0.25+Math.random()*pathArr.length*0.5);
-        ball4.pathindx = parseInt(pathArr.length*0.5+Math.random()*pathArr.length*0.5);
-    }
+    updateBall(ball1, pathArrY);
+    // if (ball2.x==null) {
+    //     ball2.pathindx = parseInt(Math.random()*pathArr.length*0.5);
+    //     ball3.pathindx = parseInt(pathArr.length*0.25+Math.random()*pathArr.length*0.5);
+    //     ball4.pathindx = parseInt(pathArr.length*0.5+Math.random()*pathArr.length*0.5);
+    // }
     
-    drawBall(ball2);
-    updateBall(ball2, pathArrG);
+    // drawBall(ball2);
+    // updateBall(ball2, pathArrG);
     
-    drawBall(ball3);
-    updateBall(ball3, pathArrB);
-    drawBall(ball4);
-    updateBall(ball4, pathArrY);
+    // drawBall(ball3);
+    // updateBall(ball3, pathArrB);
+    // drawBall(ball4);
+    // updateBall(ball4, pathArrY);
 
     requestAnimationFrame(animate);
 
@@ -758,6 +758,7 @@ window.setTimeout(animate, 1000);
 </script>
 </body>
 </html>
+
 
 
 
