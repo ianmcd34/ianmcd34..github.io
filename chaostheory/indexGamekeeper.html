@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 180px;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+}
+td {
+	width: 85px;
+	height: 55px;
+	font-size: 140%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.inter {
+    border-width: 0px;
+    font-size: 150%;
+    width: 44px;
+	height: 44px;
+    background-color: transparent;
+    color: red;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.container {
+    width: 600px;
+    position:relative;
+    margin: auto;
+}
+table {
+	display: inline-block;
+	margin: auto;
+	border-collapse: collapse;
+    width: 600px;
+    position:relative;
+}
+table.tinter {
+    z-index: 2;
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    pointer-events: none;
+}
+div.playerInfo {
+	float: left;
+	left: 80px;
+    position: fixed; 
+    bottom: 50px;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>Gamekeeper</title>
+  </head>
+  <body >
+    <h1>Gamekeeper - Maximise Your Harvest of Rabbits!</h1>
+    <h4 id='date'></h4>
+    <p><a id="bottomlink" href="#pagebottom">click here to scroll to bottom of page</a></p>
+    
+    <div style="display: inline-block; width:50%;">
+    
+    <table id="table1">
+        <tr>
+            <th>Year</th>
+            <th>Pop(%)</th>
+            <th>k-Fecundity</th>
+            <th>Harvest(%)</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>50</td>
+            <td>1.1</td>
+            <td>0</td>
+        </tr>
+    </table>
+    
+    </div>
+    <div class="playerInfo">
+    <form id="nextYear" >
+        <label for="fecundity">Breed for Less/More Fecundity</label>
+        <select id="fecundity" name="fecundity">
+            <option  value="-">Decrease k</option>
+            <option value="0">Leave k</option>
+            <option value="+">Increase k</option>
+        </select></br>
+        <label for="harvest">Harvest (maximum = Pop):</label>
+        <input type="range" id="harvest" name="harvest" min="0" max="100" value="0"></br>
+        <button type="submit">Next Year</button>
+
+    </form>
+    </div>
+    
+    <div id="pagebottom"><p>bottom of the page</p></div>
+    <script>
+        // Attach the JS handler to override the default action
+        document.getElementById('nextYear').addEventListener('submit', handleFormSubmit);
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Stop the form from submitting normally
+
+            // Get form data
+            const form = event.target;
+            const formData = new FormData(form);
+            dk=0;
+            harv=0;
+
+
+
+            for (let [key, value] of formData.entries()) {
+                if (key=="fecundity") {
+                    dk=value;
+                } else {
+                    harv=parseInt(value)/100;
+                }
+            }
+            
+
+
+            tableArr = document.getElementsByTagName("td");
+            for (t1=0; t1<tableArr.length; t1=t1+4) {
+                if (tableArr[t1].nodeType==1) {
+                    year=parseInt(tableArr[t1].innerHTML);
+                    pop=parseFloat(tableArr[t1+1].innerHTML)/100;
+                    k=parseFloat(tableArr[t1+2].innerHTML);
+                    h=parseFloat(tableArr[t1+3].innerHTML);
+                }
+            }
+            nextyear=year+1;
+            nextk=k+(0.5-Math.random())*0.2;
+            if (dk=="+") {
+                nextk=nextk+0.1;
+            } else if (dk=="-") {
+                nextk=nextk-0.1;
+            }
+
+            nextk = Math.round(nextk * 100)/100;
+
+            nextpop = Math.round((nextk * (pop - harv*pop) * (1 - (pop - harv*pop))) * 100);
+            if (nextpop>100) {
+                nextpop=0;
+            }
+
+            rowel = document.createElement("tr");
+            tdel1 = document.createElement("td");
+            tdel1.innerHTML = nextyear;
+            tdel2 = document.createElement("td");
+            tdel2.innerHTML = nextpop;
+            tdel3 = document.createElement("td");
+            tdel3.innerHTML = nextk;
+            tdel4 = document.createElement("td");
+
+            tdel4.innerHTML = (h*year+parseInt(harv*pop*100))/nextyear;
+
+            rowel.append(tdel1);
+            rowel.append(tdel2);
+            rowel.append(tdel3);
+            rowel.append(tdel4);
+            document.getElementById("table1").append(rowel);
+
+            document.getElementById("bottomlink").click();
+
+
+
+
+
+
+        }
+    </script>
+   
+  </body>
+
+</html>
