@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <title>Tower</title>
+    <style>
+    .td {
+        width: 65px;
+        min-width: 65px;
+        height: 65px;
+        font-size: 340%;
+        text-align: center;
+        border-style: solid;
+        margin: 20px;
+        padding: 10px;
+        border-width: 5px;
+        background-color: White;
+    }
+    button {
+        background-color: #04AA6D; /* Green */
+        border: 2px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 20px;
+        margin-bottom: 0%;
+    }
+    div.playerInfo {
+        position: relative;
+        float: left;
+        left: 10px;
+        bottom: 300px;
+        border-style: solid;
+        margin: 0px;
+        padding: 20px;
+        border-width: 5px;
+        font-size: 140%;
+    }
+    </style>
+  </head>
+  <body onload="makeSum2()">
+    <h1 style="margin: 50px">Tower</h1>
+    <h4 id='date'></h4>
+
+    <p><span class="td"  id="A0"> 1 </span></p>
+    <p id="sum1"><span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_B0"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_B1"> ? </span></p>
+    <p id="sum2"><span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_C0"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_C1"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_C2"> ? </span></p>
+    <p id="sum3"><span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_D0"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_D1"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_D2"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_D3"> ? </span></p>
+    <p id="sum4"><span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_E0"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_E1"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_E2"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_E3"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_E4"> ? </span>  </p>
+    <p id="sum5"><span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F0"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F1"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F2"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F3"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F4"> ? </span>
+        <span class="td" ondragover="allowDrop(event)" ondrop="drop(event)" id="tgt_F5"> ? </span> </p>
+    <p id="sum6"> </p>
+    <div class="playerInfo">
+        <label for="rows">Select Number of Rows</label>
+        <select id="rows" name="rows" style="font-size: large;">
+            <option  value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select></br>
+        <p><button type="button" onclick="restart()" >Restart!</button><button type="button" onclick="newGame()" >New Game</button></p>
+    </div>
+    <p id="bottomp" style=" position: relative;  right: 150px; top: 160px;"></p>
+  </body>
+
+  <script>
+
+    operators = ["+", "-", "*"];
+    letters = ["A", "B", "C", "D", "E", "F"];
+    primes = [1,2,3,5,7,11];
+    values = [];
+    let a=0;
+    let b=0;
+    let c=0;
+    let d=0;
+    let e=0;
+
+    function makeSum() {
+        total = 1;
+        op1 = operators[Math.floor(Math.random() * operators.length - 1)];
+
+        a = Math.floor(Math.random() * 12 + 1);
+        if (op1=="+") {
+            b = total - a;
+        }
+        if (op1=="-") {
+            b = a - total;
+        }
+
+        txt1 = a + " " + op1 + " " + b + " = "+total;
+
+        document.getElementById("sum1").innerText = txt1;
+
+        op2 = operators[Math.floor(Math.random() * operators.length)];
+        op3 = operators[Math.floor(Math.random() * operators.length)];
+
+        c = Math.floor(Math.random() * 12 + 1);
+        if (op2=="+") {
+            d = a - c;
+        }
+        if (op2=="-") {
+            d = c - a;
+        }
+        if (op2=="*") {
+            if (primes.includes(a)) {
+                c = 1;
+                d = a;
+            } else if (a==4) {
+                c = 2;
+                d = 2;
+            } else if (a==6) {
+                c = 2;
+                d = 3;
+            } else if (a==8) {
+                c = 2;
+                d = 4;
+            } else if (a==9) {
+                c = 3;
+                d = 3;
+            } else if (a==10) {
+                c = 2;
+                d = 5;
+            } else if (a==12) {
+                if (Math.random()<0.5) {
+                    c = 3;
+                    d = 4;
+                } else {
+                    c = 2;
+                    d = 6;
+                }
+            }
+        }
+
+        if (op3=="+") {
+            e = b - d;
+        }
+        if (op3=="-") {
+            e = d - b;
+        }
+        if (op3=="*") {
+            e = b/d;
+        }
+
+        txt2 = c + " " + op2 + " " + d + " = " + a + " ; " +  d + " " + op3 + " " + e + " = " + b;
+        document.getElementById("sum2").innerText = txt2;
+        
+    }
+
+    function makeSum1() {
+        total = 1;
+        a = Math.floor(Math.random() * 25) - 12;
+        b = total - a;
+        txt1 = a + " + " + b;
+
+        document.getElementById("sum1").innerText = txt1;
+
+        // x+y=a y+z=b   a-x=b-z   a-b=x-z  1-2b=x-z  z=x+2b-1
+
+        total = 1;
+        a1 = Math.floor(Math.random() * 25) - 12;
+        b1 = a1+2*b-total;
+
+        z1 = a - a1;
+        txt2 = a1 + " + " + z1 + " + " + b1 ;
+        document.getElementById("sum2").innerText = txt2;
+
+        // x+y=a1  y+z=z1  z+s=b1   x+z1-z=a1  x+z1-(b1-s)=a1  x+z1-b1+s=a1  s=a1+b1-z1-x
+
+        a2 = Math.floor(Math.random() * 25) - 12;
+        b2 = a1+b1-z1-a2;
+
+        z2 = a1-a2;
+        y2 = z1-z2;
+
+        txt3 = a2 + " + " + z2 + " + " + y2 + " + " + b2 ;
+        document.getElementById("sum3").innerText = txt3;
+
+
+        //  a1...an   b1+b2=a1  b2+b3=a2 ... bn+bn+1=an   bn+1=an-bn  bn+1=an-(an-1-bn-1) = an-(an-1-(an-2-bn-2)) = an-(an-1-(an-2-(an-3-(an-4-bn-4))))
+    }
+
+    function makeSum2() {
+        numRows=parseInt(document.getElementById("rows").value);
+        if (numRows<5) {
+            document.getElementById("sum5").hidden=true;
+        } else {
+            document.getElementById("sum5").hidden=false;
+        }
+        if (numRows<4) {
+            document.getElementById("sum4").hidden=true;
+        } else {
+            document.getElementById("sum4").hidden=false;
+        }
+        values = [[1]];
+        lastrow = 0;
+
+
+        for (x1=0; x1<numRows; x1++) {
+            a = Math.floor(Math.random() * 7) - 6;
+            //a=values[lastrow][values[lastrow].length-1];
+
+            values.push([a]);
+            lastrow+=1;
+
+            for (n1 in values[lastrow-1]) {
+                values[lastrow].push(values[lastrow-1][n1]-values[lastrow][n1]);
+            }
+
+        }
+
+
+        // document.getElementById("sum1").innerText = values[1];
+        // document.getElementById("sum2").innerText = values[2];
+        // document.getElementById("sum3").innerText = values[3];
+        // document.getElementById("sum4").innerText = values[4];
+        // document.getElementById("sum5").innerText = values[5];
+        // document.getElementById("sum6").innerText = values[6];
+
+        // for (i1 in values) {
+        //     for (j1 in values[i1]) {
+        //         if (i1!=0) {
+        //             num = values[i1][j1];
+        //             para = document.createElement("span");
+        //             node = document.createTextNode(""+num);	
+        //             para.id = "drag"+letters[i1]+j1;
+        //             para.classList.add("td");
+        //             para.draggable = true;
+        //             para.addEventListener("dragstart", drag);
+        //             para.appendChild(node);
+        //             document.getElementById("bottomp").appendChild(para);
+        //         }
+        //     }
+        // }
+
+        restart();
+
+    }
+
+    function restart() {
+        for (i1 in values) {
+            for (j1 in values[i1]) {
+                if (i1!=0) {
+                    idtxt="tgt_"+letters[i1]+j1;
+                    document.getElementById(idtxt).innerText="?";
+                }
+            }
+        }
+
+        dragEls = [];
+        tdEls = document.getElementsByClassName("td");
+        for (e1 in tdEls) {
+            if (tdEls[e1].nodeName!=undefined) {
+                if (tdEls[e1].id.includes("drag")) {
+                    dragEls.push(tdEls[e1]);
+                }
+
+            }
+            
+        }
+        for (e1 in dragEls) {
+            document.getElementById("bottomp").removeChild(dragEls[e1]);
+        }
+       
+        
+        nodeArr = [];
+        for (i1=1; i1<values.length; i1++) {
+            for (j1 in values[i1]) {
+
+                num = values[i1][j1];
+                para = document.createElement("span");
+                node = document.createTextNode(""+num);	
+                para.id = "drag"+letters[i1]+j1;
+                para.classList.add("td");
+                para.draggable = true;
+                para.addEventListener("dragstart", drag);
+                para.appendChild(node);
+                nodeArr.push(para);
+                //document.getElementById("bottomp").appendChild(para);
+
+            }
+        }
+        nodeArr.sort(function(){return 0.5 - Math.random()});
+        for (n1 in nodeArr) {
+            document.getElementById("bottomp").appendChild(nodeArr[n1]);
+        }
+
+
+    }
+
+    function newGame() {
+        makeSum2();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var source_id = ev.dataTransfer.getData("text");
+        var target_id = ev.target.id;
+        document.getElementById(target_id).innerText=document.getElementById(source_id).innerText;
+        document.getElementById(source_id).remove();
+    }
+  </script>
