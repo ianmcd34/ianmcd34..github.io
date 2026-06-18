@@ -1,0 +1,465 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <script async src="./javascript/index.js"></script>
+
+    <style>
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    width: 10%;
+	font-size: 16px;
+	margin-right: 75px;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	position: relative;
+	float: right;
+}
+td {
+	width: 65px;
+	height: 65px;
+	font-size: 340%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 5px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyer1 {
+	border-top-color: Black;
+}
+td.plyer2 {
+	border-right-color: Black;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+table {
+	display: inline-block;
+	margin: 40px;
+	border-collapse: collapse;
+    width: 50%;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 30%;
+}
+ul {
+	font-size: 140%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    
+    <title>OXO</title>
+  </head>
+  <body onload="setup()">
+    <h1>OXO</h1>
+    <h4 id='date'></h4>
+    
+
+    <div>
+        <h1 id="info">Player: X</h1>
+    </div>
+
+    <ul id="dreamingof" class="scoretable">
+
+    </ul>
+
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A0" onclick="play(event)" ></td>
+    		<td class="plyer" id="P_A1" onclick="play(event)"  ></td>
+    		<td class="plyer" id="P_A2" onclick="play(event)"  ></td>
+
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B0" onclick="play(event)"  ></td>
+    		<td class="plyer" id="P_B1" onclick="play(event)"   ></td>
+    		<td class="plyer" id="P_B2" onclick="play(event)"  ></td>
+
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C0"  onclick="play(event)" ></td>
+    		<td class="plyer" id="P_C1" onclick="play(event)"  ></td>
+    		<td class="plyer" id="P_C2"  onclick="play(event)" ></td>
+
+  	   </tr>
+
+    </table>
+
+    <button type="button" onclick="computerPlay()">Computer Move</button>
+
+
+
+
+
+
+
+    <script >
+
+        const positionsMap = new Map();
+        let activeKey = "";
+
+        class BoardPosition {
+            static countPositions = 0;
+            constructor() {
+                BoardPosition.countPositions++;
+                this.boardArr = [["","",""],["","",""],["","",""]];
+                this.positionNumber = "_"+BoardPosition.countPositions;
+                positionsMap.set(this.positionNumber, this);
+            }
+
+            clone() {
+                const bp = new BoardPosition();
+                bp.boardArr=structuredClone(this.boardArr);
+                positionsMap.delete(bp.positionNumber);
+                bp.positionNumber = this.positionNumber+bp.positionNumber;
+                positionsMap.set(bp.positionNumber, bp);
+                return bp;
+            }
+
+            setPosition(playerChr, position) {
+                if (this.boardArr[position[0]][position[1]]!="") {
+                    return false;
+                }
+                this.boardArr[position[0]][position[1]]=playerChr;
+                return true;
+            }
+
+            weHaveAWinner(playerChr) {
+                var winner=false;
+                if (this.boardArr[0][0]==playerChr && this.boardArr[0][1]==playerChr && this.boardArr[0][2]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[1][0]==playerChr && this.boardArr[1][1]==playerChr && this.boardArr[1][2]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[2][0]==playerChr && this.boardArr[2][1]==playerChr && this.boardArr[2][2]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[0][0]==playerChr && this.boardArr[1][0]==playerChr && this.boardArr[2][0]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[0][1]==playerChr && this.boardArr[1][1]==playerChr && this.boardArr[2][1]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[0][2]==playerChr && this.boardArr[1][2]==playerChr && this.boardArr[2][2]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[0][0]==playerChr && this.boardArr[1][1]==playerChr && this.boardArr[2][2]==playerChr) {
+                    winner=true;
+                }
+                if (this.boardArr[0][2]==playerChr && this.boardArr[1][1]==playerChr && this.boardArr[2][0]==playerChr) {
+                    winner=true;
+                }
+                return winner;
+            }
+        }
+
+        function setup() {
+            activeBP = new BoardPosition();
+            activeKey = activeBP.positionNumber;
+        }
+        
+
+        function play(ev)  {
+            player = document.getElementById("info").innerHTML.charAt(8);
+            activeBP = positionsMap.get(activeKey);
+            nextBP = activeBP.clone();
+            activeKey = nextBP.positionNumber;
+
+            tile = document.getElementById(ev.target.id);
+
+            if (tile.innerHTML=="") {
+                tile.innerHTML = player;
+                if (ev.target.id.charAt(2)=="A") {
+                    row=0;
+                }
+                if (ev.target.id.charAt(2)=="B") {
+                    row=1;
+                }
+                if (ev.target.id.charAt(2)=="C") {
+                    row=2;
+                }
+                column = parseInt(ev.target.id.charAt(3));
+                nextBP.setPosition(player, [row, column]);
+            }
+
+            if (player=="X") {
+                player = "O";
+            } else {
+                player = "X";
+            }
+
+            document.getElementById("info").innerHTML = "Player: "+player;
+
+
+        }
+
+        function computerPlay() {
+            player = document.getElementById("info").innerHTML.charAt(8);
+            activeBP = positionsMap.get(activeKey);
+            completeArr=[];
+
+            nextBpArr=[];
+            toAddBpArr=[];
+            toplay="";
+            stopsearch=false;
+            for (r1=0; r1<3; r1++) {
+                for (c1=0; c1<3; c1++) {
+                    if (activeBP.boardArr[r1][c1]=="") {
+                        nextBP = activeBP.clone();
+                        nextBP.setPosition(player, [r1, c1]);
+                        nextBpArr.push(nextBP.positionNumber);
+                        completeArr.push(nextBP.positionNumber);
+                    }
+                }
+            }
+
+            while (!stopsearch && nextBpArr.length>0) {
+
+                winlose = checkPositions(structuredClone(nextBpArr), player);
+
+                if (winlose[0].length>0) {
+                    /* found winning move - stop and play it*/
+                    winindx = winlose[0][Math.floor(Math.random()*winlose[0].length)];
+                    toplay=nextBpArr[winindx];
+                    stopsearch=true;
+                } else {
+                    toAddBpArr.length=0;
+                    toAddBpArr=opponentMove(nextBpArr, player);
+
+                    if (toAddBpArr.length>0) {
+                        winloseopponent = checkPositions(structuredClone(toAddBpArr), player);
+
+                        if (winloseopponent[1].length>0) {
+      
+                            /* found losing move - remove stub from nextBpArr*/
+                            for (m1 in winloseopponent[1]) {
+
+                                stub = toAddBpArr[winloseopponent[1][m1]].substring(0, toAddBpArr[winloseopponent[1][m1]].lastIndexOf("_"));
+                                if (nextBpArr.indexOf(stub)>-1) {
+
+                                    nextBpArr.splice(nextBpArr.indexOf(stub),1);
+                                    
+                                }
+                                if (completeArr.indexOf(stub)>-1) {
+
+                                    completeArr.splice(completeArr.indexOf(stub),1);
+                                    
+                                }
+                            }
+        
+                            toAddBpArr.length=0;
+                            toAddBpArr=opponentMove(nextBpArr, player);
+                        }
+
+                        completeArr=completeArr.concat(structuredClone(nextBpArr));
+
+                    }
+                }
+                if (!stopsearch) {
+                    nextBpArr.length=0;
+                    nextBpArr=playerMove(toAddBpArr, player);
+                }
+                // /* repeat */
+            }
+  
+            if (toplay=="" && completeArr.length>0) {
+
+                toplay =  completeArr[Math.floor(Math.random()*completeArr.length)];
+                
+            }
+            if (toplay=="") {
+                /* no non-losing moves - give up */
+                for (r1=0; r1<3; r1++) {
+                    for (c1=0; c1<3; c1++) {
+                        if (activeBP.boardArr[r1][c1]=="") {
+                            nextBP = activeBP.clone();
+                            nextBP.setPosition(player, [r1, c1]);
+                        }
+                    }
+                }
+                toplay = nextBP.positionNumber;
+
+            }
+
+
+            toplay = toplay.replace(activeKey,"");
+
+   
+            if (toplay.indexOf("_",2)>-1) {
+                toplay = activeKey+toplay.substring(0,toplay.indexOf("_",2));
+            } else {
+                toplay = activeKey+toplay;
+            }
+            //dreamingOf(toplay);
+            
+
+
+
+            nextBP = positionsMap.get(toplay);
+            
+            activeKey=toplay;
+            for (r1=0; r1<3; r1++) {
+                for (c1=0; c1<3; c1++) {
+                    id = "P_"+"ABC".charAt(r1)+"012".charAt(c1);
+                    if (nextBP.boardArr[r1][c1]!="") {
+                        document.getElementById(id).innerHTML = nextBP.boardArr[r1][c1];
+                    }
+                }
+            }
+            if (player=="X") {
+                player = "O";
+            } else {
+                player = "X";
+            }
+
+            document.getElementById("info").innerHTML = "Player: "+player;
+
+        }
+
+        function checkPositions(arr1, player1) {
+            if (player1=="X") {
+                otherplayer="O";
+            } else {
+                otherplayer="X";
+            }
+            winningpositionArr=[];
+            losingpositionArr=[];
+            for (p1 in arr1) {
+                nextBP = positionsMap.get(arr1[p1]);
+                if (nextBP.weHaveAWinner(player1)) {
+                    winningpositionArr.push(p1);
+                }
+                if (nextBP.weHaveAWinner(otherplayer)) {
+                    losingpositionArr.push(p1);
+                }
+            }
+            return [winningpositionArr,losingpositionArr];
+        }
+
+        function opponentMove(nextBpArr, player1) {
+            if (player1=="X") {
+                otherplayer="O";
+            } else {
+                otherplayer="X";
+            }
+            toAddBpArr=[];
+            for (p1 in nextBpArr) {  
+                activeBP = positionsMap.get(nextBpArr[p1]);    
+                for (r1=0; r1<3; r1++) {
+                    for (c1=0; c1<3; c1++) {       
+                        if (activeBP.boardArr[r1][c1]=="") {
+                            toAddBP = activeBP.clone();
+                            toAddBP.setPosition(otherplayer, [r1, c1]);
+                            toAddBpArr.push(toAddBP.positionNumber);
+                        }
+                    }
+                }
+            }
+            return toAddBpArr;
+        }
+
+        function playerMove(toAddBpArr, player1) {
+            if (player1=="X") {
+                otherplayer="O";
+            } else {
+                otherplayer="X";
+            }
+            nextBpArr=[];
+            for (p1 in toAddBpArr) {  
+                activeBP = positionsMap.get(toAddBpArr[p1]);    
+                for (r1=0; r1<3; r1++) {
+                    for (c1=0; c1<3; c1++) {       
+                        if (activeBP.boardArr[r1][c1]=="") {
+                            nextBP = activeBP.clone();
+                            nextBP.setPosition(player1, [r1, c1]);
+                            nextBpArr.push(nextBP.positionNumber);
+                        }
+                    }
+                }
+            }
+            return nextBpArr;
+        }
+
+        function dreamingOf(key1) {
+            list = document.getElementById("dreamingof");
+
+            while(key1.length>1) {
+                bp = positionsMap.get(key1);
+                newLi = document.createElement("li");
+                newLi.innerHTML = key1+" "+JSON.stringify(bp.boardArr);
+                list.appendChild(newLi);
+                key1 = key1.substring(0,key1.lastIndexOf("_"));
+            }
+        }
+
+
+        function findPosition() {
+            key1 = document.getElementById("findposn").value;
+            bp = positionsMap.get(key1);
+            nextBpArr=[key1];
+            toAddBpArr=opponentMove([key1], "O");
+            winloseopponent = checkPositions(structuredClone(toAddBpArr), "O");
+            alert("losing moves "+winloseopponent[1]+" from "+toAddBpArr);
+            stub = toAddBpArr[winloseopponent[1][0]].substring(0, toAddBpArr[winloseopponent[1][0]].lastIndexOf("_"));
+            nextBpArr.splice(nextBpArr.indexOf(stub),1);
+            alert(JSON.stringify(nextBpArr));
+        }
+
+        
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+
+</html>
