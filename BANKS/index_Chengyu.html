@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+    h1 {
+      text-align: center; 
+    }
+    /* Tooltip container */
+    .tooltip {
+      /* position: relative; */
+      /* display: inline-block; */
+      /* border-bottom: 1px dotted black; Add dots under the hoverable text */
+      cursor: pointer;
+    }
+
+    /* Tooltip text */
+    .tooltiptext {
+      visibility: hidden; /* Hidden by default */
+      font-size: 50%;
+      width: 300px;
+      background-color: black;
+      color: #ffffff;
+      opacity: 0.75;
+      text-align: center;
+      padding: 5px 0;
+      border-radius: 6px;
+      position: fixed;
+      z-index: 1; /* Ensure tooltip is displayed above content */
+      top: 10px;
+      left: 5%;
+    }
+
+    /* Show the tooltip text on hover */
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+
+button {
+	background-color: #04AA6D; /* Green */
+	border: 2px;
+	color: white;
+	padding: 12px 12px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+    /* width: 10%; */
+	font-size: 16px;
+	margin-right: px0;
+	margin-left: 0px;
+	margin-top: 0%;
+	margin-bottom: 0%;
+	position: relative;
+	float: right;
+}
+td {
+	width: 40px;
+	height: 40px;
+	font-size: 180%;
+	text-align: center;
+	border-style: solid;
+	margin: 0px;
+	border-width: 3px;
+	background-color: White;
+}
+td.plyer {
+	border-color: LightGray;
+}
+td.plyerX {
+	color: Red;
+}
+td.plyerY {
+	color: Blue;
+}
+td.plyer3 {
+	border-bottom-color: Black;
+}
+td.plyer4 {
+	border-left-color: Black;
+}
+td.hilght {
+	background-color: Orange;
+}
+.board {
+  margin: auto;
+  width: 85%;
+}
+div.chengyutryout {
+  display: inline-block;
+  margin: 10px;
+}
+table {
+	
+	border-collapse: collapse;
+    /* width: 50%; */
+}
+table.Xcol {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
+table.Ycol {
+   margin-top: 20px;
+  margin-bottom: 20px;
+  float: right;
+}
+td.bin {
+  color: red;
+}
+div.playerInfo {
+	position: relative;
+	float: left;
+	left: 80px;
+}
+ul.scoretable {
+    position: relative;
+	float: left;
+	left: 80px;
+    display: inline-block;
+    width: 20%;
+}
+ul {
+	font-size: 340%;
+}
+li#p1 {
+	color: Green;
+}
+li#p2 {
+	color: Red;
+}
+li#p3 {
+	color: Blue;
+}
+li#p4 {
+	color: Orange;
+}
+li.active {
+	border-style: solid;
+	border-color: Red;
+	border-width: 5px;
+}
+
+  </style>
+    <title>Chengyu</title>
+  </head>
+  <body onload="initialiseChengyus()" >
+    <h1>Chengyu Scrabble</h1>
+    <p id="temp1"></p>
+
+    <div class="board">
+
+    <div class="chengyutryout">
+
+    <table >
+      <tr>
+        <td class="plyer bin" id="X_bin"  ondragover="allowDrop(event)" ondrop="dropbin(event)">🗑️</td>
+        <td class="plyer"></td>
+        <td class="plyer"><button onclick="shuffle('X')">Shuffle</button></td>
+      </tr>
+
+
+    </table>  
+    <table class="Xcol">
+      <tr>
+        <td class="plyer tooltip" id="HX_A1" onmouseover="tooltip('HX_A1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HX_A1tt"></span></td>
+        <td class="plyer tooltip" id="HX_A2" onmouseover="tooltip('HX_A2')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HX_A2tt"></span></td>
+        <td class="plyer tooltip" id="HX_A3" onmouseover="tooltip('HX_A3')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HX_A3tt"></span></td>
+        <td class="plyer tooltip" id="HX_A4" onmouseover="tooltip('HX_A4')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HX_A4tt"></span></td>
+      </tr>
+
+    </table>
+    <table class="Xcol">
+      <tr>
+        <td class="plyer tooltip" id="VX_A1" onmouseover="tooltip('VX_A1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VX_A1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VX_B1" onmouseover="tooltip('VX_B1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VX_B1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VX_C1" onmouseover="tooltip('VX_C1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VX_C1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VX_D1" onmouseover="tooltip('VX_D1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VX_D1tt"></span></td>
+      </tr>
+
+    </table>
+    </div>
+
+    <div class="chengyutryout">
+    <table class="Xcol">
+      <tr>
+        <td class="plyer tooltip" id="X_A1" onmouseover="tooltip('X_A1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_A1tt" ></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_B1" onmouseover="tooltip('X_B1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_B1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_C1" onmouseover="tooltip('X_C1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_C1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_D1" onmouseover="tooltip('X_D1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_D1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_E1" onmouseover="tooltip('X_E1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_E1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_F1" onmouseover="tooltip('X_F1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_F1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="X_G1" onmouseover="tooltip('X_G1')" draggable="true" ondragstart="drag(event)" ><span class="tooltiptext" id="X_G1tt"></span></td>
+      </tr>
+
+    </table>
+    </div>
+
+    <div class="chengyutryout">
+    <table>
+	<tr>
+    		<td class="plyer" id="P_A1" ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_A2" ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_A3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_A4"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_A5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_A6" ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+		<td class="plyer" id="P_A7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_A8"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+		<td class="plyer" id="P_A9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_A0"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+ 	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_B1"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_B2"   ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_B3"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+		<td class="plyer" id="P_B4"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_B5"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_B6"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+		<td class="plyer" id="P_B7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_B8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_B9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_B0"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_C1"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_C2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_C3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_C4"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_C5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_C6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_C7"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_C8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_C9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_C0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_D1" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_D2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_D3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_D4" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_D5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer"id="P_D6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_D7"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_D8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_D9"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_D0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	  </tr>
+  	  <tr>
+    		<td class="plyer" id="P_E1" ondragover="allowDrop(event)" ondrop="dropboard(event)"  ></td>
+    		<td class="plyer" id="P_E2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_E3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_E4" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_E5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_E6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_E7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_E8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_E9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_E0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_F1" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer"id="P_F2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_F3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_F4" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_F5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_F6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_F7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_F8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_F9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_F0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_G1"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_G2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_G3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_G4"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_G5"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_G6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_G7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_G8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_G9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_G0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_H1"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_H4" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_H7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_H9"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_H0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_I1"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I2" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_I4" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_I7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_I9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_I0" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+  	   </tr>
+	   <tr>
+    		<td class="plyer" id="P_J1"  ondragover="allowDrop(event)" ondrop="dropboard(event)"  ></td>
+    		<td class="plyer" id="P_J2"  ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_J3" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_J4"  ondragover="allowDrop(event)" ondrop="dropboard(event)"></td>
+    		<td class="plyer" id="P_J5" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_J6" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_J7" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_J8" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+		<td class="plyer" id="P_J9" ondragover="allowDrop(event)" ondrop="dropboard(event)" ></td>
+    		<td class="plyer" id="P_J0" ondragover="allowDrop(event)" ondrop="dropboard(event)"  ></td>
+  	   </tr>
+    </table>
+    </div>
+
+
+    <div class="chengyutryout">
+
+     
+    <table class="Ycol">
+      <tr>
+        <td class="plyer tooltip" id="Y_A1"  onmouseover="tooltip('Y_A1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_A1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_B1"  onmouseover="tooltip('Y_B1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_B1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_C1"  onmouseover="tooltip('Y_C1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_C1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_D1"  onmouseover="tooltip('Y_D1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_D1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_E1"  onmouseover="tooltip('Y_E1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_E1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_F1" onmouseover="tooltip('Y_F1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_F1tt"></span></td>
+      </tr>
+      <tr>
+        <td class="plyer tooltip" id="Y_G1" onmouseover="tooltip('Y_G1')" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="Y_G1tt"></span></td>
+      </tr>
+
+    </table>
+    </div>
+    <div class="chengyutryout">
+    <table class="Xcol">
+      <tr>
+        <td class="plyer"><button onclick="shuffle('Y')">Shuffle</button></td>
+        
+        <td class="plyer"></td>
+        <td class="plyer bin" id="Y_bin"  ondragover="allowDrop(event)" ondrop="dropbin(event)">🗑️</td>
+      </tr>
+
+
+    </table>
+    <table >
+      <tr>
+
+        <td class="plyer tooltip" id="HY_A1" onmouseover="tooltip('HY_A1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HY_A1tt"></span></td>
+        <td class="plyer tooltip" id="HY_A2" onmouseover="tooltip('HY_A2')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HY_A2tt"></span></td>
+        <td class="plyer tooltip" id="HY_A3" onmouseover="tooltip('HY_A3')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="HY_A3tt"></span></td>
+        <td class="plyer tooltip" id="HY_A4" onmouseover="tooltip('HY_A4')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"> <span class="tooltiptext" id="HY_A4tt"></span></td>
+      </tr>
+
+    </table>
+    <table class="Ycol">
+      <tr>
+        <td class="plyer tooltip" id="VY_A1" onmouseover="tooltip('VY_A1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VY_A1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VY_B1" onmouseover="tooltip('VY_B1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VY_B1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VY_C1" onmouseover="tooltip('VY_C1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VY_C1tt"></span></td>
+      </tr>
+        <td class="plyer tooltip" id="VY_D1" onmouseover="tooltip('VY_D1')" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><span class="tooltiptext" id="VY_D1tt"></span></td>
+      </tr>
+
+    </table>
+    </div>
+
+    </div>
+
+    <div id="ghostimg" style="position:fixed; left:-30px;"><canvas width="40" height="40" id="myCanvas"></canvas></div>
+
+
+    <!-- <button onclick="chenguBtn()">Chengu</button> -->
+    <!-- <p id="chenguP"></p>
+    <div class="tooltip" onmouseover="tooltip()">
+    <h2 id="charP" ></h2>
+    <span class="tooltiptext" id="charTt"></span>
+    </div> -->
+   </body>
+
+   <script>
+      const myCanvas = document.getElementById("myCanvas");
+      const ctx = myCanvas.getContext("2d");
+      ctx.font = "30px Arial";
+      ctx.fillText("A", 0, 40);
+      
+      function Chengyu(id1, c1, c2, c3, c4, lit, trans) {
+        this.id = id1;
+        this.char1 = c1;
+        this.char2 = c2;
+        this.char3 = c3;
+        this.char4 = c4;
+        this.literal = lit;
+        this.translate= trans;
+        this.toString = function() {
+          return this.id+" : "+this.char1+this.char2+this.char3+this.char4+" "+this.literal+" - "+this.translate;
+        }
+
+      }
+
+      const chenguSet = new Set();
+
+      const chars = "半途而废半真半假笨鸟先飞擦肩而过粗心大意得寸进尺对号入座对牛弹琴多此一举刮目相看浩浩荡荡合情合理轰轰烈烈虎头蛇尾花言巧语豁然开朗急于求成以假乱真见多识广脚踏实地津津有味精打细算精益求精九牛一毛举一反三开天辟地理所当然力所能及两肋插刀落叶归根抛砖引玉破釜沉舟强词夺理全力以赴群龙无首如鱼得水深思熟虑四海海家同甘共苦小鸟依人笑里藏刀心花怒放心血来潮兴高采烈眼花缭乱一见钟情一言为定有气无力蒸蒸日上千方百计";
+    
+      const literals = ["half way but give up", "half real half false", "dumb bird first to fly", "brush shoulder but pass by", 
+      "negligent heart, approximate focus", "get 3cm advance 33cm", "check number enter seat", "to cow play lute", "excessive this one action",
+      "wipe eyes giving regard", "mighty flow vast vast", "in accord feelings in accord reason", "loud boom intensely strong", 
+      "tiger head snake tail", "flower speech cunning language", "spacious, so broad and bright", "anxious about strive for success",
+      "use fake mix up real", "see many know broad", "foot step on solid ground", "saliva have flavour", "precise plan detailed calculation",
+      "perfection increasing seek perfection", "nine cow one hair", "list one guess three", "open sky break ground", "reason very proper like so",
+      "strength if able to reach", "two ribs insert knife", "fall leaf return roots", "throw a brick attract jade", "destroy cauldron sink boat",
+      "force words seize reason", "full strength by go", "group dragons without leader", "like fish gets water", "deep thought familiar consider",
+      "four oceans regard home", "together sweet together hardships", "small bird depends people", "smile inside conceal knife", "heart flower full bloom",
+      "heart blood rising wave", "excitement high literary talent intense", "eyes blurred tangled mess", "first see much love", 
+      "one language is decider", "have breath not have strength", "steam rising day up", "thousand method hundred plans"];
+
+      const translations = ["to start doing something, only to give up halfway", "half-seriously/half-jokingly", "people with less ability have to try harder",
+      "a near miss (in love, asteroid strike or anything inbetween)", "negligent and careless", "give them an inch and they'll take a yard",
+      "being oversensitive and assuming criticism", "talking at an inappropriate level", "overegging the pudding", "see someone in a new light",
+      "a huge scene (of people)", "fair and equitable", "on a grand scale", "start strong but finish weak", "deceitful smooth talk", 
+      "feeling on seeing a new vista/resolving a problem; eureka", "over-eager for the win", "pass off conterfeits", 
+      "experienced and knowledgeable", "down to earth, pragmatic", "enjoy with relish", "meticulous with money", "striving for excellence",
+      "a drop in the ocean", "learn by analogy", "to do something historic and unprecedented", "stands to reason", "to the best of my ability",
+      "go to great lengths for a friend", "return home", "tossing an idea out there", "fully commit to a course of action", "a weak argument",
+      "give it your all", "an organisation in disarray for lack of leadership", "in your element", "to think deeply and carefully about something",
+      "well travelled", "together through thick and thin", "dainty and lovable", "to smile hiding treachery", "joyful", "spur of the moment",
+      "elated", "overwhemed by dazzle", "love at first sight", "its settled then", "weak and feeble", "getting better each day", 
+      "great tenacity and effort"];
+      
+      function initialiseChengyus() {
+        for (i1=0; i1<literals.length; i1++) {
+          cheng1 = new Chengyu(parseInt(i1), chars.charAt(i1*4), chars.charAt(i1*4+1), chars.charAt(i1*4+2), chars.charAt(i1*4+3), literals[i1], translations[i1]);
+          chenguSet.add(cheng1);
+        }
+        initialisePlayers();
+      }
+
+      function initialisePlayers() {
+        for (i1=0; i1<7; i1++) {
+          id1="X_"+"ABCDEFG".charAt(i1)+"1";
+          ch1=chars.charAt(parseInt(Math.random()*chars.length));
+          tNode = document.createTextNode(ch1);
+          document.getElementById(id1).appendChild(tNode);
+        }
+        for (i1=0; i1<7; i1++) {
+          id1="Y_"+"ABCDEFG".charAt(i1)+"1";
+          ch1=chars.charAt(parseInt(Math.random()*chars.length));
+          tNode = document.createTextNode(ch1);
+          document.getElementById(id1).appendChild(tNode);
+        }
+      }
+
+      function chenguBtn() {
+        ch1 = getChengu(0);
+        document.getElementById("chenguP").innerText = ch1.toString();
+      }
+
+      function getChengu(t1) {
+        const myIterator = chenguSet.values();
+        var target=0;
+        if (t1==0) {
+          target = parseInt(Math.random()*chenguSet.size);
+        }
+        else {
+          target = t1;
+        }
+        
+        for (const entry of myIterator) {
+          if (entry.id==target) {
+            result = entry;
+          }
+        }
+        return result;
+      }
+
+      function tooltip(id1) {
+
+        const myIterator = chenguSet.values();
+        const myChar = document.getElementById(id1).innerText.at(-1);
+
+        result="";
+        lines=0;
+        
+        if (id1.charAt(0)=="X" || id1.charAt(0)=="Y") {
+          for (const entry of myIterator) {
+            if (entry.char1==myChar || entry.char2==myChar || entry.char3==myChar || entry.char4==myChar) {
+              result += entry.toString()+"\n";
+              lines++;
+            }
+          }
+        } else if (id1.slice(0,2)=="HX") {
+          place=parseInt(id1.charAt(4));
+          knownchars=[document.getElementById("HX_A1").innerText.at(-1),
+          document.getElementById("HX_A2").innerText.at(-1),
+          document.getElementById("HX_A3").innerText.at(-1),
+          document.getElementById("HX_A4").innerText.at(-1)];
+          
+          for (const entry of myIterator) {
+            if ((knownchars[0]==null || knownchars[0]==entry.char1) && (knownchars[1]==null || knownchars[1]==entry.char2) && (knownchars[2]==null || knownchars[2]==entry.char3) && (knownchars[3]==null || knownchars[3]==entry.char4)) {
+              if ((entry.char1==myChar && place==1) || (entry.char2==myChar && place==2) || (entry.char3==myChar && place==3) || (entry.char4==myChar && place==4)) {
+                result += entry.toString()+"\n";
+                lines++;
+              }
+            }
+          }
+        } else if (id1.slice(0,2)=="HY") {
+          place=parseInt(id1.charAt(4));
+          knownchars=[document.getElementById("HY_A1").innerText.at(-1),
+          document.getElementById("HY_A2").innerText.at(-1),
+          document.getElementById("HY_A3").innerText.at(-1),
+          document.getElementById("HY_A4").innerText.at(-1)];
+          
+          for (const entry of myIterator) {
+            if ((knownchars[0]==null || knownchars[0]==entry.char1) && (knownchars[1]==null || knownchars[1]==entry.char2) && (knownchars[2]==null || knownchars[2]==entry.char3) && (knownchars[3]==null || knownchars[3]==entry.char4)) {
+              if ((entry.char1==myChar && place==1) || (entry.char2==myChar && place==2) || (entry.char3==myChar && place==3) || (entry.char4==myChar && place==4)) {
+                result += entry.toString()+"\n";
+                lines++;
+              }
+            }
+          }
+        } else if (id1.slice(0,2)=="VX") {
+          place="ABCD".indexOf(id1.charAt(3));
+          knownchars=[document.getElementById("VX_A1").innerText.at(-1),
+          document.getElementById("VX_B1").innerText.at(-1),
+          document.getElementById("VX_C1").innerText.at(-1),
+          document.getElementById("VX_D1").innerText.at(-1)];
+          
+          for (const entry of myIterator) {
+            if ((knownchars[0]==null || knownchars[0]==entry.char1) && (knownchars[1]==null || knownchars[1]==entry.char2) && (knownchars[2]==null || knownchars[2]==entry.char3) && (knownchars[3]==null || knownchars[3]==entry.char4)) {
+              if ((entry.char1==myChar && place==0) || (entry.char2==myChar && place==1) || (entry.char3==myChar && place==2) || (entry.char4==myChar && place==3)) {
+                result += entry.toString()+"\n";
+                lines++;
+              }
+            }
+          }
+        } else if (id1.slice(0,2)=="VY") {
+          place="ABCD".indexOf(id1.charAt(3));
+          knownchars=[document.getElementById("VY_A1").innerText.at(-1),
+          document.getElementById("VY_B1").innerText.at(-1),
+          document.getElementById("VY_C1").innerText.at(-1),
+          document.getElementById("VY_D1").innerText.at(-1)];
+          
+          for (const entry of myIterator) {
+            if ((knownchars[0]==null || knownchars[0]==entry.char1) && (knownchars[1]==null || knownchars[1]==entry.char2) && (knownchars[2]==null || knownchars[2]==entry.char3) && (knownchars[3]==null || knownchars[3]==entry.char4)) {
+              if ((entry.char1==myChar && place==0) || (entry.char2==myChar && place==1) || (entry.char3==myChar && place==2) || (entry.char4==myChar && place==3)) {
+                result += entry.toString()+"\n";
+                lines++;
+              }
+            }
+          }
+        }
+
+        if (id1.charAt(0)=="X" || id1.charAt(1)=="X") {
+          document.getElementById(id1+"tt").style.left="5%";
+        } else {
+          document.getElementById(id1+"tt").style.left="70%";
+        }
+        document.getElementById(id1+"tt").innerText = result;
+
+      }
+
+      function drag(ev) {
+        let img1=document.getElementById("ghostimg");
+        
+        let char1=ev.target.innerText.charAt(ev.target.innerText.length-1);
+        ctx.clearRect(0,0,40,40);
+        ctx.fillText(char1, 0, 30);
+        ev.stopPropagation();
+
+        ev.dataTransfer.setData("text", ev.target.id);
+        ev.dataTransfer.setDragImage(img1,0,0);
+
+      }
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function drop(ev) {
+        
+        ev.preventDefault();
+        var source_id = ev.dataTransfer.getData("text").replace("tt","");
+
+        let char1=document.getElementById(source_id).innerText.at(-1);
+        
+        var target_id = ev.target.id.replace("tt","");
+
+
+        // don't want to redrop on same square
+        if(target_id==source_id) {
+          return;
+        }
+        // prevent adding to an occupied square
+        chartest=document.getElementById(target_id).innerText.at(-1);
+        if (chars.includes(chartest)) {
+          return;
+        }
+        // only accept squares from own players bank
+        if (source_id.charAt(0)!=target_id.charAt(1)) {
+          return;
+        }
+
+        const charseq=["","","",""];
+        if(target_id.at(0)=="H") {
+          chartest=document.getElementById("H"+target_id.at(1)+"_A1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[0]=chartest;
+          }
+          chartest=document.getElementById("H"+target_id.at(1)+"_A2").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[1]=chartest;
+          }
+          chartest=document.getElementById("H"+target_id.at(1)+"_A3").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[2]=chartest;
+          }
+          chartest=document.getElementById("H"+target_id.at(1)+"_A4").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[3]=chartest;
+          }
+          if (chars.includes(char1)) {
+            charseq[parseInt(target_id.at(-1))-1]=char1;
+          }
+        } else if(target_id.at(0)=="V") {
+          chartest=document.getElementById("V"+target_id.at(1)+"_A1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[0]=chartest;
+          }
+          chartest=document.getElementById("V"+target_id.at(1)+"_B1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[1]=chartest;
+          }
+          chartest=document.getElementById("V"+target_id.at(1)+"_C1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[2]=chartest;
+          }
+          chartest=document.getElementById("V"+target_id.at(1)+"_D1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[3]=chartest;
+          }
+          if (chars.includes(char1)) {
+            charseq["ABCD".indexOf(target_id.at(-2))]=char1;
+          }
+        }
+        
+       
+        const myIterator = chenguSet.values();
+        possiblechengyu=false;
+        for (const entry of myIterator) {
+          if((charseq[0]=="" || entry.char1==charseq[0]) && (charseq[1]=="" || entry.char2==charseq[1]) && (charseq[2]=="" || entry.char3==charseq[2]) && (charseq[3]=="" || entry.char4==charseq[3])) {
+            possiblechengyu=true;
+          }
+        }
+        if (!possiblechengyu) {
+          alert("doesn't make a chengyu!");
+          return;
+        }
+
+
+        document.getElementById(source_id).innerHTML=document.getElementById(source_id).innerHTML.substring(0,document.getElementById(source_id).innerHTML.length-1);
+        tNode = document.createTextNode(char1);
+
+        document.getElementById(target_id).classList.add("tooltip");
+        document.getElementById(target_id).appendChild(tNode);
+
+        document.getElementById(target_id).addEventListener("mouseover",function() {tooltip(target_id)});
+        
+
+        if (source_id.at(-1)=="t") {
+          source_id = source_id.substring(0,source_id.length-1);
+        }
+        ch1=chars.charAt(parseInt(Math.random()*chars.length));
+
+        document.getElementById(source_id).append(ch1);
+
+
+      }
+
+      function dropbin(ev) {
+
+        ev.preventDefault();
+        var source_id = ev.dataTransfer.getData("text").replace("tt","");
+        document.getElementById(source_id).innerHTML=document.getElementById(source_id).innerHTML.substring(0,document.getElementById(source_id).innerHTML.length-1);
+
+        ch1=chars.charAt(parseInt(Math.random()*chars.length));
+
+        if (source_id.charAt(0)=="X" || source_id.charAt(0)=="Y") {
+          document.getElementById(source_id).append(ch1);
+        }
+      
+
+      }
+
+      function shuffle(x_y) {
+        for (i1=0; i1<7; i1++) {
+          id1=x_y+"_"+"ABCDEFG".charAt(i1)+"1";
+          ch1=chars.charAt(parseInt(Math.random()*chars.length));
+
+          document.getElementById(id1).innerHTML=document.getElementById(id1).innerHTML.substring(0,document.getElementById(id1).innerHTML.length-1)+ch1;
+        }
+      }
+
+      function dropboard(ev) {
+         ev.preventDefault();
+        var source_id = ev.dataTransfer.getData("text").replace("tt","");
+        
+
+        let char1=document.getElementById(source_id).innerText.at(-1);
+        
+        var target_id = ev.target.id.replace("tt","");
+        
+
+        if(target_id==source_id) {
+          return;
+        }
+        let charseq=["","","",""];
+        let charseq_board=["","","",""];
+        
+        if (source_id.charAt(0)=="H") {
+          
+          chartest=document.getElementById("H"+source_id.at(1)+"_A1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[0]=chartest;
+          }
+          chartest=document.getElementById("H"+source_id.at(1)+"_A2").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[1]=chartest;
+          }
+          chartest=document.getElementById("H"+source_id.at(1)+"_A3").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[2]=chartest;
+          }
+          chartest=document.getElementById("H"+source_id.at(1)+"_A4").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[3]=chartest;
+          }
+
+          startindex=parseInt(source_id.at(-1))-1;
+
+          if (parseInt(target_id.charAt(3))-startindex<1) {
+            alert("off the board!");
+            return;
+          }
+          if (parseInt(target_id.charAt(3))+(3-startindex)>10) {
+            
+            alert("off the board!");
+            return;
+          }
+          starttarget="P_"+target_id.charAt(2)+(parseInt(target_id.charAt(3))-startindex);
+          startEl=document.getElementById(starttarget);
+
+          // check that the drop makes a chengyu
+          charseq_board=["","","",""];
+          chartest=startEl.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[0]=chartest;
+          } else {
+            charseq_board[0]=charseq[0];
+          }
+          nextEl=startEl.nextElementSibling;
+          chartest=nextEl.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[1]=chartest;
+          } else {
+            charseq_board[1]=charseq[1];
+          }
+          nextEl=nextEl.nextElementSibling;
+          chartest=nextEl.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[2]=chartest;
+          } else {
+            charseq_board[2]=charseq[2];
+          }
+          nextEl=nextEl.nextElementSibling;
+          chartest=nextEl.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[3]=chartest;
+          } else {
+            charseq_board[3]=charseq[3];
+          }
+          const myIterator = chenguSet.values();
+          possiblechengyu=false;
+          for (const entry of myIterator) {
+            if((entry.char1==charseq_board[0]) && (entry.char2==charseq_board[1]) && (entry.char3==charseq_board[2]) && (entry.char4==charseq_board[3])) {
+              possiblechengyu=true;
+            }
+          }
+          if (!possiblechengyu) {
+            alert("doesn't make a chengyu!");
+            return;
+          }
+
+          startEl.innerHTML+=charseq[0];
+          startEl.classList.add("plyer"+source_id.charAt(1));
+          nextEl=startEl.nextElementSibling;
+          nextEl.innerHTML+=charseq[1];
+          nextEl.classList.add("plyer"+source_id.charAt(1));
+          nextEl=nextEl.nextElementSibling;
+          nextEl.innerHTML+=charseq[2];
+          nextEl.classList.add("plyer"+source_id.charAt(1));
+          nextEl=nextEl.nextElementSibling;
+          nextEl.innerHTML+=charseq[3];
+          nextEl.classList.add("plyer"+source_id.charAt(1));
+
+
+        } else if (source_id.charAt(0)=="V") {
+          
+          chartest=document.getElementById("V"+source_id.at(1)+"_A1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[0]=chartest;
+          }
+          chartest=document.getElementById("V"+source_id.at(1)+"_B1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[1]=chartest;
+          }
+          chartest=document.getElementById("V"+source_id.at(1)+"_C1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[2]=chartest;
+          }
+          chartest=document.getElementById("V"+source_id.at(1)+"_D1").innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq[3]=chartest;
+          }
+
+          startindex="ABCD".indexOf(source_id.at(-2));
+
+          if ("ABCDEFGHIJ".indexOf(target_id.at(-2))-startindex<0) {
+            alert("off the board!");
+            return;
+          }
+          if ("ABCDEFGHIJ".indexOf(target_id.at(-2))+(3-startindex)>9) {
+            alert("off the board!");
+            return;
+          }
+          starttarget="P_"+"ABCDEFGHIJ".charAt("ABCDEFGHIJ".indexOf(target_id.at(-2))-startindex)+target_id.charAt(3);
+
+          startEl=document.getElementById(starttarget);
+
+          // check that the drop makes a chengyu
+          charseq_board=["","","",""];
+          chartest=startEl.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[0]=chartest;
+          } else {
+            charseq_board[0]=charseq[0];
+          }
+          nexttarget="P_"+"ABCDEFGHIJ".charAt("ABCDEFGHIJ".indexOf(target_id.at(-2))-startindex+1)+target_id.charAt(3);
+          nextEl1=document.getElementById(nexttarget);
+          chartest=nextEl1.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[1]=chartest;
+          } else {
+            charseq_board[1]=charseq[1];
+          }
+          nexttarget="P_"+"ABCDEFGHIJ".charAt("ABCDEFGHIJ".indexOf(target_id.at(-2))-startindex+2)+target_id.charAt(3);
+          nextEl2=document.getElementById(nexttarget);
+          chartest=nextEl2.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[2]=chartest;
+          } else {
+            charseq_board[2]=charseq[2];
+          }
+          nexttarget="P_"+"ABCDEFGHIJ".charAt("ABCDEFGHIJ".indexOf(target_id.at(-2))-startindex+3)+target_id.charAt(3);
+          nextEl3=document.getElementById(nexttarget);
+          chartest=nextEl3.innerText.at(-1);
+          if (chars.includes(chartest)) {
+            charseq_board[3]=chartest;
+          } else {
+            charseq_board[3]=charseq[3];
+          }
+          alert(charseq);
+          alert(charseq_board);
+          const myIterator = chenguSet.values();
+          possiblechengyu=false;
+          for (const entry of myIterator) {
+            if((entry.char1==charseq_board[0]) && (entry.char2==charseq_board[1]) && (entry.char3==charseq_board[2]) && (entry.char4==charseq_board[3])) {
+              possiblechengyu=true;
+            }
+          }
+          if (!possiblechengyu) {
+            alert("doesn't make a chengyu!");
+            return;
+          }
+
+          startEl.innerHTML+=charseq[0];
+          startEl.classList.add("plyer"+source_id.charAt(1));
+
+          nextEl1.innerHTML+=charseq[1];
+          nextEl1.classList.add("plyer"+source_id.charAt(1));
+
+          nextEl2.innerHTML+=charseq[2];
+          nextEl2.classList.add("plyer"+source_id.charAt(1));
+
+          nextEl3.innerHTML+=charseq[3];
+          nextEl3.classList.add("plyer"+source_id.charAt(1));
+
+
+        }
+
+        if (source_id.charAt(0)=="H") {
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "H"+source_id.at(1)+"_A1";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "H"+source_id.at(1)+"_A2";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "H"+source_id.at(1)+"_A3";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "H"+source_id.at(1)+"_A4";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          
+        } else if (source_id.charAt(0)=="V") {
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "V"+source_id.at(1)+"_A1";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "V"+source_id.at(1)+"_B1";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "V"+source_id.at(1)+"_C1";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          newSpan = document.createElement("span");
+          newSpan.classList.add("tooltiptext");
+          id1 = "V"+source_id.at(1)+"_D1";
+          document.getElementById(id1).innerHTML="";
+          document.getElementById(id1).appendChild(newSpan);
+          newSpan.id=id1+"tt";
+          
+        }
+
+
+
+
+      }
+
+
+
+   </script>
