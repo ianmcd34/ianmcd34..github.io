@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<HTML>
+    <HEAD>
+        
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+        <link rel="stylesheet" href="../styles/styles.css" />
+        <script async src="../javascript/index.js"></script>
+
+        <title>Tunnel</title>
+    
+        
+        <style>
+            h1 {
+                text-align: center; 
+            }
+            div.centerer {
+                width: 700px;
+                height: 500px;
+                margin: auto;
+                background-color: powderblue;
+            }
+            div.column {
+                position: relative;
+                float: left;
+                left: 80px;
+                display: inline-block;
+                width: 200px;
+                
+            }
+            div.card {
+                background-color: green;
+                height: 50px;
+                width: 30px;
+                border-style: solid;
+                border-color: gray;
+                border-width: 2px;
+                font-size: xx-large;
+                display: inline-block;
+                margin: 5px;
+            }
+            div.playdiv {
+                background-color: cornsilk;
+                height: 100px;
+                width: 150px;
+                border-style: solid;
+                border-color: gray;
+                border-width: 2px;
+                margin: auto;
+                margin-top: 50px;
+            }
+            .colheader {
+                height: 100px;
+            }
+            label {
+                font-weight: bold;
+            }
+            button {
+                background-color: #04AA6D; /* Green */
+                border: 2px;
+                border-style: solid;
+                border-color: black;
+                color: white;
+                padding: 12px 22px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                /* width: 10%; */
+                font-size: 16px;
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            ul {
+                list-style-type: none;
+            }
+            @keyframes myAnimation {
+                0%   {opacity:1.0; }
+                100% {opacity:0.0; }
+            }
+
+        </style>
+    </HEAD>
+    <BODY onload="initialise()">
+        <h1>TUNNEL</h1>
+        <h4 id='date'></h4>
+        <div class="centerer">
+            <div class="column">
+                <div class="colheader">
+                    <h2>Player 1</h2>
+                    <h3 id="score1">0</h3>
+                </div>
+                <ul id="P1_cards">
+                    <li id="card1_ABC"><div id="card1_A" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_B" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_C" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card1_DEF"><div id="card1_D" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_E" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_F" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card1_GHI"><div id="card1_G" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_H" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_I" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card1_JKL"><div id="card1_J" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_K" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card1_L" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card1_M*"><div id="card1_M" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                </ul>
+            </div>
+            
+            <div class="column">
+                <div class="colheader">
+                    <label for="trumps">Contract:</label>
+                    <select  id="trumps" name="trumps">
+                        <option value="C">Clubs</option>
+                        <option value="D">Diamonds</option>
+                        <option value="H">Hearts</option>
+                        <option value="S">Spades</option>
+                        <option value="">No Trumps</option>
+                    </select>
+                    <br>
+                    <!-- <button id="play" onclick="play()" hidden>Play</button> -->
+                </div>
+                <!-- <ul id="beats">
+
+                </ul> -->
+                <div id="playdiv" class="playdiv" ondragover="allowDrop(event)" ondrop="dropboard(event)" >
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="colheader">
+                    <h2 >Player 2</h2>
+                    <h3 id="score2">0</h3>
+                </div>
+                <ul id="P2_cards">
+                    <li id="card2_ABC"><div id="card2_A" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_B" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_C" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card2_DEF"><div id="card2_D" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_E" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_F" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card2_GHI"><div id="card2_G" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_H" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_I" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card2_JKL"><div id="card2_J" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_K" class="card" draggable="true" ondragstart="drag(event)">?</div><div id="card2_L" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                    <li id="card2_M*"><div id="card2_M" class="card" draggable="true" ondragstart="drag(event)">?</div></li>
+                </ul>
+            </div>
+        </div>
+    </BODY>
+
+    <script>
+        const suits = ["C", "D", "H", "S"];
+        const values = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+        var cardsP1=[];
+        var cardsP2=[];
+        var round=0;
+        var toplay=1;
+
+        function Card(id1, suit1, value1) {
+            this.id = id1;
+            this.suit = suit1;
+            this.value = value1;
+            this.toString = function() {
+                return this.value+this.suit;
+            }
+            this.beatenBy = function(card1, trumps) {
+                result1 = -1;
+                if (this.suit!=trumps && card1.suit==trumps) {
+                    result1 = 1;
+                } else {
+                    if (this.suit==card1.suit && values.indexOf(this.value)<values.indexOf(card1.value)) {
+                        result1 = 1;
+                    }
+                }
+                return result1;
+
+            }
+
+            
+
+        }
+
+        function initialise() {
+            cardEls = document.getElementsByClassName("card");
+
+            cards = [];
+            while (cards.length<26) {
+                suit1 = suits[parseInt(Math.random()*suits.length)];
+                val1 = values[parseInt(Math.random()*values.length)];
+                newcard = new Card(cards.length, suit1, val1);
+                if (!cards.some(function(value)  {return newcard.toString()==value.toString();})) {
+                    cards.push(newcard);
+                }
+            }
+
+            cardsP1 = cards.slice(0,13);
+            cardsP2 = cards.slice(13);
+
+            // cards = cards.sort(function(a,b) {return suits.indexOf(a.suit)-suits.indexOf(b.suit)});
+            // cards = cards.sort(function(a,b) {if (a.suit==b.suit) {return values.indexOf(a.value)-values.indexOf(b.value)} else {return 0}});
+
+            for (i1 in cards) {
+                cardEls[i1].setAttribute("data-cardval",cards[i1].id);   
+                // cardEls[i1].innerHTML=cards[i1].toString();          
+            }
+            // for (i1 in cards) {
+            //     tNode=document.createTextNode(cards[parseInt(i1)+13].beatenBy(cards[parseInt(i1)], ""));
+            //     lNode=document.createElement("li");
+            //     lNode.appendChild(tNode)
+            //     beats.appendChild(lNode);
+            // }
+            
+        }
+
+        function play() {
+            winner="==>";
+            trumps = document.getElementById("trumps").value;
+            legal=legalplay();
+            if (!legal) {
+                makelegal();
+            }
+
+            if (toplay==1) {
+                result = cardsP1[round].beatenBy(cardsP2[round],trumps);
+                if (result==-1) {
+                   winner="<=="; 
+                } else {
+                   winner="==>";  
+                   toplay=2;
+                }
+            } else {
+                result = cardsP2[round].beatenBy(cardsP1[round],trumps);
+                if (result==-1) {
+                   winner="==>"; 
+                } else {
+                   winner="<==";  
+                   toplay=1;
+                }
+            }
+            tNode=document.createTextNode(winner+legal);
+            lNode=document.createElement("li");
+            lNode.appendChild(tNode)
+            beats.appendChild(lNode);
+
+            round++;
+        }
+
+        function isItLegalPlay(id1,id2) {
+            if (id1<13 && id2<13) {
+                alert("both cards player 1");
+                return false;
+            }
+            if (id1>=13 && id2>=13) {
+                alert("both cards player 2");
+                return false;
+            }
+            
+            cardEls = document.getElementsByClassName("card");
+            for (i1 in cards) {
+                if (cards[i1].id==id1) {
+                    card1=cards[i1];
+                }
+                if (cards[i1].id==id2) {
+                    card2=cards[i1];
+                }
+            }
+
+            if (parseInt(id1)<parseInt(id2)) {
+                toplay=1;
+            } else {
+                toplay=2;
+            }
+
+            result=false;
+            leadsuit=card1.suit;
+      
+            if (card2.suit==leadsuit) {
+                result=true;
+            } else if (toplay==1) {
+                result=true;
+  
+                for (n1 in cardsP2) {
+
+                    if (cardsP2[n1].suit==leadsuit) {
+                        result=false;
+                    }
+                    
+                }
+                
+            } else if (toplay==2) {
+                result=true;
+  
+                for (n1 in cardsP1) {
+
+                    if (cardsP1[n1].suit==leadsuit) {
+                        result=false;
+                    }
+                    
+                }
+                
+            }
+            return result;
+        }
+
+        function legalplay() {
+            leadsuit="";
+            result=false;
+            if (toplay==1) {
+                leadsuit=cardsP1[round].suit;
+                if (cardsP2[round].suit==leadsuit) {
+                    result=true;
+                } else {
+                    result=true;
+                    for (n1=round+1; n1<13; n1++) {
+                        if (cardsP2[n1].suit==leadsuit) {
+                            result=false;
+                        }
+                    }
+                }
+            } else {
+                leadsuit=cardsP2[round].suit;
+                if (cardsP1[round].suit==leadsuit) {
+                    result=true;
+                } else {
+                    result=true;
+                    for (n1=round+1; n1<13; n1++) {
+                        if (cardsP1[n1].suit==leadsuit) {
+                            result=false;
+                        }
+                    }
+                }
+            }
+            return result;
+
+        }
+
+        function makelegal() {
+            cardlist1=document.getElementById("P1_cards").children;
+            cardlist2=document.getElementById("P2_cards").children;
+            if (toplay==1) {
+                adjusted=false;
+                n1=round+1;
+                while(!adjusted) {
+                    if (cardsP2[n1].suit==cardsP1[round].suit) {
+                        card2 = cardsP2[n1];
+                        card1 = cardsP2[round];
+                        cardsP2.splice(round,1,card2);
+                        cardsP2.splice(n1,1,card1);
+                        for (i1 in cardlist2) {
+                            if (cardlist2[i1].innerText==card1.toString()) {
+                                cardlist2[i1].innerText=card2.toString();
+                            } else if (cardlist2[i1].innerText==card2.toString()) {
+                                cardlist2[i1].innerText=card1.toString();
+                            }
+                        }
+                        adjusted=true;
+                    }
+                    n1++;
+                }
+            } else {
+                adjusted=false;
+                n1=round+1;
+                while(!adjusted) {
+                    if (cardsP1[n1].suit==cardsP2[round].suit) {
+                        card2 = cardsP1[n1];
+                        card1 = cardsP1[round];
+                        cardsP1.splice(round,1,card2);
+                        cardsP1.splice(n1,1,card1);
+                        for (i1 in cardlist1) {
+                            if (cardlist1[i1].innerText==card1.toString()) {
+                                cardlist1[i1].innerText=card2.toString();
+                            } else if (cardlist1[i1].innerText==card2.toString()) {
+                                cardlist1[i1].innerText=card1.toString();
+                            }
+                        }
+                        adjusted=true;
+                    }
+                    n1++;
+                }
+
+            }
+        }
+
+      function drag(ev) {
+
+        ev.stopPropagation();
+
+        ev.dataTransfer.setData("text", ev.target.id);
+
+
+      }
+
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+
+      function dropboard(ev) {
+        ev.preventDefault();
+        
+        var source_id = ev.dataTransfer.getData("text");
+        sourceEl = document.getElementById(source_id);
+        targetEl = document.getElementById("playdiv");
+        targetEl.appendChild(sourceEl);
+
+        if(targetEl.children.length==2) {
+            legal=isItLegalPlay(targetEl.children[0].getAttribute("data-cardval"),targetEl.children[1].getAttribute("data-cardval"));
+
+            if (!legal) {
+                targetEl.children[1].style.animationName="myAnimation";
+                targetEl.children[1].style.animationDuration= "3s";
+                setTimeout(returnDiv, 3000);
+                setTimeout(cleanDiv, 6000);
+            } else {
+                trumps = document.getElementById("trumps").value;
+                cardEls = document.getElementsByClassName("card");
+                id1=targetEl.children[0].getAttribute("data-cardval");
+                id2=targetEl.children[1].getAttribute("data-cardval");
+                for (i1 in cards) {
+                    if (cards[i1].id==id1) {
+                        card1=cards[i1];
+                    }
+                    if (cards[i1].id==id2) {
+                        card2=cards[i1];
+                    }
+                }
+                result = card1.beatenBy(card2,trumps);
+                if (result>0) {
+                    if (card1.id>=13) {
+                        score = parseInt(document.getElementById("score1").innerHTML);
+                        document.getElementById("score1").innerHTML=score+1;
+                    } else {
+                        score = parseInt(document.getElementById("score2").innerHTML);
+                        document.getElementById("score2").innerHTML=score+1;
+                    }
+                } else {
+                    if (card1.id>=13) {
+                        score = parseInt(document.getElementById("score2").innerHTML);
+                        document.getElementById("score2").innerHTML=score+1;
+                    } else {
+                        score = parseInt(document.getElementById("score1").innerHTML);
+                        document.getElementById("score1").innerHTML=score+1;
+                    }
+                }
+                tosplice1 = cardsP1.findIndex(function(value, index) {return value.id==card1.id || value.id==card2.id});
+                tosplice2 = cardsP2.findIndex(function(value, index) {return value.id==card1.id || value.id==card2.id});
+                cardsP1.splice(tosplice1,1);
+                cardsP2.splice(tosplice2,1);
+                targetEl.children[1].remove();
+                targetEl.children[0].remove();
+
+            }
+        }
+
+        function returnDiv() {
+            id1=targetEl.children[1].id;
+            liEls = document.getElementsByTagName("li");
+            for (n1 in liEls) {
+                if (liEls[n1].id.slice(0,5)==id1.slice(0,5) && liEls[n1].id.indexOf(id1.at(-1))>0) {
+                    liEls[n1].appendChild(sourceEl);
+                    sourceEl.style.animationDirection="reverse";
+                }
+            }
+        }
+
+        function cleanDiv() {
+            sourceEl.style.animationName="";
+            sourceEl.style.animationDuration="";
+            sourceEl.style.animationDirection="";
+        }
+        
+      }
+    </script>
+</HTML>
