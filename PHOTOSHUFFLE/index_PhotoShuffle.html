@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+    <style>
+        h1 {
+            text-align: center; 
+        }
+        table {
+            border-collapse: collapse;
+            margin: auto;
+            /* width: 50%; */
+            border: none;
+            table-layout: fixed;
+        }
+        td {
+            position: relative;
+            margin: 0px;
+            padding: 0px;
+            width: 100px;
+            height: 100px;
+            border-spacing: 0;
+        }
+        tr {
+            margin: 0px;
+            padding: 0px;
+            border: none;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: 0px;
+            padding: 0px;
+            background-color: aquamarine;
+        }
+    </style>
+    <title>PhotoShuffle</title>
+</HEAD>
+<BODY >
+    <h1>Photo Shuffle</h1>
+    <form >
+        <label for="vol">Difficulty:</label>
+        <input type="range"  id="diff" name="diff" min="2" max="10">
+        <input type="button" value="Submit" onclick="difficulty(event)">
+    </form>
+    <img  id="useimage" src="A S Benedict icon - RLH - PRINT - Border.jpg" alt="Benedict" width="300" height="300">
+    <table id="phototable" hidden>
+        <tr>
+            <td id="P_A0" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><canvas id="PC_A0" width="100" height="100"></canvas></td>
+            <td id="P_A1" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><canvas id="PC_A1" width="100" height="100"></canvas></td>
+        </tr>
+        <tr>
+            <td id="P_B0" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><canvas id="PC_B0" width="100" height="100"></canvas></td>
+            <td id="P_B1" ondragover="allowDrop(event)" ondrop="drop(event)" draggable="true" ondragstart="drag(event)"><canvas id="PC_B1" width="100" height="100"></canvas></td>
+        </tr>
+    </table>
+    <img hidden id="useimage" src="A S Benedict icon - RLH - PRINT - Border.jpg" alt="Benedict" width="90" height="90">
+    <script>
+
+        setTimeout(setCanvas, 1000);
+
+        function setCanvas() {
+
+            canvases=document.getElementsByTagName("canvas");
+            var img = document.getElementById("useimage");
+            numerals="012";
+            letters="ABC";
+            contexts=[];
+
+            for (c1 in canvases) {
+                if (c1.length<3) {
+                    can=canvases[c1];
+                    con=can.getContext("2d");
+                    con.translate(-100*(c1%2), -100*parseInt(c1/2));
+                    con.scale(200/2515, 200/3264);
+                    con.drawImage(img,0,0);
+
+                }
+                
+            }
+            
+            
+            //shuffle();
+        }
+
+        function shuffle() {
+
+
+            const parents = document.getElementsByTagName("td");
+            const childs = document.getElementsByTagName("canvas");
+
+            for (p1 in parents) {
+                if (p1.length<3) {
+                    parent1 = parents[p1];
+                    child1 = parent1.firstChild;
+
+                    otherindex=p1;
+                    while (otherindex==p1) {
+                        otherindex = parseInt(Math.random()*parents.length);
+                    }
+                    parent2 = parents[otherindex];
+
+                    child2 = parent2.firstChild;
+
+                    parent1.replaceChild(child2,child1);
+                    parent2.appendChild(child1);
+                }
+            }
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drop(ev) {
+            
+            ev.preventDefault();
+            // alert(ev.target.id);
+            // alert(ev.target.parentNode.id);
+            parent1 = document.getElementById(ev.dataTransfer.getData("text"));
+            parent2 = ev.target.parentNode;
+            child1 = parent1.firstChild;
+            child2 = parent2.firstChild;
+            parent1.replaceChild(child2,child1);
+            parent2.appendChild(child1);
+        }
+
+        function difficulty(ev) {
+            ev.preventDefault();
+            diff = document.getElementById("diff").value;
+            table = document.getElementById("phototable");
+            const img = document.getElementById("useimage");
+            const side = parseInt(500/diff);
+            table.remove();
+            table = document.createElement("table");
+            table.id = "phototable";
+            document.body.appendChild(table);
+
+            for (i1=0; i1<diff; i1++) {
+                trNode = document.createElement("tr");
+                table.appendChild(trNode);
+                for (j1=0; j1<diff; j1++) {
+                    tdNode = document.createElement("td");
+                    canvasNode = document.createElement("canvas");
+                    canvasNode.id = "PC_"+"ABCDEFGHIJ".charAt(i1)+"0123456789".charAt(j1);
+                    canvasNode.width=side;
+                    canvasNode.height=side;
+                    tdNode.id = "P_"+"ABCDEFGHIJ".charAt(i1)+"0123456789".charAt(j1);
+                    tdNode.style.width = side+"px";
+                    tdNode.style.height = side+"px";
+                    tdNode.draggable=true;
+                    tdNode.addEventListener("dragstart", drag);
+                    tdNode.addEventListener("dragover", allowDrop);
+                    tdNode.addEventListener("drop", drop);
+                    con=canvasNode.getContext("2d");
+                    con.translate(-side*j1, -side*i1);
+                    con.scale(500/2515, 500/3264);
+                    con.drawImage(img,0,0);
+
+                    tdNode.appendChild(canvasNode);
+                    trNode.appendChild(tdNode);
+                }
+            }
+
+            document.getElementById("useimage").hidden=true;
+            document.getElementById("phototable").hidden=false;
+
+            shuffle();
+        }
+        
+
+    </script>
+</BODY>
+</HTML>
